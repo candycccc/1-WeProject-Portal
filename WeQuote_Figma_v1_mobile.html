@@ -3525,14 +3525,12 @@ body.mobile-view .qp-profile-panel {
   right: auto; left: 0;
 }
 
-/* Pay Now + Payment Noted modals */
+/* Pay Now + Payment Noted modals — absolute inside #app-content, avoids iOS fixed clipping */
 body.mobile-view .paynow-overlay,
 body.mobile-view .payment-noted-overlay {
-  top: 42px;
-  left: var(--mobile-frame-left);
-  right: auto; bottom: auto;
-  width: var(--mobile-w, 390px);
-  height: var(--mobile-h, 844px);
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
 }
 .qp-notif-unread-pill {
   display: inline-flex; align-items: center; gap: 8px;
@@ -5659,73 +5657,6 @@ body.mobile-view #app-content {
 
   </div>
 
-  <!-- Pay now modal -->
-  <div class="paynow-overlay" id="paynow-overlay" onclick="if(event.target===this)closePayNowModal()">
-    <div class="paynow-modal">
-      <div class="paynow-header">
-        <span class="paynow-header-title">Pay now</span>
-        <button class="paynow-close" onclick="closePayNowModal()"><i class="fa-solid fa-times"></i></button>
-      </div>
-      <div class="paynow-body">
-        <div class="paynow-overdue"><i class="fa-solid fa-circle-exclamation" style="margin-right:4px;"></i>Overdue 3 days</div>
-        <div class="paynow-amount" id="paynow-amount">£21,250.00</div>
-        <div class="paynow-inv-desc" id="paynow-desc">Invoice #108<span class="paynow-inv-desc-dot"></span>Additional speaker installation</div>
-        <div class="paynow-section-title">Bank transfer details</div>
-        <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Bank</div>
-          <div class="paynow-detail-val">Barclays</div>
-        </div>
-        <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Account name</div>
-          <div class="paynow-val-copy">
-            <div class="paynow-detail-val">LCR Integrated Systems Ltd</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard('LCR Integrated Systems Ltd')">Copy</button>
-          </div>
-        </div>
-        <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Sort code</div>
-          <div class="paynow-val-copy">
-            <div class="paynow-detail-val">20-45-67</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard('20-45-67')">Copy</button>
-          </div>
-        </div>
-        <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Account number</div>
-          <div class="paynow-val-copy">
-            <div class="paynow-detail-val">83920174</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard('83920174')">Copy</button>
-          </div>
-        </div>
-        <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Reference</div>
-          <div class="paynow-val-copy">
-            <div class="paynow-detail-val" id="paynow-ref">INV-#002</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard(document.getElementById('paynow-ref').textContent)">Copy</button>
-          </div>
-        </div>
-        <div class="paynow-ref-note">*Please include the reference in the payment remarks.</div>
-        <button class="paynow-upload-btn">
-          <i class="fa-sharp-solid fa-upload"></i>
-          Upload screenshot of transfer
-        </button>
-        <div class="paynow-warning">
-          <i class="fa-solid fa-circle-exclamation" style="flex-shrink:0;margin-top:1px;"></i>
-          <span>After transferring, please take a screenshot and upload it for verification.</span>
-        </div>
-        <button class="paynow-mark-paid" onclick="markAsPaid()">Mark as Paid</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Payment noted modal -->
-  <div class="payment-noted-overlay" id="payment-noted-overlay" onclick="if(event.target===this)closePaymentNoted()">
-    <div class="payment-noted-modal">
-      <div class="payment-noted-title">Payment noted</div>
-      <div class="payment-noted-body">We'll update <span id="payment-noted-inv">Invoice #002</span> once the transfer clears, usually 5 working days.</div>
-      <button class="payment-noted-done" onclick="closePaymentNoted()">Done</button>
-    </div>
-  </div>
-
   <!-- Footer -->
   <div class="qp-footer">
     <div class="qp-footer-left">
@@ -7708,6 +7639,73 @@ body.mobile-view #app-content {
   </div>
 
 </div>
+  <!-- Pay now modal — direct child of #app-content so position:absolute works correctly -->
+  <div class="paynow-overlay" id="paynow-overlay" onclick="if(event.target===this)closePayNowModal()">
+    <div class="paynow-modal">
+      <div class="paynow-header">
+        <span class="paynow-header-title">Pay now</span>
+        <button class="paynow-close" onclick="closePayNowModal()"><i class="fa-solid fa-times"></i></button>
+      </div>
+      <div class="paynow-body">
+        <div class="paynow-overdue"><i class="fa-solid fa-circle-exclamation" style="margin-right:4px;"></i>Overdue 3 days</div>
+        <div class="paynow-amount" id="paynow-amount">£21,250.00</div>
+        <div class="paynow-inv-desc" id="paynow-desc">Invoice #108<span class="paynow-inv-desc-dot"></span>Additional speaker installation</div>
+        <div class="paynow-section-title">Bank transfer details</div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Bank</div>
+          <div class="paynow-detail-val">Barclays</div>
+        </div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Account name</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val">LCR Integrated Systems Ltd</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('LCR Integrated Systems Ltd')">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Sort code</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val">20-45-67</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('20-45-67')">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Account number</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val">83920174</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('83920174')">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Reference</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val" id="paynow-ref">INV-#002</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard(document.getElementById('paynow-ref').textContent)">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-ref-note">*Please include the reference in the payment remarks.</div>
+        <button class="paynow-upload-btn">
+          <i class="fa-sharp-solid fa-upload"></i>
+          Upload screenshot of transfer
+        </button>
+        <div class="paynow-warning">
+          <i class="fa-solid fa-circle-exclamation" style="flex-shrink:0;margin-top:1px;"></i>
+          <span>After transferring, please take a screenshot and upload it for verification.</span>
+        </div>
+        <button class="paynow-mark-paid" onclick="markAsPaid()">Mark as Paid</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment noted modal — direct child of #app-content -->
+  <div class="payment-noted-overlay" id="payment-noted-overlay" onclick="if(event.target===this)closePaymentNoted()">
+    <div class="payment-noted-modal">
+      <div class="payment-noted-title">Payment noted</div>
+      <div class="payment-noted-body">We'll update <span id="payment-noted-inv">Invoice #002</span> once the transfer clears, usually 5 working days.</div>
+      <button class="payment-noted-done" onclick="closePaymentNoted()">Done</button>
+    </div>
+  </div>
+
 </div><!-- /#app-content -->
 
 
