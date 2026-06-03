@@ -3525,12 +3525,25 @@ body.mobile-view .qp-profile-panel {
   right: auto; left: 0;
 }
 
-/* Pay Now + Payment Noted modals — absolute inside #app-content, avoids iOS fixed clipping */
+/* Pay Now + Payment Noted — fixed covers full viewport, escapes all overflow containers */
 body.mobile-view .paynow-overlay,
 body.mobile-view .payment-noted-overlay {
-  position: absolute;
+  position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   width: 100%; height: 100%;
+}
+body.mobile-view .paynow-modal {
+  width: calc(var(--mobile-w, 390px) - 24px);
+  max-width: calc(var(--mobile-w, 390px) - 24px);
+  max-height: calc(var(--mobile-h, 844px) - 60px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 7px;
+}
+body.mobile-view .payment-noted-modal {
+  width: calc(var(--mobile-w, 390px) - 48px);
+  border-radius: 7px;
+  padding: 48px 24px;
 }
 .qp-notif-unread-pill {
   display: inline-flex; align-items: center; gap: 8px;
@@ -3864,104 +3877,114 @@ body:not(.mobile-view) .inv-btn {
 /* ── Pay now modal ── */
 .paynow-overlay {
   display: none; position: fixed; inset: 0; z-index: 9000;
-  background: rgba(0,0,0,0.35); backdrop-filter: blur(3px);
+  background: rgba(0,0,0,0.35); backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
   align-items: center; justify-content: center;
 }
 .paynow-overlay.open { display: flex; }
 .paynow-modal {
   background: #fff; border-radius: 7px; width: 400px; max-width: 94vw;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.18); overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25); overflow: hidden;
 }
 .paynow-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 20px; border-bottom: 1px solid #ececec;
+  padding: 8px 12px; border-bottom: 1px solid #d9d9d9;
 }
 .paynow-header-title {
-  font-size: 16px; font-weight: 700; color: #313131;
+  font-size: 14px; font-weight: 600; color: #000;
 }
 .paynow-close {
   background: none; border: none; cursor: pointer; color: #9c9c9c;
-  font-size: 18px; line-height: 1; padding: 2px 6px;
+  font-size: 11px; line-height: 1; padding: 4px 6px;
   border-radius: 4px; transition: background .15s;
 }
 .paynow-close:hover { background: #f2f2f2; color: #313131; }
-.paynow-body { padding: 18px 20px; }
+.paynow-body { padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+.paynow-top { display: flex; flex-direction: column; gap: 4px; }
 .paynow-overdue {
-  font-size: 12px; font-weight: 600; color: #c0392b; margin-bottom: 4px;
+  font-size: 12px; font-weight: 500; color: #cf3400;
 }
 .paynow-amount {
-  font-size: 28px; font-weight: 700; color: #313131; line-height: 1.1;
+  font-size: 29px; font-weight: 700; color: #313131; line-height: 1.1;
 }
 .paynow-inv-desc {
-  font-size: 13px; color: #6b6b6b; margin-top: 4px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 0;
+  font-size: 12px; font-weight: 500; color: #9c9c9c;
 }
 .paynow-section-title {
-  font-size: 13px; font-weight: 700; color: #313131; margin-bottom: 10px;
+  font-size: 14px; font-weight: 700; color: #313131;
+}
+.paynow-rows {
+  display: flex; flex-direction: column; gap: 12px;
 }
 .paynow-detail-row {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 8px 0; border-bottom: 1px solid #f3f3f3;
 }
-.paynow-detail-row:last-of-type { border-bottom: none; }
 .paynow-detail-label { font-size: 12px; font-weight: 600; color: #313131; }
 .paynow-detail-val { font-size: 12px; font-weight: 600; color: #313131; }
-.paynow-val-copy { display: flex; align-items: center; gap: 7px; }
+.paynow-val-copy { display: flex; align-items: center; gap: 8px; }
 .paynow-copy-btn {
   background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 4px;
   padding: 4px 6px; font-size: 12px; font-weight: 600; color: #313131;
-  cursor: pointer; font-family: inherit;
-  transition: background .15s;
+  cursor: pointer; font-family: inherit; transition: background .15s;
 }
 .paynow-copy-btn:hover { background: #efefef; }
 .paynow-inv-desc-dot {
   display: inline-block; width: 4px; height: 4px; border-radius: 50%;
-  background: #d9d9d9; vertical-align: middle; margin: 0 5px;
+  background: #d9d9d9; vertical-align: middle; margin: 0 6px;
 }
+.paynow-ref-row { flex-wrap: wrap; row-gap: 2px; }
 .paynow-ref-note {
-  font-size: 11px; color: #c0392b; margin-top: 8px; margin-bottom: 14px;
+  width: 100%; font-size: 12px; font-weight: 500; color: #cf3400; margin-top: 2px;
 }
 .paynow-upload-btn {
-  display: flex; align-items: center; gap: 8px;
-  width: 100%; padding: 10px 14px; margin-bottom: 10px;
-  background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 5px;
-  font-size: 12px; font-weight: 600; color: #313131;
-  cursor: pointer; font-family: inherit;
-  transition: background .15s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 8px 10px;
+  background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 4px;
+  font-size: 14px; font-weight: 600; color: #313131;
+  cursor: pointer; font-family: inherit; transition: background .15s;
+  box-sizing: border-box;
 }
 .paynow-upload-btn:hover { background: #efefef; }
 .paynow-warning {
-  display: flex; align-items: flex-start; gap: 8px;
-  font-size: 11px; color: #c0392b; margin-bottom: 16px; line-height: 1.4;
+  display: flex; align-items: flex-start; gap: 6px;
+  font-size: 12px; font-weight: 600; color: #cf3400; line-height: 1.4;
 }
 .paynow-mark-paid {
-  width: 100%; padding: 12px; border-radius: 5px;
-  background: var(--brand-accent); border: none; color: #fff;
-  font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit;
-  transition: background .15s, opacity .15s;
+  width: 100%; padding: 8px 18px; border-radius: 4px;
+  background: var(--brand-accent);
+  box-shadow: inset 0 1px 1px rgba(237,237,237,0.28);
+  border: none; color: #fff;
+  font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+  transition: opacity .15s;
 }
 .paynow-mark-paid:hover { opacity: 0.88; }
 
 /* ── Payment noted modal ── */
 .payment-noted-overlay {
   display: none; position: fixed; inset: 0; z-index: 9100;
-  background: rgba(0,0,0,0.35); backdrop-filter: blur(3px);
+  background: rgba(0,0,0,0.35); backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
   align-items: center; justify-content: center;
 }
 .payment-noted-overlay.open { display: flex; }
 .payment-noted-modal {
   background: #fff; border-radius: 7px; width: 400px; max-width: 94vw;
-  padding: 36px 28px 28px; text-align: center;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  padding: 85px 24px; text-align: center;
+  box-shadow: 0 0 4px rgba(0,0,0,0.25);
+  display: flex; flex-direction: column; align-items: center; gap: 27px;
 }
 .payment-noted-title {
-  font-size: 24px; font-weight: 700; color: #313131; margin-bottom: 12px;
+  font-size: 24px; font-weight: 700; color: #000; margin-bottom: 14px;
 }
 .payment-noted-body {
-  font-size: 15px; color: #6b6b6b; line-height: 1.5; margin-bottom: 28px;
+  font-size: 16px; font-weight: 500; color: #000; line-height: 1.5; margin-bottom: 0;
 }
 .payment-noted-done {
-  width: 100%; padding: 12px; border-radius: 5px;
-  background: var(--brand-accent); border: none; color: #fff;
+  width: 100%; max-width: 375px; padding: 8px 18px; border-radius: 4px;
+  background: var(--brand-accent);
+  box-shadow: inset 0 1px 1px rgba(237,237,237,0.28);
+  border: none; color: #fff;
   font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit;
   transition: background .15s;
 }
@@ -7639,7 +7662,7 @@ body.mobile-view #app-content {
   </div>
 
 </div>
-  <!-- Pay now modal — direct child of #app-content so position:absolute works correctly -->
+  <!-- Pay now modal -->
   <div class="paynow-overlay" id="paynow-overlay" onclick="if(event.target===this)closePayNowModal()">
     <div class="paynow-modal">
       <div class="paynow-header">
@@ -7647,46 +7670,50 @@ body.mobile-view #app-content {
         <button class="paynow-close" onclick="closePayNowModal()"><i class="fa-solid fa-times"></i></button>
       </div>
       <div class="paynow-body">
-        <div class="paynow-overdue"><i class="fa-solid fa-circle-exclamation" style="margin-right:4px;"></i>Overdue 3 days</div>
-        <div class="paynow-amount" id="paynow-amount">£21,250.00</div>
-        <div class="paynow-inv-desc" id="paynow-desc">Invoice #108<span class="paynow-inv-desc-dot"></span>Additional speaker installation</div>
+        <div class="paynow-top">
+          <div class="paynow-overdue"><i class="fa-solid fa-circle-exclamation" style="margin-right:5px;"></i>Overdue 3 days</div>
+          <div class="paynow-amount" id="paynow-amount">£21,250.00</div>
+          <div class="paynow-inv-desc" id="paynow-desc">Invoice #108<span class="paynow-inv-desc-dot"></span>Additional speaker installation</div>
+        </div>
         <div class="paynow-section-title">Bank transfer details</div>
-        <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Bank</div>
-          <div class="paynow-detail-val">Barclays</div>
-        </div>
-        <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Account name</div>
-          <div class="paynow-val-copy">
-            <div class="paynow-detail-val">LCR Integrated Systems Ltd</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard('LCR Integrated Systems Ltd')">Copy</button>
+        <div class="paynow-rows">
+          <div class="paynow-detail-row">
+            <div class="paynow-detail-label">Bank</div>
+            <div class="paynow-detail-val">Barclays</div>
           </div>
-        </div>
-        <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Sort code</div>
-          <div class="paynow-val-copy">
-            <div class="paynow-detail-val">20-45-67</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard('20-45-67')">Copy</button>
+          <div class="paynow-detail-row">
+            <div class="paynow-detail-label">Account name</div>
+            <div class="paynow-val-copy">
+              <div class="paynow-detail-val">LCR Integrated Systems Ltd</div>
+              <button class="paynow-copy-btn" onclick="copyToClipboard('LCR Integrated Systems Ltd')">Copy</button>
+            </div>
           </div>
-        </div>
-        <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Account number</div>
-          <div class="paynow-val-copy">
-            <div class="paynow-detail-val">83920174</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard('83920174')">Copy</button>
+          <div class="paynow-detail-row">
+            <div class="paynow-detail-label">Sort code</div>
+            <div class="paynow-val-copy">
+              <div class="paynow-detail-val">20-45-67</div>
+              <button class="paynow-copy-btn" onclick="copyToClipboard('20-45-67')">Copy</button>
+            </div>
           </div>
-        </div>
-        <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Reference</div>
-          <div class="paynow-val-copy">
-            <div class="paynow-detail-val" id="paynow-ref">INV-#002</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard(document.getElementById('paynow-ref').textContent)">Copy</button>
+          <div class="paynow-detail-row">
+            <div class="paynow-detail-label">Account number</div>
+            <div class="paynow-val-copy">
+              <div class="paynow-detail-val">83920174</div>
+              <button class="paynow-copy-btn" onclick="copyToClipboard('83920174')">Copy</button>
+            </div>
           </div>
+          <div class="paynow-detail-row paynow-ref-row">
+            <div class="paynow-detail-label">Reference</div>
+            <div class="paynow-val-copy">
+              <div class="paynow-detail-val" id="paynow-ref">INV-#002</div>
+              <button class="paynow-copy-btn" onclick="copyToClipboard(document.getElementById('paynow-ref').textContent)">Copy</button>
+            </div>
+          </div>
+          <div class="paynow-ref-note">*Please include the reference in the payment remarks.</div>
         </div>
-        <div class="paynow-ref-note">*Please include the reference in the payment remarks.</div>
         <button class="paynow-upload-btn">
           <i class="fa-sharp-solid fa-upload"></i>
-          Upload screenshot of transfer
+          Invoice Details
         </button>
         <div class="paynow-warning">
           <i class="fa-solid fa-circle-exclamation" style="flex-shrink:0;margin-top:1px;"></i>
@@ -7697,7 +7724,7 @@ body.mobile-view #app-content {
     </div>
   </div>
 
-  <!-- Payment noted modal — direct child of #app-content -->
+  <!-- Payment noted modal -->
   <div class="payment-noted-overlay" id="payment-noted-overlay" onclick="if(event.target===this)closePaymentNoted()">
     <div class="payment-noted-modal">
       <div class="payment-noted-title">Payment noted</div>
