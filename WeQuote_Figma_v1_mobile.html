@@ -360,6 +360,7 @@ body.mobile-view .screen.on {
   min-height: 0; /* override global min-height:100vh — min-height beats height in CSS */
   overflow-y: auto;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 body.mobile-view.screen-open #app-content {
   margin-left: calc(230px + max(0px, (100vw - 230px - var(--mobile-w, 390px)) / 2));
@@ -4380,13 +4381,27 @@ body.mobile-view #app-content {
 </style>
 <script id="mobile-standalone-vars">
 (function () {
+  var root = document.documentElement;
+  /* Use svh/dvh (stable/dynamic viewport height) so iOS address bar
+     shrink/expand doesn't cause layout jumps. Fall back to innerHeight. */
+  var supportsSvh = CSS.supports('height', '1svh');
+  var supportsDvh = CSS.supports('height', '1dvh');
   function syncViewport() {
-    var root = document.documentElement;
-    root.style.setProperty('--mobile-w', window.innerWidth  + 'px');
-    root.style.setProperty('--mobile-h', window.innerHeight + 'px');
+    root.style.setProperty('--mobile-w', window.innerWidth + 'px');
+    if (!supportsSvh && !supportsDvh) {
+      root.style.setProperty('--mobile-h', window.innerHeight + 'px');
+    }
   }
-  syncViewport();
-  window.addEventListener('resize', syncViewport);
+  if (supportsSvh) {
+    root.style.setProperty('--mobile-h', '100svh');
+    root.style.setProperty('--mobile-w', '100vw');
+  } else if (supportsDvh) {
+    root.style.setProperty('--mobile-h', '100dvh');
+    root.style.setProperty('--mobile-w', '100vw');
+  } else {
+    syncViewport();
+    window.addEventListener('resize', syncViewport);
+  }
 })();
 </script>
 </head>
