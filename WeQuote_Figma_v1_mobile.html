@@ -2566,7 +2566,7 @@ body.mobile-view #s-quotes .qp-payment-card {
   min-height: 163px;
   padding: 16px 13px;
   margin: 0 0 12px;
-  border-radius: 4px;
+  border-radius: 0;
   box-sizing: border-box;
 }
 /* Page footer — hidden on mobile */
@@ -2672,7 +2672,7 @@ body.mobile-view #s-quotes .qr-view {
   grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 6px 0 10px;
 }
 body.mobile-view #s-quotes .qr-view-btn {
-  width: 100%; height: 41px; font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 41px; font-size: 16px; text-align: center; display: flex; align-items: center; justify-content: center;
   background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 4px;
 }
 
@@ -3525,13 +3525,7 @@ body.mobile-view .qp-profile-panel {
   right: auto; left: 0;
 }
 
-/* Pay Now + Payment Noted — fixed covers full viewport, escapes all overflow containers */
-body.mobile-view .paynow-overlay,
-body.mobile-view .payment-noted-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%; height: 100%;
-}
+/* Pay Now + Payment Noted — overlays are outside #app-content, base position:fixed is sufficient */
 body.mobile-view .paynow-modal {
   width: calc(var(--mobile-w, 390px) - 24px);
   max-width: calc(var(--mobile-w, 390px) - 24px);
@@ -7662,78 +7656,79 @@ body.mobile-view #app-content {
   </div>
 
 </div>
-  <!-- Pay now modal -->
-  <div class="paynow-overlay" id="paynow-overlay" onclick="if(event.target===this)closePayNowModal()">
-    <div class="paynow-modal">
-      <div class="paynow-header">
-        <span class="paynow-header-title">Pay now</span>
-        <button class="paynow-close" onclick="closePayNowModal()"><i class="fa-solid fa-times"></i></button>
-      </div>
-      <div class="paynow-body">
-        <div class="paynow-top">
-          <div class="paynow-overdue"><i class="fa-solid fa-circle-exclamation" style="margin-right:5px;"></i>Overdue 3 days</div>
-          <div class="paynow-amount" id="paynow-amount">£21,250.00</div>
-          <div class="paynow-inv-desc" id="paynow-desc">Invoice #108<span class="paynow-inv-desc-dot"></span>Additional speaker installation</div>
-        </div>
-        <div class="paynow-section-title">Bank transfer details</div>
-        <div class="paynow-rows">
-          <div class="paynow-detail-row">
-            <div class="paynow-detail-label">Bank</div>
-            <div class="paynow-detail-val">Barclays</div>
-          </div>
-          <div class="paynow-detail-row">
-            <div class="paynow-detail-label">Account name</div>
-            <div class="paynow-val-copy">
-              <div class="paynow-detail-val">LCR Integrated Systems Ltd</div>
-              <button class="paynow-copy-btn" onclick="copyToClipboard('LCR Integrated Systems Ltd')">Copy</button>
-            </div>
-          </div>
-          <div class="paynow-detail-row">
-            <div class="paynow-detail-label">Sort code</div>
-            <div class="paynow-val-copy">
-              <div class="paynow-detail-val">20-45-67</div>
-              <button class="paynow-copy-btn" onclick="copyToClipboard('20-45-67')">Copy</button>
-            </div>
-          </div>
-          <div class="paynow-detail-row">
-            <div class="paynow-detail-label">Account number</div>
-            <div class="paynow-val-copy">
-              <div class="paynow-detail-val">83920174</div>
-              <button class="paynow-copy-btn" onclick="copyToClipboard('83920174')">Copy</button>
-            </div>
-          </div>
-          <div class="paynow-detail-row paynow-ref-row">
-            <div class="paynow-detail-label">Reference</div>
-            <div class="paynow-val-copy">
-              <div class="paynow-detail-val" id="paynow-ref">INV-#002</div>
-              <button class="paynow-copy-btn" onclick="copyToClipboard(document.getElementById('paynow-ref').textContent)">Copy</button>
-            </div>
-          </div>
-          <div class="paynow-ref-note">*Please include the reference in the payment remarks.</div>
-        </div>
-        <button class="paynow-upload-btn">
-          <i class="fa-sharp-solid fa-upload"></i>
-          Invoice Details
-        </button>
-        <div class="paynow-warning">
-          <i class="fa-solid fa-circle-exclamation" style="flex-shrink:0;margin-top:1px;"></i>
-          <span>After transferring, please take a screenshot and upload it for verification.</span>
-        </div>
-        <button class="paynow-mark-paid" onclick="markAsPaid()">Mark as Paid</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Payment noted modal -->
-  <div class="payment-noted-overlay" id="payment-noted-overlay" onclick="if(event.target===this)closePaymentNoted()">
-    <div class="payment-noted-modal">
-      <div class="payment-noted-title">Payment noted</div>
-      <div class="payment-noted-body">We'll update <span id="payment-noted-inv">Invoice #002</span> once the transfer clears, usually 5 working days.</div>
-      <button class="payment-noted-done" onclick="closePaymentNoted()">Done</button>
-    </div>
-  </div>
 
 </div><!-- /#app-content -->
+
+<!-- Pay now modal — outside #app-content so position:fixed escapes overflow:clip -->
+<div class="paynow-overlay" id="paynow-overlay" onclick="if(event.target===this)closePayNowModal()">
+  <div class="paynow-modal">
+    <div class="paynow-header">
+      <span class="paynow-header-title">Pay now</span>
+      <button class="paynow-close" onclick="closePayNowModal()"><i class="fa-solid fa-times"></i></button>
+    </div>
+    <div class="paynow-body">
+      <div class="paynow-top">
+        <div class="paynow-overdue"><i class="fa-solid fa-circle-exclamation" style="margin-right:5px;"></i>Overdue 3 days</div>
+        <div class="paynow-amount" id="paynow-amount">£21,250.00</div>
+        <div class="paynow-inv-desc" id="paynow-desc">Invoice #108<span class="paynow-inv-desc-dot"></span>Additional speaker installation</div>
+      </div>
+      <div class="paynow-section-title">Bank transfer details</div>
+      <div class="paynow-rows">
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Bank</div>
+          <div class="paynow-detail-val">Barclays</div>
+        </div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Account name</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val">LCR Integrated Systems Ltd</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('LCR Integrated Systems Ltd')">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Sort code</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val">20-45-67</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('20-45-67')">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Account number</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val">83920174</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('83920174')">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-detail-row paynow-ref-row">
+          <div class="paynow-detail-label">Reference</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val" id="paynow-ref">INV-#002</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard(document.getElementById('paynow-ref').textContent)">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-ref-note">*Please include the reference in the payment remarks.</div>
+      </div>
+      <button class="paynow-upload-btn">
+        <i class="fa-sharp-solid fa-upload"></i>
+        Invoice Details
+      </button>
+      <div class="paynow-warning">
+        <i class="fa-solid fa-circle-exclamation" style="flex-shrink:0;margin-top:1px;"></i>
+        <span>After transferring, please take a screenshot and upload it for verification.</span>
+      </div>
+      <button class="paynow-mark-paid" onclick="markAsPaid()">Mark as Paid</button>
+    </div>
+  </div>
+</div>
+
+<!-- Payment noted modal — outside #app-content -->
+<div class="payment-noted-overlay" id="payment-noted-overlay" onclick="if(event.target===this)closePaymentNoted()">
+  <div class="payment-noted-modal">
+    <div class="payment-noted-title">Payment noted</div>
+    <div class="payment-noted-body">We'll update <span id="payment-noted-inv">Invoice #002</span> once the transfer clears, usually 5 working days.</div>
+    <button class="payment-noted-done" onclick="closePaymentNoted()">Done</button>
+  </div>
+</div>
 
 
 <!-- ═══════════════════════════════════════════════════════
@@ -8687,27 +8682,27 @@ function resetBranding() {
 updateOnTokens();
 
 // ── Pay now modal ──
-let _currentInvRef = 'Invoice #002';
+var _currentInvRef = 'Invoice #002';
 function openPayNowModal(invRef, amount, desc) {
   _currentInvRef = invRef || 'Invoice #002';
   document.getElementById('paynow-amount').textContent = amount || '£21,250.00';
-  document.getElementById('paynow-desc').textContent = invRef + ' · ' + (desc || 'Additional speaker installation');
+  document.getElementById('paynow-desc').innerHTML =
+    (invRef || 'Invoice #108') +
+    '<span class="paynow-inv-desc-dot"></span>' +
+    (desc || 'Additional speaker installation');
   document.getElementById('paynow-ref').textContent = 'INV-' + (invRef || '#002').replace('Invoice ','');
-  document.getElementById('paynow-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.getElementById('paynow-overlay').style.display = 'flex';
 }
 function closePayNowModal() {
-  document.getElementById('paynow-overlay').classList.remove('open');
-  document.body.style.overflow = '';
+  document.getElementById('paynow-overlay').style.display = 'none';
 }
 function markAsPaid() {
   closePayNowModal();
   document.getElementById('payment-noted-inv').textContent = _currentInvRef;
-  document.getElementById('payment-noted-overlay').classList.add('open');
+  document.getElementById('payment-noted-overlay').style.display = 'flex';
 }
 function closePaymentNoted() {
-  document.getElementById('payment-noted-overlay').classList.remove('open');
-  document.body.style.overflow = '';
+  document.getElementById('payment-noted-overlay').style.display = 'none';
 }
 function copyToClipboard(text) {
   if (navigator.clipboard) {
