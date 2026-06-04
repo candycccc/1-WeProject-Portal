@@ -3704,10 +3704,12 @@ body.mobile-view #notif-panel-activity.qp-notif-body {
 .qp-comment-overlay.open { display: flex; }
 .qp-comment-dialog {
   background: #fff; border-radius: 20px 20px 0 0;
-  width: 100%; padding: 0 20px 32px;
+  width: 100%; padding: 0 20px 24px;
   display: flex; flex-direction: column; gap: 16px;
   box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
-  min-height: 52svh; /* occupy at least half the screen */
+  /* Mobile: almost full height so handle+header fixed at top, buttons fixed at bottom */
+  height: calc(100% - 44px);
+  overflow: hidden;
 }
 .qp-comment-handle {
   width: 65px; height: 4px;
@@ -3722,14 +3724,15 @@ body.mobile-view #notif-panel-activity.qp-notif-body {
   display: block; margin-top: 2px;
 }
 .qp-comment-textarea {
-  width: 100%; min-height: 96px; flex: 1;
+  width: 100%; min-height: 0; flex: 1;
   border: 1.5px solid var(--c-border-2); border-radius: 10px;
   padding: 12px; font-size: 14px; font-family: inherit;
   color: var(--c-text-1); resize: none; outline: none;
   box-sizing: border-box; transition: border-color 0.18s;
+  overflow-y: auto;
 }
 .qp-comment-textarea:focus { border-color: var(--brand-accent); }
-.qp-comment-actions { display: flex; gap: 10px; }
+.qp-comment-actions { display: flex; gap: 10px; flex-shrink: 0; }
 .qp-comment-cancel {
   flex: 1; padding: 14px 18px; border-radius: 4px;
   background: none; border: 1.5px solid var(--c-border-2);
@@ -3784,17 +3787,61 @@ body.mobile-view .qp-notif-panel {
 }
 
 /* Profile panel */
+/* Mobile: full-page profile overlay — slides up from bottom */
 body.mobile-view .qp-profile-overlay {
-  top: 42px;
-  left: var(--mobile-frame-left);
+  position: absolute;
+  top: 0; left: var(--mobile-frame-left);
   right: auto; bottom: auto;
   width: var(--mobile-w, 390px);
   height: var(--mobile-h, 844px);
   overflow: hidden;
 }
 body.mobile-view .qp-profile-panel {
-  width: 100%;
-  right: auto; left: 0;
+  position: absolute;
+  inset: 0; width: 100%;
+  border-left: none; box-shadow: none;
+  transform: translateY(100%);
+}
+body.mobile-view .qp-profile-overlay.open .qp-profile-panel {
+  transform: translateY(0);
+}
+/* Hide desktop title; keep X close button */
+body.mobile-view .qp-profile-title { display: none; }
+body.mobile-view .qp-profile-header {
+  justify-content: flex-end;
+  padding: 16px 20px 0;
+}
+/* Avatar — more breathing room at top */
+body.mobile-view .qp-profile-avatar-wrap { padding: 8px 0 24px; }
+/* Field labels: 12px for info fields */
+body.mobile-view .qp-profile-label { font-size: 12px; }
+/* Password field labels: 14px per Figma */
+body.mobile-view .qp-profile-label-pwd { font-size: 14px; }
+/* Inputs: 4px radius, tighter padding, grey text */
+body.mobile-view .qp-profile-input {
+  border-radius: 4px; padding: 10px 12px;
+  border-color: #e1e1e1; color: #5a5a5a;
+}
+body.mobile-view .qp-profile-country-select {
+  border-radius: 4px; padding: 10px 12px;
+  border-color: #e1e1e1; color: #5a5a5a;
+}
+/* Password inputs: 6px radius per Figma */
+body.mobile-view .qp-profile-input-wrap .qp-profile-input { border-radius: 6px; }
+/* Body: match Figma side padding */
+body.mobile-view .qp-profile-body { padding: 0 12px; }
+/* Phone row: no extra bottom margin (field handles it) */
+body.mobile-view .qp-profile-phone-row { margin-bottom: 0; }
+/* Footer: no top border, match Figma button spec */
+body.mobile-view .qp-profile-footer {
+  border-top: none; padding: 12px 13px 28px; gap: 10px;
+}
+body.mobile-view .qp-profile-btn-cancel {
+  background: #f9f9f9; border-color: #d9d9d9; padding: 14px;
+  font-weight: 500;
+}
+body.mobile-view .qp-profile-btn-update {
+  background: #38435e; padding: 14px; font-weight: 500;
 }
 
 /* Pay Now + Payment Noted — overlays are outside #app-content, base position:fixed is sufficient */
@@ -3821,7 +3868,7 @@ body.mobile-view .payment-noted-modal {
   font-family: inherit;
 }
 
-/* Edit Profile Panel — slide-in side panel */
+/* Edit Profile Panel — desktop: slide-in from right; mobile: slide-up full page */
 .qp-profile-overlay {
   position: fixed;
   top: 42px; right: 0; bottom: 0; left: 0;
