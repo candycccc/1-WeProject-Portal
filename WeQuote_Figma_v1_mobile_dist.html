@@ -369,6 +369,36 @@ body.mobile-view.brand-open #app-content {
   margin-right: calc(280px + max(0px, (100vw - 280px - var(--mobile-w, 390px)) / 2));
 }
 
+/* ── Mobile: warm beige colour scheme (Figma ref 744-33187 / 1009-35605) ── */
+body.mobile-view {
+  --brand-bg:      #eae7e1;
+  --brand-bg-card: #e0ddd6;
+  --brand-accent:  #7a5c2d;   /* warm brown replaces blue accent */
+  --brand-dark:    #5c4433;   /* darker warm brown */
+}
+
+/* ── Mobile accent: override remaining hardcoded blue values ── */
+body.mobile-view .qp-notif-tab-bar          { background: #7a5c2d; }
+body.mobile-view .qp-toggle.on              { background: #7a5c2d; }
+body.mobile-view .card-top-line             { background: #7a5c2d; }
+body.mobile-view .login-btn                 { background: #5c4433; }
+body.mobile-view .login-btn:hover           { background: #4a3626; }
+body.mobile-view .qp-profile-btn-update     { background: #5c4433; }
+body.mobile-view .qp-notif-toggle-label     { color: #7a5c2d; }
+/* Active filter pill — warm cream bg matches panel */
+body.mobile-view .qp-notif-cat-pill.active  {
+  background: #eae7e1; border-color: #c9c0b4;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+/* Sub-page nav card top border */
+body.mobile-view .detail-nav-card           { border-top-color: #7a5c2d; }
+/* Sales/PO card top borders */
+body.mobile-view .so-project-card           { border-top-color: #7a5c2d; }
+body.mobile-view .so-payment-details-card   { border-top-color: #7a5c2d; }
+body.mobile-view .so-project-title          { color: #5c4433; }
+/* Activity panel avatars */
+body.mobile-view .qp-activity-avatar        { background: #7a5c2d; }
+
 /* Right: brand customizer toggle in toolbar */
 #pt-brand-btn {
   display: flex; align-items: center; gap: 7px;
@@ -738,6 +768,10 @@ body.mobile-view .login-company-logo {
   position: relative;
   z-index: 2;
   box-shadow: 0 2px 8px rgba(0,0,0,0.14);
+  background: #fff;
+}
+body.mobile-view .login-company-logo img {
+  object-fit: contain;
 }
 
 /* Heading — 26px centred, matches Figma */
@@ -756,7 +790,7 @@ body.mobile-view .form-group label {
 
 /* Input fields — follow theme tokens */
 body.mobile-view .form-group input {
-  background: var(--c-surface);
+  background: #fff;
   border: 1px solid var(--c-border-1);
   color: var(--c-text-1);
   font-size: 14px;
@@ -1033,7 +1067,13 @@ body.mobile-view .dash-header {
   flex-shrink: 0;
 }
 body.mobile-view .dash-logo {
-  width: 29px; height: 29px;
+  width: 34px; height: 34px;
+  background: #fff;
+  border-radius: 4px;
+}
+body.mobile-view .dash-logo img {
+  object-fit: contain;
+  padding: 2px;
 }
 body.mobile-view .dash-company-name {
   display: block;
@@ -1046,18 +1086,19 @@ body.mobile-view .dash-user-info { display: none; }
 /* Bell: frosted glass pill */
 body.mobile-view .dash-bell {
   width: 42px; height: 42px;
-  background: var(--c-frosted-bg);
+  background: rgba(0,0,0,0.76);
   border: none;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow: none;
+  color: #ffffff;
 }
 body.dark-mode.mobile-view .dash-bell {
   background: rgba(255,255,255,0.12);
 }
-/* Avatar: brand dark bg */
+/* Avatar: warm brown (Figma 744-33187) */
 body.mobile-view .dash-avatar {
-  background: #38435e;
+  background: #675437;
   color: #fff;
 }
 
@@ -1093,7 +1134,7 @@ body.mobile-view .project-card {
   width: 100%;
 }
 body.mobile-view .card-top-line {
-  background: #38435e;
+  background: #7a5c2d;
 }
 body.mobile-view .card-name {
   font-size: 20px; font-weight: 500; color: var(--c-text-1);
@@ -1374,10 +1415,20 @@ body.mobile-view .detail-page {
   overscroll-behavior: contain;
 }
 
-/* Step 3: hero — 245px, never shrinks */
+/* Step 3: hero — 245px, never shrinks; rounded bottom corners (Figma 744-33187) */
 body.mobile-view .detail-hero {
   height: 245px;
   flex-shrink: 0;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+}
+/* Hero gradient: warm brown (Figma 744-33187) replaces dark navy */
+body.mobile-view .detail-hero-overlay {
+  background: linear-gradient(
+    to top,
+    #7a5c2d 3%,
+    rgba(156,119,62,0) 55%
+  );
 }
 
 /* Topbar — frosted glass pill at top:16px inside hero */
@@ -1396,23 +1447,24 @@ body.mobile-view .detail-breadcrumb {
 .detail-bc-back    { display: none; }
 .detail-bc-refresh { display: inline-flex; align-items: center; }
 
-/* Bell button — frosted glass circle 42px */
+/* Bell button — frosted white circle (Figma 744-33187) */
 body.mobile-view .detail-bell-btn {
   width: 42px; height: 42px;
-  backdrop-filter: blur(8px) saturate(1.4);
-  -webkit-backdrop-filter: blur(8px) saturate(1.4);
-  background: var(--c-frosted-bg);
+  background: rgba(255,255,255,0.80);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   border-radius: 50%; border: none; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
 }
 body.mobile-view .detail-bell-btn i {
   font-size: 18px;
-  color: var(--c-text-1);
+  color: #313131;
   line-height: 1;
 }
-/* Avatar */
+/* Avatar — warm brown background (Figma 744-33187) */
 body.mobile-view .detail-avatar {
   width: 42px; height: 42px; font-size: 14px; flex-shrink: 0;
+  background: #675437;
 }
 
 /* Hero bottom-left content */
@@ -1422,8 +1474,9 @@ body.mobile-view .detail-hero-bottom {
 }
 body.mobile-view .detail-company-logo {
   width: 40px; height: 40px; bottom: 18px; right: 14px;
-  border-radius: 6px;
+  border-radius: 6px; background: #fff; overflow: hidden;
 }
+body.mobile-view .detail-company-logo img { object-fit: contain; padding: 2px; }
 body.mobile-view .detail-project-name {
   font-size: 24px; font-weight: 500; gap: 4px; flex-wrap: nowrap;
   flex-direction: column; align-items: flex-start;
@@ -2282,9 +2335,10 @@ body.mobile-view .pp-notes-lbl { font-size: 12px; }
 body.mobile-view .pp-notes-text { font-size: 13px; }
 
 /* Attention section */
-body.mobile-view .pp-attention { margin: 8px 0 0; padding: 14px; }
+body.mobile-view .pp-attention { margin: 8px 0 0; padding: 14px 0; }
+body.mobile-view .pp-attention-header { padding: 0 14px 4px; }
 body.mobile-view .pp-attention-title { font-size: 16px; }
-body.mobile-view .pp-section-label { font-size: 16px; margin: 12px 0 6px; }
+body.mobile-view .pp-section-label { font-size: 16px; margin: 12px 0 6px; padding: 0 14px; }
 
 
 /* Invoice card in mobile: single column */
@@ -2546,12 +2600,13 @@ body.mobile-view .qp-nav-pill i {
   line-height: 1;
 }
 /* Bell button — frosted glass 42px */
+/* Bell button — solid dark circle (Figma 1009-35605) */
 body.mobile-view .qp-bell-btn {
   width: 42px; height: 42px;
   border-radius: 50%;
-  background: var(--c-frosted-bg);
-  backdrop-filter: blur(8px) saturate(1.4);
-  -webkit-backdrop-filter: blur(8px) saturate(1.4);
+  background: rgba(0,0,0,0.76);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border: none;
   box-shadow: none;
   display: flex; align-items: center; justify-content: center;
@@ -2559,14 +2614,15 @@ body.mobile-view .qp-bell-btn {
 }
 body.mobile-view .qp-bell-btn i {
   font-size: 18px;
-  color: var(--c-text-1);
+  color: #ffffff;
   line-height: 1;
 }
-/* Avatar — 42px (same as detail-avatar) */
+/* Avatar — 42px; warm brown background (Figma 744-33187 / 1009-35605) */
 body.mobile-view .qp-avatar {
   width: 42px; height: 42px;
   font-size: 16px;
   flex-shrink: 0;
+  background: #675437;
 }
 body.mobile-view .qp-topbar-right { flex-shrink: 0; gap: 8px; }
 /* Figma footer: 2-column — PM info left | contact right */
@@ -2842,8 +2898,9 @@ body.mobile-view #s-quotes .qr-view-btn {
 }
 
 /* Mirror of #s-quotes mobile .qr for progress attention section */
+/* ── Progress page qr card — identical to #s-quotes mobile layout ── */
 body.mobile-view #s-progress .pp-attention .qr {
-  grid-template-columns: 65px 1fr 1fr;
+  grid-template-columns: clamp(44px, 15.6vw, 65px) 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   padding: 12px 12px 0; min-height: unset; column-gap: 10px; row-gap: 0;
   border-radius: 4px;
@@ -2852,67 +2909,63 @@ body.mobile-view #s-progress .pp-attention .qr {
 body.mobile-view #s-progress .pp-attention .qr > div:empty { display: none; }
 body.mobile-view #s-progress .pp-attention .qr-thumb {
   grid-column: 1; grid-row: 1 / 4;
-  width: 61px; height: 61px; align-self: start; margin-top: 0;
+  width: clamp(40px, 15.6vw, 61px); height: clamp(40px, 15.6vw, 61px); align-self: start; margin-top: 0;
 }
 body.mobile-view #s-progress .pp-attention .qr-status {
   grid-column: 2 / 4; grid-row: 1;
   display: flex; flex-direction: row; justify-content: space-between;
-  align-items: center; flex-wrap: nowrap; gap: 6px; min-width: 0;
-  padding-bottom: 3px;
+  align-items: center; flex-wrap: wrap; gap: 4px; min-width: 0;
+  padding-bottom: 10px;
 }
 body.mobile-view #s-progress .pp-attention .qr-badge {
-  background: none !important; padding: 0; border-radius: 0;
-  display: flex; align-items: center; gap: 5px;
-  font-size: 12px; font-weight: 600; white-space: nowrap; color: var(--c-text-1);
+  padding: 3px 6px; border-radius: 2px;
+  display: inline-flex; align-items: center;
+  font-size: 12px; font-weight: 600; white-space: nowrap; color: #000 !important;
+  background: none;
 }
-body.mobile-view #s-progress .pp-attention .qr-badge::before {
-  content: ''; display: inline-block;
-  width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0;
-}
-body.mobile-view #s-progress .pp-attention .qr-badge-pending::before  { background: #ff9500; }
-body.mobile-view #s-progress .pp-attention .qr-badge-tbc::before      { background: #9c9c9c; }
-body.mobile-view #s-progress .pp-attention .qr-badge-accepted::before { background: #009113; }
-body.mobile-view #s-progress .pp-attention .qr-badge-declined::before { background: #9c9c9c; }
-body.mobile-view #s-progress .pp-attention .qr-date {
-  font-size: 11px; text-align: right; flex-shrink: 0; min-width: 0;
-  overflow: hidden; text-overflow: ellipsis; max-width: 55%; white-space: nowrap;
-}
+body.mobile-view #s-progress .pp-attention .qr-badge::before { display: none; }
+body.mobile-view #s-progress .pp-attention .qr-badge-pending  { background: rgba(255, 149, 0, 0.15); }
+body.mobile-view #s-progress .pp-attention .qr-badge-tbc      { background: #eaeaea; }
+body.mobile-view #s-progress .pp-attention .qr-badge-accepted { background: rgba(0, 145, 19, 0.1); }
+body.mobile-view #s-progress .pp-attention .qr-badge-declined { background: #eaeaea; }
+body.mobile-view #s-progress .pp-attention .qr-date { font-size: 12px; text-align: right; white-space: nowrap; }
 body.mobile-view #s-progress .pp-attention .qr-name  { grid-column: 2 / 4; grid-row: 2; padding: 0; }
 body.mobile-view #s-progress .pp-attention .qr-title { font-size: 20px; margin-top: 2px; line-height: 1.2; }
-body.mobile-view #s-progress .pp-attention .qr-number { font-size: 10px; }
-body.mobile-view #s-progress .pp-attention .qr-revision { font-size: 10px; }
-body.mobile-view #s-progress .pp-attention .qr-meta { margin-top: 2px; gap: 6px; }
+body.mobile-view #s-progress .pp-attention .qr-number { font-size: 12px; }
+body.mobile-view #s-progress .pp-attention .qr-revision { font-size: 12px; }
+body.mobile-view #s-progress .pp-attention .qr-meta { margin-top: 2px; gap: 8px; }
 body.mobile-view #s-progress .pp-attention .qr-orig {
-  grid-column: 2; grid-row: 3; padding-top: 12px; align-self: start;
+  grid-column: 2; grid-row: 3; padding-top: 18.5px; align-self: start;
 }
 body.mobile-view #s-progress .pp-attention .qr-orig-val { font-size: 16px; }
 body.mobile-view #s-progress .pp-attention .qr-orig-lbl { font-size: 10px; }
 body.mobile-view #s-progress .pp-attention .qr-ver {
-  grid-column: 3; grid-row: 3; padding-top: 12px; align-self: start;
+  grid-column: 3; grid-row: 3; padding-top: 18.5px; align-self: start;
+  display: flex; flex-direction: column; gap: 2px;
 }
 body.mobile-view #s-progress .pp-attention .qr-ver-val { font-size: 16px; }
 body.mobile-view #s-progress .pp-attention .qr-ver-lbl { font-size: 10px; }
 body.mobile-view #s-progress .pp-attention .qr-payment {
   grid-column: 1 / 4; grid-row: 4; padding-left: 0;
-  padding-top: 10px; border-top: 1px solid var(--c-border-1); margin-top: 10px;
+  padding-top: 10px; margin-top: 10px; padding-bottom: 21px;
 }
 body.mobile-view #s-progress .pp-attention .qr-payment-legend { grid-template-columns: repeat(3, 1fr); }
-body.mobile-view #s-progress .pp-attention .qr-payment-big { font-size: 20px; }
-body.mobile-view #s-progress .pp-attention .qr-payment-of { font-size: 12px; }
+body.mobile-view #s-progress .pp-attention .qr-payment-big { font-size: 20px; font-weight: 600; }
+body.mobile-view #s-progress .pp-attention .qr-payment-of { font-size: 14px; font-weight: 500; }
 body.mobile-view #s-progress .pp-attention .qr-actions {
   grid-column: 1 / 4; grid-row: 4; justify-self: stretch;
-  margin-top: 10px; border-top: 1px solid var(--c-border-1);
+  margin-top: 33.5px;
 }
 body.mobile-view #s-progress .pp-attention .qr-action-group { width: 100%; }
 body.mobile-view #s-progress .pp-attention .qr-action-btn {
   flex: 1; padding: 10px 6px; font-size: 16px; min-height: 42px; justify-content: center; display: flex; align-items: center;
 }
-body.mobile-view #s-progress .pp-attention .qr-action-btn:first-child { flex: none; width: 44px; }
+body.mobile-view #s-progress .pp-attention .qr-action-btn:first-child { flex: none; width: 54px; }
 body.mobile-view #s-progress .pp-attention .qr-view {
-  grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 6px 0 10px;
+  grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 12px 0 10px;
 }
 body.mobile-view #s-progress .pp-attention .qr-view-btn {
-  width: 100%; height: 41px; font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 41px; font-size: 16px; text-align: center; display: flex; align-items: center; justify-content: center;
   background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 4px;
 }
 
@@ -3844,11 +3897,11 @@ body.mobile-view .qp-profile-label-pwd { font-size: 14px; }
 /* Inputs: 4px radius, tighter padding, grey text */
 body.mobile-view .qp-profile-input {
   border-radius: 4px; padding: 10px 12px;
-  border-color: #e1e1e1; color: #5a5a5a;
+  border-color: #e1e1e1; color: #5a5a5a; background: #fff;
 }
 body.mobile-view .qp-profile-country-select {
   border-radius: 4px; padding: 10px 12px;
-  border-color: #e1e1e1; color: #5a5a5a;
+  border-color: #e1e1e1; color: #5a5a5a; background: #fff;
 }
 /* Password inputs: 6px radius per Figma */
 body.mobile-view .qp-profile-input-wrap .qp-profile-input { border-radius: 6px; }
@@ -3865,7 +3918,7 @@ body.mobile-view .qp-profile-btn-cancel {
   font-weight: 500;
 }
 body.mobile-view .qp-profile-btn-update {
-  background: #38435e; padding: 14px; font-weight: 500;
+  background: #5c4433; padding: 14px; font-weight: 500;
 }
 
 /* Pay Now + Payment Noted — overlays are outside #app-content, base position:fixed is sufficient */
@@ -4956,7 +5009,7 @@ body.mobile-view #app-content {
         <img src="assets/images/9b2d4b7f-de0a-4f47-8ffd-6c09fd13404f.png"
              alt="BH" onerror="this.parentElement.style.background='var(--brand-dark)';this.style.display='none'"/>
       </div>
-      <span class="dash-company-name">Butler Harwell,&#10;Amous Yeo</span>
+      <span class="dash-company-name">LCR Intergrated system,&#10;Lee Roche</span>
     </div>
     <div class="dash-header-right">
       <button class="dash-bell qp-bell-badge" onclick="toggleNotifPanel(event)">
@@ -5005,7 +5058,7 @@ body.mobile-view #app-content {
       <div class="card-info">
         <div class="card-title-row">
           <a class="card-name-link">
-            <span class="card-name"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></span>
+            <span class="card-name"><span class="brand-project-name">Ocean Palm Residences</span></span>
             <svg width="20" height="20" fill="none" stroke="#383741" stroke-width="1.5" viewBox="0 0 24 24">
               <path d="M7 17L17 7M17 7H7M17 7v10"/>
             </svg>
@@ -5107,7 +5160,7 @@ body.mobile-view #app-content {
           <path d="M15 18l-6-6 6-6"/>
         </svg>
         <!-- Project name always visible -->
-        <span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span>
+        <span class="brand-project-name">Ocean Palm Residences</span>
         <!-- Mobile: refresh icon (FA7 Sharp, after name) -->
         <i class="fa-regular fa-arrows-repeat detail-bc-refresh"></i>
       </button>
@@ -5142,7 +5195,7 @@ body.mobile-view #app-content {
             <div class="active-badge-dot"></div>
             Active
           </div>
-          <span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span>
+          <span class="brand-project-name">Ocean Palm Residences</span>
         </div>
         <div class="detail-lead-time">Lead time 12 weeks · Due 16 Mar 2026</div>
         <div class="detail-meta">
@@ -5176,7 +5229,7 @@ body.mobile-view #app-content {
           <div class="sidebar-person-role"><span class="brand-pm-role">Project Manager</span></div>
         </div>
         <div class="sidebar-pm-right">
-          <div class="sidebar-company-name">Butler Harwell Limited</div>
+          <div class="sidebar-company-name">LCR Intergrated system</div>
           <div class="sidebar-address">Unit 19, Creative Enterprise Quarter, Javelin Way, Ashford, TN24 8FN</div>
           <div class="sidebar-contact">
             <div class="sidebar-contact-item">
@@ -5435,7 +5488,7 @@ body.mobile-view #app-content {
     <div class="qp-card qp-project-card">
       <div class="qp-project-left">
         <div>
-          <div class="qp-project-name"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></div>
+          <div class="qp-project-name"><span class="brand-project-name">Ocean Palm Residences</span></div>
           <div class="qp-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
         </div>
         <div class="qp-total-block">
@@ -5679,7 +5732,7 @@ body.mobile-view #app-content {
         <img src="assets/images/9b2d4b7f-de0a-4f47-8ffd-6c09fd13404f.png"
              alt="BH" onerror="this.parentElement.style.background='var(--brand-dark)';this.style.display='none'"/>
       </div>
-      <div class="qp-footer-project"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></div>
+      <div class="qp-footer-project"><span class="brand-project-name">Ocean Palm Residences</span></div>
     </div>
     <div class="qp-footer-right">
       <div class="qp-footer-pm">
@@ -5788,7 +5841,7 @@ body.mobile-view #app-content {
     <div class="qp-card qp-project-card">
       <div class="qp-project-left">
         <div>
-          <div class="qp-project-name"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></div>
+          <div class="qp-project-name"><span class="brand-project-name">Ocean Palm Residences</span></div>
           <div class="qp-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
         </div>
         <div class="qp-total-block">
@@ -6046,7 +6099,7 @@ body.mobile-view #app-content {
       <div class="qp-footer-logo">
         <img src="assets/images/9b2d4b7f-de0a-4f47-8ffd-6c09fd13404f.png" alt="BH" onerror="this.parentElement.style.background='var(--brand-dark)';this.style.display='none'"/>
       </div>
-      <div class="qp-footer-project"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></div>
+      <div class="qp-footer-project"><span class="brand-project-name">Ocean Palm Residences</span></div>
     </div>
     <div class="qp-footer-right">
       <div class="qp-footer-pm">
@@ -6414,7 +6467,7 @@ body.mobile-view #app-content {
       <div class="qp-footer-logo">
         <img src="assets/images/9b2d4b7f-de0a-4f47-8ffd-6c09fd13404f.png" alt="BH" onerror="this.parentElement.style.background='var(--brand-dark)';this.style.display='none'"/>
       </div>
-      <div class="qp-footer-project"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></div>
+      <div class="qp-footer-project"><span class="brand-project-name">Ocean Palm Residences</span></div>
     </div>
     <div class="qp-footer-right">
       <div class="qp-footer-pm">
@@ -6519,7 +6572,7 @@ body.mobile-view #app-content {
     <div class="qp-card qp-project-card">
       <div class="qp-project-left">
         <div>
-          <div class="qp-project-name"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></div>
+          <div class="qp-project-name"><span class="brand-project-name">Ocean Palm Residences</span></div>
           <div class="qp-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
         </div>
         <div class="qp-total-block">
@@ -6722,7 +6775,7 @@ body.mobile-view #app-content {
       <div class="qp-footer-logo">
         <img src="assets/images/eec959b6-9b81-40e5-8494-3d37a4ca2018.png" alt="BH" onerror="this.parentElement.style.background='var(--brand-dark)';this.style.display='none'"/>
       </div>
-      <div class="qp-footer-project"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></div>
+      <div class="qp-footer-project"><span class="brand-project-name">Ocean Palm Residences</span></div>
     </div>
     <div class="qp-footer-right">
       <div class="qp-footer-pm">
@@ -6969,8 +7022,11 @@ body.mobile-view #app-content {
         </div>
       </div>
       <div class="inv-btns">
-        <button class="inv-btn" onclick="go('invoices')">Invoice Details</button>
-        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay now</button>
+        <div class="inv-btns-row">
+          <button class="inv-btn" onclick="go('invoices')">Invoice Details</button>
+          <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay Now</button>
+        </div>
+        <button class="inv-btn inv-btn-view" onclick="go('quotes')">View Quote</button>
       </div>
     </div><!-- /inv-row -->
 
@@ -7411,7 +7467,7 @@ body.mobile-view #app-content {
       <span class="qp-notif-heading">Notifications</span>
       <div class="qp-notif-toggles">
         <div class="qp-notif-toggle-row" onclick="toggleReadFilter('unread')">
-          <span class="qp-notif-toggle-label" style="color:#405995;font-size:11px;">Only show unread</span>
+          <span class="qp-notif-toggle-label" style="font-size:11px;">Only show unread</span>
           <div class="qp-toggle" id="toggle-unread"><div class="qp-toggle-thumb"></div></div>
         </div>
       </div>
@@ -9550,7 +9606,7 @@ function togglePoweredBy(btn) {
 const DEFAULTS = {
   accent: '#405995',
   font: 'Figtree',
-  projectName: 'Amos-Yeo Foxglove - AVOIP',
+  projectName: 'Ocean Palm Residences',
   pmName: 'Tyler Holmes',
   pmRole: 'Project Manager',
   logoUrl: 'assets/images/721f1d92-43b5-4a75-8e68-a9e62bdf23ff.png',
@@ -9737,7 +9793,7 @@ function copyToClipboard(text) {
    BRAND DATA — change once, updates everywhere
 ─────────────────────────────────────────────────────── */
 const WQ_BRAND = {
-  projectName: 'Amos-Yeo Foxglove - AVOIP',
+  projectName: 'Ocean Palm Residences',
   pmName:      'Tyler Holmes',
   pmRole:      'Project Manager',
   email:       'demo@example.com',

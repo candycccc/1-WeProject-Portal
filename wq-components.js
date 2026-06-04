@@ -9,7 +9,7 @@
    BRAND DATA — change once, updates everywhere
 ─────────────────────────────────────────────────────── */
 const WQ_BRAND = {
-  projectName: 'Amos-Yeo Foxglove - AVOIP',
+  projectName: 'Ocean Palm Residences',
   pmName:      'Tyler Holmes',
   pmRole:      'Project Manager',
   email:       'demo@example.com',

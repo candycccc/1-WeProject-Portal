@@ -1204,7 +1204,7 @@ function togglePoweredBy(btn) {
 const DEFAULTS = {
   accent: '#405995',
   font: 'Figtree',
-  projectName: 'Amos-Yeo Foxglove - AVOIP',
+  projectName: 'Ocean Palm Residences',
   pmName: 'Tyler Holmes',
   pmRole: 'Project Manager',
   logoUrl: 'assets/images/721f1d92-43b5-4a75-8e68-a9e62bdf23ff.png',
