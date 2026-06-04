@@ -1116,47 +1116,52 @@ function cardRef(card) {
 // ── Comment dialog ──
 let commentDialogRef = '';
 
-// Visual Viewport handler — keeps comment dialog above keyboard on real mobile
+// ── Visual Viewport: keep comment overlay filling the visible area above keyboard ──
 function _vvCommentResize() {
-  const overlay = document.getElementById('qp-comment-overlay');
-  if (!overlay || !overlay.classList.contains('open')) return;
-  const vv = window.visualViewport;
+  var o = document.getElementById('qp-comment-overlay');
+  if (!o || !o.classList.contains('open')) return;
+  var vv = window.visualViewport;
   if (!vv) return;
-  overlay.style.top    = vv.offsetTop  + 'px';
-  overlay.style.height = vv.height     + 'px';
-  overlay.style.left   = vv.offsetLeft + 'px';
-  overlay.style.width  = vv.width      + 'px';
+  o.style.top    = vv.offsetTop  + 'px';
+  o.style.left   = vv.offsetLeft + 'px';
+  o.style.width  = vv.width      + 'px';
+  o.style.height = vv.height     + 'px';
 }
 
 function openCommentDialog(ref) {
   commentDialogRef = ref;
-  const overlay = document.getElementById('qp-comment-overlay');
-  const refEl   = document.getElementById('comment-ref-text');
-  const ta      = document.getElementById('comment-textarea');
+  var overlay = document.getElementById('qp-comment-overlay');
+  var refEl   = document.getElementById('comment-ref-text');
+  var ta      = document.getElementById('comment-textarea');
   if (refEl) refEl.textContent = ref;
   if (ta)    ta.value = '';
 
-  // On real mobile: switch to position:fixed so keyboard pushes dialog up
-  if (document.body.classList.contains('mobile-view')) {
-    overlay.style.position = 'fixed';
-    overlay.style.inset = '0';
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', _vvCommentResize);
-      window.visualViewport.addEventListener('scroll', _vvCommentResize);
-    }
+  // Switch to position:fixed so keyboard doesn't bury the dialog
+  overlay.style.position = 'fixed';
+  overlay.style.top      = '0';
+  overlay.style.right    = '0';
+  overlay.style.bottom   = '0';
+  overlay.style.left     = '0';
+  overlay.style.width    = '';
+  overlay.style.height   = '';
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', _vvCommentResize);
+    window.visualViewport.addEventListener('scroll', _vvCommentResize);
   }
 
-  overlay?.classList.add('open');
-  setTimeout(() => ta?.focus(), 120);
+  overlay.classList.add('open');
+  setTimeout(function() { if (ta) ta.focus(); }, 120);
 }
 
 function closeCommentDialog() {
-  const overlay = document.getElementById('qp-comment-overlay');
-  overlay?.classList.remove('open');
-  // Restore absolute positioning for desktop preview
+  var overlay = document.getElementById('qp-comment-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  // Restore to CSS-driven absolute positioning
   overlay.style.position = '';
-  overlay.style.inset    = '';
-  overlay.style.top = overlay.style.left = overlay.style.width = overlay.style.height = '';
+  overlay.style.top = overlay.style.right = overlay.style.bottom = overlay.style.left = '';
+  overlay.style.width = overlay.style.height = '';
   if (window.visualViewport) {
     window.visualViewport.removeEventListener('resize', _vvCommentResize);
     window.visualViewport.removeEventListener('scroll', _vvCommentResize);
@@ -1319,69 +1324,86 @@ function copyToClipboard(text) {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Comment dialog — iOS-style drag-to-dismiss
-   Grab the handle or header, drag down: backdrop fades, dialog slides out.
-   Snap back with spring if not past threshold.
+   Comment dialog — iOS-style drag-to-dismiss (touch + mouse)
+   Grab the handle or header zone → drag down → backdrop fades out →
+   release past threshold = dismiss; release early = spring back.
 ───────────────────────────────────────────────────────────────────────── */
 (function initCommentDrag() {
-  var startY = 0, dy = 0, dragging = false;
-  var THRESHOLD = 80; // px to trigger dismiss
+  var startY = 0, dy = 0, active = false;
+  var THRESHOLD = 80;
 
-  function ov() { return document.getElementById('qp-comment-overlay'); }
-  function dlg() { return document.querySelector('#qp-comment-overlay .qp-comment-dialog'); }
+  function $o()  { return document.getElementById('qp-comment-overlay'); }
+  function $d()  { var o = $o(); return o && o.querySelector('.qp-comment-dialog'); }
+  function isOpen() { var o = $o(); return o && o.classList.contains('open'); }
+  function inDragZone(el) {
+    return !!(el && el.closest('.qp-comment-handle, .qp-comment-header'));
+  }
 
-  document.addEventListener('touchstart', function(e) {
-    var o = ov();
-    if (!o || !o.classList.contains('open')) return;
-    // Only initiate drag from handle or header zone
-    if (!e.target.closest('.qp-comment-handle, .qp-comment-header')) return;
-    dragging = true;
-    startY = e.touches[0].clientY;
-    dy = 0;
-    dlg().style.transition = 'none';
-    o.style.transition = 'none';
-  }, { passive: true });
+  /* ── start ── */
+  function onStart(y) {
+    if (!isOpen()) return;
+    active = true; startY = y; dy = 0;
+    var d = $d(), o = $o();
+    if (d) d.style.transition = 'none';
+    if (o) o.style.transition = 'none';
+  }
 
-  document.addEventListener('touchmove', function(e) {
-    if (!dragging) return;
-    dy = Math.max(0, e.touches[0].clientY - startY);
-    dlg().style.transform = 'translateY(' + dy + 'px)';
-    // Proportionally fade the backdrop
-    var progress = Math.min(dy / 220, 1);
-    ov().style.background = 'rgba(0,0,0,' + (0.42 * (1 - progress)) + ')';
-  }, { passive: true });
+  /* ── move ── */
+  function onMove(y) {
+    if (!active) return;
+    dy = Math.max(0, y - startY);
+    var d = $d(), o = $o();
+    if (d) d.style.transform = 'translateY(' + dy + 'px)';
+    if (o) o.style.background = 'rgba(0,0,0,' + Math.max(0, 0.42 * (1 - dy / 220)) + ')';
+  }
 
-  document.addEventListener('touchend', function() {
-    if (!dragging) return;
-    dragging = false;
-    var d = dlg(), o = ov();
+  /* ── end ── */
+  function onEnd() {
+    if (!active) return;
+    active = false;
+    var d = $d(), o = $o();
     if (!d || !o) return;
 
     if (dy > THRESHOLD) {
-      // Past threshold — dismiss
       d.style.transition = 'transform 0.22s ease-in';
       o.style.transition = 'background 0.22s ease-in';
       d.style.transform  = 'translateY(110%)';
       o.style.background = 'rgba(0,0,0,0)';
       setTimeout(function() {
+        d.style.transform = d.style.transition = '';
+        o.style.background = o.style.transition = '';
         closeCommentDialog();
-        d.style.transform  = '';
-        d.style.transition = '';
-        o.style.background  = '';
-        o.style.transition  = '';
       }, 230);
     } else {
-      // Below threshold — spring back
       d.style.transition = 'transform 0.32s cubic-bezier(.4,0,.2,1)';
       o.style.transition = 'background 0.32s ease';
       d.style.transform  = 'translateY(0)';
       o.style.background = 'rgba(0,0,0,0.42)';
       setTimeout(function() {
-        d.style.transform  = '';
-        d.style.transition = '';
-        o.style.background  = '';
-        o.style.transition  = '';
+        d.style.transform = d.style.transition = '';
+        o.style.background = o.style.transition = '';
       }, 320);
     }
+  }
+
+  /* Touch (mobile) — non-passive so we can preventDefault on move */
+  document.addEventListener('touchstart', function(e) {
+    if (inDragZone(e.target)) onStart(e.touches[0].clientY);
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function(e) {
+    if (!active) return;
+    if (dy > 4) e.preventDefault(); // block page scroll once we're dragging
+    onMove(e.touches[0].clientY);
+  }, { passive: false });
+
+  document.addEventListener('touchend',    onEnd, { passive: true });
+  document.addEventListener('touchcancel', onEnd, { passive: true });
+
+  /* Mouse (desktop preview) */
+  document.addEventListener('mousedown', function(e) {
+    if (inDragZone(e.target)) { e.preventDefault(); onStart(e.clientY); }
   });
+  document.addEventListener('mousemove', function(e) { if (active) onMove(e.clientY); });
+  document.addEventListener('mouseup',   onEnd);
 })();

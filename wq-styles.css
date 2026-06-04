@@ -3732,6 +3732,7 @@ body.mobile-view #notif-panel-activity.qp-notif-body {
   overflow-y: auto;
 }
 .qp-comment-textarea:focus { border-color: var(--brand-accent); }
+.qp-comment-header { flex-shrink: 0; }
 .qp-comment-actions { display: flex; gap: 10px; flex-shrink: 0; }
 .qp-comment-cancel {
   flex: 1; padding: 14px 18px; border-radius: 4px;
