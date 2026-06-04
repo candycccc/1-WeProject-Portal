@@ -1116,18 +1116,6 @@ function cardRef(card) {
 // ── Comment dialog ──
 let commentDialogRef = '';
 
-// ── Visual Viewport: keep comment overlay filling the visible area above keyboard ──
-function _vvCommentResize() {
-  var o = document.getElementById('qp-comment-overlay');
-  if (!o || !o.classList.contains('open')) return;
-  var vv = window.visualViewport;
-  if (!vv) return;
-  o.style.top    = vv.offsetTop  + 'px';
-  o.style.left   = vv.offsetLeft + 'px';
-  o.style.width  = vv.width      + 'px';
-  o.style.height = vv.height     + 'px';
-}
-
 function openCommentDialog(ref) {
   commentDialogRef = ref;
   var overlay = document.getElementById('qp-comment-overlay');
@@ -1135,22 +1123,10 @@ function openCommentDialog(ref) {
   var ta      = document.getElementById('comment-textarea');
   if (refEl) refEl.textContent = ref;
   if (ta)    ta.value = '';
-
-  // Switch to position:fixed so keyboard doesn't bury the dialog
-  overlay.style.position = 'fixed';
-  overlay.style.top      = '0';
-  overlay.style.right    = '0';
-  overlay.style.bottom   = '0';
-  overlay.style.left     = '0';
-  overlay.style.width    = '';
-  overlay.style.height   = '';
-
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', _vvCommentResize);
-    window.visualViewport.addEventListener('scroll', _vvCommentResize);
-  }
-
   overlay.classList.add('open');
+  // Lock background scroll while dialog is open
+  var ac = document.getElementById('app-content');
+  if (ac) ac.style.overflow = 'hidden';
   setTimeout(function() { if (ta) ta.focus(); }, 120);
 }
 
@@ -1158,14 +1134,9 @@ function closeCommentDialog() {
   var overlay = document.getElementById('qp-comment-overlay');
   if (!overlay) return;
   overlay.classList.remove('open');
-  // Restore to CSS-driven absolute positioning
-  overlay.style.position = '';
-  overlay.style.top = overlay.style.right = overlay.style.bottom = overlay.style.left = '';
-  overlay.style.width = overlay.style.height = '';
-  if (window.visualViewport) {
-    window.visualViewport.removeEventListener('resize', _vvCommentResize);
-    window.visualViewport.removeEventListener('scroll', _vvCommentResize);
-  }
+  // Restore background scroll
+  var ac = document.getElementById('app-content');
+  if (ac) ac.style.overflow = '';
 }
 
 function submitComment() {
