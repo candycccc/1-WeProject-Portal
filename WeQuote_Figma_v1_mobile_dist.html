@@ -2315,15 +2315,15 @@ body.mobile-view #s-variations .var-card-left {
   flex: none; padding: 22px 14px 22px;
   flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 12px;
 }
-body.mobile-view #s-variations .var-summary-title { font-size: 24px; line-height: 1.25; }
+body.mobile-view #s-variations .var-summary-title { font-size: 18px; line-height: 1.25; }
 body.mobile-view #s-variations .var-total-block { display: block; text-align: right; }
 body.mobile-view #s-variations .var-total-value { font-size: 24px !important; font-weight: 600; color: var(--c-text-1); }
-body.mobile-view #s-variations .var-total-label { font-size: 10px !important; font-weight: 500; color: var(--c-text-muted); max-width: 110px; line-height: 1.3; }
+body.mobile-view #s-variations .var-total-label { font-size: 10px !important; font-weight: 500; color: var(--c-text-muted); line-height: 1.3; text-align: right; }
 body.mobile-view #s-variations .qp-project-right {
   border-left: none; border-top: none;
   flex: none; padding: 16px 14px 14px; gap: 8px;
 }
-body.mobile-view #s-variations .qp-payment-amount { font-size: 24px; }
+body.mobile-view #s-variations .qp-payment-amount { font-size: 20px; }
 body.mobile-view #s-variations .qp-payment-of { font-size: 10px; }
 body.mobile-view #s-variations .qp-summary-amounts {
   display: flex; justify-content: space-between; align-items: flex-start; width: 100%;
@@ -2332,7 +2332,7 @@ body.mobile-view #s-variations .qp-total-block-mobile {
   display: flex; flex-direction: column; align-items: flex-end; text-align: right;
 }
 body.mobile-view #s-variations .qp-total-block-mobile .qp-total-value {
-  font-size: 24px; font-weight: 600; color: var(--c-text-1);
+  font-size: 20px; font-weight: 600; color: var(--c-text-1);
 }
 body.mobile-view #s-variations .qp-total-block-mobile .qp-total-label {
   font-size: 10px; font-weight: 500; color: var(--c-text-muted); max-width: 110px; line-height: 1.3;
@@ -2354,9 +2354,9 @@ body.mobile-view #s-variations .qp-bank-field span { color: #1f2f3e; }
 body.mobile-view #s-variations .qp-list {
   flex: 1; min-height: 0; overflow-y: auto; padding: 0 12px;
 }
-/* Variation cards: 3-col grid matching Figma 724:28554 */
+/* Variation cards: identical layout to #s-quotes cards */
 body.mobile-view #s-variations .qr {
-  grid-template-columns: 65px 1fr 1fr;
+  grid-template-columns: clamp(44px, 15.6vw, 65px) 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   padding: 12px 12px 0; min-height: unset; column-gap: 10px; row-gap: 0;
   border-radius: 4px;
@@ -2364,66 +2364,123 @@ body.mobile-view #s-variations .qr {
 }
 body.mobile-view #s-variations .qr > div:empty { display: none; }
 body.mobile-view #s-variations .qr-thumb {
-  grid-column: 1; grid-row: 1 / 4; width: 61px; height: 61px; align-self: start;
+  grid-column: 1; grid-row: 1 / 4;
+  width: clamp(40px, 15.6vw, 61px); height: clamp(40px, 15.6vw, 61px);
+  align-self: start; margin-top: 0;
 }
 body.mobile-view #s-variations .qr-status {
   grid-column: 2 / 4; grid-row: 1;
   display: flex; flex-direction: row; justify-content: space-between;
-  align-items: center; flex-wrap: nowrap; gap: 6px; min-width: 0; padding-bottom: 3px;
+  align-items: center; flex-wrap: wrap; gap: 4px; min-width: 0;
+  padding-bottom: 10px;
 }
 body.mobile-view #s-variations .qr-badge {
-  background: none !important; padding: 0; border-radius: 0;
-  display: flex; align-items: center; gap: 5px;
-  font-size: 12px; font-weight: 600; white-space: nowrap; color: var(--c-text-1);
+  padding: 3px 6px; border-radius: 2px;
+  display: inline-flex; align-items: center;
+  font-size: 12px; font-weight: 600; white-space: nowrap; color: #000 !important;
 }
-body.mobile-view #s-variations .qr-badge::before {
-  content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0;
-}
-body.mobile-view #s-variations .qr-badge-pending::before  { background: #ff9500; }
-body.mobile-view #s-variations .qr-badge-tbc::before      { background: #9c9c9c; }
-body.mobile-view #s-variations .qr-badge-accepted::before { background: #009113; }
-body.mobile-view #s-variations .qr-badge-declined::before { background: #9c9c9c; }
+body.mobile-view #s-variations .qr-badge::before { display: none; }
+body.mobile-view #s-variations .qr-badge-pending  { background: rgba(255, 149, 0, 0.15); }
+body.mobile-view #s-variations .qr-badge-tbc      { background: #eaeaea; }
+body.mobile-view #s-variations .qr-badge-accepted { background: rgba(0, 145, 19, 0.1); }
+body.mobile-view #s-variations .qr-badge-declined { background: #eaeaea; }
 body.mobile-view #s-variations .qr-date {
-  font-size: 11px; text-align: right; flex-shrink: 0; min-width: 0;
-  overflow: hidden; text-overflow: ellipsis; max-width: 55%; white-space: nowrap;
+  font-size: 12px; text-align: right; white-space: nowrap;
 }
 body.mobile-view #s-variations .qr-name  { grid-column: 2 / 4; grid-row: 2; padding: 0; }
 body.mobile-view #s-variations .qr-title { font-size: 20px; margin-top: 2px; line-height: 1.2; }
-body.mobile-view #s-variations .qr-number { font-size: 10px; }
-body.mobile-view #s-variations .qr-revision { font-size: 10px; }
-body.mobile-view #s-variations .qr-meta { margin-top: 2px; gap: 6px; }
+body.mobile-view #s-variations .qr-number { font-size: 12px; }
+body.mobile-view #s-variations .qr-revision { font-size: 12px; }
+body.mobile-view #s-variations .qr-meta { margin-top: 2px; gap: 8px; }
 body.mobile-view #s-variations .qr-orig {
-  grid-column: 2; grid-row: 3; padding-top: 12px; align-self: start;
+  grid-column: 2; grid-row: 3; padding-top: 18.5px; align-self: start;
 }
 body.mobile-view #s-variations .qr-orig-val { font-size: 16px; }
 body.mobile-view #s-variations .qr-orig-lbl { font-size: 10px; }
 body.mobile-view #s-variations .qr-ver {
-  grid-column: 3; grid-row: 3; padding-top: 12px; align-self: start;
+  grid-column: 3; grid-row: 3; padding-top: 18.5px; align-self: start;
+  display: flex; flex-direction: column; gap: 2px;
 }
 body.mobile-view #s-variations .qr-ver-val { font-size: 16px; }
 body.mobile-view #s-variations .qr-ver-lbl { font-size: 10px; }
 body.mobile-view #s-variations .qr-payment {
   grid-column: 1 / 4; grid-row: 4; padding-left: 0;
-  padding-top: 10px; border-top: 1px solid var(--c-border-1); margin-top: 10px;
+  padding-top: 10px; margin-top: 10px; padding-bottom: 21px;
 }
 body.mobile-view #s-variations .qr-payment-legend { grid-template-columns: repeat(3, 1fr); }
-body.mobile-view #s-variations .qr-payment-big { font-size: 20px; }
-body.mobile-view #s-variations .qr-payment-of { font-size: 12px; }
+body.mobile-view #s-variations .qr-payment-big { font-size: 20px; font-weight: 600; }
+body.mobile-view #s-variations .qr-payment-of { font-size: 14px; font-weight: 500; }
+
 body.mobile-view #s-variations .qr-actions {
   grid-column: 1 / 4; grid-row: 4; justify-self: stretch;
-  margin-top: 10px; border-top: 1px solid var(--c-border-1);
+  margin-top: 33.5px;
 }
 body.mobile-view #s-variations .qr-action-group { width: 100%; }
 body.mobile-view #s-variations .qr-action-btn {
   flex: 1; padding: 10px 6px; font-size: 16px; min-height: 42px; justify-content: center; display: flex; align-items: center;
 }
-body.mobile-view #s-variations .qr-action-btn:first-child { flex: none; width: 44px; }
+body.mobile-view #s-variations .qr-action-btn:first-child { flex: none; width: 54px; }
 body.mobile-view #s-variations .qr-view {
-  grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 6px 0 10px;
+  grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 12px 0 10px;
 }
 body.mobile-view #s-variations .qr-view-btn {
-  width: 100%; height: 41px; font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 41px; font-size: 16px; text-align: center; display: flex; align-items: center; justify-content: center;
   background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 4px;
+}
+
+/* ── Accept card animation ── */
+/* Phase 1: green border pulse while action buttons are fading */
+.qr.qr-accepting {
+  border-color: #009113 !important;
+  box-shadow: 0 0 0 3px rgba(0,145,19,0.18), 0 3px 2px #efefef !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+/* Phase 5: payment section enters */
+.qr-payment.qr-payment-enter {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: none;
+}
+.qr-payment.qr-payment-entered {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+/* Phase 6: accepted glow fades out */
+.qr.qr-accepted-done {
+  animation: qrAcceptedSettle 0.8s ease-out forwards;
+}
+@keyframes qrAcceptedSettle {
+  0%   { border-color: #009113; box-shadow: 0 0 0 2px rgba(0,145,19,0.12), 0 3px 2px #efefef; }
+  100% { border-color: #eaeaea; box-shadow: 0 3px 2px #efefef; }
+}
+
+/* TBC animation — grey pulse */
+.qr.qr-tbc-ing {
+  border-color: #9c9c9c !important;
+  box-shadow: 0 0 0 3px rgba(156,156,156,0.18), 0 3px 2px #efefef !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.qr.qr-tbc-done {
+  animation: qrTbcSettle 0.7s ease-out forwards;
+}
+@keyframes qrTbcSettle {
+  0%   { border-color: #9c9c9c; box-shadow: 0 0 0 2px rgba(156,156,156,0.12), 0 3px 2px #efefef; }
+  100% { border-color: #eaeaea; box-shadow: 0 3px 2px #efefef; }
+}
+
+/* Reject/Decline animation — red pulse */
+.qr.qr-rejecting {
+  border-color: #cf3400 !important;
+  box-shadow: 0 0 0 3px rgba(207,52,0,0.15), 0 3px 2px #efefef !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.qr.qr-rejected-done {
+  animation: qrRejectedSettle 0.8s ease-out forwards;
+}
+@keyframes qrRejectedSettle {
+  0%   { border-color: #cf3400; box-shadow: 0 0 0 2px rgba(207,52,0,0.1), 0 3px 2px #efefef; }
+  100% { border-color: #eaeaea; box-shadow: 0 3px 2px #efefef; }
 }
 
 /* ── Mobile: Shared topbar (all QP pages) — Figma 515:7778 ──
@@ -2694,7 +2751,7 @@ body.mobile-view #s-purchase-order .qp-list {
 /* 3-column grid: [thumb 65px] [orig 1fr] [ver 1fr]
    Rows: 1=status  2=name  3=amounts  4=actions|payment  5=view */
 body.mobile-view #s-quotes .qr {
-  grid-template-columns: 65px 1fr 1fr;
+  grid-template-columns: clamp(44px, 15.6vw, 65px) 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   padding: 12px 12px 0; min-height: unset; column-gap: 10px; row-gap: 0;
   border-radius: 4px;
@@ -2702,18 +2759,19 @@ body.mobile-view #s-quotes .qr {
 }
 body.mobile-view #s-quotes .qr > div:empty { display: none; }
 
-/* Thumb: 61×61px, spans cols 1, rows 1–3 */
+/* Thumb: scales proportionally with viewport width */
 body.mobile-view #s-quotes .qr-thumb {
   grid-column: 1; grid-row: 1 / 4;
-  width: 61px; height: 61px; align-self: start; margin-top: 0;
+  width: clamp(40px, 15.6vw, 61px); height: clamp(40px, 15.6vw, 61px);
+  align-self: start; margin-top: 0;
 }
 
-/* Status row: dot+badge LEFT, date RIGHT — spans both content cols */
+/* Status row: badge LEFT, date RIGHT — wraps to next line when tight */
 body.mobile-view #s-quotes .qr-status {
   grid-column: 2 / 4; grid-row: 1;
   display: flex; flex-direction: row; justify-content: space-between;
-  align-items: center; flex-wrap: nowrap; gap: 6px; min-width: 0;
-  padding-bottom: 3px;
+  align-items: center; flex-wrap: wrap; gap: 4px; min-width: 0;
+  padding-bottom: 10px;
 }
 /* Badge → colored dot + text (no pill background) */
 body.mobile-view #s-quotes .qr-badge {
@@ -2728,8 +2786,7 @@ body.mobile-view #s-quotes .qr-badge-tbc      { background: #eaeaea; }
 body.mobile-view #s-quotes .qr-badge-accepted { background: rgba(0, 145, 19, 0.1); }
 body.mobile-view #s-quotes .qr-badge-declined { background: #eaeaea; }
 body.mobile-view #s-quotes .qr-date {
-  font-size: 12px; text-align: right; flex-shrink: 0; min-width: 0;
-  overflow: hidden; text-overflow: ellipsis; max-width: 55%; white-space: nowrap;
+  font-size: 12px; text-align: right; white-space: nowrap;
 }
 
 /* Name row: spans both content cols */
@@ -2741,12 +2798,12 @@ body.mobile-view #s-quotes .qr-meta { margin-top: 2px; gap: 8px; }
 
 /* Amounts: orig in col 2, ver in col 3 — row 3 */
 body.mobile-view #s-quotes .qr-orig {
-  grid-column: 2; grid-row: 3; padding-top: 16px; align-self: start;
+  grid-column: 2; grid-row: 3; padding-top: 18.5px; align-self: start;
 }
 body.mobile-view #s-quotes .qr-orig-val { font-size: 16px; }
 body.mobile-view #s-quotes .qr-orig-lbl { font-size: 10px; }
 body.mobile-view #s-quotes .qr-ver {
-  grid-column: 3; grid-row: 3; padding-top: 16px; align-self: start;
+  grid-column: 3; grid-row: 3; padding-top: 18.5px; align-self: start;
   display: flex; flex-direction: column; gap: 2px;
 }
 body.mobile-view #s-quotes .qr-ver-val { font-size: 16px; }
@@ -2761,10 +2818,11 @@ body.mobile-view #s-quotes .qr-payment-legend { grid-template-columns: repeat(3,
 body.mobile-view #s-quotes .qr-payment-big { font-size: 20px; font-weight: 600; }
 body.mobile-view #s-quotes .qr-payment-of { font-size: 14px; font-weight: 500; }
 
+
 /* Action buttons — full-width, row 4 (mutually exclusive with payment) */
 body.mobile-view #s-quotes .qr-actions {
   grid-column: 1 / 4; grid-row: 4; justify-self: stretch;
-  margin-top: 10px;
+  margin-top: 33.5px;
 }
 body.mobile-view #s-quotes .qr-action-group { width: 100%; }
 body.mobile-view #s-quotes .qr-action-btn {
@@ -3012,8 +3070,9 @@ body.mobile-view #s-variations .qp-list { flex: none !important; overflow: visib
 /* Invoices: make list natural flow */
 body.mobile-view #s-invoices .qp-list { flex: none; overflow: visible; }
 /* SO: 3-col card grid — mirrors quotes layout */
+/* Sales Order cards — identical layout to #s-quotes */
 body.mobile-view #s-purchase-order .qr {
-  grid-template-columns: 65px 1fr 1fr;
+  grid-template-columns: clamp(44px, 15.6vw, 65px) 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   padding: 12px 12px 0; min-height: unset; column-gap: 10px; row-gap: 0;
   border-radius: 4px;
@@ -3021,63 +3080,59 @@ body.mobile-view #s-purchase-order .qr {
 }
 body.mobile-view #s-purchase-order .qr > div:empty { display: none; }
 body.mobile-view #s-purchase-order .qr-thumb {
-  grid-column: 1; grid-row: 1 / 4; width: 61px; height: 61px; align-self: start; margin-top: 0;
+  grid-column: 1; grid-row: 1 / 4;
+  width: clamp(40px, 15.6vw, 61px); height: clamp(40px, 15.6vw, 61px);
+  align-self: start; margin-top: 0;
 }
 body.mobile-view #s-purchase-order .qr-status {
   grid-column: 2 / 4; grid-row: 1;
   display: flex; flex-direction: row; justify-content: space-between;
-  align-items: center; flex-wrap: nowrap; gap: 6px; min-width: 0; padding-bottom: 3px;
+  align-items: center; flex-wrap: wrap; gap: 4px; min-width: 0; padding-bottom: 10px;
 }
 body.mobile-view #s-purchase-order .qr-badge {
-  background: none !important; padding: 0; border-radius: 0;
-  display: flex; align-items: center; gap: 5px;
-  font-size: 12px; font-weight: 600; white-space: nowrap; color: var(--c-text-1);
+  padding: 3px 6px; border-radius: 2px;
+  display: inline-flex; align-items: center;
+  font-size: 12px; font-weight: 600; white-space: nowrap; color: #000 !important;
 }
-body.mobile-view #s-purchase-order .qr-badge::before {
-  content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0;
-}
-body.mobile-view #s-purchase-order .qr-badge-pending::before  { background: #ff9500; }
-body.mobile-view #s-purchase-order .qr-badge-tbc::before      { background: #9c9c9c; }
-body.mobile-view #s-purchase-order .qr-badge-accepted::before { background: #009113; }
-body.mobile-view #s-purchase-order .qr-badge-declined::before { background: #9c9c9c; }
+body.mobile-view #s-purchase-order .qr-badge::before { display: none; }
+body.mobile-view #s-purchase-order .qr-badge-pending  { background: rgba(255,149,0,0.15); }
+body.mobile-view #s-purchase-order .qr-badge-tbc      { background: #eaeaea; }
+body.mobile-view #s-purchase-order .qr-badge-accepted { background: rgba(0,145,19,0.1); }
+body.mobile-view #s-purchase-order .qr-badge-declined { background: #eaeaea; }
 body.mobile-view #s-purchase-order .qr-date {
-  font-size: 11px; text-align: right; flex-shrink: 0; min-width: 0;
-  overflow: hidden; text-overflow: ellipsis; max-width: 55%; white-space: nowrap;
+  font-size: 12px; text-align: right; white-space: nowrap;
 }
 body.mobile-view #s-purchase-order .qr-name  { grid-column: 2 / 4; grid-row: 2; padding: 0; }
 body.mobile-view #s-purchase-order .qr-title { font-size: 20px; margin-top: 2px; line-height: 1.2; }
-body.mobile-view #s-purchase-order .qr-number { font-size: 10px; }
-body.mobile-view #s-purchase-order .qr-meta { margin-top: 2px; gap: 6px; }
+body.mobile-view #s-purchase-order .qr-number { font-size: 12px; }
+body.mobile-view #s-purchase-order .qr-meta { margin-top: 2px; gap: 8px; }
 body.mobile-view #s-purchase-order .qr-orig {
-  grid-column: 2 / 4; grid-row: 3; padding-top: 12px; align-self: start;
+  grid-column: 2 / 4; grid-row: 3; padding-top: 18.5px; align-self: start;
 }
 body.mobile-view #s-purchase-order .qr-orig-val { font-size: 16px; }
 body.mobile-view #s-purchase-order .qr-orig-lbl { font-size: 10px; }
 body.mobile-view #s-purchase-order .qr-view {
-  grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 6px 0 10px;
+  grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 12px 0 10px;
 }
 body.mobile-view #s-purchase-order .qr-view-btn {
-  width: 100%; height: 41px; font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 41px; font-size: 16px; text-align: center; display: flex; align-items: center; justify-content: center;
   background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 4px;
 }
-/* SO: payment progress — full-width on mobile */
 body.mobile-view #s-purchase-order .qr-payment {
-  grid-column: 1 / -1; grid-row: auto; padding-left: 0;
-  padding-top: 10px; border-top: 1px solid var(--c-border-1); margin-top: 10px;
+  grid-column: 1 / 4; grid-row: 4; padding-left: 0;
+  padding-top: 10px; margin-top: 10px; padding-bottom: 21px;
 }
 body.mobile-view #s-purchase-order .qr-payment-legend { grid-template-columns: repeat(3, 1fr); }
-body.mobile-view #s-purchase-order .qr-payment-big { font-size: 20px; }
-body.mobile-view #s-purchase-order .qr-payment-of { font-size: 12px; }
-/* SO: action buttons — mobile layout mirrors quotes */
+body.mobile-view #s-purchase-order .qr-payment-big { font-size: 20px; font-weight: 600; }
+body.mobile-view #s-purchase-order .qr-payment-of { font-size: 14px; font-weight: 500; }
 body.mobile-view #s-purchase-order .qr-actions {
-  grid-column: 1 / -1; grid-row: auto;
-  justify-self: stretch; margin-top: 8px;
+  grid-column: 1 / 4; grid-row: 4; justify-self: stretch; margin-top: 33.5px;
 }
 body.mobile-view #s-purchase-order .qr-action-group { width: 100%; }
 body.mobile-view #s-purchase-order .qr-action-btn {
-  flex: 1; justify-content: center; font-size: 16px; min-height: 42px; padding: 8px 4px;
+  flex: 1; padding: 10px 6px; font-size: 16px; min-height: 42px; justify-content: center; display: flex; align-items: center;
 }
-body.mobile-view #s-purchase-order .qr-action-btn:first-child { flex: none; width: 44px; }
+body.mobile-view #s-purchase-order .qr-action-btn:first-child { flex: none; width: 54px; }
 
 /* SO: filter tabs — sticky below topbar, same as invoices/quotes */
 body.mobile-view #s-purchase-order .qp-filter-tabs {
@@ -5335,9 +5390,9 @@ body.mobile-view #app-content {
           <button class="qr-action-btn">
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
         </div>
       </div>
     </div>
@@ -5365,9 +5420,9 @@ body.mobile-view #app-content {
           <button class="qr-action-btn">
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
         </div>
       </div>
     </div>
@@ -5390,16 +5445,8 @@ body.mobile-view #app-content {
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
       <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
       <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
-      <div class="qr-actions">
-        <div class="qr-action-group">
-          <button class="qr-action-btn">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
-        </div>
-      </div>
+      <!-- No action buttons for overdue -->
+      <div></div>
     </div>
 
     <!-- ④ Accepted (with inline payment summary) -->
@@ -5951,12 +5998,11 @@ body.mobile-view #app-content {
     <div class="qp-card qp-var-summary-card">
       <div class="var-card-left">
         <div>
-          <div class="var-summary-title">Total Project Value</div>
-          <div style="color:#009113;font-size:12px;font-weight:600;margin-top:4px;">Accepted on 14 April 2026</div>
+          <div class="var-summary-title">Total Project Accepted Value</div>
         </div>
         <div class="var-total-block" style="text-align:right;">
           <div class="var-total-value" style="font-size:20px;font-weight:600;color:var(--c-text-1);">$850,000.00</div>
-          <div class="var-total-label" style="font-size:9px;font-weight:500;color:var(--c-text-muted);line-height:1.3;max-width:110px;">Total Quote Value (excl. Tax)</div>
+          <div class="var-total-label">Total Value (excl. Tax)</div>
         </div>
       </div>
       <div class="qp-project-right">
@@ -5968,7 +6014,7 @@ body.mobile-view #app-content {
           </div>
           <div class="qp-total-block-mobile">
             <div class="qp-total-value">$850,000.00</div>
-            <div class="qp-total-label">Total Quote Value (excl. Tax)</div>
+            <div class="qp-total-label">Total Variation Value</div>
           </div>
         </div>
         <div class="qp-progress-bar-outer">
@@ -6083,20 +6129,20 @@ body.mobile-view #app-content {
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
         </div>
       </div>
     </div>
 
-    <!-- To be confirmed (Revision 3.1) -->
+    <!-- To be confirmed (valid) -->
     <div class="qr">
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
           <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3.1</span>
+          <span class="qr-revision">Revision 3</span>
         </div>
         <div class="qr-title">Dutch House Security INV TEST</div>
       </div>
@@ -6111,14 +6157,15 @@ body.mobile-view #app-content {
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
         </div>
       </div>
     </div>
 
     <!-- To be confirmed (overdue) -->
+
     <div class="qr">
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
@@ -6136,14 +6183,8 @@ body.mobile-view #app-content {
       <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
       <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
       <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
-      <div class="qr-actions">
-        <div class="qr-action-group">
-          <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
-        </div>
-      </div>
+      <!-- No action buttons for overdue -->
+      <div></div>
     </div>
 
     <!-- Accepted (with payment progress — Figma 724:28554) -->
@@ -6197,7 +6238,7 @@ body.mobile-view #app-content {
       <div class="qr-name">
         <div class="qr-meta">
           <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 1</span>
+          <span class="qr-revision">Revision 3</span>
         </div>
         <div class="qr-title">Dutch House Security INV TEST</div>
       </div>
@@ -6207,8 +6248,9 @@ body.mobile-view #app-content {
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$0.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$0.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Original Quote</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <!-- No action buttons for declined -->
       <div></div>
     </div>
 
@@ -6426,9 +6468,9 @@ body.mobile-view #app-content {
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
         </div>
       </div>
     </div>
@@ -6513,9 +6555,9 @@ body.mobile-view #app-content {
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
         </div>
       </div>
     </div>
@@ -8007,6 +8049,27 @@ body.mobile-view #app-content {
 </div>
 
 <script>
+/* ── Restore last screen on page refresh ──
+   On load, if localStorage has a saved screen we navigate straight to it
+   (skipping the skeleton so the restore feels instant). ── */
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    const saved = localStorage.getItem('wq_screen');
+    const known = ['login','forgot-password','dash','detail','quotes','variations',
+                   'invoices','documents','warranty','progress','purchase-order'];
+    if (saved && known.includes(saved) && document.getElementById('s-' + saved)) {
+      // Navigate without skeleton delay for a snappy restore
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+      document.getElementById('s-' + saved).classList.add('on');
+      if (saved === 'progress') initPPBars();
+      const spEl = document.getElementById('sp-' + saved);
+      if (spEl) { document.querySelectorAll('.sp-item').forEach(e => e.classList.remove('active')); spEl.classList.add('active'); }
+      const viewEl = document.getElementById('pt-viewing-name');
+      if (viewEl) viewEl.textContent = screenFriendly[saved] || saved;
+    }
+  } catch(e) {}
+});
+
 const screenLabels  = {
   login: '① Login', 'forgot-password': '② Forgot Password', dash: '③ Project List', detail: '④ Project Detail',
   quotes: '⑤ Quotes', invoices: '⑥ Invoices',
@@ -8140,14 +8203,23 @@ function go(name) {
 
   const activate = () => {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
-    document.getElementById('s-' + name).classList.add('on');
+    const screenEl = document.getElementById('s-' + name);
+    screenEl.classList.add('on');
     if (name === 'progress') initPPBars();
     document.querySelectorAll('.sp-item').forEach(el => el.classList.remove('active'));
     const spEl = document.getElementById('sp-' + name);
     if (spEl) spEl.classList.add('active');
     const viewEl = document.getElementById('pt-viewing-name');
     if (viewEl) viewEl.textContent = screenFriendly[name] || name;
+
+    // Scroll to top — reset both window and any inner scroll container
     window.scrollTo(0, 0);
+    screenEl.scrollTop = 0;
+    const inner = screenEl.querySelector('.quotes-page, .invoices-page, .documents-page, .pp-page, .screen-scroll');
+    if (inner) inner.scrollTop = 0;
+
+    // Persist current screen so refresh restores same view
+    try { localStorage.setItem('wq_screen', name); } catch(e) {}
   };
 
   const isMobile = document.body.classList.contains('mobile-view');
@@ -8350,6 +8422,242 @@ function filterTab(btn) {
 
 // Legacy alias kept for any existing onclick="filterQuotes(this)" references
 const filterQuotes = filterTab;
+
+/* ── Accept card interaction ──
+   Click Accept → card transitions to Accepted state with animation.
+   Works for both Quotes (#s-quotes) and Variations (#s-variations). ── */
+function acceptCard(btn) {
+  const card = btn.closest('.qr');
+  if (!card) return;
+
+  // Prevent double-fire
+  if (card.classList.contains('qr-accepting')) return;
+
+  // Determine label suffix (Quote vs Variation)
+  const isVariation = !!card.closest('#s-variations');
+  const viewLabel   = isVariation ? 'View Variation' : 'View Quote';
+
+  // Format today as "14 April 2026"
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  // Pull the total from the existing orig column
+  const origValEl = card.querySelector('.qr-orig-val');
+  const total = origValEl ? origValEl.textContent.trim() : '$0.00';
+
+  // ── Phase 1: green border flash ──
+  card.classList.add('qr-accepting');
+
+  // ── Phase 2: fade-out action buttons (200ms) ──
+  const actionsEl = card.querySelector('.qr-actions');
+  if (actionsEl) {
+    actionsEl.style.transition = 'opacity 0.2s ease, transform 0.2s ease, max-height 0.25s ease';
+    actionsEl.style.opacity    = '0';
+    actionsEl.style.transform  = 'translateY(6px)';
+    actionsEl.style.overflow   = 'hidden';
+    actionsEl.style.maxHeight  = actionsEl.scrollHeight + 'px';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      actionsEl.style.maxHeight = '0';
+    }));
+  }
+
+  setTimeout(() => {
+    // ── Phase 3: swap badge + date ──
+    const badge = card.querySelector('.qr-badge');
+    if (badge) {
+      badge.className   = 'qr-badge qr-badge-accepted';
+      badge.textContent = 'Accepted';
+    }
+    const dateEl = card.querySelector('.qr-date');
+    if (dateEl) {
+      dateEl.className   = 'qr-date qr-date-accepted';
+      dateEl.textContent = 'Accepted on ' + dateStr;
+    }
+
+    // ── Phase 4: replace actions with payment progress ──
+    const paymentHTML = `
+      <div class="qr-payment qr-payment-enter">
+        <div class="qr-payment-label">Payment Progress</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of ${total} Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due"  style="width:0%;"></div>
+        </div>
+        <div class="qr-payment-legend">
+          <div class="qr-legend-item">
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div>Paid so far <span>0%</span></div>
+            <div class="qr-legend-val">$0.00</div>
+          </div>
+          <div class="qr-legend-item">
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div>To pay now <span>0%</span></div>
+            <div class="qr-legend-val">$0.00</div>
+          </div>
+          <div class="qr-legend-item">
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#eaeaea;"></div>Upcoming <span>100%</span></div>
+            <div class="qr-legend-val">${total}</div>
+          </div>
+        </div>
+      </div>`;
+    if (actionsEl) actionsEl.outerHTML = paymentHTML;
+
+    // ── Phase 5: fade-in payment section ──
+    const payEl = card.querySelector('.qr-payment');
+    if (payEl) {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        payEl.classList.remove('qr-payment-enter');
+        payEl.classList.add('qr-payment-entered');
+      }));
+    }
+
+    // ── Phase 6: settle — remove flash class, add subtle accepted glow ──
+    setTimeout(() => {
+      card.classList.remove('qr-accepting');
+      card.classList.add('qr-accepted-done');
+      setTimeout(() => card.classList.remove('qr-accepted-done'), 800);
+
+      // ── Phase 7: re-sort list so Pending cards bubble to the top ──
+      const listEl = card.closest('.qp-list');
+      if (listEl) resortCardList(listEl);
+    }, 350);
+
+  }, 250);
+}
+
+/* ── Re-sort card list after a state change ──
+   Priority order: Pending → TBC → Accepted → Declined
+   Uses FLIP animation so cards visually slide to new positions. ── */
+function resortCardList(listEl) {
+  const cards = Array.from(listEl.querySelectorAll(':scope > .qr'));
+  if (cards.length < 2) return;
+
+  function priority(card) {
+    if (card.querySelector('.qr-badge-pending'))  return 0;
+    if (card.querySelector('.qr-badge-tbc'))       return 1;
+    if (card.querySelector('.qr-badge-accepted'))  return 2;
+    if (card.querySelector('.qr-badge-declined'))  return 3;
+    return 4;
+  }
+
+  // Check if already sorted — skip animation if nothing to move
+  const priorities = cards.map(priority);
+  const alreadySorted = priorities.every((p, i) => i === 0 || priorities[i - 1] <= p);
+  if (alreadySorted) return;
+
+  // FLIP — record First positions
+  const firstRects = cards.map(c => c.getBoundingClientRect());
+
+  // Re-append in sorted order (stable sort preserves relative order within group)
+  const sorted = cards
+    .map((c, i) => ({ c, i, p: priority(c) }))
+    .sort((a, b) => a.p !== b.p ? a.p - b.p : a.i - b.i)
+    .map(x => x.c);
+  sorted.forEach(c => listEl.appendChild(c));
+
+  // FLIP — record Last positions, apply Inverted transforms instantly
+  sorted.forEach((card, newIdx) => {
+    const oldIdx  = cards.indexOf(card);
+    const dy = firstRects[oldIdx].top - card.getBoundingClientRect().top;
+    if (dy === 0) return;
+    card.style.transition = 'none';
+    card.style.transform  = `translateY(${dy}px)`;
+  });
+
+  // FLIP — Play: animate to natural position
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    sorted.forEach(card => {
+      card.style.transition = 'transform 0.45s cubic-bezier(0.4,0,0.2,1)';
+      card.style.transform  = '';
+    });
+    setTimeout(() => sorted.forEach(c => { c.style.transition = ''; c.style.transform = ''; }), 480);
+  }));
+}
+
+/* ── TBC card interaction ──
+   Badge → "To be confirmed", date class → tbc, keep action buttons
+   (card is still actionable — user can still Accept or Reject). ── */
+function tbcCard(btn) {
+  const card = btn.closest('.qr');
+  if (!card) return;
+  if (card.classList.contains('qr-tbc-ing')) return;
+
+  // ── Phase 1: grey border flash ──
+  card.classList.add('qr-tbc-ing');
+
+  setTimeout(() => {
+    // ── Phase 2: swap badge + date ──
+    const badge = card.querySelector('.qr-badge');
+    if (badge) {
+      badge.className   = 'qr-badge qr-badge-tbc';
+      badge.textContent = 'To be confirmed';
+    }
+    const dateEl = card.querySelector('.qr-date');
+    if (dateEl) {
+      // Keep existing date text — just update the colour class
+      dateEl.className = 'qr-date qr-date-tbc';
+    }
+
+    // ── Phase 3: settle ──
+    card.classList.remove('qr-tbc-ing');
+    card.classList.add('qr-tbc-done');
+    setTimeout(() => card.classList.remove('qr-tbc-done'), 700);
+  }, 180);
+}
+
+/* ── Reject card interaction ──
+   Badge → "Declined", date → "Declined on [today]",
+   action buttons collapse out, card becomes view-only. ── */
+function rejectCard(btn) {
+  const card = btn.closest('.qr');
+  if (!card) return;
+  if (card.classList.contains('qr-rejecting')) return;
+
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  // ── Phase 1: red border flash ──
+  card.classList.add('qr-rejecting');
+
+  // ── Phase 2: collapse action buttons ──
+  const actionsEl = card.querySelector('.qr-actions');
+  if (actionsEl) {
+    actionsEl.style.transition = 'opacity 0.2s ease, transform 0.2s ease, max-height 0.25s ease';
+    actionsEl.style.opacity    = '0';
+    actionsEl.style.transform  = 'translateY(6px)';
+    actionsEl.style.overflow   = 'hidden';
+    actionsEl.style.maxHeight  = actionsEl.scrollHeight + 'px';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      actionsEl.style.maxHeight = '0';
+    }));
+  }
+
+  setTimeout(() => {
+    // ── Phase 3: swap badge + date ──
+    const badge = card.querySelector('.qr-badge');
+    if (badge) {
+      badge.className   = 'qr-badge qr-badge-declined';
+      badge.textContent = 'Declined';
+    }
+    const dateEl = card.querySelector('.qr-date');
+    if (dateEl) {
+      dateEl.className   = 'qr-date qr-date-declined';
+      dateEl.textContent = 'Declined on ' + dateStr;
+    }
+
+    // ── Phase 4: remove actions entirely → empty slot ──
+    if (actionsEl) actionsEl.outerHTML = '<div></div>';
+
+    // ── Phase 5: settle + re-sort so Declined drops to bottom ──
+    card.classList.remove('qr-rejecting');
+    card.classList.add('qr-rejected-done');
+    setTimeout(() => card.classList.remove('qr-rejected-done'), 800);
+
+    const listEl = card.closest('.qp-list');
+    if (listEl) resortCardList(listEl);
+  }, 250);
+}
 
 
 function searchQuotes(input) {

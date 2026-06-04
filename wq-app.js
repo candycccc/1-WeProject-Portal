@@ -1,3 +1,24 @@
+/* ── Restore last screen on page refresh ──
+   On load, if localStorage has a saved screen we navigate straight to it
+   (skipping the skeleton so the restore feels instant). ── */
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    const saved = localStorage.getItem('wq_screen');
+    const known = ['login','forgot-password','dash','detail','quotes','variations',
+                   'invoices','documents','warranty','progress','purchase-order'];
+    if (saved && known.includes(saved) && document.getElementById('s-' + saved)) {
+      // Navigate without skeleton delay for a snappy restore
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+      document.getElementById('s-' + saved).classList.add('on');
+      if (saved === 'progress') initPPBars();
+      const spEl = document.getElementById('sp-' + saved);
+      if (spEl) { document.querySelectorAll('.sp-item').forEach(e => e.classList.remove('active')); spEl.classList.add('active'); }
+      const viewEl = document.getElementById('pt-viewing-name');
+      if (viewEl) viewEl.textContent = screenFriendly[saved] || saved;
+    }
+  } catch(e) {}
+});
+
 const screenLabels  = {
   login: '① Login', 'forgot-password': '② Forgot Password', dash: '③ Project List', detail: '④ Project Detail',
   quotes: '⑤ Quotes', invoices: '⑥ Invoices',
@@ -131,14 +152,23 @@ function go(name) {
 
   const activate = () => {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
-    document.getElementById('s-' + name).classList.add('on');
+    const screenEl = document.getElementById('s-' + name);
+    screenEl.classList.add('on');
     if (name === 'progress') initPPBars();
     document.querySelectorAll('.sp-item').forEach(el => el.classList.remove('active'));
     const spEl = document.getElementById('sp-' + name);
     if (spEl) spEl.classList.add('active');
     const viewEl = document.getElementById('pt-viewing-name');
     if (viewEl) viewEl.textContent = screenFriendly[name] || name;
+
+    // Scroll to top — reset both window and any inner scroll container
     window.scrollTo(0, 0);
+    screenEl.scrollTop = 0;
+    const inner = screenEl.querySelector('.quotes-page, .invoices-page, .documents-page, .pp-page, .screen-scroll');
+    if (inner) inner.scrollTop = 0;
+
+    // Persist current screen so refresh restores same view
+    try { localStorage.setItem('wq_screen', name); } catch(e) {}
   };
 
   const isMobile = document.body.classList.contains('mobile-view');
@@ -341,6 +371,242 @@ function filterTab(btn) {
 
 // Legacy alias kept for any existing onclick="filterQuotes(this)" references
 const filterQuotes = filterTab;
+
+/* ── Accept card interaction ──
+   Click Accept → card transitions to Accepted state with animation.
+   Works for both Quotes (#s-quotes) and Variations (#s-variations). ── */
+function acceptCard(btn) {
+  const card = btn.closest('.qr');
+  if (!card) return;
+
+  // Prevent double-fire
+  if (card.classList.contains('qr-accepting')) return;
+
+  // Determine label suffix (Quote vs Variation)
+  const isVariation = !!card.closest('#s-variations');
+  const viewLabel   = isVariation ? 'View Variation' : 'View Quote';
+
+  // Format today as "14 April 2026"
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  // Pull the total from the existing orig column
+  const origValEl = card.querySelector('.qr-orig-val');
+  const total = origValEl ? origValEl.textContent.trim() : '$0.00';
+
+  // ── Phase 1: green border flash ──
+  card.classList.add('qr-accepting');
+
+  // ── Phase 2: fade-out action buttons (200ms) ──
+  const actionsEl = card.querySelector('.qr-actions');
+  if (actionsEl) {
+    actionsEl.style.transition = 'opacity 0.2s ease, transform 0.2s ease, max-height 0.25s ease';
+    actionsEl.style.opacity    = '0';
+    actionsEl.style.transform  = 'translateY(6px)';
+    actionsEl.style.overflow   = 'hidden';
+    actionsEl.style.maxHeight  = actionsEl.scrollHeight + 'px';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      actionsEl.style.maxHeight = '0';
+    }));
+  }
+
+  setTimeout(() => {
+    // ── Phase 3: swap badge + date ──
+    const badge = card.querySelector('.qr-badge');
+    if (badge) {
+      badge.className   = 'qr-badge qr-badge-accepted';
+      badge.textContent = 'Accepted';
+    }
+    const dateEl = card.querySelector('.qr-date');
+    if (dateEl) {
+      dateEl.className   = 'qr-date qr-date-accepted';
+      dateEl.textContent = 'Accepted on ' + dateStr;
+    }
+
+    // ── Phase 4: replace actions with payment progress ──
+    const paymentHTML = `
+      <div class="qr-payment qr-payment-enter">
+        <div class="qr-payment-label">Payment Progress</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of ${total} Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due"  style="width:0%;"></div>
+        </div>
+        <div class="qr-payment-legend">
+          <div class="qr-legend-item">
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div>Paid so far <span>0%</span></div>
+            <div class="qr-legend-val">$0.00</div>
+          </div>
+          <div class="qr-legend-item">
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div>To pay now <span>0%</span></div>
+            <div class="qr-legend-val">$0.00</div>
+          </div>
+          <div class="qr-legend-item">
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#eaeaea;"></div>Upcoming <span>100%</span></div>
+            <div class="qr-legend-val">${total}</div>
+          </div>
+        </div>
+      </div>`;
+    if (actionsEl) actionsEl.outerHTML = paymentHTML;
+
+    // ── Phase 5: fade-in payment section ──
+    const payEl = card.querySelector('.qr-payment');
+    if (payEl) {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        payEl.classList.remove('qr-payment-enter');
+        payEl.classList.add('qr-payment-entered');
+      }));
+    }
+
+    // ── Phase 6: settle — remove flash class, add subtle accepted glow ──
+    setTimeout(() => {
+      card.classList.remove('qr-accepting');
+      card.classList.add('qr-accepted-done');
+      setTimeout(() => card.classList.remove('qr-accepted-done'), 800);
+
+      // ── Phase 7: re-sort list so Pending cards bubble to the top ──
+      const listEl = card.closest('.qp-list');
+      if (listEl) resortCardList(listEl);
+    }, 350);
+
+  }, 250);
+}
+
+/* ── Re-sort card list after a state change ──
+   Priority order: Pending → TBC → Accepted → Declined
+   Uses FLIP animation so cards visually slide to new positions. ── */
+function resortCardList(listEl) {
+  const cards = Array.from(listEl.querySelectorAll(':scope > .qr'));
+  if (cards.length < 2) return;
+
+  function priority(card) {
+    if (card.querySelector('.qr-badge-pending'))  return 0;
+    if (card.querySelector('.qr-badge-tbc'))       return 1;
+    if (card.querySelector('.qr-badge-accepted'))  return 2;
+    if (card.querySelector('.qr-badge-declined'))  return 3;
+    return 4;
+  }
+
+  // Check if already sorted — skip animation if nothing to move
+  const priorities = cards.map(priority);
+  const alreadySorted = priorities.every((p, i) => i === 0 || priorities[i - 1] <= p);
+  if (alreadySorted) return;
+
+  // FLIP — record First positions
+  const firstRects = cards.map(c => c.getBoundingClientRect());
+
+  // Re-append in sorted order (stable sort preserves relative order within group)
+  const sorted = cards
+    .map((c, i) => ({ c, i, p: priority(c) }))
+    .sort((a, b) => a.p !== b.p ? a.p - b.p : a.i - b.i)
+    .map(x => x.c);
+  sorted.forEach(c => listEl.appendChild(c));
+
+  // FLIP — record Last positions, apply Inverted transforms instantly
+  sorted.forEach((card, newIdx) => {
+    const oldIdx  = cards.indexOf(card);
+    const dy = firstRects[oldIdx].top - card.getBoundingClientRect().top;
+    if (dy === 0) return;
+    card.style.transition = 'none';
+    card.style.transform  = `translateY(${dy}px)`;
+  });
+
+  // FLIP — Play: animate to natural position
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    sorted.forEach(card => {
+      card.style.transition = 'transform 0.45s cubic-bezier(0.4,0,0.2,1)';
+      card.style.transform  = '';
+    });
+    setTimeout(() => sorted.forEach(c => { c.style.transition = ''; c.style.transform = ''; }), 480);
+  }));
+}
+
+/* ── TBC card interaction ──
+   Badge → "To be confirmed", date class → tbc, keep action buttons
+   (card is still actionable — user can still Accept or Reject). ── */
+function tbcCard(btn) {
+  const card = btn.closest('.qr');
+  if (!card) return;
+  if (card.classList.contains('qr-tbc-ing')) return;
+
+  // ── Phase 1: grey border flash ──
+  card.classList.add('qr-tbc-ing');
+
+  setTimeout(() => {
+    // ── Phase 2: swap badge + date ──
+    const badge = card.querySelector('.qr-badge');
+    if (badge) {
+      badge.className   = 'qr-badge qr-badge-tbc';
+      badge.textContent = 'To be confirmed';
+    }
+    const dateEl = card.querySelector('.qr-date');
+    if (dateEl) {
+      // Keep existing date text — just update the colour class
+      dateEl.className = 'qr-date qr-date-tbc';
+    }
+
+    // ── Phase 3: settle ──
+    card.classList.remove('qr-tbc-ing');
+    card.classList.add('qr-tbc-done');
+    setTimeout(() => card.classList.remove('qr-tbc-done'), 700);
+  }, 180);
+}
+
+/* ── Reject card interaction ──
+   Badge → "Declined", date → "Declined on [today]",
+   action buttons collapse out, card becomes view-only. ── */
+function rejectCard(btn) {
+  const card = btn.closest('.qr');
+  if (!card) return;
+  if (card.classList.contains('qr-rejecting')) return;
+
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  // ── Phase 1: red border flash ──
+  card.classList.add('qr-rejecting');
+
+  // ── Phase 2: collapse action buttons ──
+  const actionsEl = card.querySelector('.qr-actions');
+  if (actionsEl) {
+    actionsEl.style.transition = 'opacity 0.2s ease, transform 0.2s ease, max-height 0.25s ease';
+    actionsEl.style.opacity    = '0';
+    actionsEl.style.transform  = 'translateY(6px)';
+    actionsEl.style.overflow   = 'hidden';
+    actionsEl.style.maxHeight  = actionsEl.scrollHeight + 'px';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      actionsEl.style.maxHeight = '0';
+    }));
+  }
+
+  setTimeout(() => {
+    // ── Phase 3: swap badge + date ──
+    const badge = card.querySelector('.qr-badge');
+    if (badge) {
+      badge.className   = 'qr-badge qr-badge-declined';
+      badge.textContent = 'Declined';
+    }
+    const dateEl = card.querySelector('.qr-date');
+    if (dateEl) {
+      dateEl.className   = 'qr-date qr-date-declined';
+      dateEl.textContent = 'Declined on ' + dateStr;
+    }
+
+    // ── Phase 4: remove actions entirely → empty slot ──
+    if (actionsEl) actionsEl.outerHTML = '<div></div>';
+
+    // ── Phase 5: settle + re-sort so Declined drops to bottom ──
+    card.classList.remove('qr-rejecting');
+    card.classList.add('qr-rejected-done');
+    setTimeout(() => card.classList.remove('qr-rejected-done'), 800);
+
+    const listEl = card.closest('.qp-list');
+    if (listEl) resortCardList(listEl);
+  }, 250);
+}
 
 
 function searchQuotes(input) {

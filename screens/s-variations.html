@@ -67,12 +67,11 @@
     <div class="qp-card qp-var-summary-card">
       <div class="var-card-left">
         <div>
-          <div class="var-summary-title">Total Project Value</div>
-          <div style="color:#009113;font-size:12px;font-weight:600;margin-top:4px;">Accepted on 14 April 2026</div>
+          <div class="var-summary-title">Total Project Accepted Value</div>
         </div>
         <div class="var-total-block" style="text-align:right;">
           <div class="var-total-value" style="font-size:20px;font-weight:600;color:var(--c-text-1);">$850,000.00</div>
-          <div class="var-total-label" style="font-size:9px;font-weight:500;color:var(--c-text-muted);line-height:1.3;max-width:110px;">Total Quote Value (excl. Tax)</div>
+          <div class="var-total-label">Total Value (excl. Tax)</div>
         </div>
       </div>
       <div class="qp-project-right">
@@ -84,7 +83,7 @@
           </div>
           <div class="qp-total-block-mobile">
             <div class="qp-total-value">$850,000.00</div>
-            <div class="qp-total-label">Total Quote Value (excl. Tax)</div>
+            <div class="qp-total-label">Total Variation Value</div>
           </div>
         </div>
         <div class="qp-progress-bar-outer">
@@ -199,20 +198,20 @@
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
         </div>
       </div>
     </div>
 
-    <!-- To be confirmed (Revision 3.1) -->
+    <!-- To be confirmed (valid) -->
     <div class="qr">
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
           <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3.1</span>
+          <span class="qr-revision">Revision 3</span>
         </div>
         <div class="qr-title">Dutch House Security INV TEST</div>
       </div>
@@ -227,14 +226,15 @@
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
         </div>
       </div>
     </div>
 
     <!-- To be confirmed (overdue) -->
+
     <div class="qr">
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
@@ -252,14 +252,8 @@
       <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
       <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
       <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
-      <div class="qr-actions">
-        <div class="qr-action-group">
-          <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn">TBC</button>
-          <button class="qr-action-btn reject">Reject</button>
-          <button class="qr-action-btn accept">Accept</button>
-        </div>
-      </div>
+      <!-- No action buttons for overdue -->
+      <div></div>
     </div>
 
     <!-- Accepted (with payment progress — Figma 724:28554) -->
@@ -313,7 +307,7 @@
       <div class="qr-name">
         <div class="qr-meta">
           <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 1</span>
+          <span class="qr-revision">Revision 3</span>
         </div>
         <div class="qr-title">Dutch House Security INV TEST</div>
       </div>
@@ -323,8 +317,9 @@
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$0.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$0.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Original Quote</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <!-- No action buttons for declined -->
       <div></div>
     </div>
 

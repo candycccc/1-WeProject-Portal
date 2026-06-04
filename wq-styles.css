@@ -2306,15 +2306,15 @@ body.mobile-view #s-variations .var-card-left {
   flex: none; padding: 22px 14px 22px;
   flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 12px;
 }
-body.mobile-view #s-variations .var-summary-title { font-size: 24px; line-height: 1.25; }
+body.mobile-view #s-variations .var-summary-title { font-size: 18px; line-height: 1.25; }
 body.mobile-view #s-variations .var-total-block { display: block; text-align: right; }
 body.mobile-view #s-variations .var-total-value { font-size: 24px !important; font-weight: 600; color: var(--c-text-1); }
-body.mobile-view #s-variations .var-total-label { font-size: 10px !important; font-weight: 500; color: var(--c-text-muted); max-width: 110px; line-height: 1.3; }
+body.mobile-view #s-variations .var-total-label { font-size: 10px !important; font-weight: 500; color: var(--c-text-muted); line-height: 1.3; text-align: right; }
 body.mobile-view #s-variations .qp-project-right {
   border-left: none; border-top: none;
   flex: none; padding: 16px 14px 14px; gap: 8px;
 }
-body.mobile-view #s-variations .qp-payment-amount { font-size: 24px; }
+body.mobile-view #s-variations .qp-payment-amount { font-size: 20px; }
 body.mobile-view #s-variations .qp-payment-of { font-size: 10px; }
 body.mobile-view #s-variations .qp-summary-amounts {
   display: flex; justify-content: space-between; align-items: flex-start; width: 100%;
@@ -2323,7 +2323,7 @@ body.mobile-view #s-variations .qp-total-block-mobile {
   display: flex; flex-direction: column; align-items: flex-end; text-align: right;
 }
 body.mobile-view #s-variations .qp-total-block-mobile .qp-total-value {
-  font-size: 24px; font-weight: 600; color: var(--c-text-1);
+  font-size: 20px; font-weight: 600; color: var(--c-text-1);
 }
 body.mobile-view #s-variations .qp-total-block-mobile .qp-total-label {
   font-size: 10px; font-weight: 500; color: var(--c-text-muted); max-width: 110px; line-height: 1.3;
@@ -2345,9 +2345,9 @@ body.mobile-view #s-variations .qp-bank-field span { color: #1f2f3e; }
 body.mobile-view #s-variations .qp-list {
   flex: 1; min-height: 0; overflow-y: auto; padding: 0 12px;
 }
-/* Variation cards: 3-col grid matching Figma 724:28554 */
+/* Variation cards: identical layout to #s-quotes cards */
 body.mobile-view #s-variations .qr {
-  grid-template-columns: 65px 1fr 1fr;
+  grid-template-columns: clamp(44px, 15.6vw, 65px) 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   padding: 12px 12px 0; min-height: unset; column-gap: 10px; row-gap: 0;
   border-radius: 4px;
@@ -2355,66 +2355,123 @@ body.mobile-view #s-variations .qr {
 }
 body.mobile-view #s-variations .qr > div:empty { display: none; }
 body.mobile-view #s-variations .qr-thumb {
-  grid-column: 1; grid-row: 1 / 4; width: 61px; height: 61px; align-self: start;
+  grid-column: 1; grid-row: 1 / 4;
+  width: clamp(40px, 15.6vw, 61px); height: clamp(40px, 15.6vw, 61px);
+  align-self: start; margin-top: 0;
 }
 body.mobile-view #s-variations .qr-status {
   grid-column: 2 / 4; grid-row: 1;
   display: flex; flex-direction: row; justify-content: space-between;
-  align-items: center; flex-wrap: nowrap; gap: 6px; min-width: 0; padding-bottom: 3px;
+  align-items: center; flex-wrap: wrap; gap: 4px; min-width: 0;
+  padding-bottom: 10px;
 }
 body.mobile-view #s-variations .qr-badge {
-  background: none !important; padding: 0; border-radius: 0;
-  display: flex; align-items: center; gap: 5px;
-  font-size: 12px; font-weight: 600; white-space: nowrap; color: var(--c-text-1);
+  padding: 3px 6px; border-radius: 2px;
+  display: inline-flex; align-items: center;
+  font-size: 12px; font-weight: 600; white-space: nowrap; color: #000 !important;
 }
-body.mobile-view #s-variations .qr-badge::before {
-  content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0;
-}
-body.mobile-view #s-variations .qr-badge-pending::before  { background: #ff9500; }
-body.mobile-view #s-variations .qr-badge-tbc::before      { background: #9c9c9c; }
-body.mobile-view #s-variations .qr-badge-accepted::before { background: #009113; }
-body.mobile-view #s-variations .qr-badge-declined::before { background: #9c9c9c; }
+body.mobile-view #s-variations .qr-badge::before { display: none; }
+body.mobile-view #s-variations .qr-badge-pending  { background: rgba(255, 149, 0, 0.15); }
+body.mobile-view #s-variations .qr-badge-tbc      { background: #eaeaea; }
+body.mobile-view #s-variations .qr-badge-accepted { background: rgba(0, 145, 19, 0.1); }
+body.mobile-view #s-variations .qr-badge-declined { background: #eaeaea; }
 body.mobile-view #s-variations .qr-date {
-  font-size: 11px; text-align: right; flex-shrink: 0; min-width: 0;
-  overflow: hidden; text-overflow: ellipsis; max-width: 55%; white-space: nowrap;
+  font-size: 12px; text-align: right; white-space: nowrap;
 }
 body.mobile-view #s-variations .qr-name  { grid-column: 2 / 4; grid-row: 2; padding: 0; }
 body.mobile-view #s-variations .qr-title { font-size: 20px; margin-top: 2px; line-height: 1.2; }
-body.mobile-view #s-variations .qr-number { font-size: 10px; }
-body.mobile-view #s-variations .qr-revision { font-size: 10px; }
-body.mobile-view #s-variations .qr-meta { margin-top: 2px; gap: 6px; }
+body.mobile-view #s-variations .qr-number { font-size: 12px; }
+body.mobile-view #s-variations .qr-revision { font-size: 12px; }
+body.mobile-view #s-variations .qr-meta { margin-top: 2px; gap: 8px; }
 body.mobile-view #s-variations .qr-orig {
-  grid-column: 2; grid-row: 3; padding-top: 12px; align-self: start;
+  grid-column: 2; grid-row: 3; padding-top: 18.5px; align-self: start;
 }
 body.mobile-view #s-variations .qr-orig-val { font-size: 16px; }
 body.mobile-view #s-variations .qr-orig-lbl { font-size: 10px; }
 body.mobile-view #s-variations .qr-ver {
-  grid-column: 3; grid-row: 3; padding-top: 12px; align-self: start;
+  grid-column: 3; grid-row: 3; padding-top: 18.5px; align-self: start;
+  display: flex; flex-direction: column; gap: 2px;
 }
 body.mobile-view #s-variations .qr-ver-val { font-size: 16px; }
 body.mobile-view #s-variations .qr-ver-lbl { font-size: 10px; }
 body.mobile-view #s-variations .qr-payment {
   grid-column: 1 / 4; grid-row: 4; padding-left: 0;
-  padding-top: 10px; border-top: 1px solid var(--c-border-1); margin-top: 10px;
+  padding-top: 10px; margin-top: 10px; padding-bottom: 21px;
 }
 body.mobile-view #s-variations .qr-payment-legend { grid-template-columns: repeat(3, 1fr); }
-body.mobile-view #s-variations .qr-payment-big { font-size: 20px; }
-body.mobile-view #s-variations .qr-payment-of { font-size: 12px; }
+body.mobile-view #s-variations .qr-payment-big { font-size: 20px; font-weight: 600; }
+body.mobile-view #s-variations .qr-payment-of { font-size: 14px; font-weight: 500; }
+
 body.mobile-view #s-variations .qr-actions {
   grid-column: 1 / 4; grid-row: 4; justify-self: stretch;
-  margin-top: 10px; border-top: 1px solid var(--c-border-1);
+  margin-top: 33.5px;
 }
 body.mobile-view #s-variations .qr-action-group { width: 100%; }
 body.mobile-view #s-variations .qr-action-btn {
   flex: 1; padding: 10px 6px; font-size: 16px; min-height: 42px; justify-content: center; display: flex; align-items: center;
 }
-body.mobile-view #s-variations .qr-action-btn:first-child { flex: none; width: 44px; }
+body.mobile-view #s-variations .qr-action-btn:first-child { flex: none; width: 54px; }
 body.mobile-view #s-variations .qr-view {
-  grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 6px 0 10px;
+  grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 12px 0 10px;
 }
 body.mobile-view #s-variations .qr-view-btn {
-  width: 100%; height: 41px; font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 41px; font-size: 16px; text-align: center; display: flex; align-items: center; justify-content: center;
   background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 4px;
+}
+
+/* ── Accept card animation ── */
+/* Phase 1: green border pulse while action buttons are fading */
+.qr.qr-accepting {
+  border-color: #009113 !important;
+  box-shadow: 0 0 0 3px rgba(0,145,19,0.18), 0 3px 2px #efefef !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+/* Phase 5: payment section enters */
+.qr-payment.qr-payment-enter {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: none;
+}
+.qr-payment.qr-payment-entered {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+/* Phase 6: accepted glow fades out */
+.qr.qr-accepted-done {
+  animation: qrAcceptedSettle 0.8s ease-out forwards;
+}
+@keyframes qrAcceptedSettle {
+  0%   { border-color: #009113; box-shadow: 0 0 0 2px rgba(0,145,19,0.12), 0 3px 2px #efefef; }
+  100% { border-color: #eaeaea; box-shadow: 0 3px 2px #efefef; }
+}
+
+/* TBC animation — grey pulse */
+.qr.qr-tbc-ing {
+  border-color: #9c9c9c !important;
+  box-shadow: 0 0 0 3px rgba(156,156,156,0.18), 0 3px 2px #efefef !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.qr.qr-tbc-done {
+  animation: qrTbcSettle 0.7s ease-out forwards;
+}
+@keyframes qrTbcSettle {
+  0%   { border-color: #9c9c9c; box-shadow: 0 0 0 2px rgba(156,156,156,0.12), 0 3px 2px #efefef; }
+  100% { border-color: #eaeaea; box-shadow: 0 3px 2px #efefef; }
+}
+
+/* Reject/Decline animation — red pulse */
+.qr.qr-rejecting {
+  border-color: #cf3400 !important;
+  box-shadow: 0 0 0 3px rgba(207,52,0,0.15), 0 3px 2px #efefef !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.qr.qr-rejected-done {
+  animation: qrRejectedSettle 0.8s ease-out forwards;
+}
+@keyframes qrRejectedSettle {
+  0%   { border-color: #cf3400; box-shadow: 0 0 0 2px rgba(207,52,0,0.1), 0 3px 2px #efefef; }
+  100% { border-color: #eaeaea; box-shadow: 0 3px 2px #efefef; }
 }
 
 /* ── Mobile: Shared topbar (all QP pages) — Figma 515:7778 ──
@@ -2685,7 +2742,7 @@ body.mobile-view #s-purchase-order .qp-list {
 /* 3-column grid: [thumb 65px] [orig 1fr] [ver 1fr]
    Rows: 1=status  2=name  3=amounts  4=actions|payment  5=view */
 body.mobile-view #s-quotes .qr {
-  grid-template-columns: 65px 1fr 1fr;
+  grid-template-columns: clamp(44px, 15.6vw, 65px) 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   padding: 12px 12px 0; min-height: unset; column-gap: 10px; row-gap: 0;
   border-radius: 4px;
@@ -2693,18 +2750,19 @@ body.mobile-view #s-quotes .qr {
 }
 body.mobile-view #s-quotes .qr > div:empty { display: none; }
 
-/* Thumb: 61×61px, spans cols 1, rows 1–3 */
+/* Thumb: scales proportionally with viewport width */
 body.mobile-view #s-quotes .qr-thumb {
   grid-column: 1; grid-row: 1 / 4;
-  width: 61px; height: 61px; align-self: start; margin-top: 0;
+  width: clamp(40px, 15.6vw, 61px); height: clamp(40px, 15.6vw, 61px);
+  align-self: start; margin-top: 0;
 }
 
-/* Status row: dot+badge LEFT, date RIGHT — spans both content cols */
+/* Status row: badge LEFT, date RIGHT — wraps to next line when tight */
 body.mobile-view #s-quotes .qr-status {
   grid-column: 2 / 4; grid-row: 1;
   display: flex; flex-direction: row; justify-content: space-between;
-  align-items: center; flex-wrap: nowrap; gap: 6px; min-width: 0;
-  padding-bottom: 3px;
+  align-items: center; flex-wrap: wrap; gap: 4px; min-width: 0;
+  padding-bottom: 10px;
 }
 /* Badge → colored dot + text (no pill background) */
 body.mobile-view #s-quotes .qr-badge {
@@ -2719,8 +2777,7 @@ body.mobile-view #s-quotes .qr-badge-tbc      { background: #eaeaea; }
 body.mobile-view #s-quotes .qr-badge-accepted { background: rgba(0, 145, 19, 0.1); }
 body.mobile-view #s-quotes .qr-badge-declined { background: #eaeaea; }
 body.mobile-view #s-quotes .qr-date {
-  font-size: 12px; text-align: right; flex-shrink: 0; min-width: 0;
-  overflow: hidden; text-overflow: ellipsis; max-width: 55%; white-space: nowrap;
+  font-size: 12px; text-align: right; white-space: nowrap;
 }
 
 /* Name row: spans both content cols */
@@ -2732,12 +2789,12 @@ body.mobile-view #s-quotes .qr-meta { margin-top: 2px; gap: 8px; }
 
 /* Amounts: orig in col 2, ver in col 3 — row 3 */
 body.mobile-view #s-quotes .qr-orig {
-  grid-column: 2; grid-row: 3; padding-top: 16px; align-self: start;
+  grid-column: 2; grid-row: 3; padding-top: 18.5px; align-self: start;
 }
 body.mobile-view #s-quotes .qr-orig-val { font-size: 16px; }
 body.mobile-view #s-quotes .qr-orig-lbl { font-size: 10px; }
 body.mobile-view #s-quotes .qr-ver {
-  grid-column: 3; grid-row: 3; padding-top: 16px; align-self: start;
+  grid-column: 3; grid-row: 3; padding-top: 18.5px; align-self: start;
   display: flex; flex-direction: column; gap: 2px;
 }
 body.mobile-view #s-quotes .qr-ver-val { font-size: 16px; }
@@ -2752,10 +2809,11 @@ body.mobile-view #s-quotes .qr-payment-legend { grid-template-columns: repeat(3,
 body.mobile-view #s-quotes .qr-payment-big { font-size: 20px; font-weight: 600; }
 body.mobile-view #s-quotes .qr-payment-of { font-size: 14px; font-weight: 500; }
 
+
 /* Action buttons — full-width, row 4 (mutually exclusive with payment) */
 body.mobile-view #s-quotes .qr-actions {
   grid-column: 1 / 4; grid-row: 4; justify-self: stretch;
-  margin-top: 10px;
+  margin-top: 33.5px;
 }
 body.mobile-view #s-quotes .qr-action-group { width: 100%; }
 body.mobile-view #s-quotes .qr-action-btn {
@@ -3003,8 +3061,9 @@ body.mobile-view #s-variations .qp-list { flex: none !important; overflow: visib
 /* Invoices: make list natural flow */
 body.mobile-view #s-invoices .qp-list { flex: none; overflow: visible; }
 /* SO: 3-col card grid — mirrors quotes layout */
+/* Sales Order cards — identical layout to #s-quotes */
 body.mobile-view #s-purchase-order .qr {
-  grid-template-columns: 65px 1fr 1fr;
+  grid-template-columns: clamp(44px, 15.6vw, 65px) 1fr 1fr;
   grid-template-rows: auto auto auto auto auto;
   padding: 12px 12px 0; min-height: unset; column-gap: 10px; row-gap: 0;
   border-radius: 4px;
@@ -3012,63 +3071,59 @@ body.mobile-view #s-purchase-order .qr {
 }
 body.mobile-view #s-purchase-order .qr > div:empty { display: none; }
 body.mobile-view #s-purchase-order .qr-thumb {
-  grid-column: 1; grid-row: 1 / 4; width: 61px; height: 61px; align-self: start; margin-top: 0;
+  grid-column: 1; grid-row: 1 / 4;
+  width: clamp(40px, 15.6vw, 61px); height: clamp(40px, 15.6vw, 61px);
+  align-self: start; margin-top: 0;
 }
 body.mobile-view #s-purchase-order .qr-status {
   grid-column: 2 / 4; grid-row: 1;
   display: flex; flex-direction: row; justify-content: space-between;
-  align-items: center; flex-wrap: nowrap; gap: 6px; min-width: 0; padding-bottom: 3px;
+  align-items: center; flex-wrap: wrap; gap: 4px; min-width: 0; padding-bottom: 10px;
 }
 body.mobile-view #s-purchase-order .qr-badge {
-  background: none !important; padding: 0; border-radius: 0;
-  display: flex; align-items: center; gap: 5px;
-  font-size: 12px; font-weight: 600; white-space: nowrap; color: var(--c-text-1);
+  padding: 3px 6px; border-radius: 2px;
+  display: inline-flex; align-items: center;
+  font-size: 12px; font-weight: 600; white-space: nowrap; color: #000 !important;
 }
-body.mobile-view #s-purchase-order .qr-badge::before {
-  content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0;
-}
-body.mobile-view #s-purchase-order .qr-badge-pending::before  { background: #ff9500; }
-body.mobile-view #s-purchase-order .qr-badge-tbc::before      { background: #9c9c9c; }
-body.mobile-view #s-purchase-order .qr-badge-accepted::before { background: #009113; }
-body.mobile-view #s-purchase-order .qr-badge-declined::before { background: #9c9c9c; }
+body.mobile-view #s-purchase-order .qr-badge::before { display: none; }
+body.mobile-view #s-purchase-order .qr-badge-pending  { background: rgba(255,149,0,0.15); }
+body.mobile-view #s-purchase-order .qr-badge-tbc      { background: #eaeaea; }
+body.mobile-view #s-purchase-order .qr-badge-accepted { background: rgba(0,145,19,0.1); }
+body.mobile-view #s-purchase-order .qr-badge-declined { background: #eaeaea; }
 body.mobile-view #s-purchase-order .qr-date {
-  font-size: 11px; text-align: right; flex-shrink: 0; min-width: 0;
-  overflow: hidden; text-overflow: ellipsis; max-width: 55%; white-space: nowrap;
+  font-size: 12px; text-align: right; white-space: nowrap;
 }
 body.mobile-view #s-purchase-order .qr-name  { grid-column: 2 / 4; grid-row: 2; padding: 0; }
 body.mobile-view #s-purchase-order .qr-title { font-size: 20px; margin-top: 2px; line-height: 1.2; }
-body.mobile-view #s-purchase-order .qr-number { font-size: 10px; }
-body.mobile-view #s-purchase-order .qr-meta { margin-top: 2px; gap: 6px; }
+body.mobile-view #s-purchase-order .qr-number { font-size: 12px; }
+body.mobile-view #s-purchase-order .qr-meta { margin-top: 2px; gap: 8px; }
 body.mobile-view #s-purchase-order .qr-orig {
-  grid-column: 2 / 4; grid-row: 3; padding-top: 12px; align-self: start;
+  grid-column: 2 / 4; grid-row: 3; padding-top: 18.5px; align-self: start;
 }
 body.mobile-view #s-purchase-order .qr-orig-val { font-size: 16px; }
 body.mobile-view #s-purchase-order .qr-orig-lbl { font-size: 10px; }
 body.mobile-view #s-purchase-order .qr-view {
-  grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 6px 0 10px;
+  grid-column: 1 / 4; grid-row: 5; justify-self: stretch; padding: 12px 0 10px;
 }
 body.mobile-view #s-purchase-order .qr-view-btn {
-  width: 100%; height: 41px; font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 41px; font-size: 16px; text-align: center; display: flex; align-items: center; justify-content: center;
   background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 4px;
 }
-/* SO: payment progress — full-width on mobile */
 body.mobile-view #s-purchase-order .qr-payment {
-  grid-column: 1 / -1; grid-row: auto; padding-left: 0;
-  padding-top: 10px; border-top: 1px solid var(--c-border-1); margin-top: 10px;
+  grid-column: 1 / 4; grid-row: 4; padding-left: 0;
+  padding-top: 10px; margin-top: 10px; padding-bottom: 21px;
 }
 body.mobile-view #s-purchase-order .qr-payment-legend { grid-template-columns: repeat(3, 1fr); }
-body.mobile-view #s-purchase-order .qr-payment-big { font-size: 20px; }
-body.mobile-view #s-purchase-order .qr-payment-of { font-size: 12px; }
-/* SO: action buttons — mobile layout mirrors quotes */
+body.mobile-view #s-purchase-order .qr-payment-big { font-size: 20px; font-weight: 600; }
+body.mobile-view #s-purchase-order .qr-payment-of { font-size: 14px; font-weight: 500; }
 body.mobile-view #s-purchase-order .qr-actions {
-  grid-column: 1 / -1; grid-row: auto;
-  justify-self: stretch; margin-top: 8px;
+  grid-column: 1 / 4; grid-row: 4; justify-self: stretch; margin-top: 33.5px;
 }
 body.mobile-view #s-purchase-order .qr-action-group { width: 100%; }
 body.mobile-view #s-purchase-order .qr-action-btn {
-  flex: 1; justify-content: center; font-size: 16px; min-height: 42px; padding: 8px 4px;
+  flex: 1; padding: 10px 6px; font-size: 16px; min-height: 42px; justify-content: center; display: flex; align-items: center;
 }
-body.mobile-view #s-purchase-order .qr-action-btn:first-child { flex: none; width: 44px; }
+body.mobile-view #s-purchase-order .qr-action-btn:first-child { flex: none; width: 54px; }
 
 /* SO: filter tabs — sticky below topbar, same as invoices/quotes */
 body.mobile-view #s-purchase-order .qp-filter-tabs {
