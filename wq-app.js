@@ -168,7 +168,11 @@ function go(name) {
     if (inner) inner.scrollTop = 0;
 
     // Persist current screen so refresh restores same view
-    try { localStorage.setItem('wq_screen', name); } catch(e) {}
+    // (clear on login so next open always starts at login)
+    try {
+      if (name === 'login') localStorage.removeItem('wq_screen');
+      else localStorage.setItem('wq_screen', name);
+    } catch(e) {}
   };
 
   const isMobile = document.body.classList.contains('mobile-view');

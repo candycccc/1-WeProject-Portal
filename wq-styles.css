@@ -3731,16 +3731,17 @@ body.mobile-view #notif-panel-activity.qp-notif-body {
 .qp-comment-textarea:focus { border-color: var(--brand-accent); }
 .qp-comment-actions { display: flex; gap: 10px; }
 .qp-comment-cancel {
-  flex: 1; height: 48px; border-radius: 100px;
+  flex: 1; padding: 14px 18px; border-radius: 4px;
   background: none; border: 1.5px solid var(--c-border-2);
-  font-size: 16px; font-weight: 600; color: var(--c-text-1);
+  font-size: 14px; font-weight: 600; color: var(--c-text-1);
   cursor: pointer; font-family: inherit;
 }
 .qp-comment-done {
-  flex: 1; height: 48px; border-radius: 100px;
+  flex: 1; padding: 14px 18px; border-radius: 4px;
   background: var(--brand-accent); border: none;
-  font-size: 16px; font-weight: 600; color: #fff;
+  font-size: 14px; font-weight: 600; color: #fff;
   cursor: pointer; font-family: inherit;
+  box-shadow: inset 0px 1px 1px 0px rgba(237,237,237,0.28);
 }
 /* Mobile: floating "Only show unread" pill at bottom of sheet */
 body.mobile-view .qp-notif-mobile-footer {
