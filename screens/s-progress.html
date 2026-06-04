@@ -1,0 +1,254 @@
+<div id="s-progress" class="screen">
+<div class="quotes-page">
+
+  <!-- Top bar -->
+  <div class="qp-topbar">
+    <button class="qp-back-btn" onclick="go('detail')">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/>
+      </svg>
+      Back
+    </button>
+    <button class="qp-nav-pill" onclick="toggleNavDropdown(event)">
+      Progress
+      <i class="fa-sharp-solid fa-chevron-down"></i>
+    </button>
+    <div class="qp-nav-dropdown" id="nav-dropdown-progress">
+      <div class="qp-nav-item" onclick="go('quotes');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Quotes
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>2 Actions Required</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        Variations
+      </div>
+      <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Invoices
+      </div>
+      <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+        Documents
+      </div>
+      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Warranty
+      </div>
+      <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Progress
+      </div>
+      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()" style="display:none;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
+      </div>
+    </div>
+    <div class="qp-topbar-right">
+      <button class="qp-bell-btn qp-bell-badge" onclick="toggleNotifPanel(event)">
+        <i class="fa-sharp-solid fa-bell"></i>
+      </button>
+      <div class="qp-avatar" onclick="toggleUserDropdown(event)">MM
+        <div class="qp-user-dropdown" id="user-dropdown-progress">
+          <div class="qp-user-dropdown-item" onclick="openProfilePanel()">Edit Profile
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="qp-user-dropdown-item" onclick="closeDropdowns()">Sign out
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- State toggle (prototype demo) -->
+  <div class="pp-state-row">
+    <span class="pp-state-label">Status:</span>
+    <button class="pp-state-btn pp-active" onclick="setPPState(this,0)">Progressing as planned</button>
+    <button class="pp-state-btn" onclick="setPPState(this,1)">Delayed</button>
+    <button class="pp-state-btn" onclick="setPPState(this,2)">Behind Schedule</button>
+  </div>
+
+  <!-- Progress card -->
+  <div class="pp-card">
+    <div class="pp-card-lbl">Progress</div>
+    <div class="pp-card-body">
+
+      <!-- Left: status + bars + dates -->
+      <div class="pp-left">
+        <div class="pp-status-row">
+          <div class="pp-status-heading" id="pp-status-text" style="color:#009113;">Progressing as planned</div>
+          <div class="pp-pct-done" id="pp-pct-done">70% Done</div>
+        </div>
+        <div class="pp-subtitle" id="pp-subtitle">Project is progressing well and on schedule.</div>
+
+        <!-- Bar chart -->
+        <div class="pp-bars-area">
+          <div class="pp-bars" id="pp-bars">
+            <!-- 29 bars, filled count driven by JS -->
+          </div>
+          <div class="pp-pointer-wrap" id="pp-pointer-wrap">
+            <div class="pp-pointer-arrow"></div>
+          </div>
+        </div>
+
+        <!-- Start / Est. completion (small, under bar) -->
+        <div class="pp-dates-row">
+          <div class="pp-date-item">
+            <span class="pp-date-lbl">Start date</span>
+            <span class="pp-date-val">12 Jan 2026</span>
+          </div>
+          <div class="pp-date-item" style="text-align:right;">
+            <span class="pp-date-lbl">Est. completion</span>
+            <span class="pp-date-val">04 Jan 2027</span>
+          </div>
+        </div>
+      </div><!-- /pp-left -->
+
+      <!-- Right: stats + notes -->
+      <div class="pp-right">
+        <div class="pp-stats-row">
+          <div class="pp-stat">
+            <span class="pp-stat-lbl">Start date</span>
+            <span class="pp-stat-val">12 Jan 2026</span>
+          </div>
+          <div class="pp-stat">
+            <span class="pp-stat-lbl">Est. completion</span>
+            <span class="pp-stat-val">04 Jan 2027</span>
+          </div>
+          <div class="pp-stat">
+            <span class="pp-stat-lbl">Days elapsed</span>
+            <span class="pp-stat-val">128 / 230</span>
+          </div>
+        </div>
+        <div>
+          <div class="pp-notes-lbl">Notes on project</div>
+          <div class="pp-notes-text">2 quotes pending your review, 1 variation awaiting approval, and 0 invoice due for payment.</div>
+        </div>
+      </div><!-- /pp-right -->
+
+    </div><!-- /pp-card-body -->
+  </div><!-- /pp-card -->
+
+  <!-- Your Attention Needed section -->
+  <div class="pp-attention">
+    <div class="pp-attention-header">
+      <span class="pp-attention-title">Your Attention Needed</span>
+      <div class="pp-actions-badge">
+        <svg width="10" height="10" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>
+        2 Actions Required
+      </div>
+    </div>
+
+    <!-- Quotes sub-section -->
+    <div class="pp-section-label">Quotes</div>
+    <div class="qr">
+      <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGRyb3Agc2hhZG93IC0tPgogIDxyZWN0IHg9IjIwIiB5PSIxMyIgd2lkdGg9IjM4IiBoZWlnaHQ9IjU4IiByeD0iNSIgZmlsbD0iI0Q4RDhEOCIvPgogIDwhLS0gc3dpdGNoIGJvZHkgLS0+CiAgPHJlY3QgeD0iMTciIHk9IjEwIiB3aWR0aD0iMzgiIGhlaWdodD0iNTgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSB1cHBlciBwYWRkbGUgLS0+CiAgPHJlY3QgeD0iMjEiIHk9IjE0IiB3aWR0aD0iMjgiIGhlaWdodD0iMjMiIHJ4PSIzIiBmaWxsPSIjRjNGM0YzIi8+CiAgPCEtLSBsb3dlciBwYWRkbGUgLS0+CiAgPHJlY3QgeD0iMjEiIHk9IjM5IiB3aWR0aD0iMjgiIGhlaWdodD0iMjIiIHJ4PSIzIiBmaWxsPSIjRkFGQUZBIi8+CiAgPCEtLSB2ZXJ0aWNhbCBzbGlkZXIgdHJhY2sgLS0+CiAgPHJlY3QgeD0iNDQiIHk9IjE1IiB3aWR0aD0iMy41IiBoZWlnaHQ9IjIyIiByeD0iMS43NSIgZmlsbD0iI0RFREVERSIvPgogIDwhLS0gc2xpZGVyIGtub2IgLS0+CiAgPHJlY3QgeD0iNDIuNSIgeT0iMTUiIHdpZHRoPSI2LjUiIGhlaWdodD0iOSIgcng9IjMuMjUiIGZpbGw9IiNCOEI4QjgiLz4KICA8IS0tIExFRCBpbmRpY2F0b3Igc3RyaXAgLS0+CiAgPHJlY3QgeD0iMjIiIHk9IjY1IiB3aWR0aD0iMjIiIGhlaWdodD0iMS41IiByeD0iLjc1IiBmaWxsPSIjRThFOEU4Ii8+CiAgPGNpcmNsZSBjeD0iMjgiIGN5PSI2OC41IiByPSIxLjgiIGZpbGw9IiM0ODc4RTgiIG9wYWNpdHk9Ii44NSIvPgogIDxjaXJjbGUgY3g9IjM0IiBjeT0iNjguNSIgcj0iMS44IiBmaWxsPSIjNDg3OEU4IiBvcGFjaXR5PSIuNSIvPgogIDxjaXJjbGUgY3g9IjQwIiBjeT0iNjguNSIgcj0iMS44IiBmaWxsPSIjREVERURFIi8+CiAgPCEtLSBicmFuZCB0ZXh0IGhpbnQgLS0+CiAgPHJlY3QgeD0iMjIiIHk9IjYyIiB3aWR0aD0iMTQiIGhlaWdodD0iMS4yIiByeD0iLjYiIGZpbGw9IiNEMEQwRDAiLz4KPC9zdmc+" alt=""/></div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #23944</span>
+          <span class="qr-revision">Revision 3</span>
+        </div>
+        <div class="qr-title">Home Automation</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-pending">Pending your review</span>
+        <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+      </div>
+      <div></div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-actions">
+        <div class="qr-action-group">
+          <button class="qr-action-btn">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 0 2 2z"/></svg>
+          </button>
+          <button class="qr-action-btn">TBC</button>
+          <button class="qr-action-btn reject">Reject</button>
+          <button class="qr-action-btn accept">Accept</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Invoice sub-section — uses same inv-row component as Invoices screen -->
+    <div class="pp-section-label">Invoice</div>
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#cf3400;"></div>
+        <span class="inv-status-label">Unpaid</span>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-title">Invoice for Aftercare</div>
+          <div class="inv-ref">Invoice #00002</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$850,000.00</div>
+          <div class="inv-amount-lbl">excl. Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Progress</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$650,000.00</div>
+          <div class="inv-payment-of">of $850,000.02 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:76%;background:#009113;"></div>
+          <div class="inv-payment-bar-fill" style="width:24%;background:#cf3400;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">70%</span></div>
+            <div class="inv-legend-val">$650,000.00</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">30%</span></div>
+            <div class="inv-legend-val">$200,000.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="go('invoices')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay now</button>
+      </div>
+    </div><!-- /inv-row -->
+
+  </div><!-- /pp-attention -->
+
+  <!-- Footer -->
+  <div class="pp-footer">
+    <div class="pp-footer-pm">
+      <span class="pp-footer-pm-name">Tyler Holmes</span>
+      <span class="pp-footer-pm-role">Project Manager</span>
+    </div>
+    <div class="pp-footer-contact">
+      <div class="pp-footer-contact-item">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+        </svg>
+        <a href="mailto:demo@example.com">demo@example.com</a>
+      </div>
+      <div class="pp-footer-contact-item">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.33A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-1.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <a href="tel:+15551234567">+1 (555) 123-4567</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="detail-sidebar-mob">
+  <div class="dsm-left">
+    <div class="dsm-name"><span class="brand-pm-name">Tyler Holmes</span></div>
+    <div class="dsm-role"><span class="brand-pm-role">Project Manager</span></div>
+  </div>
+  <div class="dsm-right">
+    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-envelope"></i><a href="mailto:demo@example.com">demo@example.com</a></div>
+    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-phone"></i><a href="tel:+15551234567">+1 (555) 123-4567</a></div>
+  </div>
+</div>
+</div>
+
