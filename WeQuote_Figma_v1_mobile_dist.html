@@ -3713,17 +3713,25 @@ body.mobile-view #notif-panel-activity.qp-notif-body {
 .qp-comment-overlay.open { display: flex; }
 .qp-comment-dialog {
   background: #fff; border-radius: 20px 20px 0 0;
-  width: 100%; padding: 0 20px 24px;
-  display: flex; flex-direction: column; gap: 16px;
+  width: 100%;
+  display: flex; flex-direction: column;
   box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
-  /* Mobile: almost full height so handle+header fixed at top, buttons fixed at bottom */
   height: calc(100% - 44px);
-  overflow: hidden;
+  /* scroll container — lets sticky header/footer work regardless of iOS keyboard scroll */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .qp-comment-handle {
   width: 65px; height: 4px;
   background: var(--c-border-2); border-radius: 100px;
-  margin: 14px auto 0; align-self: center; flex-shrink: 0;
+  margin: 0 auto 12px; display: block;
+}
+/* Header sticky at top — handle lives inside here */
+.qp-comment-header {
+  position: sticky; top: 0; z-index: 1;
+  background: #fff;
+  flex-shrink: 0;
+  padding: 14px 20px 4px;
 }
 .qp-comment-title {
   font-size: 18px; font-weight: 700; color: var(--c-text-1); line-height: 1.2;
@@ -3733,16 +3741,22 @@ body.mobile-view #notif-panel-activity.qp-notif-body {
   display: block; margin-top: 2px;
 }
 .qp-comment-textarea {
-  width: 100%; min-height: 0; flex: 1;
+  flex: 1; min-height: 200px;
+  width: 100%; box-sizing: border-box;
   border: 1.5px solid var(--c-border-2); border-radius: 10px;
-  padding: 12px; font-size: 14px; font-family: inherit;
+  padding: 12px; margin: 12px 20px; width: calc(100% - 40px);
+  font-size: 14px; font-family: inherit;
   color: var(--c-text-1); resize: none; outline: none;
-  box-sizing: border-box; transition: border-color 0.18s;
-  overflow-y: auto;
+  transition: border-color 0.18s;
 }
 .qp-comment-textarea:focus { border-color: var(--brand-accent); }
-.qp-comment-header { flex-shrink: 0; }
-.qp-comment-actions { display: flex; gap: 10px; flex-shrink: 0; }
+/* Footer sticky at bottom */
+.qp-comment-actions {
+  position: sticky; bottom: 0; z-index: 1;
+  background: #fff;
+  display: flex; gap: 10px; flex-shrink: 0;
+  padding: 12px 20px 24px;
+}
 .qp-comment-cancel {
   flex: 1; padding: 14px 18px; border-radius: 4px;
   background: none; border: 1.5px solid var(--c-border-2);
@@ -4952,7 +4966,7 @@ body.mobile-view #app-content {
       </button>
       <div class="dash-user-info">
         <span class="dash-user-name">Mabella Martin</span>
-        <span class="dash-user-role">Edit Profile</span>
+        <span class="dash-user-role" onclick="openProfilePanel()" style="cursor:pointer;">Edit Profile</span>
       </div>
       <div class="dash-avatar" onclick="toggleUserDropdown(event)">MM
         <div class="qp-user-dropdown" id="user-dropdown-dash">
@@ -7666,8 +7680,8 @@ body.mobile-view #app-content {
 <!-- ── Comment dialog (bottom sheet) ── -->
 <div class="qp-comment-overlay" id="qp-comment-overlay" onclick="closeCommentDialog()">
   <div class="qp-comment-dialog" onclick="event.stopPropagation()">
-    <div class="qp-comment-handle"></div>
     <div class="qp-comment-header">
+      <div class="qp-comment-handle"></div>
       <span class="qp-comment-title">Leave a note</span>
       <span class="qp-comment-ref" id="comment-ref-text"></span>
     </div>
@@ -9250,8 +9264,7 @@ function openProfilePanel() {
   closeDropdowns();
   // Close all other panels first
   const brand = document.getElementById('brand-panel');
-  brand.classList.remove('open');
-  document.body.classList.remove('brand-open');
+  if (brand) { brand.classList.remove('open'); document.body.classList.remove('brand-open'); }
   closeNotifPanel();
   document.getElementById('qp-profile-overlay').classList.add('open');
   // Always scroll body back to top when opening

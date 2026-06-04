@@ -918,8 +918,7 @@ function openProfilePanel() {
   closeDropdowns();
   // Close all other panels first
   const brand = document.getElementById('brand-panel');
-  brand.classList.remove('open');
-  document.body.classList.remove('brand-open');
+  if (brand) { brand.classList.remove('open'); document.body.classList.remove('brand-open'); }
   closeNotifPanel();
   document.getElementById('qp-profile-overlay').classList.add('open');
   // Always scroll body back to top when opening
