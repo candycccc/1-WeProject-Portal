@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>WeQuote — Customer Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<!-- Font Awesome 7 Pro via local OTF files — no CDN dependency -->
+<link rel="stylesheet" href="wq-styles.css">
+<script id="mobile-standalone-vars">
+(function () {
+  var root = document.documentElement;
+  /* Use svh/dvh (stable/dynamic viewport height) so iOS address bar
+     shrink/expand doesn't cause layout jumps. Fall back to innerHeight. */
+  var supportsSvh = CSS.supports('height', '1svh');
+  var supportsDvh = CSS.supports('height', '1dvh');
+  function syncViewport() {
+    root.style.setProperty('--mobile-w', window.innerWidth + 'px');
+    if (!supportsSvh && !supportsDvh) {
+      root.style.setProperty('--mobile-h', window.innerHeight + 'px');
+    }
+  }
+  if (supportsSvh) {
+    root.style.setProperty('--mobile-h', '100svh');
+    root.style.setProperty('--mobile-w', '100vw');
+  } else if (supportsDvh) {
+    root.style.setProperty('--mobile-h', '100dvh');
+    root.style.setProperty('--mobile-w', '100vw');
+  } else {
+    syncViewport();
+    window.addEventListener('resize', syncViewport);
+  }
+})();
+</script>
+</head>
+<body class="mobile-view">
+
+<!-- Hidden nav (kept for JS compat) -->
+<nav class="dev-nav" aria-hidden="true">
+  <button class="active" onclick="go('login')"></button>
+  <button onclick="go('dash')"></button>
+  <button onclick="go('detail')"></button>
+  <button onclick="go('quotes')"></button>
+</nav>
+
+<!-- ── Prototype Toolbar ── -->
+<div id="app-content">
+
+<!-- ═══════════════════════════════════════════════════════
+     SCREEN 1 — LOGIN
+═══════════════════════════════════════════════════════ -->
+<div id="app-content">
+  <!-- screens loaded dynamically -->
+</div>
+
+<script>
+(function () {
+  var SCREENS = [
+    'screens/s-login.html',
+    'screens/s-forgot-password.html',
+    'screens/s-dash.html',
+    'screens/s-detail.html',
+    'screens/s-quotes.html',
+    'screens/s-invoices.html',
+    'screens/s-variations.html',
+    'screens/s-purchase-order.html',
+    'screens/s-progress.html',
+    'screens/s-documents.html',
+    'screens/s-warranty.html',
+    'screens/s-global-overlays.html',
+  ];
+
+  function loadScript(src) {
+    return new Promise(function (resolve) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      document.body.appendChild(s);
+    });
+  }
+
+  var container = document.getElementById('app-content');
+
+  Promise.all(SCREENS.map(function (url) {
+    return fetch(url).then(function (r) { return r.text(); });
+  })).then(function (htmls) {
+    container.innerHTML = htmls.join('\n');
+    return loadScript('wq-app.js');
+  }).then(function () {
+    return loadScript('wq-components.js');
+  }).catch(function (err) {
+    console.error('Screen load failed:', err);
+  });
+})();
+</script>
+</body>
+</html>

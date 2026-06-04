@@ -1,0 +1,191 @@
+<div id="s-warranty" class="screen">
+<div class="quotes-page">
+
+  <!-- Top bar -->
+  <div class="qp-topbar">
+    <button class="qp-back-btn" onclick="go('detail')">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/>
+      </svg>
+      Back
+    </button>
+    <button class="qp-nav-pill" onclick="toggleNavDropdown(event)">
+      Warranty
+      <i class="fa-sharp-solid fa-chevron-down"></i>
+    </button>
+    <div class="qp-nav-dropdown" id="nav-dropdown-warranty">
+      <div class="qp-nav-item" onclick="go('quotes');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Quotes
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>2 Actions Required</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        Variations
+      </div>
+      <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Invoices
+      </div>
+      <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+        Documents
+      </div>
+      <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Warranty
+      </div>
+      <div class="qp-nav-item" onclick="go('progress');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Progress
+      </div>
+      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()" style="display:none;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
+      </div>
+    </div>
+    <div class="qp-topbar-right">
+      <button class="qp-bell-btn qp-bell-badge" onclick="toggleNotifPanel(event)">
+        <i class="fa-sharp-solid fa-bell"></i>
+      </button>
+      <div class="qp-avatar" onclick="toggleUserDropdown(event)">MM
+        <div class="qp-user-dropdown" id="user-dropdown-warranty">
+          <div class="qp-user-dropdown-item" onclick="openProfilePanel()">Edit Profile
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="qp-user-dropdown-item" onclick="closeDropdowns();go('login')">Sign out
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Warranty coverage summary card -->
+  <div class="po-summary-card">
+    <div class="po-overall-label">Warranty coverage period</div>
+    <div class="po-overall-count">3 of 5 items active</div>
+    <div class="po-progress-bar-outer">
+      <div class="po-progress-seg" style="width:60%;background:#009113;"></div>
+      <div class="po-progress-seg" style="width:20%;background:#ff9500;"></div>
+      <div class="po-progress-seg" style="flex:1;background:#eaeaea;"></div>
+    </div>
+    <div class="po-progress-legend">
+      <div class="po-legend-item">
+        <div class="po-legend-dot-row">
+          <div class="po-legend-dot" style="background:#009113;"></div>
+          <div class="po-legend-label">Active</div>
+        </div>
+        <div class="po-legend-val-row">
+          <span class="po-legend-val">3</span>
+        </div>
+      </div>
+      <div class="po-legend-item">
+        <div class="po-legend-dot-row">
+          <div class="po-legend-dot" style="background:#ff9500;"></div>
+          <div class="po-legend-label">Expiring soon</div>
+        </div>
+        <div class="po-legend-val-row">
+          <span class="po-legend-val">1</span>
+        </div>
+      </div>
+      <div class="po-legend-item">
+        <div class="po-legend-dot-row">
+          <div class="po-legend-dot" style="background:#c4c4c4;"></div>
+          <div class="po-legend-label">Expired</div>
+        </div>
+        <div class="po-legend-val-row">
+          <span class="po-legend-val">1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Warranty item list -->
+  <div class="po-list">
+
+    <!-- Item 1 — Active -->
+    <div class="wt-item-row">
+      <div style="flex:1;min-width:0;">
+        <div class="wt-item-name">Home Automation System</div>
+        <div class="wt-item-desc">Full system coverage including hardware, software and 24/7 remote support. Excludes accidental damage.</div>
+        <div class="wt-item-expiry" style="margin-top:6px;">Expires 14 Jan 2027</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <span class="wt-status-badge wt-status-active">Active</span>
+      </div>
+    </div>
+
+    <!-- Item 2 — Active -->
+    <div class="wt-item-row">
+      <div style="flex:1;min-width:0;">
+        <div class="wt-item-name">Security Camera Network</div>
+        <div class="wt-item-desc">Parts and labour warranty for all installed cameras and NVR unit. Remote diagnostics included.</div>
+        <div class="wt-item-expiry" style="margin-top:6px;">Expires 04 Jan 2028</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <span class="wt-status-badge wt-status-active">Active</span>
+      </div>
+    </div>
+
+    <!-- Item 3 — Expiring soon -->
+    <div class="wt-item-row">
+      <div style="flex:1;min-width:0;">
+        <div class="wt-item-name">Access Control Panels</div>
+        <div class="wt-item-desc">Covers all door controllers, readers, and wiring. Battery backup units excluded.</div>
+        <div class="wt-item-expiry" style="margin-top:6px;">Expires 30 Jun 2026</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <span class="wt-status-badge wt-status-expiring">Expiring soon</span>
+      </div>
+    </div>
+
+    <!-- Item 4 — Active -->
+    <div class="wt-item-row">
+      <div style="flex:1;min-width:0;">
+        <div class="wt-item-name">Intercom &amp; Video Entry</div>
+        <div class="wt-item-desc">All indoor and outdoor intercom stations covered. Screen replacement included for first 12 months.</div>
+        <div class="wt-item-expiry" style="margin-top:6px;">Expires 04 Jan 2027</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <span class="wt-status-badge wt-status-active">Active</span>
+      </div>
+    </div>
+
+    <!-- Item 5 — Expired -->
+    <div class="wt-item-row">
+      <div style="flex:1;min-width:0;">
+        <div class="wt-item-name">Structured Cabling (Cat6)</div>
+        <div class="wt-item-desc">Installation workmanship warranty only. Manufacturer product warranty applies separately.</div>
+        <div class="wt-item-expiry" style="margin-top:6px;">Expired 12 Jan 2026</div>
+      </div>
+      <div style="flex-shrink:0;">
+        <span class="wt-status-badge wt-status-expired">Expired</span>
+      </div>
+    </div>
+
+  </div><!-- /po-list -->
+
+  <!-- Footer -->
+  <div class="qp-footer">
+    <div class="pp-footer-contact">
+      <div class="pp-footer-contact-label">Need help? Contact us</div>
+      <div class="pp-footer-contact-item">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+        </svg>
+        <a href="mailto:info@wequote.com">info@wequote.com</a>
+      </div>
+      <div class="pp-footer-contact-item">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.33A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-1.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <a href="tel:+15551234567">+1 (555) 123-4567</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<!-- /SCREEN — WARRANTY -->
+
