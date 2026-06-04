@@ -260,11 +260,11 @@ window.addEventListener('resize', () => {
     applyMobileSize(w, h);
   }
   // Use 'change' (on blur/Enter) for a snappy feel; 'input' for live
-  document.getElementById('pt-size-w').addEventListener('input', onSizeInput);
-  document.getElementById('pt-size-h').addEventListener('input', onSizeInput);
+  document.getElementById('pt-size-w')?.addEventListener('input', onSizeInput);
+  document.getElementById('pt-size-h')?.addEventListener('input', onSizeInput);
   // Also allow Enter key to confirm
   [document.getElementById('pt-size-w'), document.getElementById('pt-size-h')].forEach(el => {
-    el.addEventListener('keydown', e => { if (e.key === 'Enter') { el.blur(); onSizeInput(); } });
+    el?.addEventListener('keydown', e => { if (e.key === 'Enter') { el.blur(); onSizeInput(); } });
   });
 })();
 
@@ -423,6 +423,9 @@ function acceptCard(btn) {
       dateEl.textContent = 'Accepted on ' + dateStr;
     }
 
+    // Log to Portal Activity
+    logActivity('You approved', cardRef(card));
+
     // ── Phase 4: replace actions with payment progress ──
     const paymentHTML = `
       <div class="qr-payment qr-payment-enter">
@@ -548,6 +551,9 @@ function tbcCard(btn) {
       dateEl.className = 'qr-date qr-date-tbc';
     }
 
+    // Log to Portal Activity
+    logActivity('You marked as TBC', cardRef(card));
+
     // ── Phase 3: settle ──
     card.classList.remove('qr-tbc-ing');
     card.classList.add('qr-tbc-done');
@@ -594,6 +600,9 @@ function rejectCard(btn) {
       dateEl.className   = 'qr-date qr-date-declined';
       dateEl.textContent = 'Declined on ' + dateStr;
     }
+
+    // Log to Portal Activity
+    logActivity('You rejected', cardRef(card));
 
     // ── Phase 4: remove actions entirely → empty slot ──
     if (actionsEl) actionsEl.outerHTML = '<div></div>';
@@ -933,17 +942,9 @@ function toggleNotifPanel(e) {
   if (opening) {
     closeProfilePanel();
     const brand = document.getElementById('brand-panel');
-    brand.classList.remove('open');
+    brand?.classList.remove('open');
     document.body.classList.remove('brand-open');
-    resetNotifPanel();
-    // Set category filter pill based on current active screen
-    const screenId = document.querySelector('.screen.on')?.id?.replace('s-', '') || 'dash';
-    const screenToCat = { quotes: 'quote', variations: 'variation', detail: 'quote', invoices: 'invoice', 'purchase-order': 'invoice' };
-    const cat = screenToCat[screenId];
-    if (cat) {
-      const pill = document.querySelector(`.qp-notif-cat-pill[data-cat="${cat}"]`);
-      if (pill) setNotifCatPill(cat, pill);
-    }
+    resetNotifPanel(); // always opens on "All" tab
   }
 }
 function resetNotifPanel() {
@@ -969,30 +970,40 @@ function closeNotifPanel(e) {
   const panel   = overlay?.querySelector('.qp-notif-panel');
   if (!panel) return;
 
-  let startY = 0, currentDelta = 0, dragging = false;
+  let startY = 0, startScrollTop = 0, currentDelta = 0, dragging = false;
 
   panel.addEventListener('touchstart', e => {
     // Only activate swipe when in mobile bottom-sheet mode
     if (!document.body.classList.contains('mobile-view')) return;
     startY = e.touches[0].clientY;
+    // Record the scroll position of the panel body at the start of the touch
+    const body = panel.querySelector('.qp-notif-body:not([style*="display: none"]):not([style*="display:none"])');
+    startScrollTop = body ? body.scrollTop : 0;
     currentDelta = 0;
-    dragging = true;
+    dragging = false; // will be set true only when we confirm downward pull gesture
     panel.classList.add('notif-dragging');
   }, { passive: true });
 
   panel.addEventListener('touchmove', e => {
-    if (!dragging) return;
+    if (!document.body.classList.contains('mobile-view')) return;
     const dy = e.touches[0].clientY - startY;
-    if (dy > 0) {
+    // Only intercept if swiping DOWN and the panel body is scrolled to the top
+    if (dy > 0 && startScrollTop <= 0) {
+      dragging = true;
+      e.preventDefault(); // block background from scrolling
       currentDelta = dy;
       panel.style.transform = `translateY(${dy}px)`;
+    } else {
+      // Upward swipe or body has scroll — let it scroll normally
+      dragging = false;
+      panel.classList.remove('notif-dragging');
     }
-  }, { passive: true });
+  }, { passive: false }); // must be non-passive to call preventDefault
 
   panel.addEventListener('touchend', () => {
-    if (!dragging) return;
-    dragging = false;
     panel.classList.remove('notif-dragging');
+    if (!dragging) { currentDelta = 0; return; }
+    dragging = false;
     if (currentDelta > 80) {
       // Dismiss: slide fully off-screen, then close
       panel.style.transform = `translateY(${panel.offsetHeight}px)`;
@@ -1017,13 +1028,14 @@ function switchNotifTab(tab) {
   // Update heading title to match active tab
   const heading = document.querySelector('.qp-notif-heading');
   if (heading) heading.textContent = tab === 'activity' ? 'Portal Activity' : 'Notifications';
-  // Filter pills + toggles only relevant for Notifications tab
+  // Filter pills + desktop toggles only relevant for Notifications tab
+  // Mobile "Only show unread" pill stays visible on both tabs (per Figma 1059-1230)
   const pillsEl    = document.getElementById('notif-cat-pills');
   const toggleEl   = document.querySelector('.qp-notif-toggles');
   const mobileFootEl = document.querySelector('.qp-notif-mobile-footer');
-  if (pillsEl)      pillsEl.style.display      = tab === 'notif' ? '' : 'none';
-  if (toggleEl)     toggleEl.style.display     = tab === 'notif' ? '' : 'none';
-  if (mobileFootEl) mobileFootEl.style.display = tab === 'notif' ? '' : 'none';
+  if (pillsEl)   pillsEl.style.display  = tab === 'notif' ? '' : 'none';
+  if (toggleEl)  toggleEl.style.display = tab === 'notif' ? '' : 'none';
+  if (mobileFootEl) mobileFootEl.style.display = '';
 }
 
 /// ── Toggle: Only show unread — syncs desktop header toggle + mobile bottom pill ──
@@ -1056,6 +1068,101 @@ function applyNotifFilters() {
                    (notifReadFilter === 'read'   && item.dataset.unread === 'false');
     item.style.display = (catOk && readOk) ? '' : 'none';
   });
+}
+
+// ── Portal Activity logger ──
+// Call this whenever the user performs a notable action.
+// action  = e.g. "You approved", "You rejected", "You marked as TBC"
+// ref     = e.g. "Quote #23944 – Home Automation"
+function logActivity(action, ref) {
+  const activityBody = document.getElementById('notif-panel-activity');
+  if (!activityBody) return;
+
+  const now     = new Date();
+  const dateStr = now.toLocaleDateString('en-AU', { day: '2-digit', month: 'long', year: 'numeric' });
+  const h = now.getHours(), m = String(now.getMinutes()).padStart(2, '0');
+  const timeStr = `${h % 12 || 12}:${m}${h >= 12 ? 'pm' : 'am'}`;
+
+  const item = document.createElement('div');
+  item.className = 'qp-activity-item qp-activity-item-new';
+  item.innerHTML =
+    `<div class="qp-activity-avatar">MM</div>` +
+    `<div class="qp-activity-content">` +
+      `<div class="qp-activity-action">${action} – ${ref}</div>` +
+      `<div class="qp-activity-time">` +
+        `<span>${dateStr}</span>` +
+        `<span class="qp-activity-time-dot"></span>` +
+        `<span>${timeStr}</span>` +
+      `</div>` +
+    `</div>`;
+
+  activityBody.insertBefore(item, activityBody.firstChild);
+  // Flash highlight
+  requestAnimationFrame(() => item.classList.add('qp-activity-item-flash'));
+  setTimeout(() => item.classList.remove('qp-activity-item-flash'), 1200);
+}
+
+// Helper: extract "Quote #23944 – Home Automation" from a card element
+function cardRef(card) {
+  const num   = card.querySelector('.qr-number')?.textContent.trim()  || '';
+  const title = card.querySelector('.qr-title')?.textContent.trim()   || '';
+  return title ? `${num} – ${title}` : num;
+}
+
+// ── Comment dialog ──
+let commentDialogRef = '';
+
+function openCommentDialog(ref) {
+  commentDialogRef = ref;
+  const overlay = document.getElementById('qp-comment-overlay');
+  const refEl   = document.getElementById('comment-ref-text');
+  const ta      = document.getElementById('comment-textarea');
+  if (refEl) refEl.textContent = ref;
+  if (ta)    ta.value = '';
+  overlay?.classList.add('open');
+  setTimeout(() => ta?.focus(), 120);
+}
+
+function closeCommentDialog() {
+  document.getElementById('qp-comment-overlay')?.classList.remove('open');
+}
+
+function submitComment() {
+  const ta   = document.getElementById('comment-textarea');
+  const note = ta?.value?.trim();
+  // Close even if empty — user may have changed mind
+  closeCommentDialog();
+  if (!note) return;
+
+  // Format timestamp
+  const now     = new Date();
+  const dateStr = now.toLocaleDateString('en-AU', { day: '2-digit', month: 'long', year: 'numeric' });
+  const h       = now.getHours(), m = String(now.getMinutes()).padStart(2, '0');
+  const ampm    = h >= 12 ? 'pm' : 'am';
+  const timeStr = `${h % 12 || 12}:${m}${ampm}`;
+
+  // Build new activity item
+  const item = document.createElement('div');
+  item.className = 'qp-activity-item';
+  item.innerHTML =
+    `<div class="qp-activity-avatar">MM</div>` +
+    `<div class="qp-activity-content">` +
+      `<div class="qp-activity-action">You left a note – ${commentDialogRef}</div>` +
+      `<div class="qp-activity-time">` +
+        `<span>${dateStr}</span>` +
+        `<span class="qp-activity-time-dot"></span>` +
+        `<span>${timeStr}</span>` +
+      `</div>` +
+    `</div>`;
+
+  // Prepend to activity list (newest first)
+  const activityBody = document.getElementById('notif-panel-activity');
+  if (activityBody) {
+    activityBody.insertBefore(item, activityBody.firstChild);
+  }
+
+  // Switch to Portal Activity tab
+  switchNotifTab('activity');
 }
 
 // ── Logo ──

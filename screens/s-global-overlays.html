@@ -20,20 +20,22 @@
       </div>
     </div>
 
-    <!-- Category filter pills -->
+    <!-- Category filter pills — matches main nav menu order -->
     <div class="qp-notif-cat-pills" id="notif-cat-pills">
-      <button class="qp-notif-cat-pill active" data-cat="all" onclick="setNotifCatPill('all',this)">All <span class="cat-count">04</span></button>
-      <button class="qp-notif-cat-pill" data-cat="quote" onclick="setNotifCatPill('quote',this)">Quotes <span class="cat-count">12</span></button>
-      <button class="qp-notif-cat-pill" data-cat="invoice" onclick="setNotifCatPill('invoice',this)">Invoices <span class="cat-count">12</span></button>
-      <button class="qp-notif-cat-pill" data-cat="variation" onclick="setNotifCatPill('variation',this)">Variations <span class="cat-count">12</span></button>
-      <button class="qp-notif-cat-pill" data-cat="declined" onclick="setNotifCatPill('declined',this)">Declined <span class="cat-count">12</span></button>
+      <button class="qp-notif-cat-pill active" data-cat="all"        onclick="setNotifCatPill('all',this)">All <span class="cat-count">07</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="quote"     onclick="setNotifCatPill('quote',this)">Quotes <span class="cat-count">04</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="variation" onclick="setNotifCatPill('variation',this)">Variations <span class="cat-count">12</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="invoice"   onclick="setNotifCatPill('invoice',this)">Invoices <span class="cat-count">03</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="document"  onclick="setNotifCatPill('document',this)">Documents <span class="cat-count">12</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="salesorder" onclick="setNotifCatPill('salesorder',this)">Sales Order <span class="cat-count">12</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="progress"  onclick="setNotifCatPill('progress',this)">Progress <span class="cat-count">12</span></button>
     </div>
 
     <!-- Notifications list -->
     <div class="qp-notif-body" id="notif-panel-notif">
       <div class="qp-notif-section-label">Today</div>
 
-      <!-- Quote notification: handshake icon (Figma fa-sharp-solid handshake) -->
+      <!-- Quote notification (unread) -->
       <div class="qp-notif-item" data-type="quote" data-unread="true">
         <div class="qp-notif-icon">
           <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
@@ -44,13 +46,19 @@
             <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
           </div>
           <div class="qp-notif-sub-row">
-            <div class="qp-notif-sub"><span>Quote #23944</span><span style="margin:0 2px;color:#9c9c9c">·</span><span>Roof Replacement, Level 3</span></div>
-            <span class="qp-notif-time">2 min ago</span>
+            <div class="qp-notif-sub">
+              <span>Quote #23944</span>
+              <span>Roof Replacement, Level 3</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">2 min ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #23944')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Invoice payment notification: file-invoice-dollar icon (Figma fa-sharp-solid file-invoice-dollar) -->
+      <!-- Invoice payment notification (unread) -->
       <div class="qp-notif-item" data-type="invoice" data-unread="true">
         <div class="qp-notif-icon">
           <i class="fa-sharp-solid fa-file-invoice-dollar" style="font-size:14px;"></i>
@@ -61,16 +69,21 @@
             <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
           </div>
           <div class="qp-notif-sub-row">
-            <div class="qp-notif-sub"><span>Invoice #INV-0091</span></div>
-            <span class="qp-notif-time">2 min ago</span>
+            <div class="qp-notif-sub">
+              <span>Invoice #INV-0091</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">2 min ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Invoice #INV-0091')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Invoice due notification -->
+      <!-- Invoice due notification (unread) -->
       <div class="qp-notif-item" data-type="invoice" data-unread="true">
         <div class="qp-notif-icon">
-          <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
+          <i class="fa-sharp-solid fa-file-invoice-dollar" style="font-size:14px;"></i>
         </div>
         <div class="qp-notif-content">
           <div class="qp-notif-title-row">
@@ -78,31 +91,185 @@
             <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
           </div>
           <div class="qp-notif-sub-row">
-            <div class="qp-notif-sub"><span>Invoice #INV-0092</span><span style="margin:0 2px;color:#9c9c9c">·</span><span>Progress Claim 1</span></div>
-            <span class="qp-notif-time">Yesterday</span>
+            <div class="qp-notif-sub">
+              <span>Invoice #INV-0092</span>
+              <span>Progress Claim 1</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Invoice #INV-0092')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Read notification (no dot) — same event as above but already read -->
+      <!-- Invoice due notification (read — no dot) -->
       <div class="qp-notif-item" data-type="invoice" data-unread="false">
         <div class="qp-notif-icon">
-          <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
+          <i class="fa-sharp-solid fa-file-invoice-dollar" style="font-size:14px;"></i>
         </div>
         <div class="qp-notif-content">
           <div class="qp-notif-title-row">
             <span class="qp-notif-title">Invoice due in 3 days</span>
           </div>
           <div class="qp-notif-sub-row">
-            <div class="qp-notif-sub"><span>Invoice #INV-0092</span><span style="margin:0 2px;color:#9c9c9c">·</span><span>Progress Claim 1</span></div>
-            <span class="qp-notif-time">Yesterday</span>
+            <div class="qp-notif-sub">
+              <span>Invoice #INV-0092</span>
+              <span>Progress Claim 1</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Invoice #INV-0092')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote accepted (unread) -->
+      <div class="qp-notif-item" data-type="quote" data-unread="true">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Quote accepted</span>
+            <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Quote #23944</span>
+              <span>Roof Replacement, Level 3</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">1 hour ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #23944')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote to be confirmed (unread) -->
+      <div class="qp-notif-item" data-type="quote" data-unread="true">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Awaiting your confirmation</span>
+            <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Quote #40344</span>
+              <span>Dutch House Security</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">3 hours ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #40344')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote declined (read) -->
+      <div class="qp-notif-item" data-type="quote" data-unread="false">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Quote declined</span>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Quote #40344</span>
+              <span>Dutch House Security</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #40344')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
           </div>
         </div>
       </div>
 
     </div>
 
-    <!-- Mobile-only: floating "Only show unread" pill at bottom (Figma 653-55142) -->
+    <!-- Portal Activity list -->
+    <div class="qp-notif-body" id="notif-panel-activity" style="display:none;">
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">MM</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">You approved – Quote #23944 Roof Replacement, Level 3</div>
+          <div class="qp-activity-time"><span>08 April 2026</span><span class="qp-activity-time-dot"></span><span>03:15pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">TH</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">Tyler Holmes sent – Quote #23944 Roof Replacement, Level 3</div>
+          <div class="qp-activity-time"><span>08 April 2026</span><span class="qp-activity-time-dot"></span><span>11:40am</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">MM</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">You rejected – Quote #40344 Dutch House Security</div>
+          <div class="qp-activity-time"><span>07 April 2026</span><span class="qp-activity-time-dot"></span><span>02:50pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">JE</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">Julie Esparza updated – Quote #23944 Roof Replacement, Level 3</div>
+          <div class="qp-activity-time"><span>07 April 2026</span><span class="qp-activity-time-dot"></span><span>10:05am</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">MM</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">You left a note – Quote #23944 Roof Replacement, Level 3</div>
+          <div class="qp-activity-time"><span>06 April 2026</span><span class="qp-activity-time-dot"></span><span>04:30pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">TH</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">Tyler Holmes created – Variation #VAR-003 Additional Roof Works</div>
+          <div class="qp-activity-time"><span>05 April 2026</span><span class="qp-activity-time-dot"></span><span>01:20pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">MM</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">You marked as TBC – Quote #40344 Dutch House Security</div>
+          <div class="qp-activity-time"><span>04 April 2026</span><span class="qp-activity-time-dot"></span><span>09:45am</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">TH</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">Tyler Holmes updated – Invoice #INV-0092 Progress Claim 1</div>
+          <div class="qp-activity-time"><span>03 April 2026</span><span class="qp-activity-time-dot"></span><span>03:00pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">MM</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">You marked as paid – Invoice #022 Invoice for Aftercare</div>
+          <div class="qp-activity-time"><span>02 April 2026</span><span class="qp-activity-time-dot"></span><span>05:10pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">JE</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">Julie Esparza sent – Sales Order #SO-0012 Roof Replacement</div>
+          <div class="qp-activity-time"><span>01 April 2026</span><span class="qp-activity-time-dot"></span><span>11:00am</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile-only: "Only show unread" pill — always at bottom of sheet (both tabs, Figma 1059-1230) -->
     <div class="qp-notif-mobile-footer" onclick="toggleReadFilter('unread')">
       <button class="qp-notif-unread-pill">
         <span>Only show unread</span>
@@ -110,46 +277,22 @@
       </button>
     </div>
 
-    <!-- Portal Activity list -->
-    <div class="qp-notif-body" id="notif-panel-activity" style="display:none;">
-      <div class="qp-notif-section-label">Recent</div>
-      <div class="qp-activity-item">
-        <div class="qp-activity-avatar">MM</div>
-        <div class="qp-activity-content">
-          <div class="qp-activity-action">You approved – Quote#23944 Roof Replacement, Level 3</div>
-          <div class="qp-activity-time"><span>24 April 2026</span><span class="qp-activity-time-dot"></span><span>03:00pm</span></div>
-        </div>
-      </div>
-      <div class="qp-activity-item">
-        <div class="qp-activity-avatar">JE</div>
-        <div class="qp-activity-content">
-          <div class="qp-activity-action">Julie Esparza sent – Quote#23944 Revision 2</div>
-          <div class="qp-activity-time"><span>24 April 2026</span><span class="qp-activity-time-dot"></span><span>09:15am</span></div>
-        </div>
-      </div>
-      <div class="qp-activity-item">
-        <div class="qp-activity-avatar">MM</div>
-        <div class="qp-activity-content">
-          <div class="qp-activity-action">You left a note – Quote#23944 Roof Replacement, Level 3</div>
-          <div class="qp-activity-time"><span>18 May 2026</span><span class="qp-activity-time-dot"></span><span>09:41am</span></div>
-        </div>
-      </div>
-      <div class="qp-activity-item">
-        <div class="qp-activity-avatar">JE</div>
-        <div class="qp-activity-content">
-          <div class="qp-activity-action">Julie Esparza updated – Quote#23944 Roof Replacement, Level 3</div>
-          <div class="qp-activity-time"><span>10 April 2026</span><span class="qp-activity-time-dot"></span><span>11:00am</span></div>
-        </div>
-      </div>
-      <div class="qp-activity-item">
-        <div class="qp-activity-avatar">MM</div>
-        <div class="qp-activity-content">
-          <div class="qp-activity-action">You marked as paid – Invoice#001 Deposit Invoice</div>
-          <div class="qp-activity-time"><span>28 April 2026</span><span class="qp-activity-time-dot"></span><span>02:10pm</span></div>
-        </div>
-      </div>
-    </div>
+  </div>
+</div>
 
+<!-- ── Comment dialog (bottom sheet) ── -->
+<div class="qp-comment-overlay" id="qp-comment-overlay" onclick="closeCommentDialog()">
+  <div class="qp-comment-dialog" onclick="event.stopPropagation()">
+    <div class="qp-comment-handle"></div>
+    <div class="qp-comment-header">
+      <span class="qp-comment-title">Leave a note</span>
+      <span class="qp-comment-ref" id="comment-ref-text"></span>
+    </div>
+    <textarea class="qp-comment-textarea" id="comment-textarea" placeholder="Write your note here..."></textarea>
+    <div class="qp-comment-actions">
+      <button class="qp-comment-cancel" onclick="closeCommentDialog()">Cancel</button>
+      <button class="qp-comment-done" onclick="submitComment()">Done</button>
+    </div>
   </div>
 </div>
 

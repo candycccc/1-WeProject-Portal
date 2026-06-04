@@ -3449,7 +3449,7 @@ body.dark-mode #skeleton-overlay [style*="border-top:2px solid #dde3ee"] {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 800;
   background: transparent;
 }
-.qp-notif-overlay.open { display: block; }
+.qp-notif-overlay.open { display: block; touch-action: none; }
 .qp-notif-panel {
   position: absolute; right: 36px; top: 50px;
   width: 375px;
@@ -3470,7 +3470,7 @@ body.dark-mode #skeleton-overlay [style*="border-top:2px solid #dde3ee"] {
 }
 .qp-notif-tab {
   flex: 1; padding: 15px 14px 13px;
-  font-size: 14px; font-weight: 600; color: var(--c-text-muted);
+  font-size: 16px; font-weight: 600; color: var(--c-text-muted);
   background: none; border: none; cursor: pointer;
   font-family: inherit; text-align: center;
 }
@@ -3526,6 +3526,8 @@ body.dark-mode #skeleton-overlay [style*="border-top:2px solid #dde3ee"] {
 .qp-notif-body {
   flex: 1; overflow-y: auto;
   padding: 0 12px 20px;
+  touch-action: pan-y; /* allow internal scrolling; JS handles downward pull-to-dismiss */
+  overscroll-behavior: contain; /* prevent scroll chaining to background */
 }
 .qp-notif-section-label {
   display: none; /* hidden — date group labels ("Today", "Recent") removed per UX feedback */
@@ -3570,30 +3572,30 @@ body.dark-mode #skeleton-overlay [style*="border-top:2px solid #dde3ee"] {
 .qp-notif-section-label { display: none; } /* removed per UX feedback — "Today"/"Recent" labels not needed */
 /* Portal Activity tab */
 .qp-activity-item {
-  display: flex; align-items: flex-start;
-  padding: 12px 0; border-bottom: 1px solid var(--c-border-1);
+  display: flex; align-items: center;
+  padding: 0 0 16px; border-bottom: 1px solid #e8e8e8;
   gap: 12px;
 }
-.qp-activity-item:last-child { border-bottom: none; }
+.qp-activity-item:last-child { border-bottom: none; padding-bottom: 0; }
 .qp-activity-avatar {
   width: 32px; height: 32px; border-radius: 50%;
   background: #38435e; color: #fff;
-  font-family: 'Mulish', sans-serif; font-weight: 700; font-size: 11px;
+  font-family: 'Mulish', sans-serif; font-weight: 700; font-size: 12px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; line-height: 1;
 }
-.qp-activity-content { flex: 1; min-width: 0; }
+.qp-activity-content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .qp-activity-action {
-  font-size: 13px; font-weight: 600; color: var(--c-text-1);
+  font-size: 14px; font-weight: 600; color: var(--c-text-1);
   line-height: 1.4; word-break: break-word;
 }
 .qp-activity-time {
-  margin-top: 3px; font-size: 11px; color: var(--c-text-muted);
-  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 500; color: var(--c-text-muted);
+  display: flex; align-items: center; gap: 4px;
 }
 .qp-activity-time-dot {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: var(--c-border-2); flex-shrink: 0;
+  width: 4px; height: 4px;
+  background: #d9d9d9; flex-shrink: 0;
 }
 
 /* ── Notification panel — mobile bottom-sheet (≤320px viewport) ── */
@@ -3637,23 +3639,109 @@ body.mobile-view .qp-notif-cat-pills {
   scrollbar-width: none;
 }
 body.mobile-view .qp-notif-cat-pills::-webkit-scrollbar { display: none; }
-body.mobile-view .qp-notif-cat-pill { padding: 7px 14px; font-size: 13px; flex-shrink: 0; }
-/* Mobile: notification title 16px to match Figma */
+body.mobile-view .qp-notif-cat-pill { padding: 10px 20px; font-size: 16px; flex-shrink: 0; }
+/* Mobile: notification title 16px — Figma 843-23837 */
 body.mobile-view .qp-notif-title { font-size: 16px; }
-/* Mobile: list uses gap-based spacing (24px) — no border dividers */
+/* Mobile: list body — 24px gap, no borders (Figma spec) */
 body.mobile-view .qp-notif-body {
   display: flex; flex-direction: column; gap: 24px;
   padding: 8px 13px 20px;
 }
+/* Mobile: notification items — no padding/border, 8px gap between icon and content */
 body.mobile-view .qp-notif-item {
   padding: 0; border-bottom: none; gap: 8px;
+  align-items: flex-start;
 }
-/* Mobile: content gap 6px to match Figma */
+/* Mobile: content gap 6px */
 body.mobile-view .qp-notif-content { gap: 6px; }
-/* Mobile: icon 30×30 centred */
+/* Mobile: icon 30×30 */
 body.mobile-view .qp-notif-icon { width: 30px; height: 30px; font-size: 14px; }
-/* Mobile: read notification text muted */
-body.mobile-view .qp-notif-item[data-unread="false"] .qp-notif-title { color: var(--c-text-muted); }
+/* Mobile: sub reference text — 10px SemiBold dark (Figma spec) */
+body.mobile-view .qp-notif-sub {
+  font-size: 10px; font-weight: 600; color: var(--c-text-1);
+  flex-wrap: nowrap; gap: 4px;
+}
+/* Mobile: time — 10px Medium muted, right-aligned, 50px (Figma spec) */
+body.mobile-view .qp-notif-time {
+  font-size: 10px; font-weight: 500; color: var(--c-text-muted);
+  min-width: 50px; text-align: right; flex-shrink: 0;
+}
+/* Mobile: time + comment btn grouped on right of sub-row */
+.qp-notif-time-actions {
+  display: flex; align-items: center; gap: 4px; flex-shrink: 0;
+}
+/* Notification titles are always full-colour regardless of read state */
+/* Mobile: Portal Activity body */
+body.mobile-view #notif-panel-activity.qp-notif-body {
+  gap: 14px;
+  padding: 14px 14px 20px;
+}
+
+/* ── Portal Activity — new item flash ── */
+@keyframes activityFlash {
+  0%   { background: rgba(64,89,149,0.10); }
+  100% { background: transparent; }
+}
+.qp-activity-item-flash { animation: activityFlash 1.2s ease-out forwards; border-radius: 8px; }
+
+/* ── Comment button on notification items ── */
+.qp-notif-comment-btn {
+  background: none; border: none; cursor: pointer;
+  padding: 2px; color: var(--c-text-muted);
+  font-size: 13px; line-height: 1; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: color 0.18s;
+}
+.qp-notif-comment-btn:hover,
+.qp-notif-comment-btn:active { color: var(--brand-accent); }
+
+/* ── Comment dialog (bottom sheet) ── */
+.qp-comment-overlay {
+  display: none; position: absolute; inset: 0;
+  background: rgba(0,0,0,0.42); z-index: 820;
+  align-items: flex-end;
+}
+.qp-comment-overlay.open { display: flex; }
+.qp-comment-dialog {
+  background: #fff; border-radius: 20px 20px 0 0;
+  width: 100%; padding: 0 20px 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+  min-height: 52svh; /* occupy at least half the screen */
+}
+.qp-comment-handle {
+  width: 65px; height: 4px;
+  background: var(--c-border-2); border-radius: 100px;
+  margin: 14px auto 0; align-self: center; flex-shrink: 0;
+}
+.qp-comment-title {
+  font-size: 18px; font-weight: 700; color: var(--c-text-1); line-height: 1.2;
+}
+.qp-comment-ref {
+  font-size: 13px; font-weight: 500; color: var(--c-text-muted);
+  display: block; margin-top: 2px;
+}
+.qp-comment-textarea {
+  width: 100%; min-height: 96px; flex: 1;
+  border: 1.5px solid var(--c-border-2); border-radius: 10px;
+  padding: 12px; font-size: 14px; font-family: inherit;
+  color: var(--c-text-1); resize: none; outline: none;
+  box-sizing: border-box; transition: border-color 0.18s;
+}
+.qp-comment-textarea:focus { border-color: var(--brand-accent); }
+.qp-comment-actions { display: flex; gap: 10px; }
+.qp-comment-cancel {
+  flex: 1; height: 48px; border-radius: 100px;
+  background: none; border: 1.5px solid var(--c-border-2);
+  font-size: 16px; font-weight: 600; color: var(--c-text-1);
+  cursor: pointer; font-family: inherit;
+}
+.qp-comment-done {
+  flex: 1; height: 48px; border-radius: 100px;
+  background: var(--brand-accent); border: none;
+  font-size: 16px; font-weight: 600; color: #fff;
+  cursor: pointer; font-family: inherit;
+}
 /* Mobile: floating "Only show unread" pill at bottom of sheet */
 body.mobile-view .qp-notif-mobile-footer {
   display: flex; justify-content: center;
@@ -3726,7 +3814,7 @@ body.mobile-view .payment-noted-modal {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 10px 23px; border-radius: 100px;
   background: #fff; border: 1px solid #e1e1e1;
-  box-shadow: 0 3px 2px #efefef;
+  box-shadow: 0 3px 4px 0 #efefef;
   cursor: pointer; user-select: none;
   font-size: 12px; font-weight: 600; color: #313131;
   font-family: inherit;
@@ -3870,19 +3958,20 @@ body.mobile-view .payment-noted-modal {
 }
 .qp-notif-cat-pills::-webkit-scrollbar { display: none; }
 .qp-notif-cat-pill {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 8px 16px; border-radius: 100px; border: none;
+  display: inline-flex; align-items: flex-start; gap: 4px;
+  padding: 10px 20px; border-radius: 100px; border: none;
   background: transparent; color: var(--c-text-1);
-  font-size: 14px; font-weight: 600;
+  font-size: 16px; font-weight: 600;
   white-space: nowrap; cursor: pointer; font-family: inherit;
   transition: background .15s, box-shadow .15s; flex-shrink: 0;
+  filter: drop-shadow(0px 3px 2px #efefef);
 }
 .qp-notif-cat-pill:hover { background: var(--c-hover); }
 .qp-notif-cat-pill.active {
-  background: var(--c-surface); border: 1px solid var(--c-border-2);
-  box-shadow: 0 3px 4px var(--c-shadow);
+  background: #fff; border: 1px solid #e1e1e1;
+  box-shadow: 0 3px 4px 0 #efefef; filter: none;
 }
-.qp-notif-cat-pill .cat-count { font-size: 9px; font-weight: 700; }
+.qp-notif-cat-pill .cat-count { font-size: 9px; font-weight: 700; line-height: 1; margin-top: 2px; }
 
 /* ── Invoice rows — Figma 724-29474 vertical card layout ── */
 .inv-row {
