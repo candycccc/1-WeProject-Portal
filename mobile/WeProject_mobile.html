@@ -77,6 +77,7 @@
 .fa-envelope::before            { content: "\f0e0"; }
 .fa-phone::before               { content: "\f095"; }
 .fa-chevron-down::before        { content: "\f078"; }
+.fa-comment-dots::before        { content: "\f4ad"; }
 /* ── Brand tokens ── */
 :root {
   --brand-accent:  #405995;
@@ -1843,9 +1844,10 @@ body.mobile-view .qp-nav-dropdown {
 /* No backdrop — dropdown shadow provides enough separation */
 .qp-nav-alert {
   display: inline-flex; align-items: center; gap: 4px;
-  background: rgba(207,52,0,0.1); border-radius: 2px;
-  padding: 3px 6px; margin-left: 8px;
+  background: #ffe6dd; border-radius: 2px;
+  padding: 3px 6px; margin-left: auto;
   font-size: 12px; font-weight: 600; color: var(--c-text-1);
+  white-space: nowrap; flex-shrink: 0;
 }
 
 /* Dropdown: user menu */
@@ -2765,12 +2767,16 @@ body.mobile-view #s-quotes .qp-project-card {
   flex-direction: column; min-height: unset; flex: none; width: 100%;
 }
 body.mobile-view #s-quotes .qp-project-left {
-  flex: none; padding: 22px 14px 22px;
-  flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px;
+  flex: none; padding: 16px 14px 18px;
+  flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 12px;
 }
-body.mobile-view #s-quotes .qp-total-block { display: none; }
-body.mobile-view #s-quotes .qp-project-name { font-size: 24px; line-height: 1.25; }
-body.mobile-view #s-quotes .qp-project-meta { font-size: 12px; margin-top: 6px; }
+body.mobile-view #s-quotes .qp-total-block {
+  display: flex; flex-direction: column; align-items: flex-end; text-align: right; flex-shrink: 0;
+}
+body.mobile-view #s-quotes .qp-total-block .qp-total-value { font-size: 24px; font-weight: 600; color: var(--c-text-1); }
+body.mobile-view #s-quotes .qp-total-block .qp-total-label { font-size: 10px; font-weight: 500; color: var(--c-text-muted); max-width: 110px; line-height: 1.3; text-align: right; }
+body.mobile-view #s-quotes .qp-project-name { font-size: 18px; line-height: 1.3; max-width: 160px; }
+body.mobile-view #s-quotes .qp-project-meta { display: none; }
 body.mobile-view #s-quotes .qp-project-right {
   border-left: none; border-top: none;
   flex: none; padding: 16px 14px 14px; gap: 8px;
@@ -2842,12 +2848,16 @@ body.mobile-view #s-purchase-order .qp-project-card {
   flex-direction: column; min-height: unset; flex: none; width: 100%;
 }
 body.mobile-view #s-purchase-order .qp-project-left {
-  flex: none; padding: 22px 14px 22px;
-  flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px;
+  flex: none; padding: 16px 14px 18px;
+  flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 12px;
 }
-body.mobile-view #s-purchase-order .qp-total-block { display: none; }
-body.mobile-view #s-purchase-order .qp-project-name { font-size: 24px; line-height: 1.25; }
-body.mobile-view #s-purchase-order .qp-project-meta { font-size: 12px; margin-top: 6px; }
+body.mobile-view #s-purchase-order .qp-total-block {
+  display: flex; flex-direction: column; align-items: flex-end; text-align: right; flex-shrink: 0;
+}
+body.mobile-view #s-purchase-order .qp-total-block .qp-total-value { font-size: 24px; font-weight: 600; color: var(--c-text-1); }
+body.mobile-view #s-purchase-order .qp-total-block .qp-total-label { font-size: 10px; font-weight: 500; color: var(--c-text-muted); max-width: 110px; line-height: 1.3; text-align: right; }
+body.mobile-view #s-purchase-order .qp-project-name { font-size: 18px; line-height: 1.3; max-width: 160px; }
+body.mobile-view #s-purchase-order .qp-project-meta { display: none; }
 body.mobile-view #s-purchase-order .qp-project-right {
   border-left: none; border-top: none; flex: none; padding: 16px 14px 14px; gap: 8px;
 }
@@ -3060,12 +3070,16 @@ body.mobile-view #s-invoices .qp-project-card {
   flex-direction: column; min-height: unset; flex: none; width: 100%;
 }
 body.mobile-view #s-invoices .qp-project-left {
-  flex: none; padding: 22px 14px 22px;
-  flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px;
+  flex: none; padding: 16px 14px 18px;
+  flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 12px;
 }
-body.mobile-view #s-invoices .qp-total-block { display: none; }
-body.mobile-view #s-invoices .qp-project-name { font-size: 24px; line-height: 1.25; }
-body.mobile-view #s-invoices .qp-project-meta { font-size: 12px; margin-top: 6px; }
+body.mobile-view #s-invoices .qp-total-block {
+  display: flex; flex-direction: column; align-items: flex-end; text-align: right; flex-shrink: 0;
+}
+body.mobile-view #s-invoices .qp-total-block .qp-total-value { font-size: 24px; font-weight: 600; color: var(--c-text-1); }
+body.mobile-view #s-invoices .qp-total-block .qp-total-label { font-size: 10px; font-weight: 500; color: var(--c-text-muted); max-width: 110px; line-height: 1.3; text-align: right; }
+body.mobile-view #s-invoices .qp-project-name { font-size: 18px; line-height: 1.3; max-width: 160px; }
+body.mobile-view #s-invoices .qp-project-meta { display: none; }
 body.mobile-view #s-invoices .qp-project-right {
   border-left: none; border-top: none;
   flex: none; padding: 16px 14px 14px; gap: 8px;
@@ -3965,6 +3979,27 @@ body.mobile-view .qp-notif-overlay {
   width: 100%; height: 100%;
   overflow: hidden;
 }
+/* NYA dialog — inside #app-content, override fixed→absolute so overflow:clip doesn't hide it */
+body.mobile-view .nya-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
+/* Pay Now modal — inside #app-content, override fixed→absolute so overflow:clip doesn't hide it */
+body.mobile-view .paynow-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
+/* Payment Noted modal — same fix */
+body.mobile-view .payment-noted-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
 /* Notification bottom sheet: height uses mobile frame height, not browser viewport */
 body.mobile-view .qp-notif-panel {
   min-height: unset;
@@ -4617,6 +4652,12 @@ body.dark-mode .payment-noted-done:hover { opacity: 0.88; }
 .var-status-tbc     { background: #eaeaea; color: #313131; }
 .var-status-accepted{ background: #ddffe1; color: #313131; }
 .var-status-declined{ background: #f6f6f6; color: #7a7a7a; }
+/* Accepted value breakdown rows inside var-card-left */
+.var-breakdown { margin-top: 10px; display: flex; flex-direction: column; gap: 0; }
+.var-breakdown-row { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; padding: 4px 0; border-bottom: 1px solid var(--c-border); }
+.var-breakdown-row:last-child { border-bottom: none; }
+.var-breakdown-lbl { font-size: 10px; color: var(--c-text-2); line-height: 1.3; }
+.var-breakdown-amt { font-size: 11px; font-weight: 600; color: var(--c-text-1); white-space: nowrap; }
 
 /* ── Active nav item highlight ── */
 .qp-nav-item-active {
@@ -4907,6 +4948,126 @@ body.mobile-view #app-content {
   box-shadow: none !important;
   border-radius: 0 !important;
 }
+
+/* ── Needs Your Attention dialog ── */
+.nya-overlay {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+}
+.nya-overlay.open { display: flex; }
+.nya-dialog {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 24px rgba(0,0,0,0.25);
+  width: 100%; max-width: 397px;
+  padding: 20px 14px 24px;
+  font-family: var(--brand-font);
+  animation: nya-pop 0.25s ease forwards;
+}
+@keyframes nya-pop {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.nya-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.nya-title { font-size: 16px; font-weight: 600; color: #000; }
+.nya-counter { font-size: 16px; font-weight: 600; color: #000; }
+.nya-progress {
+  height: 5px; background: #eee; border-radius: 100px;
+  overflow: hidden; margin-bottom: 18px;
+}
+.nya-progress-fill { height: 5px; background: #356098; border-radius: 100px; }
+.nya-status-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.nya-status-badge {
+  background: rgba(255,149,0,0.15); border-radius: 2px;
+  padding: 3px 6px;
+  font-size: 12px; font-weight: 600; color: #000;
+}
+.nya-valid-date { font-size: 12px; font-weight: 600; color: #ff9500; }
+.nya-ref-row { display: flex; gap: 8px; margin-bottom: 6px; }
+.nya-ref-row span { font-size: 12px; font-weight: 600; color: #313131; }
+.nya-item-title {
+  font-size: 20px; font-weight: 600; color: #313131;
+  line-height: 1.3; margin-bottom: 18px;
+}
+.nya-amounts { margin-bottom: 12px; }
+.nya-amount-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 12px; margin-bottom: 11px;
+  border-bottom: 1px solid #e4e4e4;
+  font-size: 16px; font-weight: 600; color: #313131;
+}
+.nya-amount-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 8px; }
+.nya-amount-positive { color: #009113; }
+.nya-actions {
+  display: flex;
+  border: 1px solid #d9d9d9; border-radius: 4px;
+  overflow: hidden; margin-bottom: 10px;
+}
+.nya-action-btn {
+  flex: 1; height: 42px;
+  background: #f9f9f9; border: none;
+  border-right: 1px solid #d9d9d9;
+  font-family: var(--brand-font);
+  font-size: 16px; font-weight: 600; color: #313131;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  padding: 6px 10px;
+}
+.nya-action-btn:last-child { border-right: none; }
+.nya-action-btn.nya-icon-btn { flex: 0 0 54px; font-size: 14px; }
+.nya-action-btn:active { background: #efefef; }
+.nya-view-btn {
+  width: 100%; height: 41px;
+  background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 4px;
+  font-family: var(--brand-font);
+  font-size: 16px; font-weight: 600; color: #313131;
+  cursor: pointer; margin-top: 10px; margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.nya-view-btn:active { background: #efefef; }
+.nya-remind-btn {
+  display: block; width: 100%;
+  background: none; border: none;
+  font-family: var(--brand-font);
+  font-size: 16px; font-weight: 600; color: #313131;
+  text-decoration: underline; cursor: pointer; text-align: center;
+}
+/* NYA item 02 — Invoice */
+.nya-status-dot-row { display: flex; align-items: center; gap: 4px; }
+.nya-status-dot { width: 7px; height: 7px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+.nya-status-dot-label { font-size: 12px; font-weight: 600; color: #313131; }
+.nya-inv-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 8px; margin-bottom: 16px;
+}
+.nya-inv-left { flex: 1; min-width: 0; }
+.nya-inv-title { font-size: 18px; font-weight: 600; color: #313131; }
+.nya-inv-ref { font-size: 12px; font-weight: 500; color: #313131; margin-top: 2px; }
+.nya-inv-right { flex: 1; text-align: right; }
+.nya-inv-amount { font-size: 18px; font-weight: 600; color: #303030; white-space: nowrap; }
+.nya-inv-vat { font-size: 12px; color: #9c9c9c; }
+.nya-payment-lbl { font-size: 12px; font-weight: 600; color: #313131; margin-bottom: 8px; }
+.nya-seg-bar { display: flex; gap: 6px; height: 12px; margin-bottom: 8px; }
+.nya-seg-fill { flex: 1; height: 12px; border-radius: 2px; }
+.nya-seg-legend { display: flex; justify-content: space-between; margin-bottom: 18px; }
+.nya-seg-legend-side { display: flex; flex-direction: column; gap: 2px; }
+.nya-seg-legend-row { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: #313131; }
+.nya-seg-dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+.nya-seg-amount { font-size: 12px; font-weight: 700; color: #313131; padding-left: 12px; }
+.nya-seg-legend-side:last-child .nya-seg-amount { padding-left: 0; text-align: right; }
+.nya-seg-legend-side:last-child .nya-seg-legend-row { justify-content: flex-end; }
+.nya-two-btns { display: flex; gap: 17px; margin-top: 10px; margin-bottom: 16px; }
+.nya-two-btns .nya-view-btn { flex: 1; margin: 0; }
 
 </style>
 <script id="mobile-standalone-vars">
@@ -5357,25 +5518,37 @@ body.mobile-view #app-content {
     <i class="fa-solid fa-handshake detail-nav-icon"></i>
     <span class="detail-nav-label">Quotes</span>
     <div class="detail-nav-badge">
-      <svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
       <span>2 Actions Required</span>
     </div>
   </div>
   <div class="detail-nav-card" onclick="go('variations')">
     <i class="fa-solid fa-file-plus detail-nav-icon"></i>
     <span class="detail-nav-label">Variations</span>
+    <div class="detail-nav-badge">
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
+      <span>2 Awaiting Approval</span>
+    </div>
   </div>
   <div class="detail-nav-card" onclick="go('invoices')">
     <i class="fa-solid fa-file-invoice detail-nav-icon"></i>
     <span class="detail-nav-label">Invoices</span>
-  </div>
-  <div class="detail-nav-card" onclick="go('documents')">
-    <i class="fa-solid fa-files detail-nav-icon"></i>
-    <span class="detail-nav-label">Documents</span>
+    <div class="detail-nav-badge">
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
+      <span>2 Payment Due</span>
+    </div>
   </div>
   <div class="detail-nav-card" onclick="go('purchase-order')">
     <i class="fa-sharp-solid fa-file-invoice detail-nav-icon"></i>
     <span class="detail-nav-label">Sales Order</span>
+    <div class="detail-nav-badge">
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
+      <span>1 Awaiting Approval</span>
+    </div>
+  </div>
+  <div class="detail-nav-card" onclick="go('documents')">
+    <i class="fa-solid fa-files detail-nav-icon"></i>
+    <span class="detail-nav-label">Documents</span>
   </div>
   <div class="detail-nav-card" onclick="go('warranty')" style="display:none;">
     <i class="fa-sharp-solid fa-shield-check detail-nav-icon"></i>
@@ -5393,9 +5566,7 @@ body.mobile-view #app-content {
       <!-- Quotes -->
       <div class="tile" onclick="go('quotes')">
         <div class="tile-alert">
-          <svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400">
-            <path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/>
-          </svg>
+          <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
           <span>2 Actions Required</span>
         </div>
         <div class="tile-label">
@@ -5407,9 +5578,7 @@ body.mobile-view #app-content {
       <!-- Variations -->
       <div class="tile" onclick="go('variations')">
         <div class="tile-alert">
-          <svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400">
-            <path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/>
-          </svg>
+          <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
           <span>2 Actions Required</span>
         </div>
         <div class="tile-label">
@@ -5514,48 +5683,36 @@ body.mobile-view #app-content {
     <!-- Nav dropdown -->
     <div class="qp-nav-dropdown" id="nav-dropdown">
       <div class="qp-nav-item" onclick="closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Quotes
-        <span class="qp-nav-alert">
-          <svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>
-          2 Actions Required
-        </span>
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Actions Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
-        </svg>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/>
-        </svg>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         Invoices
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Payment Due</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>1 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-          <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/>
-        </svg>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
         Documents
       </div>
-      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        Warranty
-      </div>
       <div class="qp-nav-item" onclick="go('progress');closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-        </svg>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Progress
       </div>
-      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()" style="display:none;">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
-        </svg>
-        Sales Order
+      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()" style="display:none;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Warranty
       </div>
     </div>
 
@@ -5588,80 +5745,68 @@ body.mobile-view #app-content {
 
     <!-- Left: project + payment summary -->
     <div class="qp-card qp-project-card">
+      <!-- Payment Summary: Quote #21887 (only accepted quote) = $162,000 (Rev 3)
+           Paid $81,000 (50%) + To pay now $18,200 (11%) + Upcoming $62,800 (39%) = $162,000 -->
       <div class="qp-project-left">
         <div>
-          <div class="qp-project-name"><span class="brand-project-name">Ocean Palm Residences</span></div>
+          <div class="qp-project-name">Total Project<br>Accepted Value</div>
           <div class="qp-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
         </div>
         <div class="qp-total-block">
-          <div class="qp-total-value">$850,000.00</div>
-          <div class="qp-total-label">Total Quote Value (excl. Tax)</div>
+          <div class="qp-total-value">$162,000.00</div>
+          <div class="qp-total-label">Total Value (excl. Tax)</div>
         </div>
       </div>
       <div class="qp-project-right">
         <div class="qp-payment-summary-label">Payment Summary</div>
         <div class="qp-summary-amounts">
           <div class="qp-amounts-left">
-            <div class="qp-payment-amount">$650,000.00</div>
-            <div class="qp-payment-of">of $850,000.02 Paid so far</div>
+            <div class="qp-payment-amount">$81,000.00</div>
+            <div class="qp-payment-of">of $162,000.00 Paid so far</div>
           </div>
           <div class="qp-total-block-mobile">
-            <div class="qp-total-value">$850,000.00</div>
-            <div class="qp-total-label">Total Quote Value (excl. Tax)</div>
+            <div class="qp-total-value">$162,000.00</div>
+            <div class="qp-total-label">Accepted Quote Value (excl. Tax)</div>
           </div>
         </div>
         <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+          <div class="qp-progress-bar-fill" style="width:50%;background:#009113;"></div>
         </div>
         <div class="qp-progress-legend">
           <div class="qp-legend-item">
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:#009113;"></div> Paid so far
             </div>
-            <div class="qp-legend-value">$650,000.00</div>
+            <div class="qp-legend-value">$81,000.00</div>
           </div>
           <div class="qp-legend-item">
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now
             </div>
-            <div class="qp-legend-value">$15,000.00</div>
+            <div class="qp-legend-value">$18,200.00</div>
           </div>
           <div class="qp-legend-item" style="align-items:flex-end;">
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:var(--c-border-1);"></div> Upcoming
             </div>
-            <div class="qp-legend-value">$0.00</div>
+            <div class="qp-legend-value">$62,800.00</div>
           </div>
         </div>
+        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;flex:none;" onclick="openPayNowModal('Quote #21887','$162,000.00','Accepted Quote Payment')">Pay Now</button>
       </div>
     </div>
 
     <!-- Right: payment details (bank) -->
-    <div class="qp-card qp-payment-card">
-      <div class="qp-payment-card-title">Payment details</div>
-      <div class="qp-bank-name">LCR Integrated Systems</div>
-      <div class="qp-bank-address">350 Fifth Ave, New York, NY 10118</div>
-      <div class="qp-bank-details" style="margin-top:auto;">
-        <div class="qp-bank-field">
-          <label>Routing No.</label>
-          <span>021000021</span>
-        </div>
-        <div class="qp-bank-field">
-          <label>Account Number</label>
-          <span>000000</span>
-        </div>
-      </div>
-    </div>
 
   </div>
 
   <!-- ── Filter tabs ── -->
   <div class="qp-filter-tabs">
     <button class="qp-filter-tab active" onclick="filterQuotes(this)">All <span class="qp-filter-count">04</span></button>
-    <button class="qp-filter-tab" onclick="filterQuotes(this)">Pending your review <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterQuotes(this)">To be confirmed <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterQuotes(this)">Accepted <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterQuotes(this)">Declined <span class="qp-filter-count">12</span></button>
+    <button class="qp-filter-tab" onclick="filterQuotes(this)">Pending your review <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterQuotes(this)">To be confirmed <span class="qp-filter-count">02</span></button>
+    <button class="qp-filter-tab" onclick="filterQuotes(this)">Accepted <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterQuotes(this)">Declined <span class="qp-filter-count">01</span></button>
     <label class="qp-search-pill">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -5678,8 +5823,8 @@ body.mobile-view #app-content {
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGRyb3Agc2hhZG93IC0tPgogIDxyZWN0IHg9IjIwIiB5PSIxMyIgd2lkdGg9IjM4IiBoZWlnaHQ9IjU4IiByeD0iNSIgZmlsbD0iI0Q4RDhEOCIvPgogIDwhLS0gc3dpdGNoIGJvZHkgLS0+CiAgPHJlY3QgeD0iMTciIHk9IjEwIiB3aWR0aD0iMzgiIGhlaWdodD0iNTgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSB1cHBlciBwYWRkbGUgLS0+CiAgPHJlY3QgeD0iMjEiIHk9IjE0IiB3aWR0aD0iMjgiIGhlaWdodD0iMjMiIHJ4PSIzIiBmaWxsPSIjRjNGM0YzIi8+CiAgPCEtLSBsb3dlciBwYWRkbGUgLS0+CiAgPHJlY3QgeD0iMjEiIHk9IjM5IiB3aWR0aD0iMjgiIGhlaWdodD0iMjIiIHJ4PSIzIiBmaWxsPSIjRkFGQUZBIi8+CiAgPCEtLSB2ZXJ0aWNhbCBzbGlkZXIgdHJhY2sgLS0+CiAgPHJlY3QgeD0iNDQiIHk9IjE1IiB3aWR0aD0iMy41IiBoZWlnaHQ9IjIyIiByeD0iMS43NSIgZmlsbD0iI0RFREVERSIvPgogIDwhLS0gc2xpZGVyIGtub2IgLS0+CiAgPHJlY3QgeD0iNDIuNSIgeT0iMTUiIHdpZHRoPSI2LjUiIGhlaWdodD0iOSIgcng9IjMuMjUiIGZpbGw9IiNCOEI4QjgiLz4KICA8IS0tIExFRCBpbmRpY2F0b3Igc3RyaXAgLS0+CiAgPHJlY3QgeD0iMjIiIHk9IjY1IiB3aWR0aD0iMjIiIGhlaWdodD0iMS41IiByeD0iLjc1IiBmaWxsPSIjRThFOEU4Ii8+CiAgPGNpcmNsZSBjeD0iMjgiIGN5PSI2OC41IiByPSIxLjgiIGZpbGw9IiM0ODc4RTgiIG9wYWNpdHk9Ii44NSIvPgogIDxjaXJjbGUgY3g9IjM0IiBjeT0iNjguNSIgcj0iMS44IiBmaWxsPSIjNDg3OEU4IiBvcGFjaXR5PSIuNSIvPgogIDxjaXJjbGUgY3g9IjQwIiBjeT0iNjguNSIgcj0iMS44IiBmaWxsPSIjREVERURFIi8+CiAgPCEtLSBicmFuZCB0ZXh0IGhpbnQgLS0+CiAgPHJlY3QgeD0iMjIiIHk9IjYyIiB3aWR0aD0iMTQiIGhlaWdodD0iMS4yIiByeD0iLjYiIGZpbGw9IiNEMEQwRDAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Quote #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Quote #22018</span>
+          <span class="qr-revision">Revision 2</span>
         </div>
         <div class="qr-title">Home Automation</div>
       </div>
@@ -5690,8 +5835,8 @@ body.mobile-view #app-content {
       <!-- No payment panel for pending -->
       <div></div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$185,000.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$185,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 2</span></div></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn" onclick="openCommentDialog(cardRef(this.closest('.qr')))">
@@ -5709,10 +5854,10 @@ body.mobile-view #app-content {
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Quote #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Quote #22341</span>
+          <span class="qr-revision">Revision 1</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Smart Lighting & Controls</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-tbc">To be confirmed</span>
@@ -5720,8 +5865,8 @@ body.mobile-view #app-content {
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$245,000.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$265,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 1</span></div></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn" onclick="openCommentDialog(cardRef(this.closest('.qr')))">
@@ -5739,10 +5884,10 @@ body.mobile-view #app-content {
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Quote #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Quote #22019</span>
+          <span class="qr-revision">Revision 2</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Structured Cabling & Network</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-tbc">To be confirmed</span>
@@ -5750,8 +5895,8 @@ body.mobile-view #app-content {
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$225,000.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$218,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 2</span></div></div>
       <!-- No action buttons for overdue -->
       <div></div>
     </div>
@@ -5761,10 +5906,10 @@ body.mobile-view #app-content {
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Quote #23944</span>
+          <span class="qr-number">Quote #21887</span>
           <span class="qr-revision">Revision 3</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Audio Visual Systems</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-accepted">Accepted</span>
@@ -5774,31 +5919,31 @@ body.mobile-view #app-content {
       <div class="qr-payment">
         <div class="qr-payment-label">Payment Progress</div>
         <div class="qr-payment-amount-row">
-          <span class="qr-payment-big">$10,000.00</span>
-          <span class="qr-payment-of">of $20,000.00 Paid so far</span>
+          <span class="qr-payment-big">$81,000.00</span>
+          <span class="qr-payment-of">of $162,000.00 Paid so far</span>
         </div>
         <div class="qr-payment-bar">
           <div class="qr-payment-bar-seg seg-paid" style="width:50%;"></div>
-          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:11%;"></div>
         </div>
         <div class="qr-payment-legend">
           <div class="qr-legend-item">
             <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div>Paid so far <span>50%</span></div>
-            <div class="qr-legend-val">$10,000.00</div>
+            <div class="qr-legend-val">$81,000.00</div>
           </div>
           <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div>To pay now <span>0%</span></div>
-            <div class="qr-legend-val">$0.00</div>
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div>To pay now <span>11%</span></div>
+            <div class="qr-legend-val">$18,200.00</div>
           </div>
           <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#eaeaea;"></div>Upcoming <span>50%</span></div>
-            <div class="qr-legend-val">$10,000.00</div>
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#eaeaea;"></div>Upcoming <span>39%</span></div>
+            <div class="qr-legend-val">$62,800.00</div>
           </div>
         </div>
       </div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$145,000.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$162,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
       <!-- No action buttons for accepted -->
       <div></div>
     </div>
@@ -5808,10 +5953,10 @@ body.mobile-view #app-content {
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Quote #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Quote #21654</span>
+          <span class="qr-revision">Revision 1</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Security & Access Control</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-declined">Declined</span>
@@ -5819,8 +5964,8 @@ body.mobile-view #app-content {
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$92,000.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$92,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 1</span></div></div>
       <!-- No action buttons for declined -->
       <div></div>
     </div>
@@ -5858,18 +6003,7 @@ body.mobile-view #app-content {
     </div>
   </div>
 
-</div>
-<div class="detail-sidebar-mob">
-  <div class="dsm-left">
-    <div class="dsm-name"><span class="brand-pm-name">Tyler Holmes</span></div>
-    <div class="dsm-role"><span class="brand-pm-role">Project Manager</span></div>
-  </div>
-  <div class="dsm-right">
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-envelope"></i><a href="mailto:demo@example.com">demo@example.com</a></div>
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-phone"></i><a href="tel:+15551234567">+1 (555) 123-4567</a></div>
-  </div>
-</div>
-</div>
+</div></div>
 
 
 
@@ -5892,31 +6026,33 @@ body.mobile-view #app-content {
       <div class="qp-nav-item" onclick="go('quotes');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Quotes
-        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>2 Actions Required</span>
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Actions Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         Invoices
       </div>
+      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>1 Awaiting Approval</span>
+      </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
         Documents
-      </div>
-      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        Warranty
       </div>
       <div class="qp-nav-item" onclick="go('progress');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Progress
       </div>
-      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()" style="display:none;">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        Sales Order
+      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()" style="display:none;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Warranty
       </div>
     </div>
     <div class="qp-topbar-right">
@@ -5943,12 +6079,12 @@ body.mobile-view #app-content {
     <div class="qp-card qp-project-card">
       <div class="qp-project-left">
         <div>
-          <div class="qp-project-name"><span class="brand-project-name">Ocean Palm Residences</span></div>
+          <div class="qp-project-name">Total Project<br>Accepted Value</div>
           <div class="qp-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
         </div>
         <div class="qp-total-block">
           <div class="qp-total-value">$850,000.00</div>
-          <div class="qp-total-label">Total Quote Value (excl. Tax)</div>
+          <div class="qp-total-label">Total Value (excl. Tax)</div>
         </div>
       </div>
       <div class="qp-project-right">
@@ -5959,7 +6095,7 @@ body.mobile-view #app-content {
         <div class="qp-summary-amounts">
           <div class="qp-amounts-left">
             <div class="qp-payment-amount">$650,000.00</div>
-            <div class="qp-payment-of">of $850,000.02 Paid so far</div>
+            <div class="qp-payment-of">of $850,000.00 Paid so far</div>
           </div>
           <div class="qp-total-block-mobile">
             <div class="qp-total-value">$850,000.00</div>
@@ -5980,32 +6116,16 @@ body.mobile-view #app-content {
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now
             </div>
-            <div class="qp-legend-value">$15,000.00</div>
+            <div class="qp-legend-value">$18,000.00</div>
           </div>
           <div class="qp-legend-item" style="align-items:flex-end;">
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:var(--c-border-1);"></div> Upcoming
             </div>
-            <div class="qp-legend-value">$15,000.00</div>
+            <div class="qp-legend-value">$18,000.00</div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Right: payment details (bank) -->
-    <div class="qp-card qp-payment-card">
-      <div class="qp-payment-card-title">Payment details</div>
-      <div class="qp-bank-name">LCR Integrated Systems</div>
-      <div class="qp-bank-address">350 Fifth Ave, New York, NY 10118</div>
-      <div class="qp-bank-details" style="margin-top:auto;">
-        <div class="qp-bank-field">
-          <label>Routing No.</label>
-          <span>021000021</span>
-        </div>
-        <div class="qp-bank-field">
-          <label>Account Number</label>
-          <span>000000</span>
-        </div>
+        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;flex:none;" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay Now</button>
       </div>
     </div>
 
@@ -6058,7 +6178,7 @@ body.mobile-view #app-content {
         <div class="inv-payment-label">Payment Progress</div>
         <div class="inv-payment-amount-row">
           <div class="inv-payment-big">$650,000.00</div>
-          <div class="inv-payment-of">of $850,000.02 Paid so far</div>
+          <div class="inv-payment-of">of $850,000.00 Paid so far</div>
         </div>
         <div class="inv-payment-bar">
           <div class="inv-payment-bar-fill" style="width:76%;background:#009113;"></div>
@@ -6221,18 +6341,7 @@ body.mobile-view #app-content {
     </div>
   </div>
 
-</div>
-<div class="detail-sidebar-mob">
-  <div class="dsm-left">
-    <div class="dsm-name"><span class="brand-pm-name">Tyler Holmes</span></div>
-    <div class="dsm-role"><span class="brand-pm-role">Project Manager</span></div>
-  </div>
-  <div class="dsm-right">
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-envelope"></i><a href="mailto:demo@example.com">demo@example.com</a></div>
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-phone"></i><a href="tel:+15551234567">+1 (555) 123-4567</a></div>
-  </div>
-</div>
-</div>
+</div></div>
 
 
 
@@ -6255,7 +6364,7 @@ body.mobile-view #app-content {
       <div class="qp-nav-item" onclick="go('quotes');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Quotes
-        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>2 Actions Required</span>
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Actions Required</span>
       </div>
       <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
@@ -6264,22 +6373,24 @@ body.mobile-view #app-content {
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         Invoices
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Payment Due</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>1 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
         Documents
       </div>
-      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        Warranty
-      </div>
       <div class="qp-nav-item" onclick="go('progress');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Progress
       </div>
-      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()" style="display:none;">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        Sales Order
+      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()" style="display:none;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Warranty
       </div>
     </div>
     <div class="qp-topbar-right">
@@ -6306,6 +6417,7 @@ body.mobile-view #app-content {
       <div class="var-card-left">
         <div>
           <div class="var-summary-title">Total Project Accepted Value</div>
+          <!-- Total = Quote Accepted ($162,000 — #21887 Rev 3) + Variation Accepted ($45,000 — #30145) + Sales Order Accepted ($619,800) -->
         </div>
         <div class="var-total-block" style="text-align:right;">
           <div class="var-total-value" style="font-size:20px;font-weight:600;color:var(--c-text-1);">$850,000.00</div>
@@ -6317,10 +6429,10 @@ body.mobile-view #app-content {
         <div class="qp-summary-amounts">
           <div class="qp-amounts-left">
             <div class="qp-payment-amount">$650,000.00</div>
-            <div class="qp-payment-of">of $850,000.02 Paid so far</div>
+            <div class="qp-payment-of">of $850,000.00 Paid so far</div>
           </div>
           <div class="qp-total-block-mobile">
-            <div class="qp-total-value">$850,000.00</div>
+            <div class="qp-total-value">$85,900.00</div>
             <div class="qp-total-label">Total Variation Value</div>
           </div>
         </div>
@@ -6334,13 +6446,14 @@ body.mobile-view #app-content {
           </div>
           <div class="qp-legend-item">
             <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now</div>
-            <div class="qp-legend-value">$15,000.00</div>
+            <div class="qp-legend-value">$18,000.00</div>
           </div>
           <div class="qp-legend-item">
             <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#eaeaea;"></div> Upcoming</div>
-            <div class="qp-legend-value">$15,000.00</div>
+            <div class="qp-legend-value">$182,000.00</div>
           </div>
         </div>
+        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;flex:none;" onclick="openPayNowModal('Variation #30145','$850,000.00','Project Payment')">Pay Now</button>
       </div>
     </div>
     <!-- Variation Summary card -->
@@ -6348,17 +6461,17 @@ body.mobile-view #app-content {
       <div class="var-card-left">
         <div class="var-summary-title">Variation Summary</div>
         <div style="margin-top:4px;">
-          <div class="var-status-row var-status-pending"><span>Pending your review</span><span>03</span></div>
-          <div class="var-status-row var-status-tbc"><span>To be confirmed</span><span>03</span></div>
-          <div class="var-status-row var-status-accepted"><span>Accepted</span><span>03</span></div>
-          <div class="var-status-row var-status-declined"><span>Declined</span><span>03</span></div>
+          <div class="var-status-row var-status-pending"><span>Pending your review</span><span>01</span></div>
+          <div class="var-status-row var-status-tbc"><span>To be confirmed</span><span>02</span></div>
+          <div class="var-status-row var-status-accepted"><span>Accepted</span><span>01</span></div>
+          <div class="var-status-row var-status-declined"><span>Declined</span><span>01</span></div>
         </div>
       </div>
       <div class="qp-project-right">
         <div class="qp-payment-summary-label">Payment Summary</div>
         <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
           <div class="qp-payment-amount">$650,000.00</div>
-          <div class="qp-payment-of">of $850,000.02 Paid so far</div>
+          <div class="qp-payment-of">of $850,000.00 Paid so far</div>
         </div>
         <div class="qp-progress-bar-outer">
           <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
@@ -6370,28 +6483,12 @@ body.mobile-view #app-content {
           </div>
           <div class="qp-legend-item">
             <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now</div>
-            <div class="qp-legend-value">$15,000.00</div>
+            <div class="qp-legend-value">$18,000.00</div>
           </div>
           <div class="qp-legend-item">
             <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#eaeaea;"></div> Upcoming</div>
-            <div class="qp-legend-value">$15,000.00</div>
+            <div class="qp-legend-value">$182,000.00</div>
           </div>
-        </div>
-      </div>
-    </div>
-    <!-- Payment details card — Figma 843-24300 -->
-    <div class="qp-card qp-payment-card">
-      <div class="qp-payment-card-title">Payment details</div>
-      <div class="qp-bank-name">LCR Integrated Systems</div>
-      <div class="qp-bank-address">350 Fifth Ave, New York, NY 10118</div>
-      <div class="qp-bank-details" style="margin-top:auto;">
-        <div class="qp-bank-field">
-          <label>Routing No.</label>
-          <span>021000021</span>
-        </div>
-        <div class="qp-bank-field">
-          <label>Account Number</label>
-          <span>000000</span>
         </div>
       </div>
     </div>
@@ -6400,10 +6497,10 @@ body.mobile-view #app-content {
   <!-- Filter tabs -->
   <div class="qp-filter-tabs">
     <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">04</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Pending your review <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">To be confirmed <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">12</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Pending your review <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">To be confirmed <span class="qp-filter-count">02</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">01</span></button>
     <label class="qp-search-pill">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -6420,10 +6517,10 @@ body.mobile-view #app-content {
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGRyb3Agc2hhZG93IC0tPgogIDxyZWN0IHg9IjIwIiB5PSIxMyIgd2lkdGg9IjM4IiBoZWlnaHQ9IjU4IiByeD0iNSIgZmlsbD0iI0Q4RDhEOCIvPgogIDwhLS0gc3dpdGNoIGJvZHkgLS0+CiAgPHJlY3QgeD0iMTciIHk9IjEwIiB3aWR0aD0iMzgiIGhlaWdodD0iNTgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSB1cHBlciBwYWRkbGUgLS0+CiAgPHJlY3QgeD0iMjEiIHk9IjE0IiB3aWR0aD0iMjgiIGhlaWdodD0iMjMiIHJ4PSIzIiBmaWxsPSIjRjNGM0YzIi8+CiAgPCEtLSBsb3dlciBwYWRkbGUgLS0+CiAgPHJlY3QgeD0iMjEiIHk9IjM5IiB3aWR0aD0iMjgiIGhlaWdodD0iMjIiIHJ4PSIzIiBmaWxsPSIjRkFGQUZBIi8+CiAgPCEtLSB2ZXJ0aWNhbCBzbGlkZXIgdHJhY2sgLS0+CiAgPHJlY3QgeD0iNDQiIHk9IjE1IiB3aWR0aD0iMy41IiBoZWlnaHQ9IjIyIiByeD0iMS43NSIgZmlsbD0iI0RFREVERSIvPgogIDwhLS0gc2xpZGVyIGtub2IgLS0+CiAgPHJlY3QgeD0iNDIuNSIgeT0iMTUiIHdpZHRoPSI2LjUiIGhlaWdodD0iOSIgcng9IjMuMjUiIGZpbGw9IiNCOEI4QjgiLz4KICA8IS0tIExFRCBpbmRpY2F0b3Igc3RyaXAgLS0+CiAgPHJlY3QgeD0iMjIiIHk9IjY1IiB3aWR0aD0iMjIiIGhlaWdodD0iMS41IiByeD0iLjc1IiBmaWxsPSIjRThFOEU4Ii8+CiAgPGNpcmNsZSBjeD0iMjgiIGN5PSI2OC41IiByPSIxLjgiIGZpbGw9IiM0ODc4RTgiIG9wYWNpdHk9Ii44NSIvPgogIDxjaXJjbGUgY3g9IjM0IiBjeT0iNjguNSIgcj0iMS44IiBmaWxsPSIjNDg3OEU4IiBvcGFjaXR5PSIuNSIvPgogIDxjaXJjbGUgY3g9IjQwIiBjeT0iNjguNSIgcj0iMS44IiBmaWxsPSIjREVERURFIi8+CiAgPCEtLSBicmFuZCB0ZXh0IGhpbnQgLS0+CiAgPHJlY3QgeD0iMjIiIHk9IjYyIiB3aWR0aD0iMTQiIGhlaWdodD0iMS4yIiByeD0iLjYiIGZpbGw9IiNEMEQwRDAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Variation #30145</span>
+          <span class="qr-revision">Revision 1</span>
         </div>
-        <div class="qr-title">Home Automation</div>
+        <div class="qr-title">Additional Downlights — Master Bedroom</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-pending">Pending your review</span>
@@ -6431,8 +6528,8 @@ body.mobile-view #app-content {
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$8,500.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$8,500.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 1</span></div></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn" onclick="openCommentDialog(cardRef(this.closest('.qr')))"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
@@ -6448,10 +6545,10 @@ body.mobile-view #app-content {
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Variation #30187</span>
+          <span class="qr-revision">Revision 2</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Upgraded Speaker System — Pool Terrace</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-tbc">To be confirmed</span>
@@ -6459,8 +6556,8 @@ body.mobile-view #app-content {
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$14,200.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$14,200.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 2</span></div></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn" onclick="openCommentDialog(cardRef(this.closest('.qr')))"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
@@ -6477,10 +6574,10 @@ body.mobile-view #app-content {
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Variation #30063</span>
+          <span class="qr-revision">Revision 1</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Motorised Blinds — Living Areas</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-tbc">To be confirmed</span>
@@ -6488,8 +6585,8 @@ body.mobile-view #app-content {
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$11,800.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$11,800.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 1</span></div></div>
       <!-- No action buttons for overdue -->
       <div></div>
     </div>
@@ -6499,10 +6596,10 @@ body.mobile-view #app-content {
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Variation #29958</span>
+          <span class="qr-revision">Revision 2</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">CCTV Upgrade — Garage & Entry</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-accepted">Accepted</span>
@@ -6511,31 +6608,31 @@ body.mobile-view #app-content {
       <div class="qr-payment">
         <div class="qr-payment-label">Payment Progress</div>
         <div class="qr-payment-amount-row">
-          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-big">$22,500.00</span>
           <span class="qr-payment-of">of $45,000.00 Paid so far</span>
         </div>
         <div class="qr-payment-bar">
-          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-paid" style="width:50%;"></div>
           <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
         </div>
         <div class="qr-payment-legend">
           <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div>Paid so far <span>0%</span></div>
-            <div class="qr-legend-val">$15,000.00</div>
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div>Paid so far <span>50%</span></div>
+            <div class="qr-legend-val">$22,500.00</div>
           </div>
           <div class="qr-legend-item">
             <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div>To pay now <span>0%</span></div>
-            <div class="qr-legend-val">$15,000.00</div>
+            <div class="qr-legend-val">$0.00</div>
           </div>
           <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#eaeaea;"></div>Upcoming <span>0%</span></div>
-            <div class="qr-legend-val">$15,000.00</div>
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#eaeaea;"></div>Upcoming <span>50%</span></div>
+            <div class="qr-legend-val">$22,500.00</div>
           </div>
         </div>
       </div>
       <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$38,000.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$45,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 2</span></div></div>
       <div></div>
     </div>
 
@@ -6544,10 +6641,10 @@ body.mobile-view #app-content {
       <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Variation #29734</span>
+          <span class="qr-revision">Revision 1</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Ceiling Fan Installation — Bedrooms</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-declined">Declined</span>
@@ -6555,8 +6652,8 @@ body.mobile-view #app-content {
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$6,400.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$6,400.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 1</span></div></div>
       <!-- No action buttons for declined -->
       <div></div>
     </div>
@@ -6589,18 +6686,7 @@ body.mobile-view #app-content {
     </div>
   </div>
 
-</div>
-<div class="detail-sidebar-mob">
-  <div class="dsm-left">
-    <div class="dsm-name"><span class="brand-pm-name">Tyler Holmes</span></div>
-    <div class="dsm-role"><span class="brand-pm-role">Project Manager</span></div>
-  </div>
-  <div class="dsm-right">
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-envelope"></i><a href="mailto:demo@example.com">demo@example.com</a></div>
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-phone"></i><a href="tel:+15551234567">+1 (555) 123-4567</a></div>
-  </div>
-</div>
-</div>
+</div></div>
 
 
 
@@ -6623,31 +6709,33 @@ body.mobile-view #app-content {
       <div class="qp-nav-item" onclick="go('quotes');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Quotes
-        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>2 Actions Required</span>
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Actions Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         Invoices
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Payment Due</span>
+      </div>
+      <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
         Documents
       </div>
-      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        Warranty
-      </div>
       <div class="qp-nav-item" onclick="go('progress');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Progress
       </div>
-      <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()" style="display:none;">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        Sales Order
+      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()" style="display:none;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Warranty
       </div>
     </div>
     <div class="qp-topbar-right">
@@ -6674,66 +6762,50 @@ body.mobile-view #app-content {
     <div class="qp-card qp-project-card">
       <div class="qp-project-left">
         <div>
-          <div class="qp-project-name"><span class="brand-project-name">Ocean Palm Residences</span></div>
+          <div class="qp-project-name">Total Project<br>Accepted Value</div>
           <div class="qp-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
         </div>
         <div class="qp-total-block">
-          <div class="qp-total-value">$850,000.00</div>
-          <div class="qp-total-label">Total Sales Order Value (excl. Tax)</div>
+          <div class="qp-total-value">$619,800.00</div>
+          <div class="qp-total-label">Total Value (excl. Tax)</div>
         </div>
       </div>
       <div class="qp-project-right">
         <div class="qp-payment-summary-label">Payment Summary</div>
         <div class="qp-summary-amounts">
           <div class="qp-amounts-left">
-            <div class="qp-payment-amount">$650,000.00</div>
-            <div class="qp-payment-of">of $850,000.02 Paid so far</div>
+            <div class="qp-payment-amount">$500,000.00</div>
+            <div class="qp-payment-of">of $619,800.00 Paid so far</div>
           </div>
           <div class="qp-total-block-mobile">
-            <div class="qp-total-value">$850,000.00</div>
+            <div class="qp-total-value">$619,800.00</div>
             <div class="qp-total-label">Total Sales Order Value (excl. Tax)</div>
           </div>
         </div>
         <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+          <div class="qp-progress-bar-fill" style="width:81%;background:#009113;"></div>
         </div>
         <div class="qp-progress-legend">
           <div class="qp-legend-item">
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:#009113;"></div> Paid so far
             </div>
-            <div class="qp-legend-value">$650,000.00</div>
+            <div class="qp-legend-value">$500,000.00</div>
           </div>
           <div class="qp-legend-item">
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now
             </div>
-            <div class="qp-legend-value">$15,000.00</div>
+            <div class="qp-legend-value">$18,000.00</div>
           </div>
           <div class="qp-legend-item" style="align-items:flex-end;">
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:var(--c-border-1);"></div> Upcoming
             </div>
-            <div class="qp-legend-value">$0.00</div>
+            <div class="qp-legend-value">$101,800.00</div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Right: payment details (bank) -->
-    <div class="qp-card qp-payment-card">
-      <div class="qp-payment-card-title">Payment details</div>
-      <div class="qp-bank-name">LCR Integrated Systems</div>
-      <div class="qp-bank-address">350 Fifth Ave, New York, NY 10118</div>
-      <div class="qp-bank-details" style="margin-top:auto;">
-        <div class="qp-bank-field">
-          <label>Routing No.</label>
-          <span>021000021</span>
-        </div>
-        <div class="qp-bank-field">
-          <label>Account Number</label>
-          <span>000000</span>
-        </div>
+        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;flex:none;" onclick="openPayNowModal('#250924.SOC014','$619,800.00','Sales Order Payment')">Pay Now</button>
       </div>
     </div>
 
@@ -6742,9 +6814,9 @@ body.mobile-view #app-content {
   <!-- Filter tabs — Figma 849:747 (All / TBC / Accepted / Declined) -->
   <div class="qp-filter-tabs">
     <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">04</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">To be confirmed <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">12</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">To be confirmed <span class="qp-filter-count">02</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">01</span></button>
     <label class="qp-search-pill">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -6897,18 +6969,7 @@ body.mobile-view #app-content {
     </div>
   </div>
 
-</div>
-<div class="detail-sidebar-mob">
-  <div class="dsm-left">
-    <div class="dsm-name"><span class="brand-pm-name">Tyler Holmes</span></div>
-    <div class="dsm-role"><span class="brand-pm-role">Project Manager</span></div>
-  </div>
-  <div class="dsm-right">
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-envelope"></i><a href="mailto:demo@example.com">demo@example.com</a></div>
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-phone"></i><a href="tel:+15551234567">+1 (555) 123-4567</a></div>
-  </div>
-</div>
-</div>
+</div></div>
 
 
 
@@ -6931,31 +6992,34 @@ body.mobile-view #app-content {
       <div class="qp-nav-item" onclick="go('quotes');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Quotes
-        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>2 Actions Required</span>
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Actions Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         Invoices
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Payment Due</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>1 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
         Documents
       </div>
-      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        Warranty
-      </div>
       <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Progress
       </div>
-      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()" style="display:none;">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        Sales Order
+      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()" style="display:none;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Warranty
       </div>
     </div>
     <div class="qp-topbar-right">
@@ -7106,7 +7170,7 @@ body.mobile-view #app-content {
         <div class="inv-payment-label">Payment Progress</div>
         <div class="inv-payment-amount-row">
           <div class="inv-payment-big">$650,000.00</div>
-          <div class="inv-payment-of">of $850,000.02 Paid so far</div>
+          <div class="inv-payment-of">of $850,000.00 Paid so far</div>
         </div>
         <div class="inv-payment-bar">
           <div class="inv-payment-bar-fill" style="width:76%;background:#009113;"></div>
@@ -7156,18 +7220,7 @@ body.mobile-view #app-content {
     </div>
   </div>
 
-</div>
-<div class="detail-sidebar-mob">
-  <div class="dsm-left">
-    <div class="dsm-name"><span class="brand-pm-name">Tyler Holmes</span></div>
-    <div class="dsm-role"><span class="brand-pm-role">Project Manager</span></div>
-  </div>
-  <div class="dsm-right">
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-envelope"></i><a href="mailto:demo@example.com">demo@example.com</a></div>
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-phone"></i><a href="tel:+15551234567">+1 (555) 123-4567</a></div>
-  </div>
-</div>
-</div>
+</div></div>
 
 
 <div id="s-documents" class="screen">
@@ -7189,31 +7242,34 @@ body.mobile-view #app-content {
       <div class="qp-nav-item" onclick="go('quotes');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Quotes
-        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>2 Actions Required</span>
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Actions Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         Invoices
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Payment Due</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>1 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
         Documents
       </div>
-      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        Warranty
-      </div>
       <div class="qp-nav-item" onclick="go('progress');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Progress
       </div>
-      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()" style="display:none;">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        Sales Order
+      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()" style="display:none;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Warranty
       </div>
     </div>
     <div class="qp-topbar-right">
@@ -7347,18 +7403,7 @@ body.mobile-view #app-content {
     </div>
   </div>
 
-</div>
-<div class="detail-sidebar-mob">
-  <div class="dsm-left">
-    <div class="dsm-name"><span class="brand-pm-name">Tyler Holmes</span></div>
-    <div class="dsm-role"><span class="brand-pm-role">Project Manager</span></div>
-  </div>
-  <div class="dsm-right">
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-envelope"></i><a href="mailto:demo@example.com">demo@example.com</a></div>
-    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-phone"></i><a href="tel:+15551234567">+1 (555) 123-4567</a></div>
-  </div>
-</div>
-</div>
+</div></div>
 
 
 <div id="s-warranty" class="screen">
@@ -7380,31 +7425,34 @@ body.mobile-view #app-content {
       <div class="qp-nav-item" onclick="go('quotes');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Quotes
-        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>2 Actions Required</span>
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Actions Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         Invoices
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Payment Due</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>1 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
         Documents
       </div>
-      <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        Warranty
-      </div>
       <div class="qp-nav-item" onclick="go('progress');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Progress
       </div>
-      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()" style="display:none;">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        Sales Order
+      <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Warranty
       </div>
     </div>
     <div class="qp-topbar-right">
@@ -7553,6 +7601,109 @@ body.mobile-view #app-content {
 <!-- /SCREEN — WARRANTY -->
 
 
+<!-- ── Needs Your Attention dialog ── -->
+<div class="nya-overlay" id="nya-overlay" onclick="closeNYADialog()">
+  <div class="nya-dialog" onclick="event.stopPropagation()">
+
+    <!-- Header: always visible — title + counter -->
+    <div class="nya-header">
+      <span class="nya-title">Needs your attention</span>
+      <span class="nya-counter" id="nya-counter">01/04</span>
+    </div>
+    <!-- Progress bar (JS-driven width) -->
+    <div class="nya-progress">
+      <div class="nya-progress-fill" id="nya-progress-fill" style="width:25%"></div>
+    </div>
+
+    <!-- ── Item 01: Change Order (Variations) ── -->
+    <div class="nya-item" id="nya-item-1">
+      <div class="nya-status-row">
+        <span class="nya-status-badge">Pending your review</span>
+        <span class="nya-valid-date">Valid until 14 April 2026</span>
+      </div>
+      <div class="nya-ref-row">
+        <span>Quote #23944</span>
+        <span>Change Order 3.1</span>
+      </div>
+      <div class="nya-item-title">Dutch House Security INV TEST</div>
+      <div class="nya-amounts">
+        <div class="nya-amount-row">
+          <span>Original amount</span>
+          <span>£20,000.00</span>
+        </div>
+        <div class="nya-amount-row">
+          <span>Revised amount</span>
+          <span>£25,000.00</span>
+        </div>
+        <div class="nya-amount-row">
+          <span>Net change</span>
+          <span class="nya-amount-positive">+£5,000.00</span>
+        </div>
+      </div>
+      <div class="nya-actions">
+        <button class="nya-action-btn nya-icon-btn">
+          <i class="fa-regular fa-comment-dots"></i>
+        </button>
+        <button class="nya-action-btn" onclick="nyaNext()">TBC</button>
+        <button class="nya-action-btn" onclick="nyaNext()">Reject</button>
+        <button class="nya-action-btn" onclick="nyaNext()">Accept</button>
+      </div>
+      <button class="nya-view-btn" onclick="closeNYADialog();go('variations')">View Change Order</button>
+      <button class="nya-remind-btn" onclick="closeNYADialog()">Remind me later</button>
+    </div>
+
+    <!-- ── Item 02: Invoice ── -->
+    <div class="nya-item" id="nya-item-2" style="display:none">
+      <div class="nya-status-row">
+        <div class="nya-status-dot-row">
+          <span class="nya-status-dot" style="background:#cf3400;"></span>
+          <span class="nya-status-dot-label">Unpaid</span>
+        </div>
+        <span class="nya-valid-date" style="color:#cf3400;">Valid until 14 April 2026</span>
+      </div>
+      <div class="nya-inv-row">
+        <div class="nya-inv-left">
+          <div class="nya-inv-title">Invoice for Aftercare</div>
+          <div class="nya-inv-ref">Invoice #00002</div>
+        </div>
+        <div class="nya-inv-right">
+          <div class="nya-inv-amount">£850,000.00</div>
+          <div class="nya-inv-vat">exclude VAT</div>
+        </div>
+      </div>
+      <div class="nya-payment-lbl">Payment Progress</div>
+      <div class="nya-seg-bar">
+        <div class="nya-seg-fill" style="background:#009113;"></div>
+        <div class="nya-seg-fill" style="background:#cf3400;"></div>
+      </div>
+      <div class="nya-seg-legend">
+        <div class="nya-seg-legend-side">
+          <div class="nya-seg-legend-row">
+            <span class="nya-seg-dot" style="background:#009113;"></span>
+            <span>Paid so far</span>
+            <span>50%</span>
+          </div>
+          <div class="nya-seg-amount">£15,000.00</div>
+        </div>
+        <div class="nya-seg-legend-side">
+          <div class="nya-seg-legend-row">
+            <span class="nya-seg-dot" style="background:#cf3400;"></span>
+            <span>To pay now</span>
+            <span>50%</span>
+          </div>
+          <div class="nya-seg-amount">£15,000.00</div>
+        </div>
+      </div>
+      <div class="nya-two-btns">
+        <button class="nya-view-btn" onclick="closeNYADialog();go('invoices')">View Invoice</button>
+        <button class="nya-view-btn" onclick="closeNYADialog();go('invoices')">Pay Now</button>
+      </div>
+      <button class="nya-remind-btn" onclick="closeNYADialog()">Remind me later</button>
+    </div>
+
+  </div>
+</div>
+
 <!-- ── Notifications panel ── -->
 <div class="qp-notif-overlay" id="qp-notif-overlay" onclick="closeNotifPanel(event)">
   <div class="qp-notif-panel" onclick="event.stopPropagation()">
@@ -7577,13 +7728,13 @@ body.mobile-view #app-content {
 
     <!-- Category filter pills — matches main nav menu order -->
     <div class="qp-notif-cat-pills" id="notif-cat-pills">
-      <button class="qp-notif-cat-pill active" data-cat="all"        onclick="setNotifCatPill('all',this)">All <span class="cat-count">07</span></button>
-      <button class="qp-notif-cat-pill"         data-cat="quote"     onclick="setNotifCatPill('quote',this)">Quotes <span class="cat-count">04</span></button>
-      <button class="qp-notif-cat-pill"         data-cat="variation" onclick="setNotifCatPill('variation',this)">Variations <span class="cat-count">12</span></button>
-      <button class="qp-notif-cat-pill"         data-cat="invoice"   onclick="setNotifCatPill('invoice',this)">Invoices <span class="cat-count">03</span></button>
-      <button class="qp-notif-cat-pill"         data-cat="document"  onclick="setNotifCatPill('document',this)">Documents <span class="cat-count">12</span></button>
-      <button class="qp-notif-cat-pill"         data-cat="salesorder" onclick="setNotifCatPill('salesorder',this)">Sales Order <span class="cat-count">12</span></button>
-      <button class="qp-notif-cat-pill"         data-cat="progress"  onclick="setNotifCatPill('progress',this)">Progress <span class="cat-count">12</span></button>
+      <button class="qp-notif-cat-pill active" data-cat="all"        onclick="setNotifCatPill('all',this)">All <span class="cat-count">10</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="quote"     onclick="setNotifCatPill('quote',this)">Quotes <span class="cat-count">03</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="variation" onclick="setNotifCatPill('variation',this)">Variations <span class="cat-count">02</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="invoice"   onclick="setNotifCatPill('invoice',this)">Invoices <span class="cat-count">02</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="document"  onclick="setNotifCatPill('document',this)">Documents <span class="cat-count">01</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="salesorder" onclick="setNotifCatPill('salesorder',this)">Sales Order <span class="cat-count">01</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="progress"  onclick="setNotifCatPill('progress',this)">Progress <span class="cat-count">01</span></button>
     </div>
 
     <!-- Notifications list -->
@@ -7602,12 +7753,12 @@ body.mobile-view #app-content {
           </div>
           <div class="qp-notif-sub-row">
             <div class="qp-notif-sub">
-              <span>Quote #23944</span>
-              <span>Roof Replacement, Level 3</span>
+              <span>Quote #22341</span>
+              <span>Bathroom Fixtures &amp; Fittings</span>
             </div>
             <div class="qp-notif-time-actions">
-              <span class="qp-notif-time">2 min ago</span>
-              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #23944')"><i class="fa-regular fa-comment-dots"></i></button>
+              <span class="qp-notif-time">8 min ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #22341')"><i class="fa-regular fa-comment-dots"></i></button>
             </div>
           </div>
         </div>
@@ -7626,59 +7777,63 @@ body.mobile-view #app-content {
           <div class="qp-notif-sub-row">
             <div class="qp-notif-sub">
               <span>Invoice #INV-0091</span>
+              <span>Progress Claim 1</span>
             </div>
             <div class="qp-notif-time-actions">
-              <span class="qp-notif-time">2 min ago</span>
+              <span class="qp-notif-time">1 hour ago</span>
               <button class="qp-notif-comment-btn" onclick="openCommentDialog('Invoice #INV-0091')"><i class="fa-regular fa-comment-dots"></i></button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Invoice due notification (unread) -->
-      <div class="qp-notif-item" data-type="invoice" data-unread="true">
+      <!-- Variation approved (unread) -->
+      <div class="qp-notif-item" data-type="variation" data-unread="true">
         <div class="qp-notif-icon">
-          <i class="fa-sharp-solid fa-file-invoice-dollar" style="font-size:14px;"></i>
+          <i class="fa-sharp-solid fa-code-branch" style="font-size:14px;"></i>
         </div>
         <div class="qp-notif-content">
           <div class="qp-notif-title-row">
-            <span class="qp-notif-title">Invoice due in 3 days</span>
+            <span class="qp-notif-title">Variation approved</span>
             <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
           </div>
           <div class="qp-notif-sub-row">
             <div class="qp-notif-sub">
-              <span>Invoice #INV-0092</span>
-              <span>Progress Claim 1</span>
+              <span>Variation #30145</span>
+              <span>Structural Steel Modification</span>
             </div>
             <div class="qp-notif-time-actions">
-              <span class="qp-notif-time">Yesterday</span>
-              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Invoice #INV-0092')"><i class="fa-regular fa-comment-dots"></i></button>
+              <span class="qp-notif-time">2 hours ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Variation #30145')"><i class="fa-regular fa-comment-dots"></i></button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Invoice due notification (read — no dot) -->
-      <div class="qp-notif-item" data-type="invoice" data-unread="false">
+      <!-- Progress milestone (unread) -->
+      <div class="qp-notif-item" data-type="progress" data-unread="true">
         <div class="qp-notif-icon">
-          <i class="fa-sharp-solid fa-file-invoice-dollar" style="font-size:14px;"></i>
+          <i class="fa-sharp-solid fa-circle-check" style="font-size:14px;"></i>
         </div>
         <div class="qp-notif-content">
           <div class="qp-notif-title-row">
-            <span class="qp-notif-title">Invoice due in 3 days</span>
+            <span class="qp-notif-title">Milestone reached</span>
+            <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
           </div>
           <div class="qp-notif-sub-row">
             <div class="qp-notif-sub">
-              <span>Invoice #INV-0092</span>
-              <span>Progress Claim 1</span>
+              <span>Level 6 Waterproofing</span>
+              <span>Stage complete</span>
             </div>
             <div class="qp-notif-time-actions">
-              <span class="qp-notif-time">Yesterday</span>
-              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Invoice #INV-0092')"><i class="fa-regular fa-comment-dots"></i></button>
+              <span class="qp-notif-time">3 hours ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Progress — Level 6 Waterproofing')"><i class="fa-regular fa-comment-dots"></i></button>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="qp-notif-section-label">Yesterday</div>
 
       <!-- Quote accepted (unread) -->
       <div class="qp-notif-item" data-type="quote" data-unread="true">
@@ -7692,57 +7847,123 @@ body.mobile-view #app-content {
           </div>
           <div class="qp-notif-sub-row">
             <div class="qp-notif-sub">
-              <span>Quote #23944</span>
-              <span>Roof Replacement, Level 3</span>
+              <span>Quote #22018</span>
+              <span>Kitchen Cabinetry &amp; Joinery</span>
             </div>
             <div class="qp-notif-time-actions">
-              <span class="qp-notif-time">1 hour ago</span>
-              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #23944')"><i class="fa-regular fa-comment-dots"></i></button>
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #22018')"><i class="fa-regular fa-comment-dots"></i></button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Quote to be confirmed (unread) -->
-      <div class="qp-notif-item" data-type="quote" data-unread="true">
+      <!-- Invoice due in 3 days (unread) -->
+      <div class="qp-notif-item" data-type="invoice" data-unread="true">
         <div class="qp-notif-icon">
-          <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
+          <i class="fa-sharp-solid fa-file-invoice-dollar" style="font-size:14px;"></i>
         </div>
         <div class="qp-notif-content">
           <div class="qp-notif-title-row">
-            <span class="qp-notif-title">Awaiting your confirmation</span>
+            <span class="qp-notif-title">Invoice due in 3 days</span>
             <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
           </div>
           <div class="qp-notif-sub-row">
             <div class="qp-notif-sub">
-              <span>Quote #40344</span>
-              <span>Dutch House Security</span>
+              <span>Invoice #INV-0092</span>
+              <span>Progress Claim 2</span>
             </div>
             <div class="qp-notif-time-actions">
-              <span class="qp-notif-time">3 hours ago</span>
-              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #40344')"><i class="fa-regular fa-comment-dots"></i></button>
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Invoice #INV-0092')"><i class="fa-regular fa-comment-dots"></i></button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Quote declined (read) -->
+      <!-- Variation pending review (read — no dot) -->
+      <div class="qp-notif-item" data-type="variation" data-unread="false">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-code-branch" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Variation pending review</span>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Variation #30187</span>
+              <span>Facade Cladding Upgrade</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Variation #30187')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote awaiting confirmation (read) -->
       <div class="qp-notif-item" data-type="quote" data-unread="false">
         <div class="qp-notif-icon">
           <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
         </div>
         <div class="qp-notif-content">
           <div class="qp-notif-title-row">
-            <span class="qp-notif-title">Quote declined</span>
+            <span class="qp-notif-title">Awaiting your confirmation</span>
           </div>
           <div class="qp-notif-sub-row">
             <div class="qp-notif-sub">
-              <span>Quote #40344</span>
-              <span>Dutch House Security</span>
+              <span>Quote #22019</span>
+              <span>Waterproofing Membrane System</span>
             </div>
             <div class="qp-notif-time-actions">
               <span class="qp-notif-time">Yesterday</span>
-              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #40344')"><i class="fa-regular fa-comment-dots"></i></button>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #22019')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales order issued (read) -->
+      <div class="qp-notif-item" data-type="salesorder" data-unread="false">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-file-contract" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Sales order issued</span>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Sales Order #SO-0014</span>
+              <span>Level 6–8 Fit-Out Package</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Sales Order #SO-0014')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document shared (read) -->
+      <div class="qp-notif-item" data-type="document" data-unread="false">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-file-lines" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Document shared with you</span>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Contract Amendment 02</span>
+              <span>Specification Rev C</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Contract Amendment 02')"><i class="fa-regular fa-comment-dots"></i></button>
             </div>
           </div>
         </div>
@@ -7755,71 +7976,71 @@ body.mobile-view #app-content {
       <div class="qp-activity-item">
         <div class="qp-activity-avatar">MM</div>
         <div class="qp-activity-content">
-          <div class="qp-activity-action">You approved – Quote #23944 Roof Replacement, Level 3</div>
-          <div class="qp-activity-time"><span>08 April 2026</span><span class="qp-activity-time-dot"></span><span>03:15pm</span></div>
+          <div class="qp-activity-action">You approved – Quote #22018 Kitchen Cabinetry &amp; Joinery</div>
+          <div class="qp-activity-time"><span>04 Jun 2026</span><span class="qp-activity-time-dot"></span><span>03:15pm</span></div>
         </div>
       </div>
       <div class="qp-activity-item">
         <div class="qp-activity-avatar">TH</div>
         <div class="qp-activity-content">
-          <div class="qp-activity-action">Tyler Holmes sent – Quote #23944 Roof Replacement, Level 3</div>
-          <div class="qp-activity-time"><span>08 April 2026</span><span class="qp-activity-time-dot"></span><span>11:40am</span></div>
+          <div class="qp-activity-action">Tyler Holmes sent – Quote #22341 Bathroom Fixtures &amp; Fittings</div>
+          <div class="qp-activity-time"><span>04 Jun 2026</span><span class="qp-activity-time-dot"></span><span>11:40am</span></div>
         </div>
       </div>
       <div class="qp-activity-item">
         <div class="qp-activity-avatar">MM</div>
         <div class="qp-activity-content">
-          <div class="qp-activity-action">You rejected – Quote #40344 Dutch House Security</div>
-          <div class="qp-activity-time"><span>07 April 2026</span><span class="qp-activity-time-dot"></span><span>02:50pm</span></div>
+          <div class="qp-activity-action">You reviewed – Variation #30145 Structural Steel Modification</div>
+          <div class="qp-activity-time"><span>03 Jun 2026</span><span class="qp-activity-time-dot"></span><span>02:50pm</span></div>
         </div>
       </div>
       <div class="qp-activity-item">
         <div class="qp-activity-avatar">JE</div>
         <div class="qp-activity-content">
-          <div class="qp-activity-action">Julie Esparza updated – Quote #23944 Roof Replacement, Level 3</div>
-          <div class="qp-activity-time"><span>07 April 2026</span><span class="qp-activity-time-dot"></span><span>10:05am</span></div>
+          <div class="qp-activity-action">Julie Esparza updated – Quote #22018 Kitchen Cabinetry &amp; Joinery</div>
+          <div class="qp-activity-time"><span>03 Jun 2026</span><span class="qp-activity-time-dot"></span><span>10:05am</span></div>
         </div>
       </div>
       <div class="qp-activity-item">
         <div class="qp-activity-avatar">MM</div>
         <div class="qp-activity-content">
-          <div class="qp-activity-action">You left a note – Quote #23944 Roof Replacement, Level 3</div>
-          <div class="qp-activity-time"><span>06 April 2026</span><span class="qp-activity-time-dot"></span><span>04:30pm</span></div>
+          <div class="qp-activity-action">You left a note – Variation #30145 Structural Steel Modification</div>
+          <div class="qp-activity-time"><span>02 Jun 2026</span><span class="qp-activity-time-dot"></span><span>04:30pm</span></div>
         </div>
       </div>
       <div class="qp-activity-item">
         <div class="qp-activity-avatar">TH</div>
         <div class="qp-activity-content">
-          <div class="qp-activity-action">Tyler Holmes created – Variation #VAR-003 Additional Roof Works</div>
-          <div class="qp-activity-time"><span>05 April 2026</span><span class="qp-activity-time-dot"></span><span>01:20pm</span></div>
+          <div class="qp-activity-action">Tyler Holmes submitted – Variation #30187 Facade Cladding Upgrade</div>
+          <div class="qp-activity-time"><span>01 Jun 2026</span><span class="qp-activity-time-dot"></span><span>01:20pm</span></div>
         </div>
       </div>
       <div class="qp-activity-item">
         <div class="qp-activity-avatar">MM</div>
         <div class="qp-activity-content">
-          <div class="qp-activity-action">You marked as TBC – Quote #40344 Dutch House Security</div>
-          <div class="qp-activity-time"><span>04 April 2026</span><span class="qp-activity-time-dot"></span><span>09:45am</span></div>
+          <div class="qp-activity-action">You confirmed – Sales Order #SO-0014 Level 6–8 Fit-Out Package</div>
+          <div class="qp-activity-time"><span>30 May 2026</span><span class="qp-activity-time-dot"></span><span>09:45am</span></div>
         </div>
       </div>
       <div class="qp-activity-item">
         <div class="qp-activity-avatar">TH</div>
         <div class="qp-activity-content">
-          <div class="qp-activity-action">Tyler Holmes updated – Invoice #INV-0092 Progress Claim 1</div>
-          <div class="qp-activity-time"><span>03 April 2026</span><span class="qp-activity-time-dot"></span><span>03:00pm</span></div>
+          <div class="qp-activity-action">Tyler Holmes updated – Invoice #INV-0092 Progress Claim 2</div>
+          <div class="qp-activity-time"><span>28 May 2026</span><span class="qp-activity-time-dot"></span><span>03:00pm</span></div>
         </div>
       </div>
       <div class="qp-activity-item">
         <div class="qp-activity-avatar">MM</div>
         <div class="qp-activity-content">
-          <div class="qp-activity-action">You marked as paid – Invoice #022 Invoice for Aftercare</div>
-          <div class="qp-activity-time"><span>02 April 2026</span><span class="qp-activity-time-dot"></span><span>05:10pm</span></div>
+          <div class="qp-activity-action">You marked as paid – Invoice #INV-0091 Progress Claim 1</div>
+          <div class="qp-activity-time"><span>27 May 2026</span><span class="qp-activity-time-dot"></span><span>05:10pm</span></div>
         </div>
       </div>
       <div class="qp-activity-item">
         <div class="qp-activity-avatar">JE</div>
         <div class="qp-activity-content">
-          <div class="qp-activity-action">Julie Esparza sent – Sales Order #SO-0012 Roof Replacement</div>
-          <div class="qp-activity-time"><span>01 April 2026</span><span class="qp-activity-time-dot"></span><span>11:00am</span></div>
+          <div class="qp-activity-action">Julie Esparza sent – Quote #22341 Bathroom Fixtures &amp; Fittings</div>
+          <div class="qp-activity-time"><span>26 May 2026</span><span class="qp-activity-time-dot"></span><span>11:00am</span></div>
         </div>
       </div>
     </div>
@@ -8476,8 +8697,8 @@ body.mobile-view #app-content {
         <div class="paynow-detail-row">
           <div class="paynow-detail-label">Account name</div>
           <div class="paynow-val-copy">
-            <div class="paynow-detail-val">LCR Integrated Systems Ltd</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard('LCR Integrated Systems Ltd')">Copy</button>
+            <div class="paynow-detail-val">Ocean Palm Holdings Ltd</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('Ocean Palm Holdings Ltd')">Copy</button>
           </div>
         </div>
         <div class="paynow-detail-row">
@@ -8613,6 +8834,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
       document.getElementById('s-' + saved).classList.add('on');
       if (saved === 'progress') initPPBars();
+      if (saved === 'detail') setTimeout(showNYADialog, 400);
       const spEl = document.getElementById('sp-' + saved);
       if (spEl) { document.querySelectorAll('.sp-item').forEach(e => e.classList.remove('active')); spEl.classList.add('active'); }
       const viewEl = document.getElementById('pt-viewing-name');
@@ -8748,6 +8970,7 @@ function go(name) {
   document.querySelectorAll('.qp-user-dropdown').forEach(d => d.classList.remove('open'));
   document.getElementById('qp-notif-overlay')?.classList.remove('open');
   document.getElementById('qp-profile-overlay')?.classList.remove('open');
+  document.getElementById('nya-overlay')?.classList.remove('open');
 
   const alreadyLoaded = loadedScreens.has(name);
   loadedScreens.add(name);
@@ -8775,6 +8998,9 @@ function go(name) {
       if (name === 'login') localStorage.removeItem('wq_screen');
       else localStorage.setItem('wq_screen', name);
     } catch(e) {}
+
+    // Show "Needs your attention" dialog when entering the detail page
+    if (name === 'detail') setTimeout(showNYADialog, 350);
   };
 
   const isMobile = document.body.classList.contains('mobile-view');
@@ -9569,6 +9795,33 @@ function closeNotifPanel(e) {
   document.getElementById('qp-notif-overlay').classList.remove('open');
 }
 
+// ── Needs Your Attention dialog ──
+let nyaCurrentItem = 1;
+const NYA_TOTAL = 4;
+
+function showNYADialog() {
+  nyaCurrentItem = 1;
+  document.getElementById('nya-counter').textContent = '01/' + String(NYA_TOTAL).padStart(2,'0');
+  document.getElementById('nya-progress-fill').style.width = (1/NYA_TOTAL*100) + '%';
+  document.querySelectorAll('.nya-item').forEach((el, i) => {
+    el.style.display = i === 0 ? '' : 'none';
+  });
+  document.getElementById('nya-overlay').classList.add('open');
+}
+function closeNYADialog() {
+  document.getElementById('nya-overlay').classList.remove('open');
+}
+function nyaNext() {
+  nyaCurrentItem++;
+  if (nyaCurrentItem > NYA_TOTAL) { closeNYADialog(); return; }
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('nya-counter').textContent = pad(nyaCurrentItem) + '/' + pad(NYA_TOTAL);
+  document.getElementById('nya-progress-fill').style.width = (nyaCurrentItem/NYA_TOTAL*100) + '%';
+  document.querySelectorAll('.nya-item').forEach((el, i) => {
+    el.style.display = (i + 1 === nyaCurrentItem) ? '' : 'none';
+  });
+}
+
 // ── iOS-style swipe-down to close notification bottom sheet ──
 (function initNotifSwipe() {
   const overlay = document.getElementById('qp-notif-overlay');
@@ -10004,14 +10257,14 @@ const WQ_BRAND = {
 /* ─────────────────────────────────────────────────────
    NAV ITEMS — order here = order in every dropdown
    hidden: true  → item is invisible in the menu
-   badge: true   → shows "2 Actions Required" chip
+   badge: 'text' → shows alert chip with that label
 ─────────────────────────────────────────────────────── */
 const WQ_NAV_ITEMS = [
-  { screen: 'quotes',         label: 'Quotes',      badge: true },
-  { screen: 'variations',     label: 'Variations' },
-  { screen: 'invoices',       label: 'Invoices' },
+  { screen: 'quotes',         label: 'Quotes',      badge: '2 Actions Required' },
+  { screen: 'variations',     label: 'Variations',  badge: '2 Awaiting Approval' },
+  { screen: 'invoices',       label: 'Invoices',    badge: '2 Payment Due' },
+  { screen: 'purchase-order', label: 'Sales Order', badge: '1 Awaiting Approval' },
   { screen: 'documents',      label: 'Documents' },
-  { screen: 'purchase-order', label: 'Sales Order' },
   { screen: 'progress',       label: 'Progress' },
   { screen: 'warranty',       label: 'Warranty',    hidden: true },
 ];
@@ -10036,11 +10289,14 @@ const WQ_NAV_ICONS = {
     '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
 };
 
-const WQ_QUOTES_BADGE =
-  '<span class="qp-nav-alert">' +
+/* Badge SVG icon reused by wqNavBadge() */
+const WQ_BADGE_SVG =
   '<svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400">' +
   '<path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/>' +
-  '</svg>2 Actions Required</span>';
+  '</svg>';
+function wqNavBadge(text) {
+  return '<span class="qp-nav-alert">' + WQ_BADGE_SVG + text + '</span>';
+}
 
 /* ─────────────────────────────────────────────────────
    COMPONENT: Nav Dropdown
@@ -10058,7 +10314,7 @@ function wqRenderNavDropdown(containerId, activeScreen) {
       ? 'closeDropdowns()'
       : "go('" + item.screen + "');closeDropdowns()";
     var style = item.hidden ? ' style="display:none;"' : '';
-    var badge = item.badge ? '\n        ' + WQ_QUOTES_BADGE : '';
+    var badge = item.badge ? '\n        ' + wqNavBadge(item.badge) : '';
     return (
       '      <div class="' + cls + '" onclick="' + onclick + '"' + style + '>' +
       WQ_NAV_ICONS[item.screen] +
@@ -10104,14 +10360,14 @@ function wqFooterHTML() {
    INIT
 ─────────────────────────────────────────────────────── */
 function wqInitComponents() {
-  /* Nav dropdowns — one per screen */
-  wqRenderNavDropdown('nav-dropdown',          'quotes');
-  wqRenderNavDropdown('nav-dropdown-inv',      'invoices');
-  wqRenderNavDropdown('nav-dropdown-var',      'variations');
-  wqRenderNavDropdown('nav-dropdown-po',       'purchase-order');
-  wqRenderNavDropdown('nav-dropdown-progress', 'progress');
-  wqRenderNavDropdown('nav-dropdown-doc',      'documents');
-  wqRenderNavDropdown('nav-dropdown-warranty', 'warranty');
+  /* Nav dropdowns — rendered from hardcoded HTML (badges + order already correct in HTML) */
+  // wqRenderNavDropdown('nav-dropdown',          'quotes');
+  // wqRenderNavDropdown('nav-dropdown-inv',      'invoices');
+  // wqRenderNavDropdown('nav-dropdown-var',      'variations');
+  // wqRenderNavDropdown('nav-dropdown-po',       'purchase-order');
+  // wqRenderNavDropdown('nav-dropdown-progress', 'progress');
+  // wqRenderNavDropdown('nav-dropdown-doc',      'documents');
+  // wqRenderNavDropdown('nav-dropdown-warranty', 'warranty');
 
   /* Footers — replaces all .qp-footer instances */
   document.querySelectorAll('.qp-footer').forEach(function (el) {

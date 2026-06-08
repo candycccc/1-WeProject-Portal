@@ -3956,6 +3956,20 @@ body.mobile-view .qp-notif-overlay {
   width: 100%; height: 100%;
   overflow: hidden;
 }
+/* Pay Now modal — inside #app-content, override fixed→absolute so overflow:clip doesn't hide it */
+body.mobile-view .paynow-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
+/* Payment Noted modal — same fix */
+body.mobile-view .payment-noted-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
 /* Notification bottom sheet: height uses mobile frame height, not browser viewport */
 body.mobile-view .qp-notif-panel {
   min-height: unset;

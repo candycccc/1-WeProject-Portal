@@ -111,25 +111,37 @@
     <i class="fa-solid fa-handshake detail-nav-icon"></i>
     <span class="detail-nav-label">Quotes</span>
     <div class="detail-nav-badge">
-      <svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
       <span>2 Actions Required</span>
     </div>
   </div>
   <div class="detail-nav-card" onclick="go('variations')">
     <i class="fa-solid fa-file-plus detail-nav-icon"></i>
     <span class="detail-nav-label">Variations</span>
+    <div class="detail-nav-badge">
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
+      <span>2 Awaiting Approval</span>
+    </div>
   </div>
   <div class="detail-nav-card" onclick="go('invoices')">
     <i class="fa-solid fa-file-invoice detail-nav-icon"></i>
     <span class="detail-nav-label">Invoices</span>
-  </div>
-  <div class="detail-nav-card" onclick="go('documents')">
-    <i class="fa-solid fa-files detail-nav-icon"></i>
-    <span class="detail-nav-label">Documents</span>
+    <div class="detail-nav-badge">
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
+      <span>2 Payment Due</span>
+    </div>
   </div>
   <div class="detail-nav-card" onclick="go('purchase-order')">
     <i class="fa-sharp-solid fa-file-invoice detail-nav-icon"></i>
     <span class="detail-nav-label">Sales Order</span>
+    <div class="detail-nav-badge">
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
+      <span>1 Awaiting Approval</span>
+    </div>
+  </div>
+  <div class="detail-nav-card" onclick="go('documents')">
+    <i class="fa-solid fa-files detail-nav-icon"></i>
+    <span class="detail-nav-label">Documents</span>
   </div>
   <div class="detail-nav-card" onclick="go('warranty')" style="display:none;">
     <i class="fa-sharp-solid fa-shield-check detail-nav-icon"></i>
@@ -147,9 +159,7 @@
       <!-- Quotes -->
       <div class="tile" onclick="go('quotes')">
         <div class="tile-alert">
-          <svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400">
-            <path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/>
-          </svg>
+          <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
           <span>2 Actions Required</span>
         </div>
         <div class="tile-label">
@@ -161,9 +171,7 @@
       <!-- Variations -->
       <div class="tile" onclick="go('variations')">
         <div class="tile-alert">
-          <svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400">
-            <path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/>
-          </svg>
+          <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
           <span>2 Actions Required</span>
         </div>
         <div class="tile-label">
