@@ -6086,63 +6086,39 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   </div>
 
   <!-- ── Summary cards ── -->
-  <div class="qp-summary-row">
-
-    <!-- Left: project + payment summary -->
-    <div class="qp-card qp-project-card">
-      <!-- Payment Summary: Quote #21887 (only accepted quote) = $162,000 (Rev 3)
-           Paid $81,000 (50%) + To pay now $18,200 (11%) + Upcoming $62,800 (39%) = $162,000 -->
-      <div class="qp-project-left">
-        <div>
-          <div class="qp-project-name">Total Project<br>Accepted Value</div>
-          <div class="qp-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
-        </div>
-        <div class="qp-total-block">
-          <div class="qp-total-value">$162,000.00</div>
-          <div class="qp-total-label">Total Value (excl. Tax)</div>
-        </div>
-      </div>
-      <div class="qp-project-right">
-        <div class="qp-payment-summary-label">Payment Summary</div>
-        <div class="qp-summary-amounts">
-          <div class="qp-amounts-left">
-            <div class="qp-payment-amount">$81,000.00</div>
-            <div class="qp-payment-of">of $162,000.00 Paid so far</div>
-          </div>
-          <div class="qp-total-block-mobile">
-            <div class="qp-total-value">$162,000.00</div>
-            <div class="qp-total-label">Accepted Quote Value (excl. Tax)</div>
-          </div>
-        </div>
-        <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:50%;background:#009113;"></div>
-        </div>
-        <div class="qp-progress-legend">
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row">
-              <div class="qp-legend-dot" style="background:#009113;"></div> Paid so far
-            </div>
-            <div class="qp-legend-value">$81,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row">
-              <div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now
-            </div>
-            <div class="qp-legend-value">$18,200.00</div>
-          </div>
-          <div class="qp-legend-item" style="align-items:flex-end;">
-            <div class="qp-legend-dot-row">
-              <div class="qp-legend-dot" style="background:var(--c-border-1);"></div> Upcoming
-            </div>
-            <div class="qp-legend-value">$62,800.00</div>
-          </div>
-        </div>
-        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;flex:none;" onclick="openPayNowModal('Quote #21887','$162,000.00','Accepted Quote Payment')">Pay Now</button>
+  <div class="co-pc-wrap">
+    <div class="co-pc-top">
+      <div class="co-pc-title">Total Project<br>Accepted Value</div>
+      <div class="co-pc-total">
+        <div class="co-pc-total-value">$850,000.00</div>
+        <div class="co-pc-total-label">Total Value (excl. Tax)</div>
       </div>
     </div>
-
-    <!-- Right: payment details (bank) -->
-
+    <div class="co-pc-body">
+      <div class="co-pc-summary-label">Payment Summary</div>
+      <div class="co-pc-amount-row">
+        <span class="co-pc-amount">$650,000.00</span>
+        <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+      </div>
+      <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
+        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      </div>
+      <div class="co-pc-legend">
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
+          <div class="co-pc-legend-value">$650,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
+          <div class="co-pc-legend-value">$18,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
+          <div class="co-pc-legend-value">$182,000.00</div>
+        </div>
+      </div>
+      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Quote #21887','$850,000.00','Accepted Quote Payment')">Pay Now</button>
+    </div>
   </div>
 
   <!-- ── Filter tabs ── -->
@@ -6418,62 +6394,39 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   </div>
 
   <!-- Summary cards — rebuilt to match Figma -->
-  <div class="qp-summary-row">
-
-    <!-- Left: project + payment summary -->
-    <div class="qp-card qp-project-card">
-      <div class="qp-project-left">
-        <div>
-          <div class="qp-project-name">Total Project<br>Accepted Value</div>
-          <div class="qp-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
-        </div>
-        <div class="qp-total-block">
-          <div class="qp-total-value">$850,000.00</div>
-          <div class="qp-total-label">Total Value (excl. Tax)</div>
-        </div>
-      </div>
-      <div class="qp-project-right">
-        <div class="inv-pay-summary-hdr">
-          <div class="qp-payment-summary-label">Payment Summary</div>
-          <button class="inv-view-quote-btn" onclick="go('quotes')">View your quote</button>
-        </div>
-        <div class="qp-summary-amounts">
-          <div class="qp-amounts-left">
-            <div class="qp-payment-amount">$650,000.00</div>
-            <div class="qp-payment-of">of $850,000.00 Paid so far</div>
-          </div>
-          <div class="qp-total-block-mobile">
-            <div class="qp-total-value">$850,000.00</div>
-            <div class="qp-total-label">Total Quote Value (excl. Tax)</div>
-          </div>
-        </div>
-        <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
-        </div>
-        <div class="qp-progress-legend">
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row">
-              <div class="qp-legend-dot" style="background:#009113;"></div> Paid so far
-            </div>
-            <div class="qp-legend-value">$650,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row">
-              <div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now
-            </div>
-            <div class="qp-legend-value">$18,000.00</div>
-          </div>
-          <div class="qp-legend-item" style="align-items:flex-end;">
-            <div class="qp-legend-dot-row">
-              <div class="qp-legend-dot" style="background:var(--c-border-1);"></div> Upcoming
-            </div>
-            <div class="qp-legend-value">$18,000.00</div>
-          </div>
-        </div>
-        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;flex:none;" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay Now</button>
+  <div class="co-pc-wrap">
+    <div class="co-pc-top">
+      <div class="co-pc-title">Total Project<br>Accepted Value</div>
+      <div class="co-pc-total">
+        <div class="co-pc-total-value">$850,000.00</div>
+        <div class="co-pc-total-label">Total Value (excl. Tax)</div>
       </div>
     </div>
-
+    <div class="co-pc-body">
+      <div class="co-pc-summary-label">Payment Summary</div>
+      <div class="co-pc-amount-row">
+        <span class="co-pc-amount">$650,000.00</span>
+        <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+      </div>
+      <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
+        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      </div>
+      <div class="co-pc-legend">
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
+          <div class="co-pc-legend-value">$650,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
+          <div class="co-pc-legend-value">$18,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
+          <div class="co-pc-legend-value">$182,000.00</div>
+        </div>
+      </div>
+      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay Now</button>
+    </div>
   </div>
 
   <!-- Filter tabs -->
@@ -6755,87 +6708,38 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
     </div>
   </div>
 
-  <!-- Summary cards: two side-by-side (Figma: Total Project Value + Variation Summary) -->
-  <div class="qp-summary-row">
-    <!-- Total Project Value card -->
-    <div class="qp-card qp-var-summary-card">
-      <div class="var-card-left">
-        <div>
-          <div class="var-summary-title">Total Project Accepted Value</div>
-          <!-- Total = Quote Accepted ($162,000 — #21887 Rev 3) + Variation Accepted ($45,000 — #30145) + Sales Order Accepted ($619,800) -->
-        </div>
-        <div class="var-total-block" style="text-align:right;">
-          <div class="var-total-value" style="font-size:20px;font-weight:600;color:var(--c-text-1);">$850,000.00</div>
-          <div class="var-total-label">Total Value (excl. Tax)</div>
-        </div>
-      </div>
-      <div class="qp-project-right">
-        <div class="qp-payment-summary-label">Payment Summary</div>
-        <div class="qp-summary-amounts">
-          <div class="qp-amounts-left">
-            <div class="qp-payment-amount">$650,000.00</div>
-            <div class="qp-payment-of">of $850,000.00 Paid so far</div>
-          </div>
-          <div class="qp-total-block-mobile">
-            <div class="qp-total-value">$85,900.00</div>
-            <div class="qp-total-label">Total Variation Value</div>
-          </div>
-        </div>
-        <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
-        </div>
-        <div class="qp-progress-legend">
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#009113;"></div> Paid so far</div>
-            <div class="qp-legend-value">$650,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now</div>
-            <div class="qp-legend-value">$18,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#eaeaea;"></div> Upcoming</div>
-            <div class="qp-legend-value">$182,000.00</div>
-          </div>
-        </div>
-        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;flex:none;" onclick="openPayNowModal('Variation #30145','$850,000.00','Project Payment')">Pay Now</button>
+  <div class="co-pc-wrap">
+    <div class="co-pc-top">
+      <div class="co-pc-title">Total Project<br>Accepted Value</div>
+      <div class="co-pc-total">
+        <div class="co-pc-total-value">$850,000.00</div>
+        <div class="co-pc-total-label">Total Value (excl. Tax)</div>
       </div>
     </div>
-    <!-- Variation Summary card -->
-    <div class="qp-card qp-var-summary-card">
-      <div class="var-card-left">
-        <div class="var-summary-title">Variation Summary</div>
-        <div style="margin-top:4px;">
-          <div class="var-status-row var-status-pending"><span>Pending your review</span><span>01</span></div>
-          <div class="var-status-row var-status-tbc"><span>To be confirmed</span><span>02</span></div>
-          <div class="var-status-row var-status-accepted"><span>Accepted</span><span>01</span></div>
-          <div class="var-status-row var-status-declined"><span>Declined</span><span>01</span></div>
+    <div class="co-pc-body">
+      <div class="co-pc-summary-label">Payment Summary</div>
+      <div class="co-pc-amount-row">
+        <span class="co-pc-amount">$650,000.00</span>
+        <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+      </div>
+      <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
+        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      </div>
+      <div class="co-pc-legend">
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
+          <div class="co-pc-legend-value">$650,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
+          <div class="co-pc-legend-value">$18,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
+          <div class="co-pc-legend-value">$182,000.00</div>
         </div>
       </div>
-      <div class="qp-project-right">
-        <div class="qp-payment-summary-label">Payment Summary</div>
-        <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
-          <div class="qp-payment-amount">$650,000.00</div>
-          <div class="qp-payment-of">of $850,000.00 Paid so far</div>
-        </div>
-        <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
-        </div>
-        <div class="qp-progress-legend">
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#009113;"></div> Paid so far</div>
-            <div class="qp-legend-value">$650,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now</div>
-            <div class="qp-legend-value">$18,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#eaeaea;"></div> Upcoming</div>
-            <div class="qp-legend-value">$182,000.00</div>
-          </div>
-        </div>
-      </div>
+      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Variation #30145','$850,000.00','Project Payment')">Pay Now</button>
     </div>
   </div>
 
@@ -7344,60 +7248,39 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
     </div>
   </div>
 
-  <!-- ── Summary cards (same layout as Quotes) ── -->
-  <div class="qp-summary-row">
-
-    <!-- Left: project + payment summary -->
-    <div class="qp-card qp-project-card">
-      <div class="qp-project-left">
-        <div>
-          <div class="qp-project-name">Total Project<br>Accepted Value</div>
-          <div class="qp-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
-        </div>
-        <div class="qp-total-block">
-          <div class="qp-total-value">$619,800.00</div>
-          <div class="qp-total-label">Total Value (excl. Tax)</div>
-        </div>
-      </div>
-      <div class="qp-project-right">
-        <div class="qp-payment-summary-label">Payment Summary</div>
-        <div class="qp-summary-amounts">
-          <div class="qp-amounts-left">
-            <div class="qp-payment-amount">$500,000.00</div>
-            <div class="qp-payment-of">of $619,800.00 Paid so far</div>
-          </div>
-          <div class="qp-total-block-mobile">
-            <div class="qp-total-value">$619,800.00</div>
-            <div class="qp-total-label">Total Sales Order Value (excl. Tax)</div>
-          </div>
-        </div>
-        <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:81%;background:#009113;"></div>
-        </div>
-        <div class="qp-progress-legend">
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row">
-              <div class="qp-legend-dot" style="background:#009113;"></div> Paid so far
-            </div>
-            <div class="qp-legend-value">$500,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row">
-              <div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now
-            </div>
-            <div class="qp-legend-value">$18,000.00</div>
-          </div>
-          <div class="qp-legend-item" style="align-items:flex-end;">
-            <div class="qp-legend-dot-row">
-              <div class="qp-legend-dot" style="background:var(--c-border-1);"></div> Upcoming
-            </div>
-            <div class="qp-legend-value">$101,800.00</div>
-          </div>
-        </div>
-        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;flex:none;" onclick="openPayNowModal('#250924.SOC014','$619,800.00','Sales Order Payment')">Pay Now</button>
+  <div class="co-pc-wrap">
+    <div class="co-pc-top">
+      <div class="co-pc-title">Total Project<br>Accepted Value</div>
+      <div class="co-pc-total">
+        <div class="co-pc-total-value">$850,000.00</div>
+        <div class="co-pc-total-label">Total Value (excl. Tax)</div>
       </div>
     </div>
-
+    <div class="co-pc-body">
+      <div class="co-pc-summary-label">Payment Summary</div>
+      <div class="co-pc-amount-row">
+        <span class="co-pc-amount">$650,000.00</span>
+        <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+      </div>
+      <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
+        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      </div>
+      <div class="co-pc-legend">
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
+          <div class="co-pc-legend-value">$650,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
+          <div class="co-pc-legend-value">$18,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
+          <div class="co-pc-legend-value">$182,000.00</div>
+        </div>
+      </div>
+      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('#250924.SOC014','$850,000.00','Sales Order Payment')">Pay Now</button>
+    </div>
   </div>
 
   <!-- Filter tabs — Figma 849:747 (All / TBC / Accepted / Declined) -->
@@ -10967,6 +10850,52 @@ function rejectCoCard(btn) {
 }
 
 // ── Change Order detail sheet ──
+// ── Change Order detail sheet — drag-to-dismiss ──
+(function() {
+  var overlay = document.getElementById('co-detail-overlay');
+  if (!overlay) return;
+  var sheet = overlay.querySelector('.co-detail-sheet');
+  if (!sheet) return;
+  var header = overlay.querySelector('.co-detail-header');
+  if (!header) return;
+  var startY = 0, currentDelta = 0, dragging = false;
+
+  header.addEventListener('touchstart', function(e) {
+    startY = e.touches[0].clientY;
+    currentDelta = 0;
+    dragging = false;
+  }, { passive: true });
+
+  header.addEventListener('touchmove', function(e) {
+    var dy = e.touches[0].clientY - startY;
+    if (dy > 0) {
+      dragging = true;
+      e.preventDefault();
+      currentDelta = dy;
+      sheet.style.transition = 'none';
+      sheet.style.transform = 'translateY(' + dy + 'px)';
+    }
+  }, { passive: false });
+
+  header.addEventListener('touchend', function() {
+    if (!dragging) { currentDelta = 0; return; }
+    dragging = false;
+    sheet.style.transition = 'transform 0.3s cubic-bezier(0.32,0.72,0,1)';
+    if (currentDelta > 100) {
+      sheet.style.transform = 'translateY(100%)';
+      setTimeout(function() {
+        overlay.classList.remove('open');
+        sheet.style.transform = '';
+        sheet.style.transition = '';
+      }, 300);
+    } else {
+      sheet.style.transform = '';
+      setTimeout(function() { sheet.style.transition = ''; }, 300);
+    }
+    currentDelta = 0;
+  }, { passive: true });
+})();
+
 function openCoDetails() {
   var overlay = document.getElementById('co-detail-overlay');
   if (!overlay) return;
