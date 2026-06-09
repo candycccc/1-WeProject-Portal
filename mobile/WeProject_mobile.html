@@ -5069,6 +5069,334 @@ body.mobile-view #app-content {
 .nya-two-btns { display: flex; gap: 17px; margin-top: 10px; margin-bottom: 16px; }
 .nya-two-btns .nya-view-btn { flex: 1; margin: 0; }
 
+/* ── Change Order — Payment Card ── */
+.co-pc-wrap {
+  background: #ffffff;
+  border-top: 2px solid var(--brand-accent);
+  flex-shrink: 0;
+  margin: 12px;
+}
+.co-pc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 14px 10px;
+  gap: 12px;
+}
+.co-pc-title {
+  font-size: 18px; font-weight: 600;
+  color: var(--c-text-1); line-height: 1.3;
+  flex: 1;
+}
+.co-pc-total {
+  display: flex; flex-direction: column;
+  align-items: flex-end; text-align: right; flex-shrink: 0;
+}
+.co-pc-total-value {
+  font-size: 24px; font-weight: 600; color: var(--c-text-1); line-height: 1.2;
+}
+.co-pc-total-label {
+  font-size: 10px; font-weight: 500;
+  color: var(--c-text-muted); margin-top: 2px;
+}
+.co-pc-body {
+  padding: 0 14px 16px;
+}
+.co-pc-summary-label {
+  font-size: 12px; font-weight: 600;
+  color: var(--c-text-1); margin-bottom: 4px;
+}
+.co-pc-amount-row {
+  display: flex; align-items: baseline; gap: 6px; margin-bottom: 10px; flex-wrap: wrap;
+}
+.co-pc-amount {
+  font-size: 24px; font-weight: 600; color: var(--c-text-1);
+}
+.co-pc-amount-of {
+  font-size: 12px; font-weight: 600; color: var(--c-text-1);
+}
+.co-pc-legend {
+  display: flex; justify-content: space-between;
+  margin-top: 10px; margin-bottom: 14px;
+}
+.co-pc-legend-item {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.co-pc-legend-label {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 12px; font-weight: 600; color: var(--c-text-1);
+}
+.co-pc-legend-dot {
+  width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0;
+}
+.co-pc-legend-value {
+  font-size: 12px; font-weight: 700; color: var(--c-text-1); padding-left: 12px;
+}
+/* ── Mobile: Change Orders page — same sticky layout as Quotes ── */
+body.mobile-view #s-change-order.screen {
+  height: 100%; box-sizing: border-box; min-height: 0; overflow: hidden;
+}
+body.mobile-view #s-change-order .quotes-page {
+  flex: 1; min-height: 0;
+  overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  display: flex; flex-direction: column;
+}
+body.mobile-view #s-change-order .qp-topbar {
+  position: sticky; top: 0; z-index: 20; background: var(--brand-bg);
+}
+body.mobile-view #s-change-order .qp-filter-tabs {
+  position: sticky; top: 64px; z-index: 19;
+  background: var(--brand-bg);
+  padding-bottom: 8px;
+}
+body.mobile-view #s-change-order .qp-list {
+  flex: none; overflow: visible; padding: 0 12px 16px;
+}
+body.mobile-view #s-change-order .qp-progress-bar-outer { height: 18px; background: #eaeaea; }
+body.mobile-view #s-change-order .qp-footer { display: none; }
+body.mobile-view #s-change-order .qr-action-group { width: 100%; }
+body.mobile-view #s-change-order .qr-action-btn {
+  flex: 1; padding: 10px 6px; font-size: 16px; min-height: 42px;
+  display: flex; align-items: center; justify-content: center;
+}
+body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width: 54px; }
+
+/* ── Change Order card ── */
+.co-card {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  box-shadow: 0 3px 4px 0 #efefef;
+  margin-bottom: 12px;
+  overflow: hidden;
+  font-family: var(--brand-font, 'Figtree', sans-serif);
+}
+.co-card-header {
+  padding: 10px 11px 12px;
+  border-bottom: 1px solid #eaeaea;
+}
+.co-header-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.co-header-quote {
+  font-size: 12px; font-weight: 600; color: #313131;
+  margin-bottom: 2px;
+}
+.co-header-title {
+  font-size: 20px; font-weight: 600; color: #313131; line-height: 1.2;
+}
+
+/* ── Timeline ── */
+.co-timeline {
+  padding: 14px 11px 0;
+}
+.co-tl-item {
+  display: flex; gap: 10px; padding-bottom: 6px;
+}
+.co-tl-left {
+  display: flex; flex-direction: column; align-items: center;
+  flex-shrink: 0; width: 16px;
+}
+.co-tl-dot {
+  display: flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; flex-shrink: 0;
+  font-size: 11px;
+}
+.co-tl-dot-done { color: #c3c3c3; }
+.co-tl-dot-pending {
+  position: relative; width: 14px; height: 14px;
+  border-radius: 50%; border: 2px solid #ff9500;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.co-tl-dot-inner {
+  width: 6px; height: 6px; border-radius: 50%; background: #ff9500;
+}
+.co-tl-line {
+  width: 1px; background: #d9d9d9;
+  flex: 1; min-height: 18px; margin-top: 2px;
+}
+.co-tl-body {
+  flex: 1; padding-bottom: 12px; min-width: 0;
+}
+.co-tl-title-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; margin-bottom: 4px;
+}
+.co-tl-label {
+  font-size: 14px; font-weight: 600; color: #313131; white-space: nowrap;
+}
+.co-tl-desc {
+  font-size: 12px; font-weight: 600; color: #313131;
+  line-height: 1.4; margin: 0; padding: 0;
+}
+.co-tl-item-active .co-tl-body { padding-bottom: 0; }
+.co-tl-status-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; flex-wrap: wrap; margin-bottom: 6px;
+}
+
+/* ── Value breakdown table ── */
+.co-value-table {
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 14px;
+}
+.co-value-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px 10px;
+  border-bottom: 1px solid #eaeaea;
+}
+.co-value-row:last-child { border-bottom: none; }
+.co-value-label { font-weight: 500; color: #151515; }
+.co-value-num { font-weight: 600; color: #151515; text-align: right; white-space: nowrap; }
+.co-value-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px;
+  background: #f5f5f5;
+  border-top: 1px solid #d9d9d9;
+}
+.co-value-footer-left {
+  display: flex; flex-direction: column;
+}
+.co-value-footer-label { font-size: 16px; font-weight: 600; color: #313131; }
+.co-value-footer-sub { font-size: 10px; font-weight: 500; color: #151515; }
+
+/* ── Card action buttons ── */
+.co-card-actions {
+  padding: 10px 11px 12px;
+  display: flex; flex-direction: column; gap: 8px;
+  border-top: 1px solid #eaeaea;
+}
+
+/* ── Payment progress section (accepted cards) ── */
+.co-payment-progress {
+  padding: 14px 11px 14px;
+}
+.co-pay-legend {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-top: 8px;
+}
+.co-pay-legend-row {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 14px; font-weight: 600; color: #313131;
+}
+.co-pay-legend-left {
+  display: flex; align-items: center; gap: 6px;
+}
+.co-pay-pct { color: #313131; }
+.co-pay-amt { color: #313131; white-space: nowrap; }
+
+/* ── CO Details Bottom Sheet ── */
+.co-detail-overlay {
+  display: none; position: absolute; inset: 0;
+  background: rgba(0,0,0,0.42); z-index: 820;
+  align-items: flex-end;
+}
+.co-detail-overlay.open { display: flex; }
+.co-detail-sheet {
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  height: calc(100% - 44px);
+  display: flex; flex-direction: column;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+  overflow: hidden;
+  animation: coSheetIn 0.32s cubic-bezier(0.32,0.72,0,1) both;
+}
+@keyframes coSheetIn {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.co-detail-header {
+  flex-shrink: 0; background: #fff;
+  border-bottom: 1px solid var(--c-border-1);
+  padding: 14px 14px 12px;
+  cursor: grab;
+}
+.co-detail-hd-row {
+  display: flex; gap: 12px; align-items: flex-start;
+  margin-top: 4px;
+}
+.co-detail-thumb {
+  width: 61px; height: 61px;
+  border: 1px solid #e9e9e9; border-radius: 4px;
+  overflow: hidden; flex-shrink: 0;
+  background: var(--c-surface-2);
+  display: flex; align-items: center; justify-content: center;
+}
+.co-detail-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.co-detail-hd-info { flex: 1; min-width: 0; }
+.co-detail-hd-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 8px; margin-bottom: 4px; flex-wrap: wrap;
+}
+.co-detail-hd-quote {
+  font-size: 12px; font-weight: 600; color: var(--c-text-1); margin-bottom: 2px;
+}
+.co-detail-hd-title {
+  font-size: 18px; font-weight: 600; color: var(--c-text-1); line-height: 1.25;
+}
+.co-detail-body {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+}
+.co-detail-footer {
+  flex-shrink: 0; background: #fff;
+  border-top: 1px solid var(--c-border-1);
+  padding: 12px 14px 28px;
+}
+.co-detail-footer .qr-action-group { border-radius: 4px; overflow: hidden; }
+.co-detail-footer .qr-action-btn {
+  flex: 1; padding: 10px 6px; font-size: 16px;
+  min-height: 42px; display: flex; align-items: center; justify-content: center;
+}
+.co-detail-footer .qr-action-btn:first-child { flex: none; width: 54px; }
+
+/* CO breakdown wrapper */
+.co-breakdown-wrap {
+  background: #f5f5f5;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  padding: 10px 11px 12px;
+  display: flex; flex-direction: column; gap: 11px;
+  overflow: hidden;
+}
+.co-breakdown-title {
+  font-size: 14px; font-weight: 600; color: #151515;
+}
+
+/* CO doc cards (inside detail sheet) */
+.co-doc-card {
+  border: 1px solid #d9d9d9; border-radius: 4px;
+  background: #fff; overflow: hidden;
+}
+.co-doc-header {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 8px 0; flex-wrap: wrap;
+}
+.co-doc-icon { font-size: 16px; color: var(--c-text-1); flex-shrink: 0; }
+.co-doc-ref  { font-size: 14px; font-weight: 600; color: var(--c-text-1); }
+.co-doc-rev  { font-size: 14px; font-weight: 600; color: var(--c-text-1); }
+.co-doc-row {
+  display: flex; justify-content: space-between;
+  align-items: flex-end; padding: 6px 8px 10px; gap: 8px;
+}
+.co-doc-desc { font-size: 14px; font-weight: 600; color: #151515; flex: 1; }
+.co-doc-right { text-align: right; flex-shrink: 0; }
+.co-doc-delta { font-size: 18px; font-weight: 600; }
+.co-doc-sublabel { font-size: 10px; font-weight: 500; color: #9c9c9c; }
+.co-doc-title { font-size: 14px; font-weight: 600; color: #313131; padding: 6px 8px 4px; }
+.co-doc-amounts {
+  display: flex; justify-content: space-between;
+  align-items: flex-end; padding: 4px 8px 10px;
+}
+.co-doc-val { font-size: 18px; font-weight: 600; color: #303030; }
+.co-doc-vallabel { font-size: 10px; font-weight: 500; color: #9c9c9c; }
+
 </style>
 <script id="mobile-standalone-vars">
 (function () {
@@ -5528,6 +5856,14 @@ body.mobile-view #app-content {
     <div class="detail-nav-badge">
       <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
       <span>2 Awaiting Approval</span>
+    </div>
+  </div>
+  <div class="detail-nav-card" onclick="go('change-order')">
+    <i class="fa-solid fa-file-invoice detail-nav-icon"></i>
+    <span class="detail-nav-label">Change Orders</span>
+    <div class="detail-nav-badge">
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
+      <span>1 Awaiting Approval</span>
     </div>
   </div>
   <div class="detail-nav-card" onclick="go('invoices')">
@@ -6689,6 +7025,244 @@ body.mobile-view #app-content {
 </div></div>
 
 
+<div id="s-change-order" class="screen">
+<div class="quotes-page">
+
+  <!-- Top bar -->
+  <div class="qp-topbar">
+    <button class="qp-back-btn" onclick="go('detail')">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/>
+      </svg>
+      Back
+    </button>
+    <button class="qp-nav-pill" onclick="toggleNavDropdown(event)">
+      Change Orders
+      <i class="fa-sharp-solid fa-chevron-down"></i>
+    </button>
+    <div class="qp-nav-dropdown" id="nav-dropdown-co">
+    </div>
+    <div class="qp-topbar-right">
+      <button class="qp-bell-btn qp-bell-badge" onclick="toggleNotifPanel(event)">
+        <i class="fa-sharp-solid fa-bell"></i>
+      </button>
+      <div class="qp-avatar" onclick="toggleUserDropdown(event)">MM
+        <div class="qp-user-dropdown" id="user-dropdown-co">
+          <div class="qp-user-dropdown-item" onclick="openProfilePanel()">Edit Profile
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="qp-user-dropdown-item" onclick="closeDropdowns();go('login')">Sign out
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Summary Card -->
+  <div class="co-pc-wrap">
+    <div class="co-pc-top">
+      <div class="co-pc-title">Total Project<br>Accepted Value</div>
+      <div class="co-pc-total">
+        <div class="co-pc-total-value">$850,000.00</div>
+        <div class="co-pc-total-label">Total Value (excl. Tax)</div>
+      </div>
+    </div>
+    <div class="co-pc-body">
+      <div class="co-pc-summary-label">Payment Summary</div>
+      <div class="co-pc-amount-row">
+        <span class="co-pc-amount">$650,000.00</span>
+        <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+      </div>
+      <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
+        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      </div>
+      <div class="co-pc-legend">
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
+          <div class="co-pc-legend-value">$650,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
+          <div class="co-pc-legend-value">$18,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
+          <div class="co-pc-legend-value">$182,000.00</div>
+        </div>
+      </div>
+      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Change Order','$850,000.00','Change Order Payment')">Pay Now</button>
+    </div>
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="qp-filter-tabs">
+    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">02</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Pending your review <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">TBC <span class="qp-filter-count">00</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">00</span></button>
+    <label class="qp-search-pill">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" placeholder="Search" oninput="searchQuotes(this)">
+    </label>
+  </div>
+
+  <!-- Change Order cards list -->
+  <div class="qp-list">
+
+    <!-- Card 1: Pending your review -->
+    <div class="co-card" data-status="pending your review">
+      <div class="co-card-header">
+        <div class="co-header-row">
+          <span class="qr-badge qr-badge-pending">Pending your review</span>
+          <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+        </div>
+        <div class="co-header-quote">Quote #23944</div>
+        <div class="co-header-title">Dutch House Security INV TEST</div>
+      </div>
+
+      <div class="co-timeline">
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Revision 1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+          </div>
+        </div>
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Change Order 1.1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+            <p class="co-tl-desc">Additional earth terminal required to complete the system installation and ensure correct connectivity.</p>
+          </div>
+        </div>
+        <div class="co-tl-item co-tl-item-active">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-pending"><span class="co-tl-dot-inner"></span></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-label" style="font-size:16px;font-weight:600;color:#313131;margin-bottom:6px;">Change Order 1.2</div>
+            <div class="co-tl-status-row">
+              <span class="qr-badge qr-badge-pending">Pending your review</span>
+              <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+            </div>
+            <div class="co-value-table">
+              <div class="co-value-row">
+                <span class="co-value-label">Previous Project Total</span>
+                <span class="co-value-num">$12,200,000.00</span>
+              </div>
+              <div class="co-value-row">
+                <span class="co-value-label">Change Order 1.2</span>
+                <span class="co-value-num" style="color:#cf3400;">−$1,200,000.00</span>
+              </div>
+              <div class="co-value-row">
+                <span class="co-value-label">Variation Value</span>
+                <span class="co-value-num" style="color:#009113;">+$2,120,000.00</span>
+              </div>
+              <div class="co-value-footer">
+                <div class="co-value-footer-left">
+                  <span class="co-value-footer-label">New Project Total</span>
+                  <span class="co-value-footer-sub">if accepted</span>
+                </div>
+                <span class="co-value-num" style="color:#009113;font-size:16px;">$13,120,000.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="co-card-actions">
+        <button class="inv-btn" style="flex:none;width:100%;height:41px;" onclick="openCoDetails()">View Change Order 1.2 Details</button>
+        <div class="qr-action-group">
+          <button class="qr-action-btn" onclick="openCommentDialog('CO-1.2')">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </button>
+          <button class="qr-action-btn" onclick="tbcCoCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCoCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCoCard(this)">Accept</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Accepted -->
+    <div class="co-card" data-status="accepted">
+      <div class="co-card-header">
+        <div class="co-header-row">
+          <span class="qr-badge qr-badge-accepted">Accepted</span>
+          <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+        </div>
+        <div class="co-header-quote">Quote #23944</div>
+        <div class="co-header-title">Dutch House Security INV TEST</div>
+      </div>
+      <div class="co-payment-progress">
+        <div class="qr-payment-label">Payment Progress</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$120,000.00</span>
+          <span class="qr-payment-of">of $12,000,000.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar" style="margin:8px 0;">
+          <div class="qr-payment-bar-seg seg-paid" style="width:1%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$12,000,000.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+        <button class="inv-btn" style="flex:none;width:100%;height:41px;margin-top:12px;">View Accepted Details</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="qp-footer">
+    <div class="qp-footer-project">
+      <span class="brand-project-name">Ocean Palm Residences</span>
+    </div>
+    <div class="qp-footer-meta">
+      <span>Tyler Holmes</span> · <span>Project Manager</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
 
 <div id="s-purchase-order" class="screen">
 <div class="quotes-page">
@@ -7600,6 +8174,177 @@ body.mobile-view #app-content {
 </div>
 <!-- /SCREEN — WARRANTY -->
 
+
+<!-- ── Change Order Detail Bottom Sheet ── -->
+<div class="co-detail-overlay" id="co-detail-overlay" onclick="closeCoDetails()">
+  <div class="co-detail-sheet" onclick="event.stopPropagation()">
+
+    <!-- Sticky header (drag zone) -->
+    <div class="co-detail-header" id="co-detail-header">
+      <div class="qp-comment-handle"></div>
+      <div class="co-detail-hd-row">
+        <div class="co-detail-thumb">
+          <img src="assets/images/08fa6f48-31e3-47be-9f71-aa054eea522a.png" alt=""
+               onerror="this.style.display='none'">
+        </div>
+        <div class="co-detail-hd-info">
+          <div class="co-detail-hd-meta">
+            <span class="qr-badge qr-badge-pending" id="co-detail-badge">Pending your review</span>
+            <span class="qr-date qr-date-pending" id="co-detail-date">Valid until 14 April 2026</span>
+          </div>
+          <div class="co-detail-hd-quote" id="co-detail-quote">Quote #23944</div>
+          <div class="co-detail-hd-title" id="co-detail-title">Dutch House Security INV TEST</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="co-detail-body">
+
+      <!-- Timeline -->
+      <div class="co-timeline" style="padding:16px 14px 0;">
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Revision 1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+          </div>
+        </div>
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Change Order 1.1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+            <p class="co-tl-desc">Additional earth terminal required to complete the system installation and ensure correct connectivity.</p>
+          </div>
+        </div>
+        <div class="co-tl-item co-tl-item-active">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-pending"><span class="co-tl-dot-inner"></span></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-label" style="font-size:16px;font-weight:600;color:#313131;margin-bottom:6px;" id="co-detail-co-label">Change Order 1.2</div>
+            <div class="co-tl-status-row">
+              <span class="qr-badge qr-badge-pending">Pending your review</span>
+              <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+            </div>
+            <div class="co-value-table" style="margin:10px 0 0;">
+              <div class="co-value-row">
+                <span class="co-value-label">Previous Project Total</span>
+                <span class="co-value-num">$12,200,000.00</span>
+              </div>
+              <div class="co-value-row">
+                <span class="co-value-label">Change Order 1.2</span>
+                <span class="co-value-num" style="color:#cf3400;">−$1,200,000.00</span>
+              </div>
+              <div class="co-value-row" style="border-bottom:none;">
+                <span class="co-value-label">Variation Value</span>
+                <span class="co-value-num" style="color:#009113;">+$2,120,000.00</span>
+              </div>
+              <div class="co-value-footer">
+                <div class="co-value-footer-left">
+                  <span class="co-value-footer-label">New Project Total</span>
+                  <span class="co-value-footer-sub">if accepted</span>
+                </div>
+                <span class="co-value-num" style="color:#009113;font-size:16px;">$13,120,000.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Project Total Breakdown -->
+      <div class="co-breakdown-wrap" style="margin:8px 14px 24px 40px;">
+        <div class="co-breakdown-title">New Project Total Breakdown</div>
+
+        <!-- Change Order 1.2 doc card -->
+        <div class="co-doc-card">
+          <div class="co-doc-header">
+            <i class="fa-solid fa-file-invoice co-doc-icon"></i>
+            <span class="co-doc-ref">Change Order 1.2</span>
+          </div>
+          <div class="co-doc-row">
+            <div class="co-doc-desc">Additional site setup &amp; commissioning</div>
+            <div class="co-doc-right">
+              <div class="co-doc-delta" style="color:#009113;">+$1,000,000.00</div>
+              <div class="co-doc-sublabel">Change Order Changes</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Variation 1 — Above Estimate -->
+        <div class="co-doc-card co-doc-var">
+          <div class="co-doc-header">
+            <i class="fa-solid fa-file-plus co-doc-icon"></i>
+            <span class="co-doc-ref">Variation 1</span>
+            <span class="co-doc-rev">Revision 3</span>
+            <span class="qr-badge qr-badge-accepted" style="margin-left:auto;">Above Estimate</span>
+          </div>
+          <div class="co-doc-title">Additional Downlights – Master Bedroom</div>
+          <div class="co-doc-amounts">
+            <div>
+              <div class="co-doc-val">$1,200,000.00</div>
+              <div class="co-doc-vallabel">Original Estimate Value</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:12px;font-weight:600;color:#009113;">+$1,000,000.00</div>
+              <div class="co-doc-val">$2,200,000.00</div>
+              <div class="co-doc-vallabel">Final Price</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Variation 1 — Same as estimate -->
+        <div class="co-doc-card co-doc-var">
+          <div class="co-doc-header">
+            <i class="fa-solid fa-file-plus co-doc-icon"></i>
+            <span class="co-doc-ref">Variation 1</span>
+            <span class="co-doc-rev">Revision 3</span>
+            <span class="qr-badge" style="margin-left:auto;background:rgba(156,156,156,0.26);">Same as estimate</span>
+          </div>
+          <div class="co-doc-title">Additional Downlights – Master Bedroom</div>
+          <div class="co-doc-amounts">
+            <div>
+              <div class="co-doc-val">$1,200,000.00</div>
+              <div class="co-doc-vallabel">Original Estimate Value</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="co-doc-val">$1,200,000.00</div>
+              <div class="co-doc-vallabel">Final Price</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- /co-detail-body -->
+
+    <!-- Sticky footer: action buttons -->
+    <div class="co-detail-footer">
+      <div class="qr-action-group" style="width:100%;">
+        <button class="qr-action-btn" onclick="openCommentDialog('CO-1.2')">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+        <button class="qr-action-btn" onclick="closeCoDetails()">TBC</button>
+        <button class="qr-action-btn" onclick="closeCoDetails()">Reject</button>
+        <button class="qr-action-btn" onclick="closeCoDetails()">Accept</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <!-- ── Needs Your Attention dialog ── -->
 <div class="nya-overlay" id="nya-overlay" onclick="closeNYADialog()">
@@ -8852,7 +9597,7 @@ const screenLabels  = {
 const screenFriendly = {
   login: 'Login Page', 'forgot-password': 'Forgot Password', dash: 'Project List', detail: 'Project Detail',
   quotes: 'Quotes', invoices: 'Invoices',
-  variations: 'Variations', 'purchase-order': 'Sales Order',
+  variations: 'Variations', 'change-order': 'Change Orders', 'purchase-order': 'Sales Order',
   documents: 'Documents', warranty: 'Warranty', progress: 'Progress'
 };
 
@@ -10113,6 +10858,75 @@ function resetBranding() {
 // ── Initialise contrast tokens on first load ──
 updateOnTokens();
 
+// ── Change Order card actions ──
+function acceptCoCard(btn) {
+  var card = btn.closest('.co-card');
+  if (!card) return;
+  var now = new Date();
+  var dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  var actionsEl = card.querySelector('.co-card-actions');
+  if (actionsEl) {
+    actionsEl.style.transition = 'opacity 0.25s ease, max-height 0.3s ease';
+    actionsEl.style.opacity = '0'; actionsEl.style.overflow = 'hidden';
+    actionsEl.style.maxHeight = actionsEl.scrollHeight + 'px';
+    requestAnimationFrame(function() { requestAnimationFrame(function() { actionsEl.style.maxHeight = '0'; }); });
+  }
+  setTimeout(function() {
+    card.dataset.status = 'accepted';
+    var badge = card.querySelector('.co-header-row .qr-badge');
+    if (badge) { badge.className = 'qr-badge qr-badge-accepted'; badge.textContent = 'Accepted'; }
+    var dateEl = card.querySelector('.co-header-row .qr-date');
+    if (dateEl) { dateEl.className = 'qr-date qr-date-accepted'; dateEl.textContent = 'Accepted on ' + dateStr; }
+    if (actionsEl) actionsEl.remove();
+  }, 280);
+}
+function tbcCoCard(btn) {
+  var card = btn.closest('.co-card');
+  if (!card) return;
+  card.dataset.status = 'tbc';
+  var badge = card.querySelector('.co-header-row .qr-badge');
+  if (badge) { badge.className = 'qr-badge qr-badge-tbc'; badge.textContent = 'To be confirmed'; }
+  var dateEl = card.querySelector('.co-header-row .qr-date');
+  if (dateEl) { dateEl.className = 'qr-date qr-date-tbc'; }
+}
+function rejectCoCard(btn) {
+  var card = btn.closest('.co-card');
+  if (!card) return;
+  var now = new Date();
+  var dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  var actionsEl = card.querySelector('.co-card-actions');
+  if (actionsEl) {
+    actionsEl.style.transition = 'opacity 0.25s ease, max-height 0.3s ease';
+    actionsEl.style.opacity = '0'; actionsEl.style.overflow = 'hidden';
+    actionsEl.style.maxHeight = actionsEl.scrollHeight + 'px';
+    requestAnimationFrame(function() { requestAnimationFrame(function() { actionsEl.style.maxHeight = '0'; }); });
+  }
+  setTimeout(function() {
+    card.dataset.status = 'declined';
+    var badge = card.querySelector('.co-header-row .qr-badge');
+    if (badge) { badge.className = 'qr-badge qr-badge-declined'; badge.textContent = 'Declined'; }
+    var dateEl = card.querySelector('.co-header-row .qr-date');
+    if (dateEl) { dateEl.className = 'qr-date qr-date-declined'; dateEl.textContent = 'Declined on ' + dateStr; }
+    if (actionsEl) actionsEl.remove();
+  }, 280);
+}
+
+// ── Change Order detail sheet ──
+function openCoDetails() {
+  var overlay = document.getElementById('co-detail-overlay');
+  if (!overlay) return;
+  var sheet = overlay.querySelector('.co-detail-sheet');
+  if (sheet) { sheet.style.animation = 'none'; sheet.offsetHeight; sheet.style.animation = ''; }
+  overlay.classList.add('open');
+  var body = overlay.querySelector('.co-detail-body');
+  if (body) body.scrollTop = 0;
+}
+function closeCoDetails() {
+  var overlay = document.getElementById('co-detail-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+}
+
 // ── Pay now modal ──
 var _currentInvRef = 'Invoice #002';
 function openPayNowModal(invRef, amount, desc) {
@@ -10260,13 +11074,14 @@ const WQ_BRAND = {
    badge: 'text' → shows alert chip with that label
 ─────────────────────────────────────────────────────── */
 const WQ_NAV_ITEMS = [
-  { screen: 'quotes',         label: 'Quotes',      badge: '2 Actions Required' },
-  { screen: 'variations',     label: 'Variations',  badge: '2 Awaiting Approval' },
-  { screen: 'invoices',       label: 'Invoices',    badge: '2 Payment Due' },
-  { screen: 'purchase-order', label: 'Sales Order', badge: '1 Awaiting Approval' },
+  { screen: 'quotes',         label: 'Quotes',        badge: '2 Actions Required' },
+  { screen: 'variations',     label: 'Variations',    badge: '2 Awaiting Approval' },
+  { screen: 'change-order',   label: 'Change Orders', badge: '1 Awaiting Approval' },
+  { screen: 'invoices',       label: 'Invoices',      badge: '2 Payment Due' },
+  { screen: 'purchase-order', label: 'Sales Order',   badge: '1 Awaiting Approval' },
   { screen: 'documents',      label: 'Documents' },
   { screen: 'progress',       label: 'Progress' },
-  { screen: 'warranty',       label: 'Warranty',    hidden: true },
+  { screen: 'warranty',       label: 'Warranty',      hidden: true },
 ];
 
 /* ─────────────────────────────────────────────────────
@@ -10276,7 +11091,9 @@ const WQ_NAV_ICONS = {
   'quotes':
     '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
   'variations':
-    '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>',
+    '<i class="fa-solid fa-file-plus"></i>',
+  'change-order':
+    '<i class="fa-solid fa-file-invoice"></i>',
   'invoices':
     '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>',
   'documents':
@@ -10289,13 +11106,9 @@ const WQ_NAV_ICONS = {
     '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
 };
 
-/* Badge SVG icon reused by wqNavBadge() */
-const WQ_BADGE_SVG =
-  '<svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400">' +
-  '<path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/>' +
-  '</svg>';
+const WQ_BADGE_ICON = '<i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>';
 function wqNavBadge(text) {
-  return '<span class="qp-nav-alert">' + WQ_BADGE_SVG + text + '</span>';
+  return '<span class="qp-nav-alert">' + WQ_BADGE_ICON + text + '</span>';
 }
 
 /* ─────────────────────────────────────────────────────
@@ -10308,8 +11121,7 @@ function wqRenderNavDropdown(containerId, activeScreen) {
   if (!el) return;
   el.innerHTML = WQ_NAV_ITEMS.map(function (item) {
     var isActive = item.screen === activeScreen;
-    /* Quotes screen intentionally has no active highlight on itself */
-    var cls = 'qp-nav-item' + (isActive && activeScreen !== 'quotes' ? ' qp-nav-item-active' : '');
+    var cls = 'qp-nav-item' + (isActive ? ' qp-nav-item-active' : '');
     var onclick = isActive
       ? 'closeDropdowns()'
       : "go('" + item.screen + "');closeDropdowns()";
@@ -10360,14 +11172,15 @@ function wqFooterHTML() {
    INIT
 ─────────────────────────────────────────────────────── */
 function wqInitComponents() {
-  /* Nav dropdowns — rendered from hardcoded HTML (badges + order already correct in HTML) */
-  // wqRenderNavDropdown('nav-dropdown',          'quotes');
-  // wqRenderNavDropdown('nav-dropdown-inv',      'invoices');
-  // wqRenderNavDropdown('nav-dropdown-var',      'variations');
-  // wqRenderNavDropdown('nav-dropdown-po',       'purchase-order');
-  // wqRenderNavDropdown('nav-dropdown-progress', 'progress');
-  // wqRenderNavDropdown('nav-dropdown-doc',      'documents');
-  // wqRenderNavDropdown('nav-dropdown-warranty', 'warranty');
+  /* Nav dropdowns — rendered from WQ_NAV_ITEMS (single source of truth) */
+  wqRenderNavDropdown('nav-dropdown',          'quotes');
+  wqRenderNavDropdown('nav-dropdown-inv',      'invoices');
+  wqRenderNavDropdown('nav-dropdown-var',      'variations');
+  wqRenderNavDropdown('nav-dropdown-co',       'change-order');
+  wqRenderNavDropdown('nav-dropdown-po',       'purchase-order');
+  wqRenderNavDropdown('nav-dropdown-progress', 'progress');
+  wqRenderNavDropdown('nav-dropdown-doc',      'documents');
+  wqRenderNavDropdown('nav-dropdown-warranty', 'warranty');
 
   /* Footers — replaces all .qp-footer instances */
   document.querySelectorAll('.qp-footer').forEach(function (el) {
