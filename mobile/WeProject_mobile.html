@@ -5176,6 +5176,20 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   padding: 10px 11px 12px;
   border-bottom: 1px solid #eaeaea;
 }
+.co-card-header-sticky {
+  display: none; position: sticky; top: 110px; z-index: 18;
+  background: #fff; padding: 8px 12px;
+  border-bottom: 1px solid #eaeaea;
+  align-items: center; gap: 8px;
+  margin: 0 12px; border-radius: 10px 10px 0 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.co-card-header-sticky .co-sticky-badge { flex-shrink: 0; }
+.co-card-header-sticky .co-sticky-title {
+  font-size: 14px; font-weight: 600; color: #313131;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0;
+}
+.co-card-header-sticky.visible { display: flex; }
 .co-header-row {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 8px;
@@ -5375,27 +5389,22 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   background: #fff; overflow: hidden;
 }
 .co-doc-header {
-  display: flex; align-items: center; gap: 9px;
-  padding: 8px 8px 0; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 11px 0; flex-wrap: wrap;
 }
 .co-doc-icon { font-size: 16px; color: var(--c-text-1); flex-shrink: 0; }
-.co-doc-ref  { font-size: 14px; font-weight: 600; color: var(--c-text-1); }
-.co-doc-rev  { font-size: 14px; font-weight: 600; color: var(--c-text-1); }
-.co-doc-row {
-  display: flex; justify-content: space-between;
-  align-items: flex-end; padding: 6px 8px 10px; gap: 8px;
+.co-doc-ref  { font-size: 14px; font-weight: 600; color: #000; }
+.co-doc-rev  { font-size: 14px; font-weight: 600; color: #000; }
+.co-doc-title { font-size: 16px; font-weight: 600; color: #151515; padding: 6px 11px 8px; }
+.co-doc-table { display: flex; flex-direction: column; }
+.co-doc-table-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 12px; border-bottom: 1px solid #eaeaea;
+  font-size: 14px;
 }
-.co-doc-desc { font-size: 14px; font-weight: 600; color: #151515; flex: 1; }
-.co-doc-right { text-align: right; flex-shrink: 0; }
-.co-doc-delta { font-size: 18px; font-weight: 600; }
-.co-doc-sublabel { font-size: 10px; font-weight: 500; color: #9c9c9c; }
-.co-doc-title { font-size: 14px; font-weight: 600; color: #313131; padding: 6px 8px 4px; }
-.co-doc-amounts {
-  display: flex; justify-content: space-between;
-  align-items: flex-end; padding: 4px 8px 10px;
-}
-.co-doc-val { font-size: 18px; font-weight: 600; color: #303030; }
-.co-doc-vallabel { font-size: 10px; font-weight: 500; color: #9c9c9c; }
+.co-doc-table-row:last-child { border-bottom: none; }
+.co-doc-table-label { font-weight: 600; color: #757575; }
+.co-doc-table-value { font-weight: 700; color: #151515; text-align: right; }
 
 </style>
 <script id="mobile-standalone-vars">
@@ -7110,6 +7119,12 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
     </label>
   </div>
 
+  <!-- Condensed sticky header (shown on scroll) -->
+  <div class="co-card-header-sticky" id="co-sticky-bar">
+    <span class="co-sticky-badge"></span>
+    <span class="co-sticky-title"></span>
+  </div>
+
   <!-- Change Order cards list -->
   <div class="qp-list">
 
@@ -8273,54 +8288,61 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
             <i class="fa-solid fa-file-invoice co-doc-icon"></i>
             <span class="co-doc-ref">Change Order 1.2</span>
           </div>
-          <div class="co-doc-row">
-            <div class="co-doc-desc">Additional site setup &amp; commissioning</div>
-            <div class="co-doc-right">
-              <div class="co-doc-delta" style="color:#009113;">+$1,000,000.00</div>
-              <div class="co-doc-sublabel">Change Order Changes</div>
+          <div class="co-doc-title">Additional site setup &amp; commissioning</div>
+          <div class="co-doc-table">
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Change Order Changes</span>
+              <span class="co-doc-table-value" style="color:#009113;">+$1,000,000.00</span>
             </div>
           </div>
         </div>
 
         <!-- Variation 1 — Above Estimate -->
-        <div class="co-doc-card co-doc-var">
+        <div class="co-doc-card">
           <div class="co-doc-header">
             <i class="fa-solid fa-file-plus co-doc-icon"></i>
             <span class="co-doc-ref">Variation 1</span>
             <span class="co-doc-rev">Revision 3</span>
             <span class="qr-badge qr-badge-accepted" style="margin-left:auto;">Above Estimate</span>
           </div>
-          <div class="co-doc-title">Additional Downlights – Master Bedroom</div>
-          <div class="co-doc-amounts">
-            <div>
-              <div class="co-doc-val">$1,200,000.00</div>
-              <div class="co-doc-vallabel">Original Estimate Value</div>
+          <div class="co-doc-title">Additional site setup &amp; commissioning</div>
+          <div class="co-doc-table">
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Original Estimate Value</span>
+              <span class="co-doc-table-value">$1,200,000.00</span>
             </div>
-            <div style="text-align:right;">
-              <div style="font-size:12px;font-weight:600;color:#009113;">+$1,000,000.00</div>
-              <div class="co-doc-val">$2,200,000.00</div>
-              <div class="co-doc-vallabel">Final Price</div>
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Change in value</span>
+              <span class="co-doc-table-value" style="color:#009113;">+$1,000,000.00</span>
+            </div>
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Final Price</span>
+              <span class="co-doc-table-value">$2,200,000.00</span>
             </div>
           </div>
         </div>
 
-        <!-- Variation 1 — Same as estimate -->
-        <div class="co-doc-card co-doc-var">
+        <!-- Variation 2 — Same as estimate -->
+        <div class="co-doc-card">
           <div class="co-doc-header">
             <i class="fa-solid fa-file-plus co-doc-icon"></i>
-            <span class="co-doc-ref">Variation 1</span>
+            <span class="co-doc-ref">Variation 2</span>
             <span class="co-doc-rev">Revision 3</span>
             <span class="qr-badge" style="margin-left:auto;background:rgba(156,156,156,0.26);">Same as estimate</span>
           </div>
-          <div class="co-doc-title">Additional Downlights – Master Bedroom</div>
-          <div class="co-doc-amounts">
-            <div>
-              <div class="co-doc-val">$1,200,000.00</div>
-              <div class="co-doc-vallabel">Original Estimate Value</div>
+          <div class="co-doc-title">Additional site setup &amp; commissioning</div>
+          <div class="co-doc-table">
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Original Estimate Value</span>
+              <span class="co-doc-table-value">$1,200,000.00</span>
             </div>
-            <div style="text-align:right;">
-              <div class="co-doc-val">$1,200,000.00</div>
-              <div class="co-doc-vallabel">Final Price</div>
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Change in value</span>
+              <span class="co-doc-table-value" style="color:#009113;">+$1,000,000.00</span>
+            </div>
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Final Price</span>
+              <span class="co-doc-table-value">$2,200,000.00</span>
             </div>
           </div>
         </div>
@@ -10857,6 +10879,39 @@ function resetBranding() {
 
 // ── Initialise contrast tokens on first load ──
 updateOnTokens();
+
+// ── Change Order condensed sticky header ──
+(function() {
+  var scrollRoot = document.querySelector('#s-change-order .quotes-page');
+  if (!scrollRoot) return;
+  var stickyBar = document.getElementById('co-sticky-bar');
+  if (!stickyBar) return;
+  var badgeEl = stickyBar.querySelector('.co-sticky-badge');
+  var titleEl = stickyBar.querySelector('.co-sticky-title');
+  scrollRoot.addEventListener('scroll', function() {
+    var rootRect = scrollRoot.getBoundingClientRect();
+    var threshold = rootRect.top + 110;
+    var active = null;
+    var cards = scrollRoot.querySelectorAll('.co-card');
+    cards.forEach(function(card) {
+      var hdr = card.querySelector('.co-card-header');
+      if (!hdr) return;
+      var cardRect = card.getBoundingClientRect();
+      var hdrRect = hdr.getBoundingClientRect();
+      if (hdrRect.bottom < threshold && cardRect.bottom > threshold) active = card;
+    });
+    if (active) {
+      var badge = active.querySelector('.co-header-row .qr-badge');
+      var title = active.querySelector('.co-header-title');
+      badgeEl.className = 'co-sticky-badge ' + (badge ? badge.className : '');
+      badgeEl.textContent = badge ? badge.textContent : '';
+      titleEl.textContent = title ? title.textContent : '';
+      stickyBar.classList.add('visible');
+    } else {
+      stickyBar.classList.remove('visible');
+    }
+  }, { passive: true });
+})();
 
 // ── Change Order card actions ──
 function acceptCoCard(btn) {
