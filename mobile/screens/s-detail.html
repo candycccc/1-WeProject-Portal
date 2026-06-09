@@ -123,6 +123,14 @@
       <span>2 Awaiting Approval</span>
     </div>
   </div>
+  <div class="detail-nav-card" onclick="go('change-order')">
+    <i class="fa-solid fa-file-invoice detail-nav-icon"></i>
+    <span class="detail-nav-label">Change Orders</span>
+    <div class="detail-nav-badge">
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
+      <span>1 Awaiting Approval</span>
+    </div>
+  </div>
   <div class="detail-nav-card" onclick="go('invoices')">
     <i class="fa-solid fa-file-invoice detail-nav-icon"></i>
     <span class="detail-nav-label">Invoices</span>
@@ -180,6 +188,18 @@
         </div>
       </div>
 
+      <!-- Change Orders -->
+      <div class="tile" onclick="go('change-order')">
+        <div class="tile-alert">
+          <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
+          <span>1 Awaiting Approval</span>
+        </div>
+        <div class="tile-label">
+          Change Orders
+          <i class="fa-solid fa-file-invoice tile-fa-icon"></i>
+        </div>
+      </div>
+
       <!-- Invoices -->
       <div class="tile" onclick="go('invoices')">
         <div class="tile-label">
@@ -188,19 +208,19 @@
         </div>
       </div>
 
-      <!-- Documents -->
-      <div class="tile" onclick="go('documents')">
-        <div class="tile-label">
-          Documents
-          <i class="fa-solid fa-copy tile-fa-icon"></i>
-        </div>
-      </div>
-
       <!-- Sales Order -->
       <div class="tile" onclick="go('purchase-order')">
         <div class="tile-label">
           Sales Order
           <i class="fa-sharp-solid fa-file-invoice tile-fa-icon"></i>
+        </div>
+      </div>
+
+      <!-- Documents -->
+      <div class="tile" onclick="go('documents')">
+        <div class="tile-label">
+          Documents
+          <i class="fa-solid fa-copy tile-fa-icon"></i>
         </div>
       </div>
 

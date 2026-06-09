@@ -366,6 +366,278 @@
   </div>
 </div>
 
+<!-- ── CO Details bottom sheet (Figma 1106:5012) ── -->
+<div class="co-detail-overlay" id="co-detail-overlay" onclick="closeCoDetails()">
+  <div class="co-detail-sheet" onclick="event.stopPropagation()">
+
+    <!-- Sticky header (drag zone) -->
+    <div class="co-detail-header" id="co-detail-header">
+      <div class="qp-comment-handle"></div>
+      <div class="co-detail-hd-row">
+        <div class="co-detail-thumb">
+          <img src="assets/images/08fa6f48-31e3-47be-9f71-aa054eea522a.png" alt=""
+               onerror="this.style.display='none'">
+        </div>
+        <div class="co-detail-hd-info">
+          <div class="co-detail-hd-meta">
+            <span class="qr-badge qr-badge-pending" id="co-detail-badge">Pending your review</span>
+            <span class="qr-date qr-date-pending" id="co-detail-date">Valid until 14 April 2026</span>
+          </div>
+          <div class="co-detail-hd-quote" id="co-detail-quote">Quote #23944</div>
+          <div class="co-detail-hd-title" id="co-detail-title">Dutch House Security INV TEST</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="co-detail-body">
+
+      <!-- Timeline -->
+      <div class="co-timeline" style="padding:16px 14px 0;">
+        <!-- Revision 1 — Accepted -->
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Revision 1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+          </div>
+        </div>
+        <!-- Change Order 1.1 — Accepted -->
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Change Order 1.1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+            <p class="co-tl-desc">Additional earth terminal required to complete the system installation and ensure correct connectivity.</p>
+          </div>
+        </div>
+        <!-- Change Order 1.2 — Pending (active) -->
+        <div class="co-tl-item co-tl-item-active">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-pending"><span class="co-tl-dot-inner"></span></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-label" style="font-size:16px;font-weight:600;color:#313131;margin-bottom:6px;" id="co-detail-co-label">Change Order 1.2</div>
+            <div class="co-tl-status-row">
+              <span class="qr-badge qr-badge-pending">Pending your review</span>
+              <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+            </div>
+            <!-- Value breakdown table — inside CO 1.2 body -->
+            <div class="co-value-table" style="margin:10px 0 0;">
+              <div class="co-value-row">
+                <span class="co-value-label">Previous Project Total</span>
+                <span class="co-value-num">$12,200,000.00</span>
+              </div>
+              <div class="co-value-row">
+                <span class="co-value-label">Change Order 1.2</span>
+                <span class="co-value-num" style="color:#cf3400;">−$1,200,000.00</span>
+              </div>
+              <div class="co-value-row" style="border-bottom:none;">
+                <span class="co-value-label">Variation Value</span>
+                <span class="co-value-num" style="color:#009113;">+$2,120,000.00</span>
+              </div>
+              <div class="co-value-footer">
+                <div class="co-value-footer-left">
+                  <span class="co-value-footer-label">New Project Total</span>
+                  <span class="co-value-footer-sub">if accepted</span>
+                </div>
+                <span class="co-value-num" style="color:#009113;font-size:16px;">$13,120,000.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Change Order 1.2 doc card — offset to align under CO 1.2 timeline body -->
+      <div class="co-doc-card" style="margin:8px 14px 12px 40px;">
+        <div class="co-doc-header">
+          <i class="fa-solid fa-file-invoice co-doc-icon"></i>
+          <span class="co-doc-ref">Change Order 1.2</span>
+        </div>
+        <div class="co-doc-row">
+          <div class="co-doc-desc">Additional site setup &amp; commissioning</div>
+          <div class="co-doc-right">
+            <div class="co-doc-delta" style="color:#009113;">+$1,000,000.00</div>
+            <div class="co-doc-sublabel">Change Order Changes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variation 1 — Above Estimate -->
+      <div class="co-doc-card co-doc-var" style="margin:0 14px 12px 40px;">
+        <div class="co-doc-header">
+          <i class="fa-solid fa-file-plus co-doc-icon"></i>
+          <span class="co-doc-ref">Variation 1</span>
+          <span class="co-doc-rev">Revision 3</span>
+          <span class="qr-badge qr-badge-accepted" style="margin-left:auto;">Above Estimate</span>
+        </div>
+        <div class="co-doc-title">Additional Downlights – Master Bedroom</div>
+        <div class="co-doc-amounts">
+          <div>
+            <div class="co-doc-val">$1,200,000.00</div>
+            <div class="co-doc-vallabel">Original Estimate Value</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:12px;font-weight:600;color:#009113;">+$1,000,000.00</div>
+            <div class="co-doc-val">$2,200,000.00</div>
+            <div class="co-doc-vallabel">Final Price</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variation 1 — Same as estimate -->
+      <div class="co-doc-card co-doc-var" style="margin:0 14px 24px 40px;">
+        <div class="co-doc-header">
+          <i class="fa-solid fa-file-plus co-doc-icon"></i>
+          <span class="co-doc-ref">Variation 1</span>
+          <span class="co-doc-rev">Revision 3</span>
+          <span class="qr-badge" style="margin-left:auto;background:rgba(156,156,156,0.26);">Same as estimate</span>
+        </div>
+        <div class="co-doc-title">Additional Downlights – Master Bedroom</div>
+        <div class="co-doc-amounts">
+          <div>
+            <div class="co-doc-val">$1,200,000.00</div>
+            <div class="co-doc-vallabel">Original Estimate Value</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="co-doc-val">$1,200,000.00</div>
+            <div class="co-doc-vallabel">Final Price</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /co-detail-body -->
+
+    <!-- Sticky footer: action buttons -->
+    <div class="co-detail-footer">
+      <div class="qr-action-group" style="width:100%;">
+        <button class="qr-action-btn" onclick="openCommentDialog('CO-1.2')">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+        <button class="qr-action-btn" onclick="closeCoDetails()">TBC</button>
+        <button class="qr-action-btn" onclick="closeCoDetails()">Reject</button>
+        <button class="qr-action-btn" onclick="closeCoDetails()">Accept</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Needs Your Attention dialog ── -->
+<div class="nya-overlay" id="nya-overlay" onclick="closeNYADialog()">
+  <div class="nya-dialog" onclick="event.stopPropagation()">
+
+    <!-- Header: title + counter -->
+    <div class="nya-header">
+      <span class="nya-title">Needs your attention</span>
+      <span class="nya-counter" id="nya-counter">01/02</span>
+    </div>
+    <!-- Progress bar (JS-driven width) -->
+    <div class="nya-progress">
+      <div class="nya-progress-fill" id="nya-progress-fill" style="width:50%"></div>
+    </div>
+
+    <!-- ── Item 01: Change Order ── -->
+    <div class="nya-item" id="nya-item-1">
+      <div class="nya-status-row">
+        <span class="nya-status-badge">Pending your review</span>
+        <span class="nya-valid-date">Valid until 14 April 2026</span>
+      </div>
+      <div class="nya-ref-row">
+        <span>Quote #23944</span>
+        <span>Change Order 3.1</span>
+      </div>
+      <div class="nya-item-title">Dutch House Security INV TEST</div>
+      <div class="nya-amounts">
+        <div class="nya-amount-row">
+          <span>Original amount</span>
+          <span>£20,000.00</span>
+        </div>
+        <div class="nya-amount-row">
+          <span>Revised amount</span>
+          <span>£25,000.00</span>
+        </div>
+        <div class="nya-amount-row">
+          <span>Net change</span>
+          <span class="nya-amount-positive">+£5,000.00</span>
+        </div>
+      </div>
+      <div class="nya-actions">
+        <button class="nya-action-btn nya-icon-btn">
+          <i class="fa-regular fa-comment-dots"></i>
+        </button>
+        <button class="nya-action-btn" onclick="nyaNext()">TBC</button>
+        <button class="nya-action-btn" onclick="nyaNext()">Reject</button>
+        <button class="nya-action-btn" onclick="nyaNext()">Accept</button>
+      </div>
+      <button class="nya-view-btn" onclick="closeNYADialog();go('variations')">View Change Order</button>
+      <button class="nya-remind-btn" onclick="closeNYADialog()">Remind me later</button>
+    </div>
+
+    <!-- ── Item 02: Invoice ── -->
+    <div class="nya-item" id="nya-item-2" style="display:none">
+      <div class="nya-status-row">
+        <div class="nya-status-dot-row">
+          <span class="nya-status-dot" style="background:#cf3400;"></span>
+          <span class="nya-status-dot-label">Unpaid</span>
+        </div>
+        <span class="nya-valid-date" style="color:#cf3400;">Valid until 14 April 2026</span>
+      </div>
+      <div class="nya-inv-row">
+        <div class="nya-inv-left">
+          <div class="nya-inv-title">Invoice for Aftercare</div>
+          <div class="nya-inv-ref">Invoice #00002</div>
+        </div>
+        <div class="nya-inv-right">
+          <div class="nya-inv-amount">£850,000.00</div>
+          <div class="nya-inv-vat">exclude VAT</div>
+        </div>
+      </div>
+      <div class="nya-payment-lbl">Payment Progress</div>
+      <div class="nya-seg-bar">
+        <div class="nya-seg-fill" style="background:#009113;"></div>
+        <div class="nya-seg-fill" style="background:#cf3400;"></div>
+      </div>
+      <div class="nya-seg-legend">
+        <div class="nya-seg-legend-side">
+          <div class="nya-seg-legend-row">
+            <span class="nya-seg-dot" style="background:#009113;"></span>
+            <span>Paid so far</span>
+            <span>50%</span>
+          </div>
+          <div class="nya-seg-amount">£15,000.00</div>
+        </div>
+        <div class="nya-seg-legend-side">
+          <div class="nya-seg-legend-row">
+            <span class="nya-seg-dot" style="background:#cf3400;"></span>
+            <span>To pay now</span>
+            <span>50%</span>
+          </div>
+          <div class="nya-seg-amount">£15,000.00</div>
+        </div>
+      </div>
+      <div class="nya-two-btns">
+        <button class="nya-view-btn" onclick="closeNYADialog();go('invoices')">View Invoice</button>
+        <button class="nya-view-btn" onclick="closeNYADialog();go('invoices')">Pay Now</button>
+      </div>
+      <button class="nya-remind-btn" onclick="closeNYADialog()">Remind me later</button>
+    </div>
+
+  </div>
+</div>
+
 <!-- Skeleton loading overlay — per-page layouts -->
 <div id="skeleton-overlay">
   <!-- Shared topbar -->

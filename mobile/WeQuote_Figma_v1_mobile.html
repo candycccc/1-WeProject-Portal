@@ -56,24 +56,26 @@
 <script>
 (function () {
   var SCREENS = [
-    'screens/s-login.html',
-    'screens/s-forgot-password.html',
-    'screens/s-dash.html',
-    'screens/s-detail.html',
-    'screens/s-quotes.html',
-    'screens/s-invoices.html',
-    'screens/s-variations.html',
-    'screens/s-purchase-order.html',
-    'screens/s-progress.html',
-    'screens/s-documents.html',
-    'screens/s-warranty.html',
-    'screens/s-global-overlays.html',
+    'screens/s-login',
+    'screens/s-forgot-password',
+    'screens/s-dash',
+    'screens/s-detail',
+    'screens/s-quotes',
+    'screens/s-invoices',
+    'screens/s-variations',
+    'screens/s-purchase-order',
+    'screens/s-change-order',
+    'screens/s-progress',
+    'screens/s-documents',
+    'screens/s-warranty',
+    'screens/s-global-overlays',
   ];
 
+  var bust = '?v=' + Date.now();
   function loadScript(src) {
     return new Promise(function (resolve) {
       var s = document.createElement('script');
-      s.src = src;
+      s.src = src + bust;
       s.onload = resolve;
       document.body.appendChild(s);
     });
@@ -81,10 +83,42 @@
 
   var container = document.getElementById('app-content');
 
+  function rebuildNavDropdowns() {
+    var NAV_ITEMS = [
+      { key:'quotes', label:'Quotes', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>', badge:'2 Actions Required' },
+      { key:'variations', label:'Variations', icon:'<i class="fa-solid fa-file-plus"></i>', badge:'2 Awaiting Approval' },
+      { key:'change-order', label:'Change Orders', icon:'<i class="fa-solid fa-file-invoice"></i>', badge:'1 Awaiting Approval' },
+      { key:'invoices', label:'Invoices', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>', badge:'2 Payment Due' },
+      { key:'purchase-order', label:'Sales Order', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>', badge:'1 Awaiting Approval' },
+      { key:'documents', label:'Documents', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>' },
+      { key:'progress', label:'Progress', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' },
+      { key:'warranty', label:'Warranty', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>', hidden:true }
+    ];
+    var BADGE_ICON = '<i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>';
+    var keyMap = { 'quotes':1,'variations':1,'change-order':1,'invoices':1,'purchase-order':1,'documents':1,'progress':1,'warranty':1 };
+    container.querySelectorAll('.qp-nav-dropdown').forEach(function(drop) {
+      var screen = drop.closest('[id^="s-"]');
+      if (!screen) return;
+      var activeKey = screen.id.replace('s-','');
+      if (!keyMap[activeKey]) return;
+      var h = '';
+      NAV_ITEMS.forEach(function(item) {
+        var isActive = item.key === activeKey;
+        var cls = 'qp-nav-item' + (isActive ? ' qp-nav-item-active' : '');
+        var onclick = isActive ? 'closeDropdowns()' : "go('" + item.key + "');closeDropdowns()";
+        var style = item.hidden ? ' style="display:none;"' : '';
+        var badge = item.badge ? '<span class="qp-nav-alert">' + BADGE_ICON + item.badge + '</span>' : '';
+        h += '<div class="' + cls + '" onclick="' + onclick + '"' + style + '>' + item.icon + ' ' + item.label + badge + '</div>';
+      });
+      drop.innerHTML = h;
+    });
+  }
+
   Promise.all(SCREENS.map(function (url) {
-    return fetch(url).then(function (r) { return r.text(); });
+    return fetch(url + bust, { cache: 'no-store' }).then(function (r) { return r.text(); });
   })).then(function (htmls) {
     container.innerHTML = htmls.join('\n');
+    rebuildNavDropdowns();
     return loadScript('wq-app.js');
   }).then(function () {
     return loadScript('wq-components.js');

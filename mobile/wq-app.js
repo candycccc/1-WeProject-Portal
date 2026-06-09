@@ -1,34 +1,19 @@
 /* ── Restore last screen on page refresh ──
-   On load, if localStorage has a saved screen we navigate straight to it
-   (skipping the skeleton so the restore feels instant). ── */
-document.addEventListener('DOMContentLoaded', function() {
-  try {
-    const saved = localStorage.getItem('wq_screen');
-    const known = ['login','forgot-password','dash','detail','quotes','variations',
-                   'invoices','documents','warranty','progress','purchase-order'];
-    if (saved && known.includes(saved) && document.getElementById('s-' + saved)) {
-      // Navigate without skeleton delay for a snappy restore
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
-      document.getElementById('s-' + saved).classList.add('on');
-      if (saved === 'progress') initPPBars();
-      const spEl = document.getElementById('sp-' + saved);
-      if (spEl) { document.querySelectorAll('.sp-item').forEach(e => e.classList.remove('active')); spEl.classList.add('active'); }
-      const viewEl = document.getElementById('pt-viewing-name');
-      if (viewEl) viewEl.textContent = screenFriendly[saved] || saved;
-    }
-  } catch(e) {}
-});
+   NOTE: wq-app.js is loaded dynamically after DOMContentLoaded fires,
+   so the restore runs as an IIFE at the END of this file instead. ── */
 
 const screenLabels  = {
   login: '① Login', 'forgot-password': '② Forgot Password', dash: '③ Project List', detail: '④ Project Detail',
   quotes: '⑤ Quotes', invoices: '⑥ Invoices',
   variations: '⑦ Variations', 'purchase-order': '⑧ Sales Order',
-  documents: '⑨ Documents', warranty: '⑩ Warranty', progress: '⑪ Progress'
+  'change-order': '⑨ Change Orders',
+  documents: '⑩ Documents', warranty: '⑪ Warranty', progress: '⑫ Progress'
 };
 const screenFriendly = {
   login: 'Login Page', 'forgot-password': 'Forgot Password', dash: 'Project List', detail: 'Project Detail',
   quotes: 'Quotes', invoices: 'Invoices',
   variations: 'Variations', 'purchase-order': 'Sales Order',
+  'change-order': 'Change Orders',
   documents: 'Documents', warranty: 'Warranty', progress: 'Progress'
 };
 
@@ -143,6 +128,7 @@ function go(name) {
   const overlay = document.getElementById('skeleton-overlay');
   // Close nav dropdowns only — screen panel stays open across navigation
   document.querySelectorAll('.qp-nav-dropdown').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.qp-nav-pill').forEach(p => p.classList.remove('open'));
   document.querySelectorAll('.qp-user-dropdown').forEach(d => d.classList.remove('open'));
   document.getElementById('qp-notif-overlay')?.classList.remove('open');
   document.getElementById('qp-profile-overlay')?.classList.remove('open');
@@ -167,12 +153,14 @@ function go(name) {
     const inner = screenEl.querySelector('.quotes-page, .invoices-page, .documents-page, .pp-page, .screen-scroll');
     if (inner) inner.scrollTop = 0;
 
-    // Persist current screen so refresh restores same view
-    // (clear on login so next open always starts at login)
+    // Persist current screen — skip login/forgot so refresh never lands there
     try {
-      if (name === 'login') localStorage.removeItem('wq_screen');
-      else localStorage.setItem('wq_screen', name);
+      if (name !== 'login' && name !== 'forgot-password')
+        localStorage.setItem('wq_screen', name);
     } catch(e) {}
+
+    // Show "Needs your attention" dialog when entering project detail
+    if (name === 'detail') setTimeout(showNYADialog, 350);
   };
 
   const isMobile = document.body.classList.contains('mobile-view');
@@ -351,11 +339,20 @@ function filterTab(btn) {
 
   // 4. Show all on "all"
   if (label === 'all') {
-    screen.querySelectorAll('.qr, .inv-row').forEach(r => r.style.display = '');
+    screen.querySelectorAll('.qr, .inv-row, .co-card').forEach(r => r.style.display = '');
     return;
   }
 
-  // 5. Quote / Variation rows (use .qr-badge-* classes)
+  // 5. Change Order cards (data-status attribute)
+  const hasCoCards = screen.querySelectorAll('.co-card').length > 0;
+  if (hasCoCards) {
+    screen.querySelectorAll('.co-card').forEach(r => {
+      r.style.display = r.dataset.status === label ? '' : 'none';
+    });
+    return;
+  }
+
+  // 6. Quote / Variation rows (use .qr-badge-* classes)
   if (QUOTE_FILTER_MAP[label]) {
     const badgeClass = QUOTE_FILTER_MAP[label];
     screen.querySelectorAll('.qr').forEach(r => {
@@ -622,6 +619,60 @@ function rejectCard(btn) {
 }
 
 
+/* ── Change Order card actions ──
+   Mirrors acceptCard/tbcCard/rejectCard but targets .co-card ── */
+function acceptCoCard(btn) {
+  const card = btn.closest('.co-card');
+  if (!card) return;
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  const actionsEl = card.querySelector('.co-card-actions');
+  if (actionsEl) {
+    actionsEl.style.transition = 'opacity 0.25s ease, max-height 0.3s ease';
+    actionsEl.style.opacity = '0'; actionsEl.style.overflow = 'hidden';
+    actionsEl.style.maxHeight = actionsEl.scrollHeight + 'px';
+    requestAnimationFrame(() => requestAnimationFrame(() => { actionsEl.style.maxHeight = '0'; }));
+  }
+  setTimeout(() => {
+    card.dataset.status = 'accepted';
+    const badge = card.querySelector('.co-header-row .qr-badge');
+    if (badge) { badge.className = 'qr-badge qr-badge-accepted'; badge.textContent = 'Accepted'; }
+    const dateEl = card.querySelector('.co-header-row .qr-date');
+    if (dateEl) { dateEl.className = 'qr-date qr-date-accepted'; dateEl.textContent = 'Accepted on ' + dateStr; }
+    if (actionsEl) actionsEl.remove();
+  }, 280);
+}
+function tbcCoCard(btn) {
+  const card = btn.closest('.co-card');
+  if (!card) return;
+  card.dataset.status = 'tbc';
+  const badge = card.querySelector('.co-header-row .qr-badge');
+  if (badge) { badge.className = 'qr-badge qr-badge-tbc'; badge.textContent = 'To be confirmed'; }
+  const dateEl = card.querySelector('.co-header-row .qr-date');
+  if (dateEl) { dateEl.className = 'qr-date qr-date-tbc'; }
+}
+function rejectCoCard(btn) {
+  const card = btn.closest('.co-card');
+  if (!card) return;
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  const actionsEl = card.querySelector('.co-card-actions');
+  if (actionsEl) {
+    actionsEl.style.transition = 'opacity 0.25s ease, max-height 0.3s ease';
+    actionsEl.style.opacity = '0'; actionsEl.style.overflow = 'hidden';
+    actionsEl.style.maxHeight = actionsEl.scrollHeight + 'px';
+    requestAnimationFrame(() => requestAnimationFrame(() => { actionsEl.style.maxHeight = '0'; }));
+  }
+  setTimeout(() => {
+    card.dataset.status = 'declined';
+    const badge = card.querySelector('.co-header-row .qr-badge');
+    if (badge) { badge.className = 'qr-badge qr-badge-declined'; badge.textContent = 'Declined'; }
+    const dateEl = card.querySelector('.co-header-row .qr-date');
+    if (dateEl) { dateEl.className = 'qr-date qr-date-declined'; dateEl.textContent = 'Declined on ' + dateStr; }
+    if (actionsEl) actionsEl.remove();
+  }, 280);
+}
+
 function searchQuotes(input) {
   const term = (typeof input === 'string' ? input : input.value).trim().toLowerCase();
   // Scope search to the screen that contains this input
@@ -637,13 +688,16 @@ function searchQuotes(input) {
 
 function toggleNavDropdown(e) {
   e.stopPropagation();
+  const pill = e.currentTarget;
   // Find dropdown relative to the clicked pill's topbar (works for all screens)
-  const topbar = e.currentTarget.closest('.qp-topbar');
+  const topbar = pill.closest('.qp-topbar');
   const nd = topbar ? topbar.querySelector('.qp-nav-dropdown') : document.getElementById('nav-dropdown');
-  // Close all other nav dropdowns and user dropdowns
+  // Close all other nav dropdowns, pills, and user dropdowns
   document.querySelectorAll('.qp-nav-dropdown').forEach(d => { if (d !== nd) d.classList.remove('open'); });
+  document.querySelectorAll('.qp-nav-pill').forEach(p => { if (p !== pill) p.classList.remove('open'); });
   document.querySelectorAll('.qp-user-dropdown').forEach(d => d.classList.remove('open'));
   nd.classList.toggle('open');
+  pill.classList.toggle('open', nd.classList.contains('open'));
 }
 
 function toggleUserDropdown(e) {
@@ -659,6 +713,7 @@ function toggleUserDropdown(e) {
 
 function closeDropdowns() {
   document.querySelectorAll('.qp-nav-dropdown').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.qp-nav-pill').forEach(p => p.classList.remove('open'));
   document.getElementById('screen-panel')?.classList.remove('open');
   document.getElementById('screen-picker-btn')?.classList.remove('panel-open');
   document.body.classList.remove('screen-open');
@@ -1176,6 +1231,128 @@ function submitComment() {
   switchNotifTab('activity');
 }
 
+// ── CO Details bottom sheet ──
+function openCoDetails() {
+  var overlay = document.getElementById('co-detail-overlay');
+  if (!overlay) return;
+  // Re-trigger slide-up animation each time it opens
+  var sheet = overlay.querySelector('.co-detail-sheet');
+  if (sheet) { sheet.style.animation = 'none'; sheet.offsetHeight; sheet.style.animation = ''; }
+  overlay.classList.add('open');
+  var ac = document.getElementById('app-content');
+  if (ac) ac.style.overflow = 'hidden';
+  // Scroll body back to top
+  var body = overlay.querySelector('.co-detail-body');
+  if (body) body.scrollTop = 0;
+}
+
+function closeCoDetails() {
+  var overlay = document.getElementById('co-detail-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  var ac = document.getElementById('app-content');
+  if (ac) ac.style.overflow = '';
+}
+
+/* iOS-style drag-to-dismiss — same pattern as comment dialog */
+(function initCoDetailsDrag() {
+  var startY = 0, dy = 0, active = false;
+  var THRESHOLD = 80;
+
+  function $o()  { return document.getElementById('co-detail-overlay'); }
+  function $s()  { var o = $o(); return o && o.querySelector('.co-detail-sheet'); }
+  function isOpen() { var o = $o(); return o && o.classList.contains('open'); }
+  function inDragZone(el) {
+    return !!(el && el.closest('.co-detail-header'));
+  }
+
+  function onStart(y) {
+    if (!isOpen()) return;
+    active = true; startY = y; dy = 0;
+    var s = $s(), o = $o();
+    if (s) s.style.transition = 'none';
+    if (o) o.style.transition = 'none';
+  }
+  function onMove(y) {
+    if (!active) return;
+    dy = Math.max(0, y - startY);
+    var s = $s(), o = $o();
+    if (s) s.style.transform = 'translateY(' + dy + 'px)';
+    if (o) o.style.background = 'rgba(0,0,0,' + Math.max(0, 0.42 * (1 - dy / 220)) + ')';
+  }
+  function onEnd() {
+    if (!active) return;
+    active = false;
+    var s = $s(), o = $o();
+    if (!s || !o) return;
+    if (dy > THRESHOLD) {
+      s.style.transition = 'transform 0.22s ease-in';
+      o.style.transition = 'background 0.22s ease-in';
+      s.style.transform  = 'translateY(110%)';
+      o.style.background = 'rgba(0,0,0,0)';
+      setTimeout(function() {
+        s.style.transform = s.style.transition = '';
+        o.style.background = o.style.transition = '';
+        closeCoDetails();
+      }, 230);
+    } else {
+      s.style.transition = 'transform 0.32s cubic-bezier(.4,0,.2,1)';
+      o.style.transition = 'background 0.32s ease';
+      s.style.transform  = 'translateY(0)';
+      o.style.background = 'rgba(0,0,0,0.42)';
+      setTimeout(function() {
+        s.style.transform = s.style.transition = '';
+        o.style.background = o.style.transition = '';
+      }, 320);
+    }
+  }
+
+  document.addEventListener('touchstart', function(e) {
+    if (inDragZone(e.target)) onStart(e.touches[0].clientY);
+  }, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    if (!active) return;
+    if (dy > 4) e.preventDefault();
+    onMove(e.touches[0].clientY);
+  }, { passive: false });
+  document.addEventListener('touchend',    onEnd, { passive: true });
+  document.addEventListener('touchcancel', onEnd, { passive: true });
+  /* Mouse (desktop preview) */
+  document.addEventListener('mousedown', function(e) {
+    if (inDragZone(e.target)) { e.preventDefault(); onStart(e.clientY); }
+  });
+  document.addEventListener('mousemove', function(e) { if (active) onMove(e.clientY); });
+  document.addEventListener('mouseup', onEnd);
+})();
+
+// ── Needs Your Attention dialog ──
+var nyaCurrentItem = 1;
+var NYA_TOTAL = 2;
+
+function showNYADialog() {
+  nyaCurrentItem = 1;
+  var pad = function(n) { return String(n).padStart(2, '0'); };
+  document.getElementById('nya-counter').textContent = '01/' + pad(NYA_TOTAL);
+  document.getElementById('nya-progress-fill').style.width = (1 / NYA_TOTAL * 100) + '%';
+  document.querySelectorAll('.nya-item').forEach(function(el, i) {
+    el.style.display = i === 0 ? '' : 'none';
+  });
+  document.getElementById('nya-overlay').classList.add('open');
+}
+function closeNYADialog() {
+  document.getElementById('nya-overlay').classList.remove('open');
+}
+function nyaNext() {
+  nyaCurrentItem++;
+  if (nyaCurrentItem > NYA_TOTAL) { closeNYADialog(); return; }
+  var pad = function(n) { return String(n).padStart(2, '0'); };
+  document.getElementById('nya-counter').textContent = pad(nyaCurrentItem) + '/' + pad(NYA_TOTAL);
+  document.getElementById('nya-progress-fill').style.width = (nyaCurrentItem / NYA_TOTAL * 100) + '%';
+  document.querySelectorAll('.nya-item').forEach(function(el, i) {
+    el.style.display = (i + 1 === nyaCurrentItem) ? '' : 'none';
+  });
+}
+
 // ── Logo ──
 function applyLogo(url) {
   ['brand-logo', 'brand-logo-fp'].forEach(id => {
@@ -1376,4 +1553,66 @@ function copyToClipboard(text) {
   });
   document.addEventListener('mousemove', function(e) { if (active) onMove(e.clientY); });
   document.addEventListener('mouseup',   onEnd);
+})();
+
+/* ── Rebuild all nav dropdowns from single source of truth ── */
+(function rebuildNavDropdowns() {
+  var NAV_ITEMS = [
+    { key:'quotes', label:'Quotes', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>', badge:'2 Actions Required' },
+    { key:'variations', label:'Variations', icon:'<i class="fa-solid fa-file-plus"></i>', badge:'2 Awaiting Approval' },
+    { key:'change-order', label:'Change Orders', icon:'<i class="fa-solid fa-file-invoice"></i>', badge:'1 Awaiting Approval' },
+    { key:'invoices', label:'Invoices', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>', badge:'2 Payment Due' },
+    { key:'purchase-order', label:'Sales Order', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>', badge:'1 Awaiting Approval' },
+    { key:'documents', label:'Documents', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>' },
+    { key:'progress', label:'Progress', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' },
+    { key:'warranty', label:'Warranty', icon:'<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>', hidden:true }
+  ];
+  var BADGE_ICON = '<i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>';
+  var screenToKey = { 'quotes':'quotes','variations':'variations','change-order':'change-order','invoices':'invoices','purchase-order':'purchase-order','documents':'documents','progress':'progress','warranty':'warranty' };
+
+  document.querySelectorAll('.qp-nav-dropdown').forEach(function(drop) {
+    var screen = drop.closest('.screen');
+    if (!screen) return;
+    var screenId = screen.id.replace('s-','');
+    var activeKey = screenToKey[screenId];
+    if (!activeKey) return;
+
+    var html = '';
+    NAV_ITEMS.forEach(function(item) {
+      var isActive = item.key === activeKey;
+      var cls = 'qp-nav-item' + (isActive ? ' qp-nav-item-active' : '');
+      var onclick = isActive ? 'closeDropdowns()' : "go('" + item.key + "');closeDropdowns()";
+      var style = item.hidden ? ' style="display:none;"' : '';
+      var badge = item.badge ? '<span class="qp-nav-alert">' + BADGE_ICON + item.badge + '</span>' : '';
+      html += '<div class="' + cls + '" onclick="' + onclick + '"' + style + '>' + item.icon + ' ' + item.label + badge + '</div>';
+    });
+    drop.innerHTML = html;
+  });
+})();
+
+/* ── Restore last screen on page refresh ──
+   Runs immediately after all functions are defined.
+   s-login.html has class="screen on" by default — this overrides it.
+   Never restores to login or forgot-password; defaults to dash. ── */
+(function restoreLastScreen() {
+  try {
+    var known = ['dash','detail','quotes','variations',
+                 'invoices','documents','warranty','progress','purchase-order','change-order'];
+    var saved = localStorage.getItem('wq_screen');
+    var target = (saved && known.indexOf(saved) !== -1) ? saved : 'dash';
+    var el = document.getElementById('s-' + target);
+    if (el) {
+      document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('on'); });
+      el.classList.add('on');
+      if (target === 'progress') initPPBars();
+      var spEl = document.getElementById('sp-' + target);
+      if (spEl) {
+        document.querySelectorAll('.sp-item').forEach(function(e) { e.classList.remove('active'); });
+        spEl.classList.add('active');
+      }
+      var viewEl = document.getElementById('pt-viewing-name');
+      if (viewEl) viewEl.textContent = screenFriendly[target] || target;
+      if (target === 'detail') setTimeout(showNYADialog, 400);
+    }
+  } catch(e) {}
 })();

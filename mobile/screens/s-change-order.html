@@ -1,0 +1,300 @@
+<div id="s-change-order" class="screen">
+<div class="quotes-page">
+
+  <!-- Top bar -->
+  <div class="qp-topbar">
+    <button class="qp-back-btn" onclick="go('detail')">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/>
+      </svg>
+      Back
+    </button>
+    <button class="qp-nav-pill" onclick="toggleNavDropdown(event)">
+      Change Orders
+      <i class="fa-sharp-solid fa-chevron-down"></i>
+    </button>
+    <div class="qp-nav-dropdown" id="nav-dropdown-co">
+      <div class="qp-nav-item" onclick="go('quotes');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Quotes
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Actions Required</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
+        <i class="fa-solid fa-file-plus"></i>
+        Variations
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Awaiting Approval</span>
+      </div>
+      <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
+        <i class="fa-solid fa-file-invoice"></i>
+        Change Orders
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>1 Awaiting Approval</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Invoices
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Payment Due</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>1 Awaiting Approval</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+        Documents
+      </div>
+      <div class="qp-nav-item" onclick="go('progress');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Progress
+      </div>
+    </div>
+    <div class="qp-topbar-right">
+      <button class="qp-bell-btn qp-bell-badge" onclick="toggleNotifPanel(event)">
+        <i class="fa-sharp-solid fa-bell"></i>
+      </button>
+      <div class="qp-avatar" onclick="toggleUserDropdown(event)">MM
+        <div class="qp-user-dropdown" id="user-dropdown-co">
+          <div class="qp-user-dropdown-item" onclick="openProfilePanel()">Edit Profile
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="qp-user-dropdown-item" onclick="closeDropdowns();go('login')">Sign out
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Summary Card (Figma 1106:3918) -->
+  <div class="co-pc-wrap">
+
+    <!-- Top row: title left · total value right -->
+    <div class="co-pc-top">
+      <div class="co-pc-title">Total Project<br>Accepted Value</div>
+      <div class="co-pc-total">
+        <div class="co-pc-total-value">$850,000.00</div>
+        <div class="co-pc-total-label">Total Value (excl. Tax)</div>
+      </div>
+    </div>
+
+    <!-- Payment summary body -->
+    <div class="co-pc-body">
+      <div class="co-pc-summary-label">Payment Summary</div>
+      <div class="co-pc-amount-row">
+        <span class="co-pc-amount">$650,000.00</span>
+        <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+      </div>
+      <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
+        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      </div>
+      <div class="co-pc-legend">
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
+          <div class="co-pc-legend-value">$650,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
+          <div class="co-pc-legend-value">$18,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
+          <div class="co-pc-legend-value">$182,000.00</div>
+        </div>
+      </div>
+      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Change Order','$850,000.00','Change Order Payment')">Pay Now</button>
+    </div>
+
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="qp-filter-tabs">
+    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">02</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Pending your review <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">TBC <span class="qp-filter-count">00</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">00</span></button>
+    <label class="qp-search-pill">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" placeholder="Search" oninput="searchQuotes(this)">
+    </label>
+  </div>
+
+  <!-- Change Order cards list -->
+  <div class="qp-list">
+
+    <!-- ── Card 1: Pending your review (Figma 1106:3849) ── -->
+    <div class="co-card" data-status="pending your review">
+
+      <!-- Card header -->
+      <div class="co-card-header">
+        <div class="co-header-row">
+          <span class="qr-badge qr-badge-pending">Pending your review</span>
+          <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+        </div>
+        <div class="co-header-quote">Quote #23944</div>
+        <div class="co-header-title">Dutch House Security INV TEST</div>
+      </div>
+
+      <!-- Timeline (Figma 1106:3869) -->
+      <div class="co-timeline">
+
+        <!-- Revision 1 — Accepted -->
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Revision 1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Change Order 1.1 — Accepted -->
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Change Order 1.1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+            <p class="co-tl-desc">Additional earth terminal required to complete the system installation and ensure correct connectivity.</p>
+          </div>
+        </div>
+
+        <!-- Change Order 1.2 — Pending (active) -->
+        <div class="co-tl-item co-tl-item-active">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-pending">
+              <span class="co-tl-dot-inner"></span>
+            </div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-label" style="font-size:16px;font-weight:600;color:#313131;margin-bottom:6px;">Change Order 1.2</div>
+            <div class="co-tl-status-row">
+              <span class="qr-badge qr-badge-pending">Pending your review</span>
+              <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+            </div>
+
+            <!-- Value breakdown table (Figma 1106:5153) -->
+            <div class="co-value-table">
+              <div class="co-value-row">
+                <span class="co-value-label">Previous Project Total</span>
+                <span class="co-value-num">$12,200,000.00</span>
+              </div>
+              <div class="co-value-row">
+                <span class="co-value-label">Change Order 1.2</span>
+                <span class="co-value-num" style="color:#cf3400;">−$1,200,000.00</span>
+              </div>
+              <div class="co-value-row">
+                <span class="co-value-label">Variation Value</span>
+                <span class="co-value-num" style="color:#009113;">+$2,120,000.00</span>
+              </div>
+              <div class="co-value-footer">
+                <div class="co-value-footer-left">
+                  <span class="co-value-footer-label">New Project Total</span>
+                  <span class="co-value-footer-sub">if accepted</span>
+                </div>
+                <span class="co-value-num" style="color:#009113;font-size:16px;">$13,120,000.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /co-timeline -->
+
+      <!-- Action buttons -->
+      <div class="co-card-actions">
+        <button class="inv-btn" style="flex:none;width:100%;height:41px;" onclick="openCoDetails()">View Change Order 1.2 Details</button>
+        <div class="qr-action-group">
+          <button class="qr-action-btn" onclick="openCommentDialog('CO-1.2')">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </button>
+          <button class="qr-action-btn" onclick="tbcCoCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCoCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCoCard(this)">Accept</button>
+        </div>
+      </div>
+
+    </div><!-- /co-card pending -->
+
+    <!-- ── Card 2: Accepted (Figma 1106:4007) ── -->
+    <div class="co-card" data-status="accepted">
+
+      <!-- Card header -->
+      <div class="co-card-header">
+        <div class="co-header-row">
+          <span class="qr-badge qr-badge-accepted">Accepted</span>
+          <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+        </div>
+        <div class="co-header-quote">Quote #23944</div>
+        <div class="co-header-title">Dutch House Security INV TEST</div>
+      </div>
+
+      <!-- Payment Progress section -->
+      <div class="co-payment-progress">
+        <div class="qr-payment-label">Payment Progress</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$120,000.00</span>
+          <span class="qr-payment-of">of $12,000,000.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar" style="margin:8px 0;">
+          <div class="qr-payment-bar-seg seg-paid" style="width:1%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$12,000,000.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+        <button class="inv-btn" style="flex:none;width:100%;height:41px;margin-top:12px;">View Accepted Details</button>
+      </div>
+
+    </div><!-- /co-card accepted -->
+
+  </div><!-- /qp-list -->
+
+  <!-- Footer -->
+  <div class="qp-footer">
+    <div class="qp-footer-project">
+      <span class="brand-project-name">Ocean Palm Residences</span>
+    </div>
+    <div class="qp-footer-meta">
+      <span>Tyler Holmes</span> · <span>Project Manager</span>
+    </div>
+  </div>
+
+</div>
+</div>

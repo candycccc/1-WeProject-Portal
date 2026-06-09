@@ -20,9 +20,14 @@
         <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Actions Required</span>
       </div>
       <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        <i class="fa-solid fa-file-plus"></i>
         Variations
         <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>2 Awaiting Approval</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('change-order');closeDropdowns()">
+        <i class="fa-solid fa-file-invoice"></i>
+        Change Orders
+        <span class="qp-nav-alert"><i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>1 Awaiting Approval</span>
       </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
@@ -64,85 +69,78 @@
     </div>
   </div>
 
-  <!-- Summary cards: two side-by-side (Figma: Total Project Value + Variation Summary) -->
-  <div class="qp-summary-row">
-    <!-- Total Project Value card -->
-    <div class="qp-card qp-var-summary-card">
-      <div class="var-card-left">
-        <div>
-          <div class="var-summary-title">Total Project Accepted Value</div>
-          <!-- Total = Quote Accepted ($162,000 — #21887 Rev 3) + Variation Accepted ($45,000 — #30145) + Sales Order Accepted ($619,800) -->
-        </div>
-        <div class="var-total-block" style="text-align:right;">
-          <div class="var-total-value" style="font-size:20px;font-weight:600;color:var(--c-text-1);">$850,000.00</div>
-          <div class="var-total-label">Total Value (excl. Tax)</div>
-        </div>
-      </div>
-      <div class="qp-project-right">
-        <div class="qp-payment-summary-label">Payment Summary</div>
-        <div class="qp-summary-amounts">
-          <div class="qp-amounts-left">
-            <div class="qp-payment-amount">$650,000.00</div>
-            <div class="qp-payment-of">of $850,000.00 Paid so far</div>
-          </div>
-          <div class="qp-total-block-mobile">
-            <div class="qp-total-value">$85,900.00</div>
-            <div class="qp-total-label">Total Variation Value</div>
-          </div>
-        </div>
-        <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
-        </div>
-        <div class="qp-progress-legend">
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#009113;"></div> Paid so far</div>
-            <div class="qp-legend-value">$650,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now</div>
-            <div class="qp-legend-value">$18,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#eaeaea;"></div> Upcoming</div>
-            <div class="qp-legend-value">$182,000.00</div>
-          </div>
-        </div>
-        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;flex:none;" onclick="openPayNowModal('Variation #30145','$850,000.00','Project Payment')">Pay Now</button>
+  <!-- Card 1: Total Project Accepted Value — co-pc style -->
+  <div class="co-pc-wrap">
+    <div class="co-pc-top">
+      <div class="co-pc-title">Total Project<br>Accepted Value</div>
+      <div class="co-pc-total">
+        <div class="co-pc-total-value">£850,000.00</div>
+        <div class="co-pc-total-label">Total Value (exclude VAT)</div>
       </div>
     </div>
-    <!-- Variation Summary card -->
-    <div class="qp-card qp-var-summary-card">
-      <div class="var-card-left">
-        <div class="var-summary-title">Variation Summary</div>
-        <div style="margin-top:4px;">
-          <div class="var-status-row var-status-pending"><span>Pending your review</span><span>01</span></div>
-          <div class="var-status-row var-status-tbc"><span>To be confirmed</span><span>02</span></div>
-          <div class="var-status-row var-status-accepted"><span>Accepted</span><span>01</span></div>
-          <div class="var-status-row var-status-declined"><span>Declined</span><span>01</span></div>
+    <div class="co-pc-body">
+      <div class="co-pc-summary-label" style="margin-bottom:8px;">Payment Summary</div>
+      <div class="co-pc-amount-row">
+        <div class="co-pc-amount">£650,000.00</div>
+        <div class="co-pc-amount-of">of £850,000.00 Paid so far</div>
+      </div>
+      <div class="qp-progress-bar-outer">
+        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      </div>
+      <div class="qp-progress-legend" style="margin-top:10px;margin-bottom:14px;">
+        <div class="qp-legend-item">
+          <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#009113;"></div> Paid so far</div>
+          <div class="qp-legend-value">£650,000.00</div>
+        </div>
+        <div class="qp-legend-item">
+          <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now</div>
+          <div class="qp-legend-value">£18,000.00</div>
+        </div>
+        <div class="qp-legend-item" style="align-items:flex-end;">
+          <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#eaeaea;"></div> Upcoming</div>
+          <div class="qp-legend-value">£182,000.00</div>
         </div>
       </div>
-      <div class="qp-project-right">
-        <div class="qp-payment-summary-label">Payment Summary</div>
-        <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
-          <div class="qp-payment-amount">$650,000.00</div>
-          <div class="qp-payment-of">of $850,000.00 Paid so far</div>
+      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;flex:none;" onclick="openPayNowModal('Variation #30145','£850,000.00','Project Payment')">Pay Now</button>
+    </div>
+  </div>
+
+  <!-- Card 2: Variation Summary — co-pc style -->
+  <div class="co-pc-wrap">
+    <div class="co-pc-top">
+      <div class="co-pc-title">Variation Summary</div>
+      <div class="co-pc-total">
+        <div class="co-pc-total-value">£85,900.00</div>
+        <div class="co-pc-total-label">Total Variation Value</div>
+      </div>
+    </div>
+    <div class="co-pc-body">
+      <div style="margin-bottom:14px;">
+        <div class="var-status-row var-status-pending"><span>Pending your review</span><span>01</span></div>
+        <div class="var-status-row var-status-tbc"><span>To be confirmed</span><span>02</span></div>
+        <div class="var-status-row var-status-accepted"><span>Accepted</span><span>01</span></div>
+        <div class="var-status-row var-status-declined"><span>Declined</span><span>01</span></div>
+      </div>
+      <div class="co-pc-summary-label" style="margin-bottom:8px;">Payment Summary</div>
+      <div class="co-pc-amount-row">
+        <div class="co-pc-amount">£650,000.00</div>
+        <div class="co-pc-amount-of">of £850,000.00 Paid so far</div>
+      </div>
+      <div class="qp-progress-bar-outer">
+        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      </div>
+      <div class="qp-progress-legend" style="margin-top:10px;margin-bottom:4px;">
+        <div class="qp-legend-item">
+          <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#009113;"></div> Paid so far</div>
+          <div class="qp-legend-value">£650,000.00</div>
         </div>
-        <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+        <div class="qp-legend-item">
+          <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now</div>
+          <div class="qp-legend-value">£18,000.00</div>
         </div>
-        <div class="qp-progress-legend">
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#009113;"></div> Paid so far</div>
-            <div class="qp-legend-value">$650,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now</div>
-            <div class="qp-legend-value">$18,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#eaeaea;"></div> Upcoming</div>
-            <div class="qp-legend-value">$182,000.00</div>
-          </div>
+        <div class="qp-legend-item" style="align-items:flex-end;">
+          <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#eaeaea;"></div> Upcoming</div>
+          <div class="qp-legend-value">£182,000.00</div>
         </div>
       </div>
     </div>
