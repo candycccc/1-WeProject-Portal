@@ -5305,10 +5305,19 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 .co-pay-amt { color: #313131; white-space: nowrap; }
 
 /* ── CO Details Bottom Sheet ── */
+body.co-overlay-open,
+html.co-overlay-open {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  touch-action: none !important;
+  position: fixed !important;
+  width: 100% !important;
+}
 .co-detail-overlay {
   display: none; position: absolute; inset: 0;
   background: rgba(0,0,0,0.42); z-index: 820;
   align-items: flex-end;
+  overscroll-behavior: contain; touch-action: none;
 }
 .co-detail-overlay.open { display: flex; }
 .co-detail-sheet {
@@ -5330,6 +5339,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   border-bottom: 1px solid var(--c-border-1);
   padding: 14px 14px 12px;
   cursor: grab;
+  touch-action: none;
 }
 .co-detail-hd-row {
   display: flex; gap: 12px; align-items: flex-start;
@@ -10850,6 +10860,7 @@ function rejectCoCard(btn) {
 }
 
 // ── Change Order detail sheet ──
+var _coOverlayScrollY = 0;
 // ── Change Order detail sheet — drag-to-dismiss ──
 (function() {
   var overlay = document.getElementById('co-detail-overlay');
@@ -10887,6 +10898,11 @@ function rejectCoCard(btn) {
         overlay.classList.remove('open');
         sheet.style.transform = '';
         sheet.style.transition = '';
+        // Unlock body
+        document.documentElement.classList.remove('co-overlay-open');
+        document.body.classList.remove('co-overlay-open');
+        document.body.style.top = '';
+        window.scrollTo(0, _coOverlayScrollY);
       }, 300);
     } else {
       sheet.style.transform = '';
@@ -10904,11 +10920,21 @@ function openCoDetails() {
   overlay.classList.add('open');
   var body = overlay.querySelector('.co-detail-body');
   if (body) body.scrollTop = 0;
+  // Lock body to prevent pull-to-refresh on mobile
+  _coOverlayScrollY = window.scrollY;
+  document.documentElement.classList.add('co-overlay-open');
+  document.body.classList.add('co-overlay-open');
+  document.body.style.top = '-' + _coOverlayScrollY + 'px';
 }
 function closeCoDetails() {
   var overlay = document.getElementById('co-detail-overlay');
   if (!overlay) return;
   overlay.classList.remove('open');
+  // Unlock body
+  document.documentElement.classList.remove('co-overlay-open');
+  document.body.classList.remove('co-overlay-open');
+  document.body.style.top = '';
+  window.scrollTo(0, _coOverlayScrollY);
 }
 
 // ── Pay now modal ──
