@@ -57,10 +57,11 @@
 .fa-sharp         { font-family:'Font Awesome 7 Sharp',sans-serif; font-weight:400; font-style:normal; display:inline-block; }
 .fa-brands, .fab  { font-family:'Font Awesome 7 Brands',sans-serif; font-weight:400; font-style:normal; display:inline-block; }
 /* ── FA7 Pro icon :before content (unicode codepoints) ── */
-.fa-bars-staggered::before      { content: "\e0d3"; }
+.fa-bars-staggered::before      { content: "\f550"; }
 .fa-circle::before              { content: "\f111"; }
 .fa-circle-check::before        { content: "\f058"; }
 .fa-circle-exclamation::before  { content: "\f06a"; }
+.fa-circle-xmark::before        { content: "\f057"; }
 .fa-copy::before                { content: "\f0c5"; }
 .fa-file-certificate::before    { content: "\f5f3"; }
 .fa-file-invoice::before        { content: "\f570"; }
@@ -1609,11 +1610,11 @@ body.mobile-view .detail-nav-card {
   height: 56px;
   flex-shrink: 0;
   background: var(--c-surface);
-  border: 1px solid var(--c-border-1);
+  border: 1px solid #ebecef;
   border-radius: 6px;
   box-shadow: 0 3px 4px 0 rgba(239,239,239,1);
-  padding: 0 20px;
-  gap: 8px;
+  padding: 0 8px; /* Figma 1069-35659: px-8 */
+  gap: 4px;       /* Figma: icon↔label gap 4px */
   cursor: pointer;
   transition: opacity .12s;
   box-sizing: border-box;
@@ -2588,6 +2589,23 @@ body.mobile-view #s-variations .qr-view-btn {
 .qr.qr-accepted-done {
   animation: qrAcceptedSettle 0.8s ease-out forwards;
 }
+/* CO cards reuse the same accept flash / settle */
+.co-card.qr-accepting {
+  border-color: #009113 !important;
+  box-shadow: 0 0 0 3px rgba(0,145,19,0.18), 0 3px 4px 0 #efefef !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.co-card.qr-accepted-done {
+  animation: qrAcceptedSettle 0.8s ease-out forwards;
+}
+/* CO payment progress enters after accept (mirrors quotes Phase 4/5) */
+.co-payment-progress.qr-payment-enter {
+  opacity: 0; transform: translateY(-8px); transition: none;
+}
+.co-payment-progress.qr-payment-entered {
+  opacity: 1; transform: translateY(0);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
 @keyframes qrAcceptedSettle {
   0%   { border-color: #009113; box-shadow: 0 0 0 2px rgba(0,145,19,0.12), 0 3px 2px #efefef; }
   100% { border-color: #eaeaea; box-shadow: 0 3px 2px #efefef; }
@@ -2685,12 +2703,13 @@ body.mobile-view .qp-nav-pill i {
 }
 /* Bell button — frosted glass 42px */
 /* Bell button — solid dark circle (Figma 1009-35605) */
+/* Matches .detail-bell-btn — one white bell style everywhere */
 body.mobile-view .qp-bell-btn {
   width: 42px; height: 42px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.76);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: rgba(255,255,255,0.80);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   border: none;
   box-shadow: none;
   display: flex; align-items: center; justify-content: center;
@@ -2698,7 +2717,7 @@ body.mobile-view .qp-bell-btn {
 }
 body.mobile-view .qp-bell-btn i {
   font-size: 18px;
-  color: #ffffff;
+  color: #313131;
   line-height: 1;
 }
 /* Avatar — 42px; warm brown background (Figma 744-33187 / 1009-35605) */
@@ -4661,7 +4680,7 @@ body.dark-mode .payment-noted-done:hover { opacity: 0.88; }
 
 /* ── Active nav item highlight ── */
 .qp-nav-item-active {
-  background: rgba(64,89,149,0.08) !important;
+  background: #fff !important;
   color: var(--brand-accent) !important;
   font-weight: 700;
 }
@@ -5175,15 +5194,36 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   font-family: var(--brand-font, 'Figtree', sans-serif);
 }
 .co-card-header {
-  padding: 10px 11px 12px;
+  padding: 13px 11px 10px;
   border-bottom: 1px solid #eaeaea;
 }
+/* Same layout as the detail sheet header: thumb on the left, info on the right */
+.co-card-hd-row {
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.co-card-thumb {
+  width: 61px; height: 61px;
+  border: 1px solid #e9e9e9; border-radius: 4px;
+  overflow: hidden; flex-shrink: 0;
+  background: var(--c-surface-2);
+  display: flex; align-items: center; justify-content: center;
+}
+.co-card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.co-card-hd-info { flex: 1; min-width: 0; }
+/* Zero-height sticky shell — showing/hiding it must never shift the page
+   layout, otherwise it pushes the list down past the trigger threshold and
+   oscillates (pops in and out on every scroll tick). */
 .co-card-header-sticky {
   display: none; position: sticky; top: 110px; z-index: 18;
+  height: 0; overflow: visible;
+  margin: 0 12px;
+}
+.co-card-header-sticky.visible { display: block; }
+.co-sticky-inner {
   background: #fff; padding: 8px 12px;
   border-bottom: 1px solid #eaeaea;
-  flex-direction: column; align-items: flex-start; gap: 2px;
-  margin: 0 12px; border-radius: 10px 10px 0 0;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  border-radius: 10px 10px 0 0;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 .co-card-header-sticky .co-sticky-badge { flex-shrink: 0; }
@@ -5192,10 +5232,9 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   min-width: 0; max-width: 100%;
 }
-.co-card-header-sticky.visible { display: flex; }
 .co-header-row {
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 9px;
 }
 .co-header-quote {
   font-size: 12px; font-weight: 600; color: #313131;
@@ -5203,6 +5242,8 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 }
 .co-header-title {
   font-size: 20px; font-weight: 600; color: #313131; line-height: 1.2;
+  /* Figma: single line */
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 /* ── Timeline ── */
@@ -5222,6 +5263,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   font-size: 11px;
 }
 .co-tl-dot-done { color: #c3c3c3; }
+.co-tl-dot-declined { color: #c3c3c3; } /* close-circle, no pulse */
 .co-tl-dot-pending {
   position: relative; width: 14px; height: 14px;
   border-radius: 50%; border: 2px solid #ff9500;
@@ -5309,11 +5351,14 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 
 /* ── Payment progress section (accepted cards) ── */
 .co-payment-progress {
-  padding: 14px 11px 14px;
+  padding: 16px 11px 14px;
 }
+/* Figma 1106-4007 spacing: label →6px→ amount →2px→ "of" line →6px→ bar */
+.co-payment-progress .qr-payment-amount-row { margin-top: 6px; }
+.co-payment-progress .qr-payment-of { color: #9c9c9c; }
 .co-pay-legend {
-  display: flex; flex-direction: column; gap: 6px;
-  margin-top: 8px;
+  display: flex; flex-direction: column; gap: 11px;
+  margin-top: 11px;
 }
 .co-pay-legend-row {
   display: flex; align-items: center; justify-content: space-between;
@@ -5322,6 +5367,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 .co-pay-legend-left {
   display: flex; align-items: center; gap: 6px;
 }
+.co-pay-legend-left .qr-legend-dot { margin-right: -2px; } /* dot↔label gap 4px */
 .co-pay-pct { color: #313131; }
 .co-pay-amt { color: #313131; white-space: nowrap; }
 
@@ -5380,7 +5426,9 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 }
 .co-detail-body {
   flex: 1; overflow-y: auto; overflow-x: hidden;
-  -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y; /* allow internal scrolling; JS handles downward pull-to-dismiss */
+  overscroll-behavior: contain; /* prevent scroll chaining to background */
 }
 /* ── CO document iframe overlay (sign & accept demo, stays in-app) ── */
 .co-doc-overlay {
@@ -5906,7 +5954,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
     <span class="detail-nav-label">Quotes</span>
     <div class="detail-nav-badge">
       <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
-      <span>2 Actions Required</span>
+      <span>2 Awaiting Approval</span>
     </div>
   </div>
   <div class="detail-nav-card" onclick="go('variations')">
@@ -5922,7 +5970,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
     <span class="detail-nav-label">Change Orders</span>
     <div class="detail-nav-badge">
       <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
-      <span>1 Awaiting Approval</span>
+      <span>1 Change to Review</span>
     </div>
   </div>
   <div class="detail-nav-card" onclick="go('invoices')">
@@ -5934,7 +5982,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
     </div>
   </div>
   <div class="detail-nav-card" onclick="go('purchase-order')">
-    <i class="fa-sharp-solid fa-file-invoice detail-nav-icon"></i>
+    <i class="fa-solid fa-file-plus detail-nav-icon"></i>
     <span class="detail-nav-label">Sales Order</span>
     <div class="detail-nav-badge">
       <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
@@ -7075,8 +7123,10 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 
   <!-- Condensed sticky header (shown on scroll) -->
   <div class="co-card-header-sticky" id="co-sticky-bar">
-    <span class="co-sticky-badge"></span>
-    <span class="co-sticky-title"></span>
+    <div class="co-sticky-inner">
+      <span class="co-sticky-badge"></span>
+      <span class="co-sticky-title"></span>
+    </div>
   </div>
 
   <!-- Change Order cards list -->
@@ -7085,12 +7135,17 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
     <!-- Card 1: Pending your review -->
     <div class="co-card" data-status="pending your review">
       <div class="co-card-header">
-        <div class="co-header-row">
-          <span class="qr-badge qr-badge-pending">Pending your review</span>
-          <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+        <div class="co-card-hd-row">
+          <div class="co-card-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""></div>
+          <div class="co-card-hd-info">
+            <div class="co-header-row">
+              <span class="qr-badge qr-badge-pending">Pending your review</span>
+              <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+            </div>
+            <div class="co-header-quote">Quote #23944</div>
+            <div class="co-header-title">Dutch House Security</div>
+          </div>
         </div>
-        <div class="co-header-quote">Quote #23944</div>
-        <div class="co-header-title">Dutch House Security INV TEST</div>
       </div>
 
       <div class="co-timeline">
@@ -7162,7 +7217,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
           </button>
           <button class="qr-action-btn" onclick="tbcCoCard(this)">TBC</button>
           <button class="qr-action-btn reject" onclick="rejectCoCard(this)">Reject</button>
-          <button class="qr-action-btn accept" onclick="acceptCoCard(this)">Accept</button>
+          <button class="qr-action-btn accept" onclick="openCoDocument(this)">Accept</button>
         </div>
       </div>
     </div>
@@ -7170,12 +7225,17 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
     <!-- Card 2: Accepted -->
     <div class="co-card" data-status="accepted">
       <div class="co-card-header">
-        <div class="co-header-row">
-          <span class="qr-badge qr-badge-accepted">Accepted</span>
-          <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+        <div class="co-card-hd-row">
+          <div class="co-card-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""></div>
+          <div class="co-card-hd-info">
+            <div class="co-header-row">
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+              <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+            </div>
+            <div class="co-header-quote">Quote #23944</div>
+            <div class="co-header-title">Dutch House Security</div>
+          </div>
         </div>
-        <div class="co-header-quote">Quote #23944</div>
-        <div class="co-header-title">Dutch House Security INV TEST</div>
       </div>
       <div class="co-payment-progress">
         <div class="qr-payment-label">Payment Progress</div>
@@ -7183,7 +7243,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
           <span class="qr-payment-big">$7,800,000.00</span>
           <span class="qr-payment-of">of $12,000,000.00 Paid so far</span>
         </div>
-        <div class="qr-payment-bar" style="margin:8px 0;">
+        <div class="qr-payment-bar" style="margin:6px 0 0;">
           <div class="qr-payment-bar-seg seg-paid" style="width:65%;"></div>
           <div class="qr-payment-bar-seg seg-due" style="width:10%;"></div>
         </div>
@@ -7213,7 +7273,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
             <span class="co-pay-amt">$3,000,000.00</span>
           </div>
         </div>
-        <button class="inv-btn" style="flex:none;width:100%;height:41px;margin-top:12px;">View Accepted Details</button>
+        <button class="inv-btn" style="flex:none;width:100%;height:41px;margin-top:17px;" onclick="openCoDetails(this)">View Accepted Details</button>
       </div>
     </div>
 
@@ -7383,7 +7443,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
         <div class="qr-meta">
           <span class="qr-number">Sales Order #23944</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Dutch House Security</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-accepted">Accepted</span>
@@ -8140,7 +8200,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
             <span class="qr-date qr-date-pending" id="co-detail-date">Valid until 14 April 2026</span>
           </div>
           <div class="co-detail-hd-quote" id="co-detail-quote">Quote #23944</div>
-          <div class="co-detail-hd-title" id="co-detail-title">Dutch House Security INV TEST</div>
+          <div class="co-detail-hd-title" id="co-detail-title">Dutch House Security</div>
         </div>
       </div>
     </div>
@@ -8291,8 +8351,8 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           </svg>
         </button>
-        <button class="qr-action-btn" onclick="closeCoDetails()">TBC</button>
-        <button class="qr-action-btn" onclick="closeCoDetails()">Reject</button>
+        <button class="qr-action-btn" onclick="coSheetAction('tbc')">TBC</button>
+        <button class="qr-action-btn" onclick="coSheetAction('reject')">Reject</button>
         <button class="qr-action-btn" onclick="openCoDocument()">Accept</button>
       </div>
     </div>
@@ -8332,7 +8392,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
         <span>Quote #23944</span>
         <span>Change Order 3.1</span>
       </div>
-      <div class="nya-item-title">Dutch House Security INV TEST</div>
+      <div class="nya-item-title">Dutch House Security</div>
       <div class="nya-amounts">
         <div class="nya-amount-row">
           <span>Original amount</span>
@@ -9951,20 +10011,17 @@ function acceptCard(btn) {
   }
 
   setTimeout(() => {
-    // ── Phase 3: swap badge + date ──
-    const badge = card.querySelector('.qr-badge');
-    if (badge) {
-      badge.className   = 'qr-badge qr-badge-accepted';
-      badge.textContent = 'Accepted';
-    }
-    const dateEl = card.querySelector('.qr-date');
-    if (dateEl) {
-      dateEl.className   = 'qr-date qr-date-accepted';
-      dateEl.textContent = 'Accepted on ' + dateStr;
-    }
+    // ── Phase 3: badge + date flip to Accepted ──
+    flipBadge(card.querySelector('.qr-badge'), 'qr-badge qr-badge-accepted', 'Accepted');
+    setTimeout(() => {
+      flipBadge(card.querySelector('.qr-date'), 'qr-date qr-date-accepted', 'Accepted on ' + dateStr);
+    }, 150);
 
     // Log to Portal Activity
     logActivity('You approved', cardRef(card));
+
+    // Pause — let the flipped status register before the card changes shape
+    setTimeout(() => {
 
     // ── Phase 4: replace actions with payment progress ──
     const paymentHTML = `
@@ -10013,7 +10070,9 @@ function acceptCard(btn) {
       // ── Phase 7: re-sort list so Pending cards bubble to the top ──
       const listEl = card.closest('.qp-list');
       if (listEl) resortCardList(listEl);
-    }, 350);
+    }, 900);
+
+    }, 1700); // end pause-after-flip
 
   }, 250);
 }
@@ -10079,25 +10138,22 @@ function tbcCard(btn) {
   card.classList.add('qr-tbc-ing');
 
   setTimeout(() => {
-    // ── Phase 2: swap badge + date ──
-    const badge = card.querySelector('.qr-badge');
-    if (badge) {
-      badge.className   = 'qr-badge qr-badge-tbc';
-      badge.textContent = 'To be confirmed';
-    }
-    const dateEl = card.querySelector('.qr-date');
-    if (dateEl) {
-      // Keep existing date text — just update the colour class
-      dateEl.className = 'qr-date qr-date-tbc';
-    }
+    // ── Phase 2: badge + date flip to TBC ──
+    flipBadge(card.querySelector('.qr-badge'), 'qr-badge qr-badge-tbc', 'To be confirmed');
+    setTimeout(() => {
+      // Keep existing date text — just flip to the tbc colour class
+      flipBadge(card.querySelector('.qr-date'), 'qr-date qr-date-tbc', null);
+    }, 150);
 
     // Log to Portal Activity
     logActivity('You marked as TBC', cardRef(card));
 
-    // ── Phase 3: settle ──
-    card.classList.remove('qr-tbc-ing');
-    card.classList.add('qr-tbc-done');
-    setTimeout(() => card.classList.remove('qr-tbc-done'), 700);
+    // ── Phase 3: settle after the flips finish ──
+    setTimeout(() => {
+      card.classList.remove('qr-tbc-ing');
+      card.classList.add('qr-tbc-done');
+      setTimeout(() => card.classList.remove('qr-tbc-done'), 700);
+    }, 1200);
   }, 180);
 }
 
@@ -10129,17 +10185,11 @@ function rejectCard(btn) {
   }
 
   setTimeout(() => {
-    // ── Phase 3: swap badge + date ──
-    const badge = card.querySelector('.qr-badge');
-    if (badge) {
-      badge.className   = 'qr-badge qr-badge-declined';
-      badge.textContent = 'Declined';
-    }
-    const dateEl = card.querySelector('.qr-date');
-    if (dateEl) {
-      dateEl.className   = 'qr-date qr-date-declined';
-      dateEl.textContent = 'Declined on ' + dateStr;
-    }
+    // ── Phase 3: badge + date flip to Declined ──
+    flipBadge(card.querySelector('.qr-badge'), 'qr-badge qr-badge-declined', 'Declined');
+    setTimeout(() => {
+      flipBadge(card.querySelector('.qr-date'), 'qr-date qr-date-declined', 'Declined on ' + dateStr);
+    }, 150);
 
     // Log to Portal Activity
     logActivity('You rejected', cardRef(card));
@@ -10147,13 +10197,16 @@ function rejectCard(btn) {
     // ── Phase 4: remove actions entirely → empty slot ──
     if (actionsEl) actionsEl.outerHTML = '<div></div>';
 
-    // ── Phase 5: settle + re-sort so Declined drops to bottom ──
-    card.classList.remove('qr-rejecting');
-    card.classList.add('qr-rejected-done');
-    setTimeout(() => card.classList.remove('qr-rejected-done'), 800);
+    // Pause — let the flipped status register before the list re-sorts
+    setTimeout(() => {
+      // ── Phase 5: settle + re-sort so Declined drops to bottom ──
+      card.classList.remove('qr-rejecting');
+      card.classList.add('qr-rejected-done');
+      setTimeout(() => card.classList.remove('qr-rejected-done'), 800);
 
-    const listEl = card.closest('.qp-list');
-    if (listEl) resortCardList(listEl);
+      const listEl = card.closest('.qp-list');
+      if (listEl) resortCardList(listEl);
+    }, 1700);
   }, 250);
 }
 
@@ -10866,9 +10919,30 @@ updateOnTokens();
   scrollRoot.addEventListener('scroll', function() {
     if (!ticking) { ticking = true; requestAnimationFrame(update); }
   }, { passive: true });
+
+  // Allow external refresh after a card's status changes (e.g. accept flow)
+  window._coStickyRefresh = function() { lastActive = null; update(); };
 })();
 
 // ── Change Order card actions ──
+/* 3D flip a badge/date chip to its new state: rotate edge-on, swap the
+   content at the midpoint, rotate back out. */
+function flipBadge(el, newClass, newText) {
+  if (!el) return;
+  el.style.transition = 'transform 0.4s ease-in';
+  el.style.transform = 'perspective(300px) rotateX(90deg)';
+  setTimeout(function() {
+    el.className = newClass;
+    if (newText != null) el.textContent = newText;
+    el.style.transition = 'none';
+    el.style.transform = 'perspective(300px) rotateX(-90deg)';
+    requestAnimationFrame(function() { requestAnimationFrame(function() {
+      el.style.transition = 'transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1)';
+      el.style.transform = 'perspective(300px) rotateX(0deg)';
+      setTimeout(function() { el.style.transition = ''; el.style.transform = ''; }, 600);
+    }); });
+  }, 400);
+}
 function acceptCoCard(btn) {
   var card = btn.closest('.co-card');
   if (!card) return;
@@ -10876,28 +10950,40 @@ function acceptCoCard(btn) {
   var dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   var actionsEl = card.querySelector('.co-card-actions');
   if (actionsEl) {
-    actionsEl.style.transition = 'opacity 0.25s ease, max-height 0.3s ease';
+    actionsEl.style.transition = 'opacity 0.45s ease, max-height 0.55s ease';
     actionsEl.style.opacity = '0'; actionsEl.style.overflow = 'hidden';
     actionsEl.style.maxHeight = actionsEl.scrollHeight + 'px';
     requestAnimationFrame(function() { requestAnimationFrame(function() { actionsEl.style.maxHeight = '0'; }); });
   }
   setTimeout(function() {
     card.dataset.status = 'accepted';
-    var badge = card.querySelector('.co-header-row .qr-badge');
-    if (badge) { badge.className = 'qr-badge qr-badge-accepted'; badge.textContent = 'Accepted'; }
-    var dateEl = card.querySelector('.co-header-row .qr-date');
-    if (dateEl) { dateEl.className = 'qr-date qr-date-accepted'; dateEl.textContent = 'Accepted on ' + dateStr; }
+    flipBadge(card.querySelector('.co-header-row .qr-badge'), 'qr-badge qr-badge-accepted', 'Accepted');
+    setTimeout(function() {
+      flipBadge(card.querySelector('.co-header-row .qr-date'), 'qr-date qr-date-accepted', 'Accepted on ' + dateStr);
+    }, 150);
     if (actionsEl) actionsEl.remove();
-  }, 280);
+  }, 450);
 }
 function tbcCoCard(btn) {
   var card = btn.closest('.co-card');
   if (!card) return;
   card.dataset.status = 'tbc';
-  var badge = card.querySelector('.co-header-row .qr-badge');
-  if (badge) { badge.className = 'qr-badge qr-badge-tbc'; badge.textContent = 'To be confirmed'; }
-  var dateEl = card.querySelector('.co-header-row .qr-date');
-  if (dateEl) { dateEl.className = 'qr-date qr-date-tbc'; }
+  flipBadge(card.querySelector('.co-header-row .qr-badge'), 'qr-badge qr-badge-tbc', 'To be confirmed');
+  setTimeout(function() {
+    flipBadge(card.querySelector('.co-header-row .qr-date'), 'qr-date qr-date-tbc', null);
+  }, 150);
+  // Timeline active step badge follows
+  var activeItem = card.querySelector('.co-tl-item-active');
+  if (activeItem) {
+    flipBadge(activeItem.querySelector('.co-tl-status-row .qr-badge'), 'qr-badge qr-badge-tbc', 'To be confirmed');
+    setTimeout(function() {
+      flipBadge(activeItem.querySelector('.co-tl-status-row .qr-date'), 'qr-date qr-date-tbc', null);
+    }, 150);
+  }
+  setTimeout(function() {
+    refreshCoTabCounts();
+    if (window._coStickyRefresh) window._coStickyRefresh();
+  }, 1100);
 }
 function rejectCoCard(btn) {
   var card = btn.closest('.co-card');
@@ -10906,19 +10992,41 @@ function rejectCoCard(btn) {
   var dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   var actionsEl = card.querySelector('.co-card-actions');
   if (actionsEl) {
-    actionsEl.style.transition = 'opacity 0.25s ease, max-height 0.3s ease';
+    actionsEl.style.transition = 'opacity 0.45s ease, max-height 0.55s ease';
     actionsEl.style.opacity = '0'; actionsEl.style.overflow = 'hidden';
     actionsEl.style.maxHeight = actionsEl.scrollHeight + 'px';
     requestAnimationFrame(function() { requestAnimationFrame(function() { actionsEl.style.maxHeight = '0'; }); });
   }
   setTimeout(function() {
     card.dataset.status = 'declined';
-    var badge = card.querySelector('.co-header-row .qr-badge');
-    if (badge) { badge.className = 'qr-badge qr-badge-declined'; badge.textContent = 'Declined'; }
-    var dateEl = card.querySelector('.co-header-row .qr-date');
-    if (dateEl) { dateEl.className = 'qr-date qr-date-declined'; dateEl.textContent = 'Declined on ' + dateStr; }
+    flipBadge(card.querySelector('.co-header-row .qr-badge'), 'qr-badge qr-badge-declined', 'Declined');
+    setTimeout(function() {
+      flipBadge(card.querySelector('.co-header-row .qr-date'), 'qr-date qr-date-declined', 'Declined on ' + dateStr);
+    }, 150);
+    // Timeline active step badge follows
+    var activeItem = card.querySelector('.co-tl-item-active');
+    if (activeItem) {
+      flipBadge(activeItem.querySelector('.co-tl-status-row .qr-badge'), 'qr-badge qr-badge-declined', 'Declined');
+      setTimeout(function() {
+        flipBadge(activeItem.querySelector('.co-tl-status-row .qr-date'), 'qr-date qr-date-declined', 'Declined on ' + dateStr);
+      }, 150);
+      // Pending dot stops pulsing and becomes a close-circle
+      var dot = activeItem.querySelector('.co-tl-dot-pending');
+      if (dot) {
+        var declinedDot = document.createElement('div');
+        declinedDot.className = 'co-tl-dot co-tl-dot-declined';
+        declinedDot.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+        dot.replaceWith(declinedDot);
+      }
+    }
     if (actionsEl) actionsEl.remove();
-  }, 280);
+    setTimeout(function() {
+      refreshCoTabCounts();
+      if (window._coStickyRefresh) window._coStickyRefresh();
+      // Declined sorts after accepted — slide to the end of the list
+      moveCoCardToEnd(card);
+    }, 1300);
+  }, 450);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -11019,15 +11127,56 @@ function rejectCoCard(btn) {
   });
 })();
 
+var _coSheetPristineBody = null;
+/* Sheet reflects whichever card opened it — pending shows the review state,
+   accepted shows the accepted state (badge, timeline, no action footer). */
+function syncCoSheetFromCard(card) {
+  var overlay = document.getElementById('co-detail-overlay');
+  if (!overlay || !card) return;
+  var body = overlay.querySelector('.co-detail-body');
+  if (body) {
+    if (_coSheetPristineBody === null) _coSheetPristineBody = body.innerHTML;
+    else body.innerHTML = _coSheetPristineBody; // reset to the pending baseline
+  }
+  var cardBadge = card.querySelector('.co-header-row .qr-badge');
+  var cardDate  = card.querySelector('.co-header-row .qr-date');
+  var sBadge = document.getElementById('co-detail-badge');
+  var sDate  = document.getElementById('co-detail-date');
+  if (cardBadge && sBadge) { sBadge.className = cardBadge.className; sBadge.textContent = cardBadge.textContent; }
+  if (cardDate && sDate)   { sDate.className  = cardDate.className;  sDate.textContent  = cardDate.textContent; }
+  var accepted = (card.dataset.status || '').toLowerCase() === 'accepted';
+  if (accepted) {
+    var activeItem = overlay.querySelector('.co-tl-item-active');
+    if (activeItem) {
+      var tlBadge = activeItem.querySelector('.co-tl-status-row .qr-badge');
+      if (tlBadge) { tlBadge.className = 'qr-badge qr-badge-accepted'; tlBadge.textContent = 'Accepted'; }
+      var tlDate = activeItem.querySelector('.co-tl-status-row .qr-date');
+      if (tlDate && cardDate) { tlDate.className = 'qr-date qr-date-accepted'; tlDate.textContent = cardDate.textContent; }
+      var dot = activeItem.querySelector('.co-tl-dot-pending');
+      if (dot) {
+        var done = document.createElement('div');
+        done.className = 'co-tl-dot co-tl-dot-done';
+        done.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        dot.replaceWith(done);
+      }
+    }
+  }
+  // Accepted COs have no TBC/Reject/Accept actions
+  var footer = overlay.querySelector('.co-detail-footer');
+  if (footer) footer.style.display = accepted ? 'none' : '';
+}
 function openCoDetails(src) {
   var overlay = document.getElementById('co-detail-overlay');
   if (!overlay) return;
-  // Sheet thumb mirrors the product image of the card that was tapped
+  // Sheet thumb + statuses mirror the card that was tapped
   if (src && src.closest) {
     var card = src.closest('.co-card');
-    var cardImg = card && card.querySelector('.qr-thumb img');
-    var thumbImg = overlay.querySelector('.co-detail-thumb img');
-    if (cardImg && thumbImg) { thumbImg.src = cardImg.src; thumbImg.style.display = ''; }
+    if (card) {
+      var cardImg = card.querySelector('.co-card-thumb img, .qr-thumb img');
+      var thumbImg = overlay.querySelector('.co-detail-thumb img');
+      if (cardImg && thumbImg) { thumbImg.src = cardImg.src; thumbImg.style.display = ''; }
+      syncCoSheetFromCard(card);
+    }
   }
   var sheet = overlay.querySelector('.co-detail-sheet');
   if (sheet) { sheet.style.animation = 'none'; sheet.offsetHeight; sheet.style.animation = ''; }
@@ -11040,20 +11189,242 @@ function closeCoDetails() {
   if (!overlay) return;
   overlay.classList.remove('open');
 }
+/* Sheet footer TBC / Reject: close the sheet, then run the same flow on the
+   pending card so the user sees the badge flip on the list. */
+function coSheetAction(action) {
+  var card = document.querySelector('#s-change-order .co-card[data-status="pending your review"]');
+  closeCoDetails();
+  if (!card) return;
+  // Bring the card into view, then flip after the sheet has gone
+  var scrollRoot = document.querySelector('#s-change-order .quotes-page');
+  if (scrollRoot) scrollRoot.scrollTo({ top: Math.max(0, card.offsetTop - 130), behavior: 'smooth' });
+  setTimeout(function() {
+    var btn = card.querySelector('.qr-action-btn.' + (action === 'reject' ? 'reject' : 'accept')) || card;
+    if (action === 'tbc') tbcCoCard(btn.closest ? btn : card);
+    else rejectCoCard(btn.closest ? btn : card);
+  }, 450);
+}
 
 /* ── CO document iframe overlay — sign & accept demo without leaving the app ── */
-function openCoDocument() {
+var _coDocSourceCard = null;
+var _coDocSigned = false;
+function openCoDocument(src) {
   var overlay = document.getElementById('co-doc-overlay');
   if (!overlay) return;
+  // Remember which CO card this accept flow belongs to
+  _coDocSourceCard = (src && src.closest) ? src.closest('.co-card') : null;
+  if (!_coDocSourceCard) {
+    // Opened from the detail sheet — it describes the pending CO card
+    _coDocSourceCard = document.querySelector('#s-change-order .co-card[data-status="pending your review"]');
+  }
   var frame = document.getElementById('co-doc-iframe');
-  // Lazy-load: only set src on first open
+  // Lazy-load: only set src on first open; reset if a previous demo already signed
   if (frame && !frame.src) frame.src = 'ChangeOrder_Sign_demo.html';
+  else if (frame && _coDocSigned) {
+    try { frame.contentWindow.location.reload(); } catch(e) {}
+    _coDocSigned = false;
+  }
   overlay.classList.add('open');
 }
+var _coSignedPending = false;
 function closeCoDocument() {
   var overlay = document.getElementById('co-doc-overlay');
   if (!overlay) return;
   overlay.classList.remove('open');
+  if (!_coSignedPending) return;
+  _coSignedPending = false;
+  var card = _coDocSourceCard;
+  _coDocSourceCard = null;
+  var detailOverlay = document.getElementById('co-detail-overlay');
+  var sheetOpen = detailOverlay && detailOverlay.classList.contains('open');
+  if (sheetOpen) {
+    // 1) Sheet statuses animate to Accepted while the user watches
+    setTimeout(flipCoSheetToAccepted, 450);
+    // 2) The sheet slides away as soon as the badge flips finish (no extra hold)
+    setTimeout(function() {
+      var sheet = detailOverlay.querySelector('.co-detail-sheet');
+      if (sheet) {
+        sheet.style.animation = 'none';
+        sheet.style.transition = 'transform 0.55s cubic-bezier(0.32, 0.72, 0, 1)';
+        sheet.style.transform = 'translateY(' + sheet.offsetHeight + 'px)';
+        detailOverlay.style.transition = 'background 0.55s ease';
+        detailOverlay.style.background = 'rgba(0,0,0,0)';
+        setTimeout(function() {
+          closeCoDetails();
+          sheet.style.transform = ''; sheet.style.animation = ''; sheet.style.transition = '';
+          detailOverlay.style.background = ''; detailOverlay.style.transition = '';
+          // 3) Finally the card accepts + bounces to the end
+          startCoCardAccept(card);
+        }, 560);
+      } else {
+        closeCoDetails();
+        startCoCardAccept(card);
+      }
+    }, 1750);
+  } else {
+    setTimeout(function() { startCoCardAccept(card); }, 400);
+  }
+}
+/* Signed inside the iframe → arm the accept sequence; it plays only when
+   the user closes the document themselves (they keep control). */
+window.addEventListener('message', function(e) {
+  if (e.data !== 'co-signed') return;
+  _coDocSigned = true;
+  _coSignedPending = true;
+});
+/* Flip a timeline's active step to Accepted (used for sheet and card) */
+function flipCoTimelineToAccepted(root, dateStr) {
+  var activeItem = root.querySelector('.co-tl-item-active');
+  if (!activeItem) return;
+  flipBadge(activeItem.querySelector('.co-tl-status-row .qr-badge'), 'qr-badge qr-badge-accepted', 'Accepted');
+  setTimeout(function() {
+    flipBadge(activeItem.querySelector('.co-tl-status-row .qr-date'), 'qr-date qr-date-accepted', 'Accepted on ' + dateStr);
+  }, 150);
+  var dot = activeItem.querySelector('.co-tl-dot-pending');
+  if (dot) {
+    var done = document.createElement('div');
+    done.className = 'co-tl-dot co-tl-dot-done';
+    done.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+    dot.replaceWith(done);
+  }
+}
+/* Bottom sheet content flips to Accepted */
+function flipCoSheetToAccepted() {
+  var dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  flipBadge(document.getElementById('co-detail-badge'), 'qr-badge qr-badge-accepted', 'Accepted');
+  setTimeout(function() {
+    flipBadge(document.getElementById('co-detail-date'), 'qr-date qr-date-accepted', 'Accepted on ' + dateStr);
+  }, 150);
+  var overlay = document.getElementById('co-detail-overlay');
+  if (overlay) flipCoTimelineToAccepted(overlay, dateStr);
+}
+/* Card accepts (flash → badge swap → timeline collapses → payment progress
+   fades in → counts) then bounces to the end of the list */
+function startCoCardAccept(card) {
+  if (!card) return;
+  var dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  // Bring the card into view first so the user can follow the whole change
+  var scrollRoot = document.querySelector('#s-change-order .quotes-page');
+  if (scrollRoot) scrollRoot.scrollTo({ top: Math.max(0, card.offsetTop - 130), behavior: 'smooth' });
+
+  // New accepted total comes from the card's "New Project Total" row
+  var totalEl = card.querySelector('.co-value-footer .co-value-num');
+  var total = totalEl ? totalEl.textContent.trim() : '$0.00';
+
+  card.classList.add('qr-accepting');
+
+  // Badge + timeline flip after a beat (let the green flash register first)
+  setTimeout(function() {
+    var btn = card.querySelector('.qr-action-btn.accept') || card;
+    acceptCoCard(btn);
+    flipCoTimelineToAccepted(card, dateStr);
+  }, 500);
+
+  // Timeline collapses only AFTER the badge flips have fully finished —
+  // collapsing mid-flip makes the badge change look like it flashes away
+  setTimeout(function() {
+    var tl = card.querySelector('.co-timeline');
+    if (tl) {
+      tl.style.overflow = 'hidden';
+      tl.style.transition = 'max-height 0.9s ease, opacity 0.65s ease';
+      tl.style.maxHeight = tl.scrollHeight + 'px';
+      requestAnimationFrame(function() { requestAnimationFrame(function() {
+        tl.style.maxHeight = '0'; tl.style.opacity = '0';
+      }); });
+      setTimeout(function() { tl.remove(); }, 950);
+    }
+  }, 2200);
+
+  // Payment progress section enters (fresh accept: $0 paid, everything upcoming)
+  setTimeout(function() {
+    var header = card.querySelector('.co-card-header');
+    if (header && !card.querySelector('.co-payment-progress')) {
+      header.insertAdjacentHTML('afterend',
+        '<div class="co-payment-progress qr-payment-enter">' +
+          '<div class="qr-payment-label">Payment Progress</div>' +
+          '<div class="qr-payment-amount-row">' +
+            '<span class="qr-payment-big">$0.00</span>' +
+            '<span class="qr-payment-of">of ' + total + ' Paid so far</span>' +
+          '</div>' +
+          '<div class="qr-payment-bar" style="margin:6px 0 0;">' +
+            '<div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>' +
+            '<div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>' +
+          '</div>' +
+          '<div class="co-pay-legend">' +
+            '<div class="co-pay-legend-row"><div class="co-pay-legend-left">' +
+              '<div class="qr-legend-dot" style="background:#009113;"></div>' +
+              '<span>Paid so far</span><span class="co-pay-pct">0%</span></div>' +
+              '<span class="co-pay-amt">$0.00</span></div>' +
+            '<div class="co-pay-legend-row"><div class="co-pay-legend-left">' +
+              '<div class="qr-legend-dot" style="background:#cf3400;"></div>' +
+              '<span>To pay now</span><span class="co-pay-pct">0%</span></div>' +
+              '<span class="co-pay-amt">$0.00</span></div>' +
+            '<div class="co-pay-legend-row"><div class="co-pay-legend-left">' +
+              '<div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>' +
+              '<span>Upcoming</span><span class="co-pay-pct">100%</span></div>' +
+              '<span class="co-pay-amt">' + total + '</span></div>' +
+          '</div>' +
+          '<button class="inv-btn" style="flex:none;width:100%;height:41px;margin-top:17px;" onclick="openCoDetails(this)">View Accepted Details</button>' +
+        '</div>');
+      var payEl = card.querySelector('.co-payment-progress');
+      requestAnimationFrame(function() { requestAnimationFrame(function() {
+        payEl.classList.remove('qr-payment-enter');
+        payEl.classList.add('qr-payment-entered');
+      }); });
+    }
+  }, 3000);
+
+  // Counts, settle glow, then bounce to the end
+  setTimeout(function() {
+    refreshCoTabCounts();
+    if (window._coStickyRefresh) window._coStickyRefresh();
+    card.classList.remove('qr-accepting');
+    card.classList.add('qr-accepted-done');
+    setTimeout(function() { card.classList.remove('qr-accepted-done'); }, 800);
+  }, 3900);
+
+  // Finally: bounce to the end of the list
+  setTimeout(function() { moveCoCardToEnd(card); }, 4300);
+}
+/* FLIP-animate the freshly accepted card to the end of the list */
+function moveCoCardToEnd(card) {
+  var listEl = card.closest('.qp-list');
+  if (!listEl) return;
+  var cards = Array.prototype.slice.call(listEl.querySelectorAll(':scope > .co-card'));
+  if (cards.length < 2 || cards[cards.length - 1] === card) return;
+  var firstTops = cards.map(function(c) { return c.getBoundingClientRect().top; });
+  listEl.appendChild(card);
+  cards.forEach(function(c, i) {
+    var dy = firstTops[i] - c.getBoundingClientRect().top;
+    if (!dy) return;
+    c.style.transition = 'none';
+    c.style.transform = 'translateY(' + dy + 'px)';
+  });
+  requestAnimationFrame(function() { requestAnimationFrame(function() {
+    cards.forEach(function(c) {
+      c.style.transition = 'transform 0.6s cubic-bezier(0.4,0,0.2,1)';
+      c.style.transform = '';
+    });
+    setTimeout(function() {
+      cards.forEach(function(c) { c.style.transition = ''; c.style.transform = ''; });
+    }, 650);
+  }); });
+}
+function refreshCoTabCounts() {
+  var cards = document.querySelectorAll('#s-change-order .qp-list .co-card');
+  var counts = { 'all': cards.length, 'pending your review': 0, 'tbc': 0, 'accepted': 0, 'declined': 0 };
+  cards.forEach(function(c) {
+    var s = (c.dataset.status || '').toLowerCase();
+    if (counts[s] != null) counts[s]++;
+  });
+  document.querySelectorAll('#s-change-order .qp-filter-tab').forEach(function(tab) {
+    var cnt = tab.querySelector('.qp-filter-count');
+    if (!cnt) return;
+    var label = tab.textContent.replace(/[0-9]/g, '').trim().toLowerCase();
+    var n = counts[label];
+    if (n != null) cnt.textContent = (n < 10 ? '0' : '') + n;
+  });
 }
 
 // ── Pay now modal ──

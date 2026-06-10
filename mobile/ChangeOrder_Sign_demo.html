@@ -242,20 +242,29 @@ body {
 .btn-accept:disabled { opacity: 0.45; cursor: not-allowed; }
 .btn-accept:not(:disabled):active { background: var(--green-dark); }
 
-/* ── Signed confirmation ── */
+/* ── Signed confirmation — fixed alert that pops down from the top ── */
 .signed-banner {
-  display: none;
-  background: rgba(33,186,136,0.12);
-  border: 1px solid rgba(33,186,136,0.45);
+  position: fixed; top: calc(8px + env(safe-area-inset-top)); left: 10px; z-index: 90;
+  right: 54px; /* clear the floating close button when framed in-app */
+  display: flex; align-items: center; gap: 8px;
+  background: #e8f7ef;
+  border: 1px solid rgba(33,186,136,0.55);
   color: #157a5c;
-  border-radius: 6px;
-  font-size: 14.5px; font-weight: 700;
-  padding: 14px 16px; margin-bottom: 16px;
-  align-items: center; gap: 10px;
+  border-radius: 8px;
+  font-size: 13px; font-weight: 700;
+  padding: 9px 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.16);
+  transform: translateY(-160%);
+  transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+  pointer-events: none;
 }
-.signed-banner.show { display: flex; }
+.signed-banner.show {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.signed-banner svg { flex-shrink: 0; width: 15px; height: 15px; }
 .signed-banner img.sig-preview {
-  height: 38px; margin-left: auto;
+  height: 26px; margin-left: auto; flex-shrink: 0;
   background: #fff; border: 1px solid var(--line); border-radius: 4px;
 }
 
@@ -514,15 +523,30 @@ function acceptAndSign() {
   document.getElementById('signed-text').textContent =
     'Signed & accepted by ' + name + ' on ' + new Date().toLocaleDateString('en-GB');
   document.getElementById('sig-preview').src = canvas.toDataURL();
-  banner.classList.add('show');
   closeSignModal();
+  // Pop the alert down from the top (slight delay so the modal close is visible first)
+  setTimeout(function() {
+    banner.classList.add('show');
+    // Auto-hide after 4 seconds
+    _bannerTimer = setTimeout(function() { banner.classList.remove('show'); }, 4000);
+  }, 250);
   // Footer switches to signed state
   var btn = document.getElementById('sign-btn');
   btn.textContent = '✓ SIGNED';
   btn.disabled = true;
   btn.style.opacity = '0.6';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Tell the host portal (when framed) so it can flip the CO card to Accepted
+  if (window.parent !== window) {
+    try { window.parent.postMessage('co-signed', '*'); } catch(e) {}
+  }
 }
+
+/* Tap the alert to dismiss it early */
+var _bannerTimer = null;
+document.getElementById('signed-banner').addEventListener('click', function() {
+  clearTimeout(_bannerTimer);
+  this.classList.remove('show');
+});
 
 window.addEventListener('resize', function() {
   if (document.getElementById('sig-modal').classList.contains('open')) resizeCanvas();
