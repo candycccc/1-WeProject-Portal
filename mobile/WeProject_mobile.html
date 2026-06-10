@@ -5154,6 +5154,8 @@ body.mobile-view #s-change-order .qp-list {
   flex: none; overflow: visible; padding: 0 12px 16px;
 }
 body.mobile-view #s-change-order .qp-progress-bar-outer { height: 18px; background: #eaeaea; }
+body.mobile-view #s-change-order .qr-payment-big { font-size: 20px; font-weight: 600; }
+body.mobile-view #s-change-order .qr-payment-of { font-size: 14px; font-weight: 500; }
 body.mobile-view #s-change-order .qp-footer { display: none; }
 body.mobile-view #s-change-order .qr-action-group { width: 100%; }
 body.mobile-view #s-change-order .qr-action-btn {
@@ -5180,14 +5182,15 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   display: none; position: sticky; top: 110px; z-index: 18;
   background: #fff; padding: 8px 12px;
   border-bottom: 1px solid #eaeaea;
-  flex-direction: column; gap: 2px;
+  flex-direction: column; align-items: flex-start; gap: 2px;
   margin: 0 12px; border-radius: 10px 10px 0 0;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 .co-card-header-sticky .co-sticky-badge { flex-shrink: 0; }
 .co-card-header-sticky .co-sticky-title {
   font-size: 14px; font-weight: 600; color: #313131;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-width: 0; max-width: 100%;
 }
 .co-card-header-sticky.visible { display: flex; }
 .co-header-row {
@@ -5225,8 +5228,26 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   display: flex; align-items: center; justify-content: center;
   margin-top: 1px;
 }
+/* Growing pulse ring — draws the eye to the active step */
+.co-tl-dot-pending::before {
+  content: '';
+  position: absolute; inset: -2px;
+  border-radius: 50%;
+  border: 2px solid #ff9500;
+  animation: coTlPulse 1.8s ease-out infinite;
+}
 .co-tl-dot-inner {
   width: 6px; height: 6px; border-radius: 50%; background: #ff9500;
+  animation: coTlDotGrow 1.8s ease-in-out infinite;
+}
+@keyframes coTlPulse {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  70%  { transform: scale(2);   opacity: 0; }
+  100% { transform: scale(2);   opacity: 0; }
+}
+@keyframes coTlDotGrow {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.35); }
 }
 .co-tl-line {
   width: 1px; background: #d9d9d9;
@@ -5306,11 +5327,11 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 
 /* ── CO Details Bottom Sheet ── */
 .co-detail-overlay {
-  display: none; position: absolute; inset: 0;
+  display: none; position: fixed; inset: 0;
   background: rgba(0,0,0,0.42); z-index: 820;
   align-items: flex-end;
 }
-.co-detail-overlay.open { display: flex; }
+.co-detail-overlay.open { display: flex; touch-action: none; }
 .co-detail-sheet {
   background: #fff;
   border-radius: 20px 20px 0 0;
@@ -5320,7 +5341,10 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
   overflow: hidden;
   animation: coSheetIn 0.32s cubic-bezier(0.32,0.72,0,1) both;
+  /* Swipe-down transition — only when not being dragged (same as notif sheet) */
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
+.co-detail-sheet.co-dragging { transition: none; }
 @keyframes coSheetIn {
   from { transform: translateY(100%); }
   to   { transform: translateY(0); }
@@ -5357,6 +5381,35 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 .co-detail-body {
   flex: 1; overflow-y: auto; overflow-x: hidden;
   -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+}
+/* ── CO document iframe overlay (sign & accept demo, stays in-app) ── */
+.co-doc-overlay {
+  display: none; position: fixed; inset: 0; z-index: 900;
+  background: #fff;
+  flex-direction: column;
+}
+.co-doc-overlay.open { display: flex; }
+.co-doc-overlay .co-doc-topbar {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: var(--brand-bg);
+  border-bottom: 1px solid var(--c-border-1);
+}
+.co-doc-overlay .co-doc-back {
+  display: flex; align-items: center; gap: 6px;
+  background: none; border: none; cursor: pointer;
+  font-family: inherit; font-size: 15px; font-weight: 600; color: var(--c-text-1);
+  padding: 6px 8px 6px 2px;
+}
+.co-doc-overlay .co-doc-topbar-title {
+  flex: 1; text-align: center;
+  font-size: 14px; font-weight: 600; color: var(--c-text-muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-right: 60px; /* balance the back button */
+}
+.co-doc-overlay iframe {
+  flex: 1; width: 100%; border: none; display: block;
 }
 .co-detail-footer {
   flex-shrink: 0; background: #fff;
@@ -7105,7 +7158,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
       </div>
 
       <div class="co-card-actions">
-        <button class="inv-btn" style="flex:none;width:100%;height:41px;" onclick="openCoDetails()">View Change Order 1.2 Details</button>
+        <button class="inv-btn" style="flex:none;width:100%;height:41px;" onclick="openCoDetails(this)">View Change Order 1.2 Details</button>
         <div class="qr-action-group">
           <button class="qr-action-btn" onclick="openCommentDialog('CO-1.2')">
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -7130,37 +7183,37 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
       <div class="co-payment-progress">
         <div class="qr-payment-label">Payment Progress</div>
         <div class="qr-payment-amount-row">
-          <span class="qr-payment-big">$120,000.00</span>
+          <span class="qr-payment-big">$7,800,000.00</span>
           <span class="qr-payment-of">of $12,000,000.00 Paid so far</span>
         </div>
         <div class="qr-payment-bar" style="margin:8px 0;">
-          <div class="qr-payment-bar-seg seg-paid" style="width:1%;"></div>
-          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-paid" style="width:65%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:10%;"></div>
         </div>
         <div class="co-pay-legend">
           <div class="co-pay-legend-row">
             <div class="co-pay-legend-left">
               <div class="qr-legend-dot" style="background:#009113;"></div>
               <span>Paid so far</span>
-              <span class="co-pay-pct">0%</span>
+              <span class="co-pay-pct">65%</span>
             </div>
-            <span class="co-pay-amt">$12,000,000.00</span>
+            <span class="co-pay-amt">$7,800,000.00</span>
           </div>
           <div class="co-pay-legend-row">
             <div class="co-pay-legend-left">
               <div class="qr-legend-dot" style="background:#cf3400;"></div>
               <span>To pay now</span>
-              <span class="co-pay-pct">0%</span>
+              <span class="co-pay-pct">10%</span>
             </div>
-            <span class="co-pay-amt">$0.00</span>
+            <span class="co-pay-amt">$1,200,000.00</span>
           </div>
           <div class="co-pay-legend-row">
             <div class="co-pay-legend-left">
               <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
               <span>Upcoming</span>
-              <span class="co-pay-pct">0%</span>
+              <span class="co-pay-pct">25%</span>
             </div>
-            <span class="co-pay-amt">$0.00</span>
+            <span class="co-pay-amt">$3,000,000.00</span>
           </div>
         </div>
         <button class="inv-btn" style="flex:none;width:100%;height:41px;margin-top:12px;">View Accepted Details</button>
@@ -8082,8 +8135,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
       <div class="qp-comment-handle"></div>
       <div class="co-detail-hd-row">
         <div class="co-detail-thumb">
-          <img src="assets/images/08fa6f48-31e3-47be-9f71-aa054eea522a.png" alt=""
-               onerror="this.style.display='none'">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt="">
         </div>
         <div class="co-detail-hd-info">
           <div class="co-detail-hd-meta">
@@ -8244,11 +8296,23 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
         </button>
         <button class="qr-action-btn" onclick="closeCoDetails()">TBC</button>
         <button class="qr-action-btn" onclick="closeCoDetails()">Reject</button>
-        <button class="qr-action-btn" onclick="closeCoDetails()">Accept</button>
+        <button class="qr-action-btn" onclick="openCoDocument()">Accept</button>
       </div>
     </div>
 
   </div>
+</div>
+
+<!-- ── CO document iframe overlay (sign & accept, stays in-app) ── -->
+<div class="co-doc-overlay" id="co-doc-overlay">
+  <div class="co-doc-topbar">
+    <button class="co-doc-back" onclick="closeCoDocument()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      Back
+    </button>
+    <span class="co-doc-topbar-title">Change Order — Sign &amp; Accept</span>
+  </div>
+  <iframe id="co-doc-iframe" title="Change Order document"></iframe>
 </div>
 
 <!-- ── Needs Your Attention dialog ── -->
@@ -9477,19 +9541,20 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 document.addEventListener('DOMContentLoaded', function() {
   try {
     const saved = localStorage.getItem('wq_screen');
-    const known = ['login','forgot-password','dash','detail','quotes','variations',
+    const known = ['dash','detail','quotes','variations','change-order',
                    'invoices','documents','warranty','progress','purchase-order'];
-    if (saved && known.includes(saved) && document.getElementById('s-' + saved)) {
-      // Navigate without skeleton delay for a snappy restore
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
-      document.getElementById('s-' + saved).classList.add('on');
-      if (saved === 'progress') initPPBars();
-      if (saved === 'detail') setTimeout(showNYADialog, 400);
-      const spEl = document.getElementById('sp-' + saved);
-      if (spEl) { document.querySelectorAll('.sp-item').forEach(e => e.classList.remove('active')); spEl.classList.add('active'); }
-      const viewEl = document.getElementById('pt-viewing-name');
-      if (viewEl) viewEl.textContent = screenFriendly[saved] || saved;
-    }
+    // Refresh never lands on login — restore last screen, default to dash
+    const target = (saved && known.includes(saved) && document.getElementById('s-' + saved))
+      ? saved : 'dash';
+    // Navigate without skeleton delay for a snappy restore
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+    document.getElementById('s-' + target).classList.add('on');
+    if (target === 'progress') initPPBars();
+    if (target === 'detail') setTimeout(showNYADialog, 400);
+    const spEl = document.getElementById('sp-' + target);
+    if (spEl) { document.querySelectorAll('.sp-item').forEach(e => e.classList.remove('active')); spEl.classList.add('active'); }
+    const viewEl = document.getElementById('pt-viewing-name');
+    if (viewEl) viewEl.textContent = screenFriendly[target] || target;
   } catch(e) {}
 });
 
@@ -10864,95 +10929,113 @@ function rejectCoCard(btn) {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   CO detail sheet — iOS-style drag-to-dismiss (touch + mouse)
-   Same pattern as comment dialog. Grab the handle or header zone →
-   drag down → backdrop fades out → release past threshold = dismiss.
+   CO detail sheet — iOS-style swipe-down to close
+   Identical pattern to the notification bottom sheet (initNotifSwipe):
+   listeners on the sheet itself, drag only when the body is scrolled to
+   top + swiping down. touch-action:none on the open overlay blocks the
+   browser pull-to-refresh.
 ───────────────────────────────────────────────────────────────────────── */
-(function initCoDrag() {
-  var startY = 0, dy = 0, active = false;
-  var THRESHOLD = 80;
+(function initCoSwipe() {
+  var overlay = document.getElementById('co-detail-overlay');
+  var sheet   = overlay && overlay.querySelector('.co-detail-sheet');
+  if (!sheet) return;
+  var body = sheet.querySelector('.co-detail-body');
 
-  function $o()  { return document.getElementById('co-detail-overlay'); }
-  function $d()  { var o = $o(); return o && o.querySelector('.co-detail-sheet'); }
-  function isOpen() { var o = $o(); return o && o.classList.contains('open'); }
-  function inDragZone(el) {
-    return !!(el && el.closest('#co-detail-header'));
-  }
+  var startY = 0, startScrollTop = 0, currentDelta = 0, dragging = false;
 
-  /* ── start ── */
-  function onStart(y) {
-    if (!isOpen()) return;
-    active = true; startY = y; dy = 0;
-    var d = $d(), o = $o();
-    if (d) { d.style.animation = 'none'; d.style.transition = 'none'; }
-    if (o) o.style.transition = 'none';
-  }
-
-  /* ── move ── */
-  function onMove(y) {
-    if (!active) return;
-    dy = Math.max(0, y - startY);
-    var d = $d(), o = $o();
-    if (d) d.style.transform = 'translateY(' + dy + 'px)';
-    if (o) o.style.background = 'rgba(0,0,0,' + Math.max(0, 0.42 * (1 - dy / 220)) + ')';
-  }
-
-  /* ── end ── */
-  function onEnd() {
-    if (!active) return;
-    active = false;
-    var d = $d(), o = $o();
-    if (!d || !o) return;
-
-    if (dy > THRESHOLD) {
-      d.style.transition = 'transform 0.22s ease-in';
-      o.style.transition = 'background 0.22s ease-in';
-      d.style.transform  = 'translateY(110%)';
-      o.style.background = 'rgba(0,0,0,0)';
-      setTimeout(function() {
-        d.style.animation = '';
-        d.style.transform = d.style.transition = '';
-        o.style.background = o.style.transition = '';
-        closeCoDetails();
-      }, 230);
-    } else {
-      d.style.transition = 'transform 0.32s cubic-bezier(.4,0,.2,1)';
-      o.style.transition = 'background 0.32s ease';
-      d.style.transform  = 'translateY(0)';
-      o.style.background = 'rgba(0,0,0,0.42)';
-      setTimeout(function() {
-        d.style.animation = '';
-        d.style.transform = d.style.transition = '';
-        o.style.background = o.style.transition = '';
-      }, 320);
-    }
-  }
-
-  /* Touch (mobile) — non-passive so we can preventDefault on move */
-  document.addEventListener('touchstart', function(e) {
-    if (inDragZone(e.target)) onStart(e.touches[0].clientY);
+  sheet.addEventListener('touchstart', function(e) {
+    startY = e.touches[0].clientY;
+    startScrollTop = body ? body.scrollTop : 0;
+    currentDelta = 0;
+    dragging = false;
+    sheet.style.animation = 'none';
+    sheet.classList.add('co-dragging');
   }, { passive: true });
 
-  document.addEventListener('touchmove', function(e) {
-    if (!active) return;
-    if (dy > 4) e.preventDefault();
-    onMove(e.touches[0].clientY);
-  }, { passive: false });
+  sheet.addEventListener('touchmove', function(e) {
+    var dy = e.touches[0].clientY - startY;
+    // Only intercept if swiping DOWN and the sheet body is scrolled to the top
+    if (dy > 0 && startScrollTop <= 0) {
+      dragging = true;
+      e.preventDefault(); // block background from scrolling
+      currentDelta = dy;
+      sheet.style.transform = 'translateY(' + dy + 'px)';
+      overlay.style.background = 'rgba(0,0,0,' + Math.max(0, 0.42 * (1 - dy / 260)) + ')';
+    } else {
+      // Upward swipe or body has scroll — let it scroll normally
+      dragging = false;
+      sheet.classList.remove('co-dragging');
+    }
+  }, { passive: false }); // must be non-passive to call preventDefault
 
-  document.addEventListener('touchend',    onEnd, { passive: true });
-  document.addEventListener('touchcancel', onEnd, { passive: true });
-
-  /* Mouse (desktop preview) */
-  document.addEventListener('mousedown', function(e) {
-    if (inDragZone(e.target)) { e.preventDefault(); onStart(e.clientY); }
+  sheet.addEventListener('touchend', function() {
+    sheet.classList.remove('co-dragging');
+    if (!dragging) { currentDelta = 0; return; }
+    dragging = false;
+    if (currentDelta > 80) {
+      // Dismiss: slide fully off-screen, then close
+      sheet.style.transform = 'translateY(' + sheet.offsetHeight + 'px)';
+      overlay.style.background = 'rgba(0,0,0,0)';
+      setTimeout(function() {
+        closeCoDetails();
+        sheet.style.transform = '';
+        sheet.style.animation = '';
+        overlay.style.background = '';
+      }, 300);
+    } else {
+      // Snap back
+      sheet.style.transform = '';
+      overlay.style.background = '';
+    }
+    currentDelta = 0;
   });
-  document.addEventListener('mousemove', function(e) { if (active) onMove(e.clientY); });
-  document.addEventListener('mouseup',   onEnd);
+
+  /* Mouse fallback (desktop preview) — drag from the header zone */
+  var mActive = false, mStartY = 0, mDy = 0;
+  document.addEventListener('mousedown', function(e) {
+    if (!overlay.classList.contains('open')) return;
+    if (!e.target.closest('#co-detail-header')) return;
+    e.preventDefault();
+    mActive = true; mStartY = e.clientY; mDy = 0;
+    sheet.style.animation = 'none';
+    sheet.classList.add('co-dragging');
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!mActive) return;
+    mDy = Math.max(0, e.clientY - mStartY);
+    sheet.style.transform = 'translateY(' + mDy + 'px)';
+    overlay.style.background = 'rgba(0,0,0,' + Math.max(0, 0.42 * (1 - mDy / 260)) + ')';
+  });
+  document.addEventListener('mouseup', function() {
+    if (!mActive) return;
+    mActive = false;
+    sheet.classList.remove('co-dragging');
+    if (mDy > 80) {
+      sheet.style.transform = 'translateY(' + sheet.offsetHeight + 'px)';
+      overlay.style.background = 'rgba(0,0,0,0)';
+      setTimeout(function() {
+        closeCoDetails();
+        sheet.style.transform = '';
+        sheet.style.animation = '';
+        overlay.style.background = '';
+      }, 300);
+    } else {
+      sheet.style.transform = '';
+      overlay.style.background = '';
+    }
+  });
 })();
 
-function openCoDetails() {
+function openCoDetails(src) {
   var overlay = document.getElementById('co-detail-overlay');
   if (!overlay) return;
+  // Sheet thumb mirrors the product image of the card that was tapped
+  if (src && src.closest) {
+    var card = src.closest('.co-card');
+    var cardImg = card && card.querySelector('.qr-thumb img');
+    var thumbImg = overlay.querySelector('.co-detail-thumb img');
+    if (cardImg && thumbImg) { thumbImg.src = cardImg.src; thumbImg.style.display = ''; }
+  }
   var sheet = overlay.querySelector('.co-detail-sheet');
   if (sheet) { sheet.style.animation = 'none'; sheet.offsetHeight; sheet.style.animation = ''; }
   overlay.classList.add('open');
@@ -10961,6 +11044,21 @@ function openCoDetails() {
 }
 function closeCoDetails() {
   var overlay = document.getElementById('co-detail-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+}
+
+/* ── CO document iframe overlay — sign & accept demo without leaving the app ── */
+function openCoDocument() {
+  var overlay = document.getElementById('co-doc-overlay');
+  if (!overlay) return;
+  var frame = document.getElementById('co-doc-iframe');
+  // Lazy-load: only set src on first open
+  if (frame && !frame.src) frame.src = 'ChangeOrder_Sign_demo.html';
+  overlay.classList.add('open');
+}
+function closeCoDocument() {
+  var overlay = document.getElementById('co-doc-overlay');
   if (!overlay) return;
   overlay.classList.remove('open');
 }
