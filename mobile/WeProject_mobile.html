@@ -5214,17 +5214,24 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
    layout, otherwise it pushes the list down past the trigger threshold and
    oscillates (pops in and out on every scroll tick). */
 .co-card-header-sticky {
-  display: none; position: sticky; top: 110px; z-index: 18;
+  display: block; position: sticky; top: 110px; z-index: 18;
   height: 0; overflow: visible;
   margin: 0 12px;
+  pointer-events: none;
 }
-.co-card-header-sticky.visible { display: block; }
 .co-sticky-inner {
   background: #fff; padding: 8px 12px;
   border-bottom: 1px solid #eaeaea;
   display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
   border-radius: 10px 10px 0 0;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  /* Always rendered — fade in/out instead of display toggling so showing
+     it never causes reflow (display flips flickered on mobile momentum scroll) */
+  opacity: 0; transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.co-card-header-sticky.visible .co-sticky-inner {
+  opacity: 1; transform: translateY(0);
 }
 .co-card-header-sticky .co-sticky-badge { flex-shrink: 0; }
 .co-card-header-sticky .co-sticky-title {
@@ -10197,7 +10204,7 @@ function rejectCard(btn) {
     // ── Phase 4: remove actions entirely → empty slot ──
     if (actionsEl) actionsEl.outerHTML = '<div></div>';
 
-    // Pause — let the flipped status register before the list re-sorts
+    // Re-sort right after the badge flips finish (~1350ms incl. date stagger)
     setTimeout(() => {
       // ── Phase 5: settle + re-sort so Declined drops to bottom ──
       card.classList.remove('qr-rejecting');
@@ -10206,7 +10213,7 @@ function rejectCard(btn) {
 
       const listEl = card.closest('.qp-list');
       if (listEl) resortCardList(listEl);
-    }, 1700);
+    }, 1450);
   }, 250);
 }
 
@@ -10889,7 +10896,11 @@ updateOnTokens();
   function update() {
     ticking = false;
     var rootRect = scrollRoot.getBoundingClientRect();
-    var threshold = rootRect.top + 110;
+    // Hysteresis: once visible, the bar only hides after the header has come
+    // back DOWN well past the line — momentum-scroll jitter around a single
+    // threshold made it pop in and out on mobile.
+    var threshold = rootRect.top + (wasVisible ? 134 : 106);
+    var bodyLine  = rootRect.top + 110;
     var active = null;
     var cards = scrollRoot.querySelectorAll('.co-card');
     for (var i = 0; i < cards.length; i++) {
@@ -10898,7 +10909,7 @@ updateOnTokens();
       if (!hdr) continue;
       var cardRect = card.getBoundingClientRect();
       var hdrRect = hdr.getBoundingClientRect();
-      if (hdrRect.bottom < threshold && cardRect.bottom > threshold) active = card;
+      if (hdrRect.bottom < threshold && cardRect.bottom > bodyLine) active = card;
     }
     if (active) {
       if (active !== lastActive) {
