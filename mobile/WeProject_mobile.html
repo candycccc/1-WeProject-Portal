@@ -5389,27 +5389,24 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   flex-direction: column;
 }
 .co-doc-overlay.open { display: flex; }
-.co-doc-overlay .co-doc-topbar {
-  flex-shrink: 0;
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px;
-  background: var(--brand-bg);
-  border-bottom: 1px solid var(--c-border-1);
+/* Floating close — overlays the iframe's own topbar, no second bar needed */
+.co-doc-overlay .co-doc-close {
+  position: absolute;
+  top: calc(12px + env(safe-area-inset-top)); right: 12px;
+  z-index: 2;
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.45); color: #fff;
+  border: none; border-radius: 50%; cursor: pointer;
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
 }
-.co-doc-overlay .co-doc-back {
-  display: flex; align-items: center; gap: 6px;
-  background: none; border: none; cursor: pointer;
-  font-family: inherit; font-size: 15px; font-weight: 600; color: var(--c-text-1);
-  padding: 6px 8px 6px 2px;
-}
-.co-doc-overlay .co-doc-topbar-title {
-  flex: 1; text-align: center;
-  font-size: 14px; font-weight: 600; color: var(--c-text-muted);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  margin-right: 60px; /* balance the back button */
-}
+.co-doc-overlay .co-doc-close:active { background: rgba(0,0,0,0.6); }
 .co-doc-overlay iframe {
-  flex: 1; width: 100%; border: none; display: block;
+  flex: 1; border: none; display: block;
+  /* iOS: width:1px + min-width:100% stops Safari expanding the iframe to
+     the content's intrinsic width (which breaks fixed headers/footers) */
+  width: 1px; min-width: 100%;
+  height: 100%; min-height: 0;
 }
 .co-detail-footer {
   flex-shrink: 0; background: #fff;
@@ -8305,13 +8302,9 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 
 <!-- ── CO document iframe overlay (sign & accept, stays in-app) ── -->
 <div class="co-doc-overlay" id="co-doc-overlay">
-  <div class="co-doc-topbar">
-    <button class="co-doc-back" onclick="closeCoDocument()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-      Back
-    </button>
-    <span class="co-doc-topbar-title">Change Order — Sign &amp; Accept</span>
-  </div>
+  <button class="co-doc-close" onclick="closeCoDocument()" aria-label="Close">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
   <iframe id="co-doc-iframe" title="Change Order document"></iframe>
 </div>
 
