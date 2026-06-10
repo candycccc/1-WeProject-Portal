@@ -5180,14 +5180,14 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   display: none; position: sticky; top: 110px; z-index: 18;
   background: #fff; padding: 8px 12px;
   border-bottom: 1px solid #eaeaea;
-  align-items: center; gap: 8px;
+  flex-direction: column; gap: 2px;
   margin: 0 12px; border-radius: 10px 10px 0 0;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 .co-card-header-sticky .co-sticky-badge { flex-shrink: 0; }
 .co-card-header-sticky .co-sticky-title {
   font-size: 14px; font-weight: 600; color: #313131;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
 }
 .co-card-header-sticky.visible { display: flex; }
 .co-header-row {
@@ -5372,7 +5372,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 
 /* CO breakdown wrapper */
 .co-breakdown-wrap {
-  background: #f5f5f5;
+  background: #f3f4f8;
   border: 1px solid #eaeaea;
   border-radius: 4px;
   padding: 10px 11px 12px;
@@ -5389,10 +5389,10 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   background: #fff; overflow: hidden;
 }
 .co-doc-header {
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 5px;
   padding: 8px 11px 0; flex-wrap: wrap;
 }
-.co-doc-icon { font-size: 16px; color: var(--c-text-1); flex-shrink: 0; }
+.co-doc-icon { font-size: 13px; color: #313131; flex-shrink: 0; }
 .co-doc-ref  { font-size: 14px; font-weight: 600; color: #000; }
 .co-doc-rev  { font-size: 14px; font-weight: 600; color: #000; }
 .co-doc-title { font-size: 16px; font-weight: 600; color: #151515; padding: 6px 11px 8px; }
@@ -5403,8 +5403,8 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   font-size: 14px;
 }
 .co-doc-table-row:last-child { border-bottom: none; }
-.co-doc-table-label { font-weight: 600; color: #757575; }
-.co-doc-table-value { font-weight: 700; color: #151515; text-align: right; }
+.co-doc-table-label { font-weight: 500; color: #757575; }
+.co-doc-table-value { font-weight: 600; color: #151515; text-align: right; }
 
 </style>
 <script id="mobile-standalone-vars">
@@ -10771,28 +10771,42 @@ updateOnTokens();
   if (!stickyBar) return;
   var badgeEl = stickyBar.querySelector('.co-sticky-badge');
   var titleEl = stickyBar.querySelector('.co-sticky-title');
-  scrollRoot.addEventListener('scroll', function() {
+  var ticking = false;
+  var lastActive = null;
+  var wasVisible = false;
+
+  function update() {
+    ticking = false;
     var rootRect = scrollRoot.getBoundingClientRect();
     var threshold = rootRect.top + 110;
     var active = null;
     var cards = scrollRoot.querySelectorAll('.co-card');
-    cards.forEach(function(card) {
+    for (var i = 0; i < cards.length; i++) {
+      var card = cards[i];
       var hdr = card.querySelector('.co-card-header');
-      if (!hdr) return;
+      if (!hdr) continue;
       var cardRect = card.getBoundingClientRect();
       var hdrRect = hdr.getBoundingClientRect();
       if (hdrRect.bottom < threshold && cardRect.bottom > threshold) active = card;
-    });
-    if (active) {
-      var badge = active.querySelector('.co-header-row .qr-badge');
-      var title = active.querySelector('.co-header-title');
-      badgeEl.className = 'co-sticky-badge ' + (badge ? badge.className : '');
-      badgeEl.textContent = badge ? badge.textContent : '';
-      titleEl.textContent = title ? title.textContent : '';
-      stickyBar.classList.add('visible');
-    } else {
-      stickyBar.classList.remove('visible');
     }
+    if (active) {
+      if (active !== lastActive) {
+        var badge = active.querySelector('.co-header-row .qr-badge');
+        var title = active.querySelector('.co-header-title');
+        badgeEl.className = 'co-sticky-badge ' + (badge ? badge.className : '');
+        badgeEl.textContent = badge ? badge.textContent : '';
+        titleEl.textContent = title ? title.textContent : '';
+        lastActive = active;
+      }
+      if (!wasVisible) { stickyBar.classList.add('visible'); wasVisible = true; }
+    } else {
+      if (wasVisible) { stickyBar.classList.remove('visible'); wasVisible = false; }
+      lastActive = null;
+    }
+  }
+
+  scrollRoot.addEventListener('scroll', function() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
   }, { passive: true });
 })();
 
