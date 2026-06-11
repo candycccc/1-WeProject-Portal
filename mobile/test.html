@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Swipe Actions — Browser Demo</title>
+<style>
+  :root{
+    --bg:#EEF0F3; --card:#fff; --ink:#1A1D21; --ink-2:#5B6470; --ink-3:#9AA3AE;
+    --line:#E4E7EB; --pending:#F59E0B; --pending-bg:#FFF6E6;
+    --accept:#16A34A; --reject:#DC2626; --tbc:#2563EB;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);max-width:480px;margin:0 auto;padding-bottom:60px;}
+  header{padding:18px 16px 6px;}
+  h1{font-size:17px;font-weight:700;}
+  .sub{font-size:12px;color:var(--ink-2);margin-top:4px;line-height:1.5;}
+  .section-label{font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--ink-3);text-transform:uppercase;padding:18px 16px 8px;}
+
+  /* shared row visuals */
+  .meta{flex:1;min-width:0;}
+  .t1{font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .t2{font-size:11px;color:var(--ink-2);margin-top:3px;display:flex;align-items:center;gap:6px;}
+  .pill{font-size:10px;font-weight:700;border-radius:99px;padding:2px 8px;color:var(--pending);background:var(--pending-bg);display:inline-flex;align-items:center;gap:4px;}
+  .dot{width:6px;height:6px;border-radius:2px;background:var(--pending);}
+  .val{font-size:13.5px;font-weight:700;flex:0 0 auto;font-variant-numeric:tabular-nums;}
+  .thumb{width:40px;height:40px;background:#fff;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .thumb i{width:24px;height:24px;background:#23262B;border-radius:3px;}
+
+  /* ===== Variant 1: JS pointer events ===== */
+  .swipe-item{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:#fff;touch-action:pan-y;}
+  .under{position:absolute;inset:0;display:flex;justify-content:flex-end;}
+  .under button{width:72px;border:none;color:#fff;font-size:10.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;}
+  .under .ico{font-size:16px;}
+  .u-tbc{background:var(--tbc);}
+  .u-rej{background:var(--reject);}
+  .u-acc{background:var(--accept);}
+  .face{position:relative;display:flex;align-items:center;gap:10px;background:#fff;padding:13px 14px;will-change:transform;}
+  .face.animate{transition:transform .22s cubic-bezier(.25,.8,.35,1);}
+  .swipe-item.done .face{background:#F6FBF7;}
+  .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(80px);background:#101317;color:#fff;font-size:12.5px;font-weight:600;padding:10px 18px;border-radius:99px;transition:transform .25s;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:50;}
+  .toast.show{transform:translateX(-50%) translateY(0);}
+
+  /* ===== Variant 2: pure CSS scroll-snap ===== */
+  .snap-item{border-bottom:1px solid var(--line);background:#fff;}
+  .snap-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .snap-scroll::-webkit-scrollbar{display:none;}
+  .snap-face{flex:0 0 100%;scroll-snap-align:start;display:flex;align-items:center;gap:10px;padding:13px 14px;background:#fff;}
+  .snap-actions{flex:0 0 auto;display:flex;scroll-snap-align:end;}
+  .snap-actions button{width:72px;border:none;color:#fff;font-size:10.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;}
+
+  .note{margin:14px 16px;background:#fff;border-radius:12px;padding:12px 14px;font-size:12px;color:var(--ink-2);line-height:1.65;}
+  .note b{color:var(--ink);}
+  code{background:#F1F3F5;border-radius:4px;padding:1px 5px;font-size:11px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Swipe actions in browser — 兩種做法</h1>
+  <p class="sub">喺手機 / touch 裝置開呢頁試。桌面都可以用滑鼠 drag(Variant 1)。</p>
+</header>
+
+<div class="section-label">Variant 1 · Pointer Events(JS,推薦)</div>
+<div id="list1"></div>
+<div class="note">
+  <b>原理:</b>聽 <code>pointerdown / pointermove / pointerup</code>,水平位移用 <code>transform: translateX()</code> 跟手指,放手時超過 threshold 就 snap 開,否則彈返。<br>
+  <b>關鍵細節:</b><code>touch-action: pan-y</code> 保留垂直 scroll;方向鎖(水平 > 垂直先接管);一次只開一行;支援 mouse drag 所以 desktop 都用到。
+</div>
+
+<div class="section-label">Variant 2 · CSS scroll-snap(零 JS)</div>
+<div id="list2"></div>
+<div class="note">
+  <b>原理:</b>每行係一個橫向 scroll container,action buttons 排喺 face 後面,<code>scroll-snap-type: x mandatory</code> 令佢自動 snap 開/合。<br>
+  <b>優點:</b>完全唔使 JS,瀏覽器原生 momentum,desktop trackpad 橫掃都得。<br>
+  <b>缺點:</b>控制力低 — 冇 callback 知道開咗、難做「一次只開一行」、Windows 滑鼠 user 冇辦法 drag(要 shift+wheel)。所以 production 建議用 Variant 1。
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DATA = [
+  {t:"Dutch House Security INV TEST", n:"#23945 · Rev 3 · 14 Apr", v:"£20,000"},
+  {t:"Kitchen AV Upgrade — Zone 2", n:"#23946 · Rev 1 · 30 Apr", v:"£4,820"},
+  {t:"Cinema Room Lighting Control", n:"#23947 · Rev 2 · 2 May", v:"£11,350"},
+  {t:"Garden Speaker Extension", n:"#23948 · Rev 1 · 9 May", v:"£2,140"},
+  {t:"Rack Rebuild — Comms Room", n:"#23949 · Rev 4 · 12 May", v:"£7,615"},
+];
+
+const rowInner = d => `
+  <div class="thumb"><i></i></div>
+  <div class="meta">
+    <div class="t1">${d.t}</div>
+    <div class="t2"><span class="pill"><span class="dot"></span>Pending</span>${d.n}</div>
+  </div>
+  <div class="val">${d.v}</div>`;
+
+/* ---------- Variant 1: pointer events ---------- */
+const ACTION_W = 72 * 3; // three buttons
+const list1 = document.getElementById('list1');
+let openItem = null;
+
+DATA.forEach(d => {
+  const item = document.createElement('div');
+  item.className = 'swipe-item';
+  item.innerHTML = `
+    <div class="under">
+      <button class="u-tbc" data-a="TBC"><span class="ico">⏱</span>TBC</button>
+      <button class="u-rej" data-a="Rejected"><span class="ico">✕</span>Reject</button>
+      <button class="u-acc" data-a="Accepted"><span class="ico">✓</span>Accept</button>
+    </div>
+    <div class="face">${rowInner(d)}</div>`;
+  list1.appendChild(item);
+
+  const face = item.querySelector('.face');
+  let startX=0, startY=0, baseX=0, curX=0, dragging=false, locked=null;
+
+  const setX = (x, animate) => {
+    curX = Math.min(0, Math.max(-ACTION_W, x));
+    face.classList.toggle('animate', !!animate);
+    face.style.transform = `translateX(${curX}px)`;
+  };
+  const close = () => { setX(0, true); if (openItem===item) openItem=null; };
+  const open  = () => {
+    if (openItem && openItem!==item) openItem.querySelector('.face').dispatchEvent(new CustomEvent('forceclose'));
+    setX(-ACTION_W, true); openItem = item;
+  };
+  face.addEventListener('forceclose', close);
+
+  face.addEventListener('pointerdown', e => {
+    dragging = true; locked = null;
+    startX = e.clientX; startY = e.clientY; baseX = curX;
+    face.setPointerCapture(e.pointerId);
+  });
+  face.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const dx = e.clientX - startX, dy = e.clientY - startY;
+    if (locked === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6))
+      locked = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
+    if (locked !== 'h') return;
+    e.preventDefault();
+    setX(baseX + dx, false);
+  });
+  const release = () => {
+    if (!dragging) return; dragging = false;
+    if (locked !== 'h') return;
+    const threshold = baseX === 0 ? -ACTION_W*0.35 : -(ACTION_W*0.65);
+    (curX < threshold) ? open() : close();
+  };
+  face.addEventListener('pointerup', release);
+  face.addEventListener('pointercancel', release);
+
+  item.querySelectorAll('.under button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      toast(`${btn.dataset.a}: ${d.t}`);
+      item.classList.add('done');
+      close();
+    });
+  });
+});
+
+/* tap anywhere else closes the open row */
+document.addEventListener('pointerdown', e => {
+  if (openItem && !openItem.contains(e.target))
+    openItem.querySelector('.face').dispatchEvent(new CustomEvent('forceclose'));
+});
+
+/* ---------- Variant 2: CSS scroll-snap ---------- */
+const list2 = document.getElementById('list2');
+DATA.slice(0,3).forEach(d => {
+  const item = document.createElement('div');
+  item.className = 'snap-item';
+  item.innerHTML = `
+    <div class="snap-scroll">
+      <div class="snap-face">${rowInner(d)}</div>
+      <div class="snap-actions">
+        <button class="u-tbc" style="background:var(--tbc)"><span class="ico">⏱</span>TBC</button>
+        <button class="u-rej" style="background:var(--reject)"><span class="ico">✕</span>Reject</button>
+        <button class="u-acc" style="background:var(--accept)"><span class="ico">✓</span>Accept</button>
+      </div>
+    </div>`;
+  list2.appendChild(item);
+  item.querySelectorAll('.snap-actions button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      toast(`Done: ${d.t}`);
+      item.querySelector('.snap-scroll').scrollTo({left:0, behavior:'smooth'});
+    });
+  });
+});
+
+/* toast */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
+}
+</script>
+</body>
+</html>

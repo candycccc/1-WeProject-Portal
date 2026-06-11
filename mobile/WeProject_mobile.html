@@ -6339,7 +6339,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-accepted">Accepted</span>
-        <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+        <span class="qr-date qr-date-accepted">Accepted on 2 April 2026</span>
       </div>
       <!-- Inline payment progress (accepted only) -->
       <div class="qr-payment">
@@ -6957,7 +6957,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-accepted">Accepted</span>
-        <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+        <span class="qr-date qr-date-accepted">Accepted on 2 April 2026</span>
       </div>
       <div class="qr-payment">
         <div class="qr-payment-label">Payment Progress</div>
@@ -7237,7 +7237,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
           <div class="co-card-hd-info">
             <div class="co-header-row">
               <span class="qr-badge qr-badge-accepted">Accepted</span>
-              <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+              <span class="qr-date qr-date-accepted">Accepted on 2 April 2026</span>
             </div>
             <div class="co-header-quote">Quote #23944</div>
             <div class="co-header-title">Dutch House Security</div>
@@ -7454,7 +7454,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-accepted">Accepted</span>
-        <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+        <span class="qr-date qr-date-accepted">Accepted on 2 April 2026</span>
       </div>
       <!-- Payment progress — shown only on accepted rows -->
       <div class="qr-payment">
@@ -9954,8 +9954,25 @@ function filterTab(btn) {
 
   // 4. Show all on "all"
   if (label === 'all') {
-    screen.querySelectorAll('.qr, .inv-row').forEach(r => r.style.display = '');
+    screen.querySelectorAll('.qr, .inv-row, .co-card').forEach(r => r.style.display = '');
     return;
+  }
+
+  // 4b. Change Order cards (filter by data-status; tab labels: TBC, Accepted…)
+  if (screen.querySelector('.co-card')) {
+    const CO_FILTER_MAP = {
+      'pending your review': 'pending your review',
+      'tbc':                 'tbc',
+      'accepted':            'accepted',
+      'declined':            'declined',
+    };
+    const status = CO_FILTER_MAP[label];
+    if (status) {
+      screen.querySelectorAll('.co-card').forEach(r => {
+        r.style.display = ((r.dataset.status || '').toLowerCase() === status) ? '' : 'none';
+      });
+      return;
+    }
   }
 
   // 5. Quote / Variation rows (use .qr-badge-* classes)
@@ -10933,7 +10950,16 @@ updateOnTokens();
 
   // Allow external refresh after a card's status changes (e.g. accept flow)
   window._coStickyRefresh = function() { lastActive = null; update(); };
+  // Which card is the sticky bar currently mirroring? (null when hidden)
+  window._coStickyActive = function() { return wasVisible ? lastActive : null; };
 })();
+
+/* If the condensed sticky bar is mirroring this card, flip its badge too */
+function flipCoStickyBadge(card, badgeClass, badgeText) {
+  if (!window._coStickyActive || window._coStickyActive() !== card) return;
+  var el = document.querySelector('#co-sticky-bar .co-sticky-badge');
+  flipBadge(el, 'co-sticky-badge ' + badgeClass, badgeText);
+}
 
 // ── Change Order card actions ──
 /* 3D flip a badge/date chip to its new state: rotate edge-on, swap the
@@ -10968,6 +10994,7 @@ function acceptCoCard(btn) {
   }
   setTimeout(function() {
     card.dataset.status = 'accepted';
+    flipCoStickyBadge(card, 'qr-badge qr-badge-accepted', 'Accepted');
     flipBadge(card.querySelector('.co-header-row .qr-badge'), 'qr-badge qr-badge-accepted', 'Accepted');
     setTimeout(function() {
       flipBadge(card.querySelector('.co-header-row .qr-date'), 'qr-date qr-date-accepted', 'Accepted on ' + dateStr);
@@ -10979,6 +11006,7 @@ function tbcCoCard(btn) {
   var card = btn.closest('.co-card');
   if (!card) return;
   card.dataset.status = 'tbc';
+  flipCoStickyBadge(card, 'qr-badge qr-badge-tbc', 'To be confirmed');
   flipBadge(card.querySelector('.co-header-row .qr-badge'), 'qr-badge qr-badge-tbc', 'To be confirmed');
   setTimeout(function() {
     flipBadge(card.querySelector('.co-header-row .qr-date'), 'qr-date qr-date-tbc', null);
@@ -11010,6 +11038,7 @@ function rejectCoCard(btn) {
   }
   setTimeout(function() {
     card.dataset.status = 'declined';
+    flipCoStickyBadge(card, 'qr-badge qr-badge-declined', 'Declined');
     flipBadge(card.querySelector('.co-header-row .qr-badge'), 'qr-badge qr-badge-declined', 'Declined');
     setTimeout(function() {
       flipBadge(card.querySelector('.co-header-row .qr-date'), 'qr-date qr-date-declined', 'Declined on ' + dateStr);
@@ -11419,6 +11448,9 @@ function moveCoCardToEnd(card) {
     });
     setTimeout(function() {
       cards.forEach(function(c) { c.style.transition = ''; c.style.transform = ''; });
+      // Cards changed position without a scroll event — the condensed sticky
+      // header would keep showing the moved card's status over the wrong card
+      if (window._coStickyRefresh) window._coStickyRefresh();
     }, 650);
   }); });
 }
