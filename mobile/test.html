@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Swipe Actions — Browser Demo</title>
+<title>Swipe Actions — Browser Demo (EN)</title>
 <style>
   :root{
     --bg:#EEF0F3; --card:#fff; --ink:#1A1D21; --ink-2:#5B6470; --ink-3:#9AA3AE;
@@ -58,23 +58,23 @@
 <body>
 
 <header>
-  <h1>Swipe actions in browser — 兩種做法</h1>
-  <p class="sub">喺手機 / touch 裝置開呢頁試。桌面都可以用滑鼠 drag(Variant 1)。</p>
+  <h1>Swipe actions in the browser — two approaches</h1>
+  <p class="sub">Open this page on a phone or any touch device to try it. On desktop, Variant 1 also works with mouse drag.</p>
 </header>
 
-<div class="section-label">Variant 1 · Pointer Events(JS,推薦)</div>
+<div class="section-label">Variant 1 · Pointer Events (JS — recommended for production)</div>
 <div id="list1"></div>
 <div class="note">
-  <b>原理:</b>聽 <code>pointerdown / pointermove / pointerup</code>,水平位移用 <code>transform: translateX()</code> 跟手指,放手時超過 threshold 就 snap 開,否則彈返。<br>
-  <b>關鍵細節:</b><code>touch-action: pan-y</code> 保留垂直 scroll;方向鎖(水平 > 垂直先接管);一次只開一行;支援 mouse drag 所以 desktop 都用到。
+  <b>How it works:</b> listen to <code>pointerdown / pointermove / pointerup</code>, track horizontal movement with <code>transform: translateX()</code> so the row follows the finger. On release, if it passes the threshold the row snaps open; otherwise it springs back.<br>
+  <b>Key details:</b> <code>touch-action: pan-y</code> keeps vertical scrolling working; a direction lock (horizontal must exceed vertical before the gesture takes over) prevents scroll/swipe conflicts; only one row can be open at a time; mouse drag is supported, so it's fully testable on desktop.
 </div>
 
-<div class="section-label">Variant 2 · CSS scroll-snap(零 JS)</div>
+<div class="section-label">Variant 2 · CSS scroll-snap (zero JS)</div>
 <div id="list2"></div>
 <div class="note">
-  <b>原理:</b>每行係一個橫向 scroll container,action buttons 排喺 face 後面,<code>scroll-snap-type: x mandatory</code> 令佢自動 snap 開/合。<br>
-  <b>優點:</b>完全唔使 JS,瀏覽器原生 momentum,desktop trackpad 橫掃都得。<br>
-  <b>缺點:</b>控制力低 — 冇 callback 知道開咗、難做「一次只開一行」、Windows 滑鼠 user 冇辦法 drag(要 shift+wheel)。所以 production 建議用 Variant 1。
+  <b>How it works:</b> each row is a horizontal scroll container with the action buttons laid out behind the row face. <code>scroll-snap-type: x mandatory</code> makes it snap open/closed natively.<br>
+  <b>Pros:</b> no JavaScript at all, native browser momentum, and horizontal trackpad swipes work on desktop.<br>
+  <b>Cons:</b> low control — no callback to know when a row is open, no way to enforce "only one row open at a time", and Windows mouse users can't drag (they'd need shift+wheel). Good for prototyping; use Variant 1 in production.
 </div>
 
 <div class="toast" id="toast"></div>
