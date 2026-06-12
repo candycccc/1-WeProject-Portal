@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Variation Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a063;
+  --gold-deep: #b08d4f;
+  --ink: #3d3d3d;
+  --ink-soft: #6b6b6b;
+  --line: #e6e6e6;
+  --btn-ink: #313131;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; max-width: 100%; }
+body {
+  font-family: 'Roboto', -apple-system, sans-serif;
+  background: #fff;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  /* App shell: fixed header + footer, only the middle scrolls (iframe-safe) */
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Top bar ── */
+.topbar {
+  flex-shrink: 0; z-index: 50;
+  background: #fafafa;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center;
+  padding: 8px 12px;
+  padding-top: calc(8px + env(safe-area-inset-top));
+}
+.topbar-logo {
+  width: 44px; height: 44px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.topbar-logo svg { display: block; }
+.topbar-mid { flex: 1; text-align: center; min-width: 0; padding: 0 6px; }
+.topbar-title {
+  font-size: 19px; font-weight: 700; color: var(--gold-deep);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.topbar-sub {
+  font-size: 12.5px; color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-top: 2px;
+}
+.topbar-spacer { width: 44px; flex-shrink: 0; }
+
+/* ── Scrollable content ── */
+.scroll {
+  flex: 1; min-height: 0;
+  overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  height: 420px;
+  background: #2a2a2a;
+  overflow: hidden;
+}
+.hero img.hero-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+}
+.hero .hero-shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 100%);
+}
+.hero-logo {
+  position: relative; text-align: center; padding-top: 26px;
+  color: var(--gold);
+}
+.hero-logo .lcr {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 64px; font-weight: 700; letter-spacing: 6px; line-height: 1;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.35);
+}
+.hero-logo .lcr-sub {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 14px; letter-spacing: 7px; margin-top: 6px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+}
+.hero-text {
+  position: absolute; left: 22px; right: 22px; bottom: 28px;
+  color: #fff; font-size: 16.5px; line-height: 1.45;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+}
+.hero-text .lead { margin-bottom: 22px; }
+.hero-text .addr div { margin-top: 10px; }
+
+/* ── Brand strip ── */
+.brands {
+  display: flex; align-items: center; justify-content: center;
+  gap: 26px; flex-wrap: wrap;
+  padding: 26px 16px;
+  color: var(--gold);
+}
+.brands span {
+  font-weight: 700; white-space: nowrap;
+}
+.b-sony  { font-family: Georgia, 'Times New Roman', serif; font-size: 30px; letter-spacing: 4px; }
+.b-lutron { font-family: 'Roboto Condensed', sans-serif; font-size: 28px; letter-spacing: 2px; }
+.b-sonos { font-family: 'Roboto', sans-serif; font-size: 26px; letter-spacing: 6px; }
+.b-nice  { font-family: 'Roboto', sans-serif; font-size: 30px; font-style: normal; }
+
+/* ── About ── */
+.about { text-align: center; padding: 16px 18px 34px; }
+.about h1 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 30px; font-weight: 400; color: #555;
+  letter-spacing: 1px;
+}
+.about h2 {
+  font-size: 14.5px; font-weight: 500; color: #555;
+  letter-spacing: 0.5px; margin-top: 8px; margin-bottom: 18px;
+}
+.about p {
+  font-size: 13.5px; color: var(--ink-soft); line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* ── Services ── */
+.services {
+  background: #f7f6f4;
+  padding: 34px 20px 30px;
+}
+.services h1 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 26px; font-weight: 400; color: #555;
+  letter-spacing: 6px; text-align: center;
+  margin-bottom: 30px;
+}
+.svc {
+  display: flex; gap: 14px; align-items: flex-start;
+  margin-bottom: 26px;
+}
+.svc-icon { flex-shrink: 0; width: 22px; color: #555; padding-top: 2px; }
+.svc-body h3 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 16px; font-weight: 400; color: var(--gold-deep);
+  letter-spacing: 3px; margin-bottom: 8px;
+}
+.svc-body p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+
+/* ── Process ── */
+.process { padding: 34px 20px 30px; }
+.process h1 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 26px; font-weight: 400; color: #555;
+  letter-spacing: 6px; margin-bottom: 8px;
+}
+.process .tagline { font-size: 14px; color: var(--gold-deep); margin-bottom: 14px; }
+.process p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 16px; }
+.process .shot {
+  border: 1px solid var(--line); border-radius: 6px;
+  overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+.process .shot img { width: 100%; display: block; }
+
+/* ── This variation ── */
+.variation-block {
+  margin: 4px 20px 30px;
+  border: 1px solid var(--line); border-radius: 6px;
+  padding: 16px;
+}
+.variation-block h2 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 18px; font-weight: 400; color: #555; letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.variation-block .v-ref { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 4px; }
+.variation-block .v-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.v-rows { font-size: 13.5px; }
+.v-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #f0f0f0; }
+.v-row:last-child { border-bottom: none; font-weight: 700; }
+
+/* ── Footer: price + actions (Figma 1160-14323) ── */
+.footer {
+  flex-shrink: 0; z-index: 60;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+  /* Two stacked rows: price on top, actions below */
+  display: flex; flex-direction: column; align-items: stretch; gap: 8px;
+  padding: 10px 12px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+}
+.footer-total { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.footer-total .amount {
+  font-size: 21px; font-weight: 700; color: var(--ink); line-height: 1.1;
+  white-space: nowrap;
+}
+.footer-total .label { font-size: 10.5px; font-weight: 700; color: var(--ink-soft); letter-spacing: 0.3px; }
+.action-group {
+  flex: 1; min-width: 0;
+  display: flex; align-items: stretch;
+  border: 1px solid #d9d9d9; border-radius: 4px;
+  overflow: hidden;
+}
+.action-btn {
+  flex: 1; min-width: 0;
+  background: #f9f9f9;
+  border: none; border-right: 1px solid #d9d9d9;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px; font-weight: 600; color: var(--btn-ink);
+  padding: 12px 10px; min-height: 46px;
+  display: flex; align-items: center; justify-content: center;
+}
+.action-btn:last-child { border-right: none; }
+.action-btn:active { background: #efefef; }
+.action-btn.comment { flex: none; width: 54px; }
+.accepted-bar {
+  display: none; flex: 1;
+  align-items: center; justify-content: center; gap: 8px;
+  background: rgba(33,186,136,0.12);
+  border: 1px solid rgba(33,186,136,0.5); border-radius: 4px;
+  color: #157a5c; font-size: 15px; font-weight: 700;
+  padding: 11px 8px; min-height: 44px;
+}
+
+/* ── Comment modal ── */
+.modal-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 100;
+  background: rgba(40,40,40,0.55);
+  align-items: center; justify-content: center;
+  padding: 16px;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: #fff; border-radius: 8px;
+  width: 100%; max-width: 560px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  padding: 18px;
+}
+.modal h2 { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.modal .modal-sub { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 12px; }
+.modal textarea {
+  width: 100%; height: 140px; resize: none;
+  border: 1px solid #cdd3da; border-radius: 4px;
+  font-family: inherit; font-size: 14px; color: var(--ink);
+  padding: 10px;
+}
+.modal textarea:focus { outline: none; border-color: var(--gold); }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px; }
+.btn {
+  border: none; border-radius: 4px; cursor: pointer;
+  font-family: inherit; font-size: 13px; font-weight: 700; letter-spacing: 0.4px;
+  padding: 11px 18px;
+}
+.btn-cancel { background: #7b8794; color: #fff; }
+.btn-send { background: #5c4433; color: #fff; }
+
+/* ── Toast ── */
+.toast {
+  position: fixed; top: calc(8px + env(safe-area-inset-top)); left: 10px; right: 10px; z-index: 90;
+  display: flex; align-items: center; gap: 8px;
+  background: #e8f7ef;
+  border: 1px solid rgba(33,186,136,0.55); border-radius: 8px;
+  color: #157a5c; font-size: 13px; font-weight: 700;
+  padding: 9px 12px;
+  transform: translateY(-160%);
+  transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+  pointer-events: none;
+}
+.toast.show { transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#c9a063" stroke-width="1.4">
+      <path d="M18 4 L31 28 H5 Z"/>
+      <path d="M18 11 L25.5 25 H10.5 Z"/>
+      <path d="M18 4 V11 M5 28 L10.5 25 M31 28 L25.5 25"/>
+    </svg>
+  </div>
+  <div class="topbar-mid">
+    <div class="topbar-title">Ocean Palm Residences</div>
+    <div class="topbar-sub" id="topbar-sub">Variation — Valid until 14 Apr 2026</div>
+  </div>
+  <div class="topbar-spacer"></div>
+</div>
+
+<!-- Scrollable proposal -->
+<div class="scroll">
+
+  <!-- Hero -->
+  <div class="hero">
+    <img class="hero-bg" src="assets/images/08fa6f48-31e3-47be-9f71-aa054eea522a.png" alt=""
+         onerror="this.style.display='none'">
+    <div class="hero-shade"></div>
+    <div class="hero-logo">
+      <div class="lcr">LCR</div>
+      <div class="lcr-sub">INTEGRATED&nbsp;SYSTEMS</div>
+    </div>
+    <div class="hero-text">
+      <div class="lead">Each Home Automation system we create is designed from scratch, specifically to each customer&rsquo;s needs.</div>
+      <div class="addr">
+        <div>Ocean Palm Residences</div>
+        <div>933 Queens Road</div>
+        <div>Los Angeles</div>
+        <div>901210</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand strip -->
+  <div class="brands">
+    <span class="b-sony">SONY</span>
+    <span class="b-lutron">LUTRON</span>
+    <span class="b-sonos">SONOS</span>
+    <span class="b-nice">Nice</span>
+  </div>
+
+  <!-- About -->
+  <div class="about">
+    <h1>ABOUT LCR INTEGRATED SYSTEMS</h1>
+    <h2>HOME AUTOMATION SYSTEMS DESIGNED TO OUR CLIENT&rsquo;S LIFESTYLE</h2>
+    <p>LCR Integrated Systems was founded by Lee Roche and his passion for cutting edge technology. With extensive prior experience in commercial electrical installations, including large scale wiring projects within banking establishments, Lee Roche applied his knowledge to home automation, to improve the way we interact with our space.</p>
+    <p>Today, we have grown to be one of the country&rsquo;s leading experts in systems integration, providing electrical design and consultancy services to a range of projects around the UK. We are committed to giving our customers a personal, bespoke service, that makes the most of their environment and revolutionises how they use it.</p>
+  </div>
+
+  <!-- Services -->
+  <div class="services">
+    <h1>OUR SERVICES</h1>
+    <div class="svc">
+      <div class="svc-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/><path d="M14 5l3 3"/></svg>
+      </div>
+      <div class="svc-body">
+        <h3>DESIGN SERVICES</h3>
+        <p>We offer a full design service, providing Architectural systems layouts and schematics to ensure you have a full plan before work begins on site.</p>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="svc-body">
+        <h3>COMMISSIONING</h3>
+        <p>Our experienced software team set up your system to work exactly how you need it to, from back end programming to setting up your interface.</p>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="13" rx="1.5"/><path d="M12 16v3M8 22l4-3 4 3"/></svg>
+      </div>
+      <div class="svc-body">
+        <h3>PROJECT MANAGEMENT</h3>
+        <p>We know how to make your project run smoothly, allowing it to finish on time and within your budget, with minimum impact on your property.</p>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path d="M8 11v2a3 3 0 0 0 3 3h2"/></svg>
+      </div>
+      <div class="svc-body">
+        <h3>BESPOKE BUILDING</h3>
+        <p>Our specialist electrical team build your equipment racks, designed fully to your specifications and reduce the amount of valuable space used.</p>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+      </div>
+      <div class="svc-body">
+        <h3>INSTALLATION</h3>
+        <p>We make the most of our time on site, providing you with a fast, efficient, high quality installation that fits seamlessly within your property.</p>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-7 9 7"/><path d="M5 9.5V20h14V9.5"/></svg>
+      </div>
+      <div class="svc-body">
+        <h3>AFTERCARE</h3>
+        <p>In addition to your hardware warranties, our aftercare service is designed to keep your system working in top condition for years to come.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process -->
+  <div class="process">
+    <h1>OUR PROCESS</h1>
+    <div class="tagline">A golden thread of information</div>
+    <p>Each Home Automation system we create is designed from scratch, specifically to each customer&rsquo;s needs.</p>
+    <div class="shot" id="process-shot" style="display:none;">
+      <img id="process-img" src="" alt="" onerror="document.getElementById('process-shot').style.display='none'">
+    </div>
+  </div>
+
+  <!-- This variation -->
+  <div class="variation-block">
+    <h2>THIS VARIATION</h2>
+    <div class="v-ref" id="v-ref">Variation</div>
+    <div class="v-title" id="v-title">—</div>
+    <div class="v-rows">
+      <div class="v-row"><span>Net price</span><span id="net-price">—</span></div>
+      <div class="v-row"><span>TAX (20%)</span><span id="tax-price">—</span></div>
+      <div class="v-row"><span>Total (inc. TAX)</span><span id="total-price">—</span></div>
+    </div>
+  </div>
+
+</div><!-- /scroll -->
+
+<!-- Footer: price + actions (Figma 1160-14323) -->
+<div class="footer">
+  <div class="footer-total">
+    <div class="amount" id="footer-price">$0.00</div>
+    <div class="label">INC. TAX</div>
+  </div>
+  <div class="action-group" id="action-group">
+    <button class="action-btn comment" onclick="openComment()" aria-label="Comment">
+      <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <button class="action-btn" onclick="doAction('tbc')">TBC</button>
+    <button class="action-btn" onclick="doAction('reject')">Reject</button>
+    <button class="action-btn" onclick="doAction('accept')">Accept</button>
+  </div>
+  <div class="accepted-bar" id="accepted-bar">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+    <span id="accepted-bar-text">Accepted</span>
+  </div>
+</div>
+
+<!-- Comment modal -->
+<div class="modal-backdrop" id="comment-modal" onclick="closeComment()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h2>Leave a note</h2>
+    <div class="modal-sub" id="comment-ref">Variation</div>
+    <textarea id="comment-text" placeholder="Write your note here..."></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-cancel" onclick="closeComment()">Cancel</button>
+      <button class="btn btn-send" onclick="sendComment()">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+  <span id="toast-text">Done</span>
+</div>
+
+<script>
+/* ── Populate from hash params (passed by the portal per card) ── */
+var P = new URLSearchParams(location.hash ? location.hash.slice(1) : location.search);
+var title = P.get('title') || 'Variation';
+var price = parseFloat(P.get('price') || '0');
+var ref   = P.get('ref')   || 'Variation';
+var valid = P.get('valid') || 'Valid until 14 Apr 2026';
+var img   = P.get('img')   || '';
+var status = (P.get('status') || 'pending').toLowerCase();
+
+function money(n) {
+  return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+document.getElementById('topbar-sub').textContent = ref + ' — ' + valid;
+document.getElementById('v-ref').textContent = ref + ' · from Quote #23944';
+document.getElementById('v-title').textContent = title;
+document.getElementById('net-price').textContent = money(price);
+document.getElementById('tax-price').textContent = money(price * 0.2);
+document.getElementById('total-price').textContent = money(price * 1.2);
+document.getElementById('footer-price').textContent = money(price * 1.2);
+document.getElementById('comment-ref').textContent = ref;
+if (img) {
+  document.getElementById('process-img').src = decodeURIComponent(img);
+  document.getElementById('process-shot').style.display = '';
+}
+if (status === 'accepted') {
+  document.getElementById('action-group').style.display = 'none';
+  var bar = document.getElementById('accepted-bar');
+  bar.style.display = 'flex';
+  document.getElementById('accepted-bar-text').textContent = valid; // "Accepted on …"
+}
+
+/* ── Actions: tell the host portal, stay open (user closes with ×) ── */
+function doAction(action) {
+  if (window.parent !== window) {
+    try { window.parent.postMessage('var-' + action, '*'); } catch(e) {}
+  }
+  var labels = { accept: 'Accepted', reject: 'Rejected', tbc: 'Marked as TBC' };
+  document.getElementById('action-group').style.display = 'none';
+  var bar = document.getElementById('accepted-bar');
+  bar.style.display = 'flex';
+  document.getElementById('accepted-bar-text').textContent = labels[action] || 'Done';
+  showToast(labels[action] + ' — close this page to return');
+}
+
+/* ── Comment ── */
+function openComment() { document.getElementById('comment-modal').classList.add('open'); }
+function closeComment() { document.getElementById('comment-modal').classList.remove('open'); }
+function sendComment() {
+  closeComment();
+  document.getElementById('comment-text').value = '';
+  showToast('Note sent to your project manager');
+}
+
+/* ── Toast ── */
+var _toastTimer = null;
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  document.getElementById('toast-text').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function() { t.classList.remove('show'); }, 3500);
+}
+</script>
+</body>
+</html>

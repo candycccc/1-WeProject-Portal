@@ -62,8 +62,6 @@
 .fa-circle-check::before        { content: "\f058"; }
 .fa-circle-exclamation::before  { content: "\f06a"; }
 .fa-circle-xmark::before        { content: "\f057"; }
-.fa-circle-plus::before         { content: "\f055"; }
-.fa-trash-can::before           { content: "\f2ed"; }
 .fa-copy::before                { content: "\f0c5"; }
 .fa-file-certificate::before    { content: "\f5f3"; }
 .fa-file-invoice::before        { content: "\f570"; }
@@ -80,7 +78,6 @@
 .fa-envelope::before            { content: "\f0e0"; }
 .fa-phone::before               { content: "\f095"; }
 .fa-chevron-down::before        { content: "\f078"; }
-.fa-chevron-right::before       { content: "\f054"; }
 .fa-comment-dots::before        { content: "\f4ad"; }
 /* ── Brand tokens ── */
 :root {
@@ -5514,204 +5511,6 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 .co-doc-table-label { font-weight: 500; color: #757575; }
 .co-doc-table-value { font-weight: 600; color: #151515; text-align: right; }
 
-
-/* ── Variations: photo cards + multi-select accept (Figma 1160-11899) ── */
-.var-card {
-  cursor: pointer;
-  background: #fff; border: 1px solid #eaeaea; border-radius: 4px;
-  box-shadow: 0 3px 2px #efefef;
-  margin-bottom: 7px; padding: 11px 8px;
-  display: flex; gap: 11px;
-  font-family: var(--brand-font, 'Figtree', sans-serif);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.var-card.var-selected {
-  border-color: var(--brand-dark, #5c4433);
-  box-shadow: 0 0 0 1px rgba(92,68,51,0.25), 0 3px 2px #efefef;
-}
-.var-photo {
-  /* Scales with the viewport so the info column always has room */
-  width: clamp(80px, 27vw, 112px);
-  aspect-ratio: 112 / 135; height: auto;
-  flex-shrink: 0;
-  border: 1px solid #efefef; border-radius: 3px;
-  overflow: hidden; background: #f4f4f4;
-}
-.var-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.var-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.var-status-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
-}
-.var-status { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
-.var-status-dot { width: 7px; height: 7px; border-radius: 2px; background: #ff9500; flex-shrink: 0; }
-.var-status-text { font-size: 12px; font-weight: 600; color: #313131; white-space: nowrap; }
-.var-valid {
-  font-size: 12px; font-weight: 600; color: #ff9500;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  min-width: 0; flex-shrink: 1; text-align: right;
-}
-.var-valid-accepted { color: #009113; }
-.var-valid-declined { color: #9c9c9c; }
-.var-price-row {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  gap: 8px; margin-top: 9px;
-}
-.var-price { font-size: 16px; font-weight: 600; color: #303030; white-space: nowrap; }
-.var-ref { font-size: 12px; font-weight: 600; color: #313131; text-align: right; line-height: 1.35; }
-.var-title {
-  font-size: 14px; font-weight: 600; color: #313131; line-height: 1.25;
-  margin-top: 8px;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-}
-.var-add-btn {
-  margin-top: auto;
-  width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;
-  background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 3px;
-  padding: 8px 10px; cursor: pointer;
-  font-family: inherit; font-size: 14px; font-weight: 600; color: #313131;
-}
-.var-add-btn i { font-size: 13px; }
-.var-add-btn:active { background: #efefef; }
-/* Selection summary bar — sticky above the bottom edge of the scroll area */
-.var-select-footer {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
-  background: rgba(255,255,255,0.85);
-  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  border-radius: 7px 7px 0 0;
-  box-shadow: 0 0 14px rgba(0,0,0,0.25);
-  padding: 14px 17px;
-  padding-bottom: calc(14px + env(safe-area-inset-bottom));
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  transform: translateY(110%);
-  visibility: hidden; /* fully gone after the slide-out — never re-revealed by scrolling */
-  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), visibility 0s linear 0.3s;
-  pointer-events: none;
-}
-.var-select-footer.show {
-  transform: translateY(0); visibility: visible; pointer-events: auto;
-  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-}
-.var-sf-title { font-size: 16px; font-weight: 600; color: #000; }
-.var-sf-sub { font-size: 12px; font-weight: 500; color: #000; margin-top: 4px; }
-.var-review-btn {
-  background: var(--brand-dark, #5c4433); color: #fff; border: none; border-radius: 4px; cursor: pointer;
-  font-family: inherit; font-size: 16px; font-weight: 600;
-  padding: 10px 12px; flex-shrink: 0; white-space: nowrap;
-}
-.var-review-btn:active { filter: brightness(0.85); }
-
-
-/* ── Variations: Ready-to-accept sheet (Figma 1160-13164) ── */
-.var-review-overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.42); z-index: 840;
-  align-items: flex-end;
-}
-.var-review-overlay.open { display: flex; touch-action: none; }
-.var-review-sheet {
-  background: #fff; border-radius: 10px 10px 0 0; width: 100%;
-  max-height: calc(100% - 60px);
-  display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: 0 0 24px rgba(0,0,0,0.25);
-  animation: coSheetIn 0.32s cubic-bezier(0.32,0.72,0,1) both;
-  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-}
-.var-review-sheet.co-dragging { transition: none; }
-.var-review-header {
-  flex-shrink: 0; padding: 7px 15px 13px;
-  border-bottom: 1px solid #dadcdf; cursor: grab;
-}
-.var-review-handle {
-  width: 73px; height: 5px; background: #d9d9d9; border-radius: 40px;
-  margin: 0 auto 14px;
-}
-.var-review-title { font-size: 18px; font-weight: 600; color: #313131; }
-.var-review-sub { font-size: 12px; font-weight: 600; color: #000; margin-top: 6px; }
-.var-review-body {
-  flex: 1; overflow-y: auto; overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y; overscroll-behavior: contain;
-  padding: 15px;
-}
-.var-review-row {
-  display: flex; gap: 12px; align-items: center;
-  border-bottom: 1px solid #d9d9d9;
-  padding-bottom: 13px; margin-bottom: 11px;
-}
-.var-review-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-.var-review-thumb {
-  width: 55px; height: 62px; flex-shrink: 0;
-  border: 1px solid #efefef; border-radius: 2px;
-  overflow: hidden; background: #f4f4f4;
-}
-.var-review-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.var-review-info { flex: 1; min-width: 0; }
-.var-review-r1 {
-  display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
-  font-size: 14px; font-weight: 600;
-}
-.var-review-name { color: #313131; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-.var-review-price { color: #303030; white-space: nowrap; flex-shrink: 0; }
-.var-review-r2 {
-  display: flex; justify-content: space-between; align-items: center; gap: 8px;
-  margin-top: 3px;
-}
-.var-review-ref { font-size: 12px; font-weight: 600; color: #313131; min-width: 0; }
-.var-remove-btn {
-  background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 3px;
-  padding: 6px; cursor: pointer; flex-shrink: 0;
-  font-family: inherit; font-size: 12px; font-weight: 600; color: #313131;
-}
-.var-remove-btn:active { background: #efefef; }
-.var-review-footer {
-  flex-shrink: 0; background: #fff;
-  border-top: 1px solid #d9d9d9;
-  padding: 13px 15px;
-  padding-bottom: calc(16px + env(safe-area-inset-bottom));
-}
-.var-review-total-row {
-  display: flex; justify-content: space-between; align-items: baseline;
-  font-size: 18px; font-weight: 700; color: #000;
-}
-.var-review-disclaimer { font-size: 12px; font-weight: 500; color: #000; margin-top: 8px; line-height: 1.4; }
-.var-accept-btn {
-  margin-top: 12px; width: 100%; height: 42px;
-  background: var(--brand-dark, #5c4433); border: none; border-radius: 4px;
-  font-family: inherit; font-size: 16px; font-weight: 600; color: #fff; cursor: pointer;
-}
-.var-accept-btn:active { filter: brightness(0.85); }
-
-
-/* ── NYA dialog — "Hi {user}" greeting summary redesign ── */
-.nya-greet-title { font-size: 24px; font-weight: 600; color: #313131; }
-.nya-greet-sub { font-size: 14px; font-weight: 500; color: #757575; margin: 6px 0 18px; }
-.nya-summary-list {
-  border: 1px solid #eaeaea; border-radius: 12px;
-  overflow: hidden; margin-bottom: 18px;
-}
-.nya-summary-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 14px; border-bottom: 1px solid #eaeaea;
-  cursor: pointer; background: #fff;
-}
-.nya-summary-row:last-child { border-bottom: none; }
-.nya-summary-row:active { background: #f5f5f5; }
-.nya-summary-hot { background: #fff8f0; }
-.nya-sum-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
-.nya-sum-text { flex: 1; min-width: 0; }
-.nya-sum-title { font-size: 16px; font-weight: 600; color: #313131; }
-.nya-sum-sub { font-size: 12.5px; font-weight: 600; color: #757575; margin-top: 1px; }
-.nya-sum-sub-hot { color: #b46a00; }
-.nya-sum-chev { font-size: 13px; color: #b3b3b3; flex-shrink: 0; }
-.nya-review-btn {
-  width: 100%;
-  background: var(--brand-dark, #5c4433); color: #fff;
-  border: none; border-radius: 8px; cursor: pointer;
-  font-family: inherit; font-size: 16px; font-weight: 600;
-  padding: 13px 16px;
-}
-.nya-review-btn:active { filter: brightness(0.85); }
-
 </style>
 <script id="mobile-standalone-vars">
 (function () {
@@ -7014,15 +6813,48 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
     </div>
   </div>
 
-  
+  <div class="co-pc-wrap">
+    <div class="co-pc-top">
+      <div class="co-pc-title">Total Project<br>Accepted Value</div>
+      <div class="co-pc-total">
+        <div class="co-pc-total-value">$850,000.00</div>
+        <div class="co-pc-total-label">Total Value (excl. Tax)</div>
+      </div>
+    </div>
+    <div class="co-pc-body">
+      <div class="co-pc-summary-label">Payment Summary</div>
+      <div class="co-pc-amount-row">
+        <span class="co-pc-amount">$650,000.00</span>
+        <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+      </div>
+      <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
+        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      </div>
+      <div class="co-pc-legend">
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
+          <div class="co-pc-legend-value">$650,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
+          <div class="co-pc-legend-value">$18,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
+          <div class="co-pc-legend-value">$182,000.00</div>
+        </div>
+      </div>
+      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Variation #30145','$850,000.00','Project Payment')">Pay Now</button>
+    </div>
+  </div>
 
   <!-- Filter tabs -->
   <div class="qp-filter-tabs">
-    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">05</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Pending your review <span class="qp-filter-count">05</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">To be confirmed <span class="qp-filter-count">00</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">00</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">00</span></button>
+    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">04</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Pending your review <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">To be confirmed <span class="qp-filter-count">02</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">01</span></button>
     <label class="qp-search-pill">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -7031,109 +6863,155 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
     </label>
   </div>
 
-  <!-- Variation photo cards — multi-select accept (Figma 1160-11899) -->
+  <!-- Variation rows (same .qr layout as quotes, different labels) -->
   <div class="qp-list">
 
-    <div class="var-card" onclick="openVarProposal(event)" data-status="pending your review" data-price="12500">
-      <div class="var-photo"><img src="assets/images/variation-kitchen-av.png" alt="" onerror="this.style.display='none'"></div>
-      <div class="var-info">
-        <div class="var-status-row">
-          <div class="var-status">
-            <div class="var-status-dot"></div>
-            <span class="var-status-text">Pending your review</span>
-          </div>
-          <span class="var-valid">Valid until 14 Apr 2026</span>
+    <!-- Pending your review -->
+    <div class="qr">
+      <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGRyb3Agc2hhZG93IC0tPgogIDxyZWN0IHg9IjIwIiB5PSIxMyIgd2lkdGg9IjM4IiBoZWlnaHQ9IjU4IiByeD0iNSIgZmlsbD0iI0Q4RDhEOCIvPgogIDwhLS0gc3dpdGNoIGJvZHkgLS0+CiAgPHJlY3QgeD0iMTciIHk9IjEwIiB3aWR0aD0iMzgiIGhlaWdodD0iNTgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSB1cHBlciBwYWRkbGUgLS0+CiAgPHJlY3QgeD0iMjEiIHk9IjE0IiB3aWR0aD0iMjgiIGhlaWdodD0iMjMiIHJ4PSIzIiBmaWxsPSIjRjNGM0YzIi8+CiAgPCEtLSBsb3dlciBwYWRkbGUgLS0+CiAgPHJlY3QgeD0iMjEiIHk9IjM5IiB3aWR0aD0iMjgiIGhlaWdodD0iMjIiIHJ4PSIzIiBmaWxsPSIjRkFGQUZBIi8+CiAgPCEtLSB2ZXJ0aWNhbCBzbGlkZXIgdHJhY2sgLS0+CiAgPHJlY3QgeD0iNDQiIHk9IjE1IiB3aWR0aD0iMy41IiBoZWlnaHQ9IjIyIiByeD0iMS43NSIgZmlsbD0iI0RFREVERSIvPgogIDwhLS0gc2xpZGVyIGtub2IgLS0+CiAgPHJlY3QgeD0iNDIuNSIgeT0iMTUiIHdpZHRoPSI2LjUiIGhlaWdodD0iOSIgcng9IjMuMjUiIGZpbGw9IiNCOEI4QjgiLz4KICA8IS0tIExFRCBpbmRpY2F0b3Igc3RyaXAgLS0+CiAgPHJlY3QgeD0iMjIiIHk9IjY1IiB3aWR0aD0iMjIiIGhlaWdodD0iMS41IiByeD0iLjc1IiBmaWxsPSIjRThFOEU4Ii8+CiAgPGNpcmNsZSBjeD0iMjgiIGN5PSI2OC41IiByPSIxLjgiIGZpbGw9IiM0ODc4RTgiIG9wYWNpdHk9Ii44NSIvPgogIDxjaXJjbGUgY3g9IjM0IiBjeT0iNjguNSIgcj0iMS44IiBmaWxsPSIjNDg3OEU4IiBvcGFjaXR5PSIuNSIvPgogIDxjaXJjbGUgY3g9IjQwIiBjeT0iNjguNSIgcj0iMS44IiBmaWxsPSIjREVERURFIi8+CiAgPCEtLSBicmFuZCB0ZXh0IGhpbnQgLS0+CiAgPHJlY3QgeD0iMjIiIHk9IjYyIiB3aWR0aD0iMTQiIGhlaWdodD0iMS4yIiByeD0iLjYiIGZpbGw9IiNEMEQwRDAiLz4KPC9zdmc+" alt=""/></div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Variation #30145</span>
+          <span class="qr-revision">Revision 1</span>
         </div>
-        <div class="var-price-row">
-          <span class="var-price">$12,500.00</span>
-          <span class="var-ref">Variation 01<br>from Quote #23944</span>
-        </div>
-        <div class="var-title">Kitchen Audio-Visual System Upgrade — Enhanced Features for Zone 2</div>
-      <button class="var-add-btn" onclick="toggleVarSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
+        <div class="qr-title">Additional Downlights — Master Bedroom</div>
       </div>
-    </div>
-    <div class="var-card" onclick="openVarProposal(event)" data-status="pending your review" data-price="8500">
-      <div class="var-photo"><img src="assets/images/variation-cinema.png" alt="" onerror="this.style.display='none'"></div>
-      <div class="var-info">
-        <div class="var-status-row">
-          <div class="var-status">
-            <div class="var-status-dot"></div>
-            <span class="var-status-text">Pending your review</span>
-          </div>
-          <span class="var-valid">Valid until 14 Apr 2026</span>
-        </div>
-        <div class="var-price-row">
-          <span class="var-price">$8,500.00</span>
-          <span class="var-ref">Variation 02<br>from Quote #23944</span>
-        </div>
-        <div class="var-title">Cinema Room Lighting Control</div>
-      <button class="var-add-btn" onclick="toggleVarSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-pending">Pending your review</span>
+        <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
       </div>
-    </div>
-    <div class="var-card" onclick="openVarProposal(event)" data-status="pending your review" data-price="25000">
-      <div class="var-photo"><img src="assets/images/variation-network.png" alt="" onerror="this.style.display='none'"></div>
-      <div class="var-info">
-        <div class="var-status-row">
-          <div class="var-status">
-            <div class="var-status-dot"></div>
-            <span class="var-status-text">Pending your review</span>
-          </div>
-          <span class="var-valid">Valid until 20 Apr 2026</span>
+      <div></div>
+      <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$8,500.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$8,500.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 1</span></div></div>
+      <div class="qr-actions">
+        <div class="qr-action-group">
+          <button class="qr-action-btn" onclick="openCommentDialog(cardRef(this.closest('.qr')))"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
         </div>
-        <div class="var-price-row">
-          <span class="var-price">$25,000.00</span>
-          <span class="var-ref">Variation 03<br>from Quote #23944</span>
-        </div>
-        <div class="var-title">Network Switch Upgrade</div>
-      <button class="var-add-btn" onclick="toggleVarSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
-      </div>
-    </div>
-    <div class="var-card" onclick="openVarProposal(event)" data-status="pending your review" data-price="3000">
-      <div class="var-photo"><img src="assets/images/variation-intercom.png" alt="" onerror="this.style.display='none'"></div>
-      <div class="var-info">
-        <div class="var-status-row">
-          <div class="var-status">
-            <div class="var-status-dot"></div>
-            <span class="var-status-text">Pending your review</span>
-          </div>
-          <span class="var-valid">Valid until 22 Apr 2026</span>
-        </div>
-        <div class="var-price-row">
-          <span class="var-price">$3,000.00</span>
-          <span class="var-ref">Variation 04<br>from Quote #23944</span>
-        </div>
-        <div class="var-title">Driveway Gate Intercom</div>
-      <button class="var-add-btn" onclick="toggleVarSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
-      </div>
-    </div>
-    <div class="var-card" onclick="openVarProposal(event)" data-status="pending your review" data-price="6800">
-      <div class="var-photo"><img src="assets/images/variation-kef.png" alt="" onerror="this.style.display='none'"></div>
-      <div class="var-info">
-        <div class="var-status-row">
-          <div class="var-status">
-            <div class="var-status-dot"></div>
-            <span class="var-status-text">Pending your review</span>
-          </div>
-          <span class="var-valid">Valid until 14 Apr 2026</span>
-        </div>
-        <div class="var-price-row">
-          <span class="var-price">$6,800.00</span>
-          <span class="var-ref">Variation 05<br>from Quote #23944</span>
-        </div>
-        <div class="var-title">Outdoor Speaker System — Garden Zone</div>
-      <button class="var-add-btn" onclick="toggleVarSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
       </div>
     </div>
 
-  </div>
-
-  <!-- Selection summary bar — appears when variations are added to accept -->
-  <div class="var-select-footer" id="var-select-footer">
-    <div class="var-sf-text">
-      <div class="var-sf-title">0 Variation to accept</div>
-      <div class="var-sf-sub">Estimated total value $0.00</div>
+    <!-- To be confirmed (valid) -->
+    <div class="qr">
+      <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Variation #30187</span>
+          <span class="qr-revision">Revision 2</span>
+        </div>
+        <div class="qr-title">Upgraded Speaker System — Pool Terrace</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-tbc">To be confirmed</span>
+        <span class="qr-date qr-date-tbc">Valid until 14 April 2026</span>
+      </div>
+      <div></div>
+      <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$14,200.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$14,200.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 2</span></div></div>
+      <div class="qr-actions">
+        <div class="qr-action-group">
+          <button class="qr-action-btn" onclick="openCommentDialog(cardRef(this.closest('.qr')))"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">TBC</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
+        </div>
+      </div>
     </div>
-    <button class="var-review-btn" onclick="reviewAcceptVars()">Review &amp; Accept</button>
+
+    <!-- To be confirmed (overdue) -->
+
+    <div class="qr">
+      <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Variation #30063</span>
+          <span class="qr-revision">Revision 1</span>
+        </div>
+        <div class="qr-title">Motorised Blinds — Living Areas</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-tbc">To be confirmed</span>
+        <span class="qr-date qr-date-overdue">Overdue 14 April 2026</span>
+      </div>
+      <div></div>
+      <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$11,800.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$11,800.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 1</span></div></div>
+      <!-- No action buttons for overdue -->
+      <div></div>
+    </div>
+
+    <!-- Accepted (with payment progress — Figma 724:28554) -->
+    <div class="qr">
+      <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Variation #29958</span>
+          <span class="qr-revision">Revision 2</span>
+        </div>
+        <div class="qr-title">CCTV Upgrade — Garage & Entry</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 2 April 2026</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Progress</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$22,500.00</span>
+          <span class="qr-payment-of">of $45,000.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:50%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="qr-payment-legend">
+          <div class="qr-legend-item">
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div>Paid so far <span>50%</span></div>
+            <div class="qr-legend-val">$22,500.00</div>
+          </div>
+          <div class="qr-legend-item">
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div>To pay now <span>0%</span></div>
+            <div class="qr-legend-val">$0.00</div>
+          </div>
+          <div class="qr-legend-item">
+            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#eaeaea;"></div>Upcoming <span>50%</span></div>
+            <div class="qr-legend-val">$22,500.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$38,000.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$45,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 2</span></div></div>
+      <div></div>
+    </div>
+
+    <!-- Declined -->
+    <div class="qr">
+      <div class="qr-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""/></div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Variation #29734</span>
+          <span class="qr-revision">Revision 1</span>
+        </div>
+        <div class="qr-title">Ceiling Fan Installation — Bedrooms</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-declined">Declined</span>
+        <span class="qr-date qr-date-declined">Declined on 14 April 2026</span>
+      </div>
+      <div></div>
+      <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$6,400.00</div><div class="qr-orig-lbl">Initial</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$6,400.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 1</span></div></div>
+      <!-- No action buttons for declined -->
+      <div></div>
+    </div>
+
   </div>
 
   <!-- Footer -->
@@ -8497,72 +8375,9 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   <iframe id="co-doc-iframe" title="Change Order document"></iframe>
 </div>
 
-<!-- ── Variations: Ready-to-accept bottom sheet (Figma 1160-13164) ── -->
-<div class="var-review-overlay" id="var-review-overlay" onclick="closeVarReview()">
-  <div class="var-review-sheet" onclick="event.stopPropagation()">
-    <div class="var-review-header" id="var-review-header">
-      <div class="var-review-handle"></div>
-      <div class="var-review-title">Ready to accept</div>
-      <div class="var-review-sub">Review the variations you&rsquo;ve added. Accepting confirms them on your contract.</div>
-    </div>
-    <div class="var-review-body" id="var-review-list"></div>
-    <div class="var-review-footer">
-      <div class="var-review-total-row">
-        <span>Estimate Total</span>
-        <span id="var-review-total">$0.00</span>
-      </div>
-      <div class="var-review-disclaimer">By accepting you approve these variations and their estimated values. This can&rsquo;t be undone in the app, contact your project manager if anything changes.</div>
-      <button class="var-accept-btn" onclick="acceptVarReview()">Accept</button>
-    </div>
-  </div>
-</div>
-
-<!-- ── Variation proposal iframe overlay (stays in-app) ── -->
-<div class="co-doc-overlay" id="var-doc-overlay">
-  <button class="co-doc-close" onclick="closeVarDoc()" aria-label="Close">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-  </button>
-  <iframe id="var-doc-iframe" title="Variation proposal"></iframe>
-</div>
-
 <!-- ── Needs Your Attention dialog ── -->
 <div class="nya-overlay" id="nya-overlay" onclick="closeNYADialog()">
   <div class="nya-dialog" onclick="event.stopPropagation()">
-
-    <div class="nya-greet-title">Hi Lee</div>
-    <div class="nya-greet-sub">Here&rsquo;s what needs your attention today</div>
-
-    <div class="nya-summary-list">
-      <div class="nya-summary-row nya-summary-hot" onclick="closeNYADialog();go('variations')">
-        <span class="nya-sum-dot" style="background:#ff9500;"></span>
-        <div class="nya-sum-text">
-          <div class="nya-sum-title">5 Variations</div>
-          <div class="nya-sum-sub nya-sum-sub-hot">pending your review</div>
-        </div>
-        <i class="fa-sharp-solid fa-chevron-right nya-sum-chev"></i>
-      </div>
-      <div class="nya-summary-row" onclick="closeNYADialog();go('change-order')">
-        <span class="nya-sum-dot" style="background:#ff9500;"></span>
-        <div class="nya-sum-text">
-          <div class="nya-sum-title">1 Change Order</div>
-          <div class="nya-sum-sub">pending your review</div>
-        </div>
-        <i class="fa-sharp-solid fa-chevron-right nya-sum-chev"></i>
-      </div>
-      <div class="nya-summary-row" onclick="closeNYADialog();go('invoices')">
-        <span class="nya-sum-dot" style="background:#cf3400;"></span>
-        <div class="nya-sum-text">
-          <div class="nya-sum-title">2 Invoices</div>
-          <div class="nya-sum-sub">payment due</div>
-        </div>
-        <i class="fa-sharp-solid fa-chevron-right nya-sum-chev"></i>
-      </div>
-    </div>
-
-    <button class="nya-remind-btn" onclick="closeNYADialog()">Remind me later</button>
-
-    <!-- OLD multi-step design kept inert below (template never renders) -->
-    <template id="nya-old-design">
 
     <!-- Header: always visible — title + counter -->
     <div class="nya-header">
@@ -8659,8 +8474,6 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
       </div>
       <button class="nya-remind-btn" onclick="closeNYADialog()">Remind me later</button>
     </div>
-
-    </template>
 
   </div>
 </div>
@@ -10141,22 +9954,21 @@ function filterTab(btn) {
 
   // 4. Show all on "all"
   if (label === 'all') {
-    screen.querySelectorAll('.qr, .inv-row, .co-card, .var-card').forEach(r => r.style.display = '');
+    screen.querySelectorAll('.qr, .inv-row, .co-card').forEach(r => r.style.display = '');
     return;
   }
 
-  // 4b. Status-driven cards (CO + new Variation cards) — filter by data-status
-  if (screen.querySelector('.co-card, .var-card')) {
-    const STATUS_FILTER_MAP = {
+  // 4b. Change Order cards (filter by data-status; tab labels: TBC, Accepted…)
+  if (screen.querySelector('.co-card')) {
+    const CO_FILTER_MAP = {
       'pending your review': 'pending your review',
       'tbc':                 'tbc',
-      'to be confirmed':     'tbc',
       'accepted':            'accepted',
       'declined':            'declined',
     };
-    const status = STATUS_FILTER_MAP[label];
+    const status = CO_FILTER_MAP[label];
     if (status) {
-      screen.querySelectorAll('.co-card, .var-card').forEach(r => {
+      screen.querySelectorAll('.co-card').forEach(r => {
         r.style.display = ((r.dataset.status || '').toLowerCase() === status) ? '' : 'none';
       });
       return;
@@ -10773,8 +10585,12 @@ let nyaCurrentItem = 1;
 const NYA_TOTAL = 4;
 
 function showNYADialog() {
-  // Greeting-summary redesign: nothing to reset, just open.
-  // (The old multi-step item logic lives inert in #nya-old-design.)
+  nyaCurrentItem = 1;
+  document.getElementById('nya-counter').textContent = '01/' + String(NYA_TOTAL).padStart(2,'0');
+  document.getElementById('nya-progress-fill').style.width = (1/NYA_TOTAL*100) + '%';
+  document.querySelectorAll('.nya-item').forEach((el, i) => {
+    el.style.display = i === 0 ? '' : 'none';
+  });
   document.getElementById('nya-overlay').classList.add('open');
 }
 function closeNYADialog() {
@@ -11389,53 +11205,6 @@ function syncCoSheetFromCard(card) {
   var footer = overlay.querySelector('.co-detail-footer');
   if (footer) footer.style.display = accepted ? 'none' : '';
 }
-/* Ready-to-accept sheet — same swipe-down-to-close as the CO sheet */
-(function initVarReviewSwipe() {
-  var overlay = document.getElementById('var-review-overlay');
-  var sheet   = overlay && overlay.querySelector('.var-review-sheet');
-  if (!sheet) return;
-  var body = sheet.querySelector('.var-review-body');
-  var startY = 0, startScrollTop = 0, currentDelta = 0, dragging = false;
-  sheet.addEventListener('touchstart', function(e) {
-    startY = e.touches[0].clientY;
-    startScrollTop = body ? body.scrollTop : 0;
-    currentDelta = 0; dragging = false;
-    sheet.style.animation = 'none';
-    sheet.classList.add('co-dragging');
-  }, { passive: true });
-  sheet.addEventListener('touchmove', function(e) {
-    var dy = e.touches[0].clientY - startY;
-    if (dy > 0 && startScrollTop <= 0) {
-      dragging = true;
-      e.preventDefault();
-      currentDelta = dy;
-      sheet.style.transform = 'translateY(' + dy + 'px)';
-      overlay.style.background = 'rgba(0,0,0,' + Math.max(0, 0.42 * (1 - dy / 260)) + ')';
-    } else {
-      dragging = false;
-      sheet.classList.remove('co-dragging');
-    }
-  }, { passive: false });
-  sheet.addEventListener('touchend', function() {
-    sheet.classList.remove('co-dragging');
-    if (!dragging) { currentDelta = 0; return; }
-    dragging = false;
-    if (currentDelta > 80) {
-      sheet.style.transform = 'translateY(' + sheet.offsetHeight + 'px)';
-      overlay.style.background = 'rgba(0,0,0,0)';
-      setTimeout(function() {
-        closeVarReview();
-        sheet.style.transform = ''; sheet.style.animation = '';
-        overlay.style.background = '';
-      }, 300);
-    } else {
-      sheet.style.transform = '';
-      overlay.style.background = '';
-    }
-    currentDelta = 0;
-  });
-})();
-
 function openCoDetails(src) {
   var overlay = document.getElementById('co-detail-overlay');
   if (!overlay) return;
@@ -11701,280 +11470,6 @@ function refreshCoTabCounts() {
   });
 }
 
-
-// ── Variations: multi-select accept (Figma 1160-11899) ──
-/* Tap a variation card -> open its proposal page in the in-app overlay.
-   The proposal is a local demo page fed by query params from the card. */
-var _varDocCard = null;
-var _varDocPending = null; // 'accept' | 'reject' | 'tbc' armed by the iframe
-function openVarProposal(e) {
-  if (e && e.target && e.target.closest('button')) return; // not when tapping Add/Remove/View
-  var card = e.target.closest('.var-card');
-  if (!card) return;
-  _varDocCard = card;
-  _varDocPending = null;
-  var img = card.querySelector('.var-photo img');
-  var params = new URLSearchParams({
-    title: card.querySelector('.var-title').textContent.trim(),
-    price: card.dataset.price || '0',
-    ref:   (card.querySelector('.var-ref').textContent.split('from')[0] || 'Variation').trim(),
-    valid: card.querySelector('.var-valid').textContent.trim(),
-    status: (card.dataset.status || '').toLowerCase() === 'accepted' ? 'accepted' : 'pending'
-  });
-  if (img && img.src) params.set('img', img.src);
-  var frame = document.getElementById('var-doc-iframe');
-  // Hash survives the dev server's cleanUrls redirect (query strings get dropped)
-  frame.src = 'Variation_Proposal_demo.html#' + params.toString();
-  document.getElementById('var-doc-overlay').classList.add('open');
-}
-function closeVarDoc() {
-  document.getElementById('var-doc-overlay').classList.remove('open');
-  if (!_varDocPending || !_varDocCard) { _varDocCard = null; _varDocPending = null; return; }
-  var card = _varDocCard, action = _varDocPending;
-  _varDocCard = null; _varDocPending = null;
-  // Bring the card into view, then play the status change
-  var scrollRoot = document.querySelector('#s-variations .quotes-page') || document.getElementById('s-variations');
-  if (scrollRoot && scrollRoot.scrollTo) scrollRoot.scrollTo({ top: Math.max(0, card.offsetTop - 130), behavior: 'smooth' });
-  setTimeout(function() { performSingleVarAction(card, action); }, 450);
-}
-window.addEventListener('message', function(e) {
-  if (e.data === 'var-accept' || e.data === 'var-reject' || e.data === 'var-tbc') {
-    _varDocPending = e.data.replace('var-', '');
-  }
-});
-/* One card changes status with the usual flip language */
-function performSingleVarAction(card, action) {
-  var dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  var label = card.querySelector('.var-status-text');
-  var validEl = card.querySelector('.var-valid');
-  var dot = card.querySelector('.var-status-dot');
-  var btn = card.querySelector('.var-add-btn');
-  // Leaving the selection if it was added
-  if (card.classList.contains('var-selected')) {
-    card.classList.remove('var-selected');
-    updateVarFooter();
-  }
-  if (action === 'accept') {
-    card.dataset.status = 'accepted';
-    flipBadge(label, 'var-status-text', 'Accepted');
-    setTimeout(function() { if (dot) dot.style.background = '#009113'; }, 400);
-    setTimeout(function() {
-      flipBadge(validEl, 'var-valid var-valid-accepted', 'Accepted on ' + dateStr);
-    }, 150);
-    if (btn) {
-      btn.style.transition = 'opacity 0.3s ease';
-      btn.style.opacity = '0';
-      setTimeout(function() {
-        btn.innerHTML = 'View Accepted';
-        btn.removeAttribute('onclick'); btn.onclick = null;
-        btn.style.opacity = '1';
-      }, 350);
-    }
-  } else if (action === 'reject') {
-    card.dataset.status = 'declined';
-    flipBadge(label, 'var-status-text', 'Declined');
-    setTimeout(function() { if (dot) dot.style.background = '#9c9c9c'; }, 400);
-    setTimeout(function() {
-      flipBadge(validEl, 'var-valid var-valid-declined', 'Declined on ' + dateStr);
-    }, 150);
-    if (btn) {
-      btn.style.transition = 'opacity 0.35s ease';
-      btn.style.opacity = '0';
-      setTimeout(function() { btn.remove(); }, 400);
-    }
-  } else if (action === 'tbc') {
-    card.dataset.status = 'tbc';
-    flipBadge(label, 'var-status-text', 'To be confirmed');
-    setTimeout(function() { if (dot) dot.style.background = '#9c9c9c'; }, 400);
-    // date keeps its "Valid until" text; button stays usable
-  }
-  setTimeout(function() {
-    refreshVarTabCounts();
-    resortVarCards();
-  }, 1450);
-}
-function toggleVarSelect(btn) {
-  var card = btn.closest('.var-card');
-  if (!card) return;
-  var selected = card.classList.toggle('var-selected');
-  btn.innerHTML = selected
-    ? '<i class="fa-sharp fa-trash-can"></i>Remove from Accept'
-    : '<i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept';
-  updateVarFooter();
-}
-function updateVarFooter() {
-  var footer = document.getElementById('var-select-footer');
-  if (!footer) return;
-  var sel = document.querySelectorAll('#s-variations .var-card.var-selected');
-  // When emptying, keep the last text while it slides out — never flash "0 Variations"
-  if (sel.length > 0) {
-    var total = 0;
-    sel.forEach(function(c2) { total += parseFloat(c2.dataset.price || '0'); });
-    footer.querySelector('.var-sf-title').textContent =
-      sel.length + ' Variation' + (sel.length === 1 ? '' : 's') + ' to accept';
-    footer.querySelector('.var-sf-sub').textContent =
-      'Estimated total value $' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  }
-  footer.classList.toggle('show', sel.length > 0);
-}
-function reviewAcceptVars() {
-  // Footer CTA → open the Ready-to-accept sheet (Figma 1160-13164)
-  openVarReview();
-}
-function openVarReview() {
-  var sel = Array.prototype.slice.call(document.querySelectorAll('#s-variations .var-card.var-selected'));
-  if (!sel.length) return;
-  window._varReviewCards = sel;
-  var list = document.getElementById('var-review-list');
-  list.innerHTML = sel.map(function(card, i) {
-    var img = card.querySelector('.var-photo img');
-    var title = card.querySelector('.var-title').textContent;
-    var price = card.querySelector('.var-price').textContent;
-    var ref = card.querySelector('.var-ref').innerHTML.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
-    return '<div class="var-review-row" data-idx="' + i + '">' +
-      '<div class="var-review-thumb"><img src="' + (img ? img.src : '') + '" alt=""></div>' +
-      '<div class="var-review-info">' +
-        '<div class="var-review-r1"><span class="var-review-name">' + title + '</span>' +
-        '<span class="var-review-price">' + price + '</span></div>' +
-        '<div class="var-review-r2"><span class="var-review-ref">' + ref + '</span>' +
-        '<button class="var-remove-btn" onclick="removeVarReviewItem(this)">Remove</button></div>' +
-      '</div></div>';
-  }).join('');
-  updateVarReviewTotal();
-  var ov = document.getElementById('var-review-overlay');
-  var sheet = ov.querySelector('.var-review-sheet');
-  if (sheet) { sheet.style.animation = 'none'; sheet.offsetHeight; sheet.style.animation = ''; }
-  ov.classList.add('open');
-  list.scrollTop = 0;
-}
-function updateVarReviewTotal() {
-  var total = 0;
-  document.querySelectorAll('#var-review-list .var-review-row').forEach(function(row) {
-    var card = window._varReviewCards[parseInt(row.dataset.idx, 10)];
-    if (card) total += parseFloat(card.dataset.price || '0');
-  });
-  document.getElementById('var-review-total').textContent =
-    '$' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-function removeVarReviewItem(btn) {
-  var row = btn.closest('.var-review-row');
-  var card = window._varReviewCards[parseInt(row.dataset.idx, 10)];
-  // Deselect the underlying card so list + footer stay in sync
-  if (card && card.classList.contains('var-selected')) {
-    var cardBtn = card.querySelector('.var-add-btn');
-    if (cardBtn) toggleVarSelect(cardBtn);
-    else { card.classList.remove('var-selected'); updateVarFooter(); }
-  }
-  row.style.transition = 'opacity 0.25s ease, max-height 0.3s ease';
-  row.style.overflow = 'hidden';
-  row.style.maxHeight = row.scrollHeight + 'px';
-  row.style.opacity = '0';
-  requestAnimationFrame(function() { requestAnimationFrame(function() { row.style.maxHeight = '0'; }); });
-  setTimeout(function() {
-    row.remove();
-    updateVarReviewTotal();
-    if (!document.querySelector('#var-review-list .var-review-row')) closeVarReview();
-  }, 320);
-}
-function closeVarReview() {
-  document.getElementById('var-review-overlay').classList.remove('open');
-}
-function acceptVarReview() {
-  closeVarReview();
-  setTimeout(performAcceptVars, 350);
-}
-function performAcceptVars() {
-  var sel = Array.prototype.slice.call(document.querySelectorAll('#s-variations .var-card.var-selected'));
-  if (!sel.length) return;
-  var dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  document.getElementById('var-select-footer').classList.remove('show');
-  sel.forEach(function(card, i) {
-    setTimeout(function() {
-      card.classList.remove('var-selected');
-      card.dataset.status = 'accepted';
-      // Status text + date flip; dot turns green at the flip midpoint
-      flipBadge(card.querySelector('.var-status-text'), 'var-status-text', 'Accepted');
-      setTimeout(function() {
-        var dot = card.querySelector('.var-status-dot');
-        if (dot) dot.style.background = '#009113';
-      }, 400);
-      setTimeout(function() {
-        flipBadge(card.querySelector('.var-valid'), 'var-valid var-valid-accepted', 'Accepted on ' + dateStr);
-      }, 150);
-      // Button stays — crossfades into "View Accepted"
-      var btn = card.querySelector('.var-add-btn');
-      if (btn) {
-        btn.style.transition = 'opacity 0.3s ease';
-        btn.style.opacity = '0';
-        setTimeout(function() {
-          btn.innerHTML = 'View Accepted';
-          btn.removeAttribute('onclick');
-          btn.onclick = null;
-          btn.style.opacity = '1';
-        }, 350);
-      }
-    }, i * 250); // stagger so each card flips visibly
-  });
-  setTimeout(function() {
-    updateVarFooter();
-    refreshVarTabCounts();
-    resortVarCards();
-  }, sel.length * 250 + 1300);
-}
-/* FLIP re-sort: Pending -> TBC -> Accepted -> Declined (accepted sinks down) */
-function resortVarCards() {
-  var listEl = document.querySelector('#s-variations .qp-list');
-  if (!listEl) return;
-  var cards = Array.prototype.slice.call(listEl.querySelectorAll(':scope > .var-card'));
-  if (cards.length < 2) return;
-  function priority(card) {
-    var s = (card.dataset.status || '').toLowerCase();
-    if (s === 'pending your review') return 0;
-    if (s === 'tbc') return 1;
-    if (s === 'accepted') return 2;
-    if (s === 'declined') return 3;
-    return 4;
-  }
-  var priorities = cards.map(priority);
-  var sorted_ok = priorities.every(function(p, i) { return i === 0 || priorities[i - 1] <= p; });
-  if (sorted_ok) return;
-  var firstTops = cards.map(function(cd) { return cd.getBoundingClientRect().top; });
-  cards
-    .map(function(cd, i) { return { cd: cd, i: i, p: priority(cd) }; })
-    .sort(function(a, b) { return a.p !== b.p ? a.p - b.p : a.i - b.i; })
-    .forEach(function(x) { listEl.appendChild(x.cd); });
-  cards.forEach(function(cd, i) {
-    var dy = firstTops[i] - cd.getBoundingClientRect().top;
-    if (!dy) return;
-    cd.style.transition = 'none';
-    cd.style.transform = 'translateY(' + dy + 'px)';
-  });
-  requestAnimationFrame(function() { requestAnimationFrame(function() {
-    cards.forEach(function(cd) {
-      cd.style.transition = 'transform 0.6s cubic-bezier(0.4,0,0.2,1)';
-      cd.style.transform = '';
-    });
-    setTimeout(function() {
-      cards.forEach(function(cd) { cd.style.transition = ''; cd.style.transform = ''; });
-    }, 650);
-  }); });
-}
-function refreshVarTabCounts() {
-  var cards = document.querySelectorAll('#s-variations .qp-list .var-card');
-  var counts = { 'all': cards.length, 'pending your review': 0, 'to be confirmed': 0, 'accepted': 0, 'declined': 0 };
-  cards.forEach(function(c2) {
-    var s = (c2.dataset.status || '').toLowerCase();
-    if (s === 'tbc') s = 'to be confirmed';
-    if (counts[s] != null) counts[s]++;
-  });
-  document.querySelectorAll('#s-variations .qp-filter-tab').forEach(function(tab) {
-    var cnt = tab.querySelector('.qp-filter-count');
-    if (!cnt) return;
-    var label = tab.textContent.replace(/[0-9]/g, '').trim().toLowerCase();
-    var n = counts[label];
-    if (n != null) cnt.textContent = (n < 10 ? '0' : '') + n;
-  });
-}
 // ── Pay now modal ──
 var _currentInvRef = 'Invoice #002';
 function openPayNowModal(invRef, amount, desc) {
