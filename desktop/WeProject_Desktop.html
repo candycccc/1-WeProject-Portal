@@ -493,6 +493,14 @@
     <i class="fa-solid fa-file-plus detail-nav-icon"></i>
     <span class="detail-nav-label">Variations</span>
   </div>
+  <div class="detail-nav-card" onclick="go('change-order')">
+    <i class="fa-solid fa-file-invoice detail-nav-icon"></i>
+    <span class="detail-nav-label">Change Orders</span>
+    <div class="detail-nav-badge">
+      <i class="fa-sharp-solid fa-circle-exclamation" style="color:#cf3400;font-size:9px;"></i>
+      <span>1 Change to Review</span>
+    </div>
+  </div>
   <div class="detail-nav-card" onclick="go('invoices')">
     <i class="fa-solid fa-file-invoice detail-nav-icon"></i>
     <span class="detail-nav-label">Invoices</span>
@@ -659,6 +667,11 @@
         </svg>
         Variations
       </div>
+      <div class="qp-nav-item" onclick="go('change-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="13" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Change Orders
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Change to Review</span>
+      </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/>
@@ -724,15 +737,15 @@
           <div class="qp-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
         </div>
         <div>
-          <div class="qp-total-value">£850,000.00</div>
-          <div class="qp-total-label">Total Quote Value (exclude VAT)</div>
+          <div class="qp-total-value">$850,000.00</div>
+          <div class="qp-total-label">Total Quote Value (exclude Tax)</div>
         </div>
       </div>
       <div class="qp-project-right">
         <div class="qp-payment-summary-label">Payment Summary</div>
         <div>
-          <div class="qp-payment-amount">£650,000.00</div>
-          <div class="qp-payment-of">of £850,000.02 Paid so far</div>
+          <div class="qp-payment-amount">$650,000.00</div>
+          <div class="qp-payment-of">of $850,000.02 Paid so far</div>
         </div>
         <div class="qp-progress-bar-outer">
           <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
@@ -742,19 +755,19 @@
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:#009113;"></div> Paid so far
             </div>
-            <div class="qp-legend-value">£650,000.00 <span style="font-weight:400;color:#9c9c9c;">(0%)</span></div>
+            <div class="qp-legend-value">$650,000.00 <span style="font-weight:400;color:#9c9c9c;">(0%)</span></div>
           </div>
           <div class="qp-legend-item">
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now
             </div>
-            <div class="qp-legend-value">£15,000.00 <span style="font-weight:400;color:#9c9c9c;">(20%)</span></div>
+            <div class="qp-legend-value">$15,000.00 <span style="font-weight:400;color:#9c9c9c;">(20%)</span></div>
           </div>
           <div class="qp-legend-item" style="align-items:flex-end;">
             <div class="qp-legend-dot-row">
               <div class="qp-legend-dot" style="background:var(--c-border-1);"></div> Upcoming
             </div>
-            <div class="qp-legend-value">£0.00 <span style="font-weight:400;color:#9c9c9c;">(0%)</span></div>
+            <div class="qp-legend-value">$0.00 <span style="font-weight:400;color:#9c9c9c;">(0%)</span></div>
           </div>
         </div>
       </div>
@@ -764,15 +777,15 @@
     <div class="qp-card qp-payment-card">
       <div class="qp-payment-card-title">Payment details</div>
       <div class="qp-bank-name">LCR Integrated Systems</div>
-      <div class="qp-bank-address">Elmwood Ave, Inverness<br>United Kingdom, IV2 6HE</div>
+      <div class="qp-bank-address">1200 Elmwood Ave, Suite 400<br>Austin, TX 78701, United States</div>
       <div class="qp-bank-details" style="margin-top:auto;">
         <div class="qp-bank-field">
-          <label>Sort code</label>
-          <span>40-00-00</span>
+          <label>Routing Number</label>
+          <span>123456789</span>
         </div>
         <div class="qp-bank-field">
           <label>Account Number</label>
-          <span>000000</span>
+          <span>000123456789</span>
         </div>
       </div>
     </div>
@@ -816,8 +829,8 @@
       <!-- No payment panel for pending -->
       <div></div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn">
@@ -848,8 +861,8 @@
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn">
@@ -880,8 +893,8 @@
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn">
@@ -914,8 +927,8 @@
       <div class="qr-payment">
         <div class="qr-payment-label">Payment Summary</div>
         <div class="qr-payment-amount-row">
-          <span class="qr-payment-big">£20,000.00</span>
-          <span class="qr-payment-of">of £850,000.02 Paid so far</span>
+          <span class="qr-payment-big">$20,000.00</span>
+          <span class="qr-payment-of">of $850,000.02 Paid so far</span>
         </div>
         <div class="qr-payment-bar">
           <div class="qr-payment-bar-fill" style="width:50%;"></div>
@@ -923,21 +936,21 @@
         <div class="qr-payment-legend">
           <div class="qr-legend-item">
             <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div> Paid so far <span style="margin-left:4px;">50%</span></div>
-            <div class="qr-legend-val">£650,000.00</div>
+            <div class="qr-legend-val">$650,000.00</div>
           </div>
           <div class="qr-legend-item">
             <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div> To pay now <span style="margin-left:4px;">0%</span></div>
-            <div class="qr-legend-val">£650,000.00</div>
+            <div class="qr-legend-val">$650,000.00</div>
           </div>
           <div class="qr-legend-item" style="align-items:flex-end;">
             <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#9c9c9c;"></div> Upcoming <span style="margin-left:4px;">0%</span></div>
-            <div class="qr-legend-val" style="text-align:right;">£650,000.00</div>
+            <div class="qr-legend-val" style="text-align:right;">$650,000.00</div>
           </div>
         </div>
       </div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
       <!-- No action buttons for accepted -->
       <div></div>
     </div>
@@ -958,8 +971,8 @@
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£0.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£0.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Original Quote</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$0.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$0.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Original Quote</span></div></div>
       <!-- No action buttons for declined -->
       <div></div>
     </div>
@@ -1039,6 +1052,11 @@
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
       </div>
+      <div class="qp-nav-item" onclick="go('change-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="13" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Change Orders
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Change to Review</span>
+      </div>
       <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         Invoices
@@ -1087,8 +1105,8 @@
           <div class="inv-proj-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
         </div>
         <div style="text-align:right;">
-          <div class="inv-proj-value">£850,000.00</div>
-          <div class="inv-proj-value-lbl">Total Quote Value (exclude VAT)</div>
+          <div class="inv-proj-value">$850,000.00</div>
+          <div class="inv-proj-value-lbl">Total Quote Value (exclude Tax)</div>
         </div>
       </div>
       <div class="inv-proj-right">
@@ -1097,8 +1115,8 @@
           <button class="inv-view-quote-btn">View your quote</button>
         </div>
         <div>
-          <span class="inv-proj-pay-amount">£650,000.00 </span>
-          <span class="inv-proj-pay-of">of £850,000.02 Paid so far</span>
+          <span class="inv-proj-pay-amount">$650,000.00 </span>
+          <span class="inv-proj-pay-of">of $850,000.02 Paid so far</span>
         </div>
         <div class="inv-proj-bar">
           <div class="inv-proj-bar-fill" style="flex:70 0 0;background:#009113;"></div>
@@ -1108,15 +1126,15 @@
         <div class="inv-proj-legend">
           <div class="inv-proj-legend-item">
             <div class="inv-proj-legend-dot-row"><div class="inv-proj-legend-dot" style="background:#009113;"></div> Paid so far</div>
-            <div class="inv-proj-legend-val">£650,000.00</div>
+            <div class="inv-proj-legend-val">$650,000.00</div>
           </div>
           <div class="inv-proj-legend-item">
             <div class="inv-proj-legend-dot-row"><div class="inv-proj-legend-dot" style="background:#cf3400;"></div> To pay now</div>
-            <div class="inv-proj-legend-val">£15,000.00</div>
+            <div class="inv-proj-legend-val">$15,000.00</div>
           </div>
           <div class="inv-proj-legend-item right">
             <div class="inv-proj-legend-dot-row"><div class="inv-proj-legend-dot" style="background:#eaeaea;border:1px solid #ccc;"></div> Upcoming</div>
-            <div class="inv-proj-legend-val">£15,000.00</div>
+            <div class="inv-proj-legend-val">$15,000.00</div>
           </div>
         </div>
       </div>
@@ -1125,10 +1143,10 @@
     <div class="inv-summary-right">
       <div class="inv-pay-details-title">Payment details</div>
       <div class="inv-pay-company">LCR Integrated Systems</div>
-      <div class="inv-pay-address">Elmwood Ave, Inverness<br>United Kingdom, IV2 6HE</div>
+      <div class="inv-pay-address">1200 Elmwood Ave, Suite 400<br>Austin, TX 78701, United States</div>
       <div class="inv-pay-codes">
-        <div class="inv-pay-code"><label>Sort code</label><span>000000</span></div>
-        <div class="inv-pay-code"><label>Account Number</label><span>000000</span></div>
+        <div class="inv-pay-code"><label>Routing Number</label><span>123456789</span></div>
+        <div class="inv-pay-code"><label>Account Number</label><span>000123456789</span></div>
       </div>
     </div>
   </div>
@@ -1162,8 +1180,8 @@
           <span class="inv-valid-until" style="color:#cf3400;">Valid until: 31 Dec 2025</span>
         </div>
         <div class="inv-col2-bottom">
-          <div class="inv-amount-val">£850,000.00</div>
-          <div class="inv-amount-lbl">exclude VAT</div>
+          <div class="inv-amount-val">$850,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-title-row">
@@ -1172,15 +1190,15 @@
           <div class="inv-title">Invoice for Aftercare</div>
         </div>
         <div class="inv-amount-col">
-          <div class="inv-amount-val">£850,000.00</div>
-          <div class="inv-amount-lbl">exclude VAT</div>
+          <div class="inv-amount-val">$850,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-payment">
         <div class="inv-payment-label">Payment Summary</div>
         <div class="inv-payment-amount-row">
-          <div class="inv-payment-big">£650,000.00</div>
-          <div class="inv-payment-of">of £850,000.02 Paid so far</div>
+          <div class="inv-payment-big">$650,000.00</div>
+          <div class="inv-payment-of">of $850,000.02 Paid so far</div>
         </div>
         <div class="inv-payment-bar">
           <div class="inv-payment-bar-fill" style="width:76%;background:#009113;"></div>
@@ -1189,17 +1207,17 @@
         <div class="inv-payment-legend">
           <div class="inv-legend-item">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">70%</span></div>
-            <div class="inv-legend-val">£650,000.00</div>
+            <div class="inv-legend-val">$650,000.00</div>
           </div>
           <div class="inv-legend-item right">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">30%</span></div>
-            <div class="inv-legend-val">£200,000.00</div>
+            <div class="inv-legend-val">$200,000.00</div>
           </div>
         </div>
       </div>
       <div class="inv-btns">
         <button class="inv-btn">Invoice Details</button>
-        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00002','£850,000.00','Invoice for Aftercare')">Pay now</button>
+        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay now</button>
       </div>
     </div>
 
@@ -1215,8 +1233,8 @@
           <span class="inv-valid-until" style="color:#009113;">Paid on: 24 Sep 2025</span>
         </div>
         <div class="inv-col2-bottom">
-          <div class="inv-amount-val">£850,000.00</div>
-          <div class="inv-amount-lbl">exclude VAT</div>
+          <div class="inv-amount-val">$850,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-title-row">
@@ -1225,15 +1243,15 @@
           <div class="inv-title">Invoice for Site visit 10/09/25</div>
         </div>
         <div class="inv-amount-col">
-          <div class="inv-amount-val">£850,000.00</div>
-          <div class="inv-amount-lbl">exclude VAT</div>
+          <div class="inv-amount-val">$850,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-payment">
         <div class="inv-payment-label">Payment Summary</div>
         <div class="inv-payment-amount-row">
-          <div class="inv-payment-big">£850,000.00</div>
-          <div class="inv-payment-of">of £850,000.00 Paid so far</div>
+          <div class="inv-payment-big">$850,000.00</div>
+          <div class="inv-payment-of">of $850,000.00 Paid so far</div>
         </div>
         <div class="inv-payment-bar">
           <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
@@ -1241,17 +1259,17 @@
         <div class="inv-payment-legend">
           <div class="inv-legend-item">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
-            <div class="inv-legend-val">£850,000.00</div>
+            <div class="inv-legend-val">$850,000.00</div>
           </div>
           <div class="inv-legend-item right">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
-            <div class="inv-legend-val">£0.00</div>
+            <div class="inv-legend-val">$0.00</div>
           </div>
         </div>
       </div>
       <div class="inv-btns">
         <button class="inv-btn">Invoice Details</button>
-        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('#250924.SOC014','£850,000.00','Invoice for Site visit')">Pay now</button>
+        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('#250924.SOC014','$850,000.00','Invoice for Site visit')">Pay now</button>
       </div>
     </div>
 
@@ -1267,8 +1285,8 @@
           <span class="inv-valid-until" style="color:#9c9c9c;">Due: 15 Jan 2026</span>
         </div>
         <div class="inv-col2-bottom">
-          <div class="inv-amount-val">£200,000.00</div>
-          <div class="inv-amount-lbl">exclude VAT</div>
+          <div class="inv-amount-val">$200,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-title-row">
@@ -1277,31 +1295,31 @@
           <div class="inv-title">Invoice for Aftercare remote support</div>
         </div>
         <div class="inv-amount-col">
-          <div class="inv-amount-val">£200,000.00</div>
-          <div class="inv-amount-lbl">exclude VAT</div>
+          <div class="inv-amount-val">$200,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-payment">
         <div class="inv-payment-label">Payment Summary</div>
         <div class="inv-payment-amount-row">
-          <div class="inv-payment-big">£0.00</div>
-          <div class="inv-payment-of">of £200,000.00 Paid so far</div>
+          <div class="inv-payment-big">$0.00</div>
+          <div class="inv-payment-of">of $200,000.00 Paid so far</div>
         </div>
         <div class="inv-payment-bar"><!-- empty — upcoming --></div>
         <div class="inv-payment-legend">
           <div class="inv-legend-item">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">0%</span></div>
-            <div class="inv-legend-val">£0.00</div>
+            <div class="inv-legend-val">$0.00</div>
           </div>
           <div class="inv-legend-item right">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
-            <div class="inv-legend-val">£200,000.00</div>
+            <div class="inv-legend-val">$200,000.00</div>
           </div>
         </div>
       </div>
       <div class="inv-btns">
         <button class="inv-btn">Invoice Details</button>
-        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00003','£200,000.00','Invoice for Aftercare remote support')">Pay now</button>
+        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00003','$200,000.00','Invoice for Aftercare remote support')">Pay now</button>
       </div>
     </div>
 
@@ -1316,32 +1334,32 @@
       </div>
       <div class="paynow-body">
         <div class="paynow-overdue"><i class="fa-solid fa-circle-exclamation" style="margin-right:4px;"></i>Overdue 3 days</div>
-        <div class="paynow-amount" id="paynow-amount">£21,250.00</div>
+        <div class="paynow-amount" id="paynow-amount">$21,250.00</div>
         <div class="paynow-inv-desc" id="paynow-desc">Invoice #108<span class="paynow-inv-desc-dot"></span>Additional speaker installation</div>
         <div class="paynow-section-title">Bank transfer details</div>
         <div class="paynow-detail-row">
           <div class="paynow-detail-label">Bank</div>
-          <div class="paynow-detail-val">Barclays</div>
+          <div class="paynow-detail-val">First National Bank</div>
         </div>
         <div class="paynow-detail-row">
           <div class="paynow-detail-label">Account name</div>
           <div class="paynow-val-copy">
-            <div class="paynow-detail-val">LCR Integrated Systems Ltd</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard('LCR Integrated Systems Ltd')">Copy</button>
+            <div class="paynow-detail-val">LCR Integrated Systems LLC</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('LCR Integrated Systems LLC')">Copy</button>
           </div>
         </div>
         <div class="paynow-detail-row">
-          <div class="paynow-detail-label">Sort code</div>
+          <div class="paynow-detail-label">Routing Number</div>
           <div class="paynow-val-copy">
-            <div class="paynow-detail-val">20-45-67</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard('20-45-67')">Copy</button>
+            <div class="paynow-detail-val">123456789</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('123456789')">Copy</button>
           </div>
         </div>
         <div class="paynow-detail-row">
           <div class="paynow-detail-label">Account number</div>
           <div class="paynow-val-copy">
-            <div class="paynow-detail-val">83920174</div>
-            <button class="paynow-copy-btn" onclick="copyToClipboard('83920174')">Copy</button>
+            <div class="paynow-detail-val">000123456789</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('000123456789')">Copy</button>
           </div>
         </div>
         <div class="paynow-detail-row">
@@ -1417,6 +1435,446 @@
 <!-- ═══════════════════════════════════════════════════════
      SCREEN 6 — VARIATIONS SUB-PAGE
 ═══════════════════════════════════════════════════════ -->
+<div id="s-change-order" class="screen">
+<div class="quotes-page">
+
+  <!-- Top bar (same pattern as quotes) -->
+  <div class="qp-topbar">
+    <button class="qp-back-btn" onclick="go('detail')">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/>
+      </svg>
+      Back
+    </button>
+    <button class="qp-nav-pill" onclick="toggleNavDropdown(event)">
+      Change Orders
+      <i class="fa-sharp-solid fa-chevron-down"></i>
+    </button>
+    <div class="qp-nav-dropdown" id="nav-dropdown-co">
+      <div class="qp-nav-item" onclick="go('quotes');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Quotes
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>2 Actions Required</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        Variations
+      </div>
+      <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="13" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Change Orders
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Change to Review</span>
+      </div>
+      <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Invoices
+      </div>
+      <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Sales Order
+      </div>
+      <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+        Documents
+      </div>
+      <div class="qp-nav-item" onclick="go('progress');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Progress
+      </div>
+      <div class="qp-nav-item" onclick="go('warranty');closeDropdowns()" style="display:none;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        Warranty
+      </div>
+    </div>
+    <div class="qp-topbar-right">
+      <button class="qp-bell-btn qp-bell-badge" onclick="toggleNotifPanel(event)">
+        <i class="fa-sharp-solid fa-bell"></i>
+      </button>
+      <div class="qp-avatar" onclick="toggleUserDropdown(event)">MM
+        <div class="qp-user-dropdown" id="user-dropdown-co">
+          <div class="qp-user-dropdown-item" onclick="openProfilePanel()">Edit Profile
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="qp-user-dropdown-item" onclick="closeDropdowns()">Sign out
+            <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary cards — rebuilt to match Figma -->
+  <div class="inv-summary-row">
+    <!-- Left: project info + payment summary -->
+    <div class="inv-summary-left">
+      <div class="inv-proj-left">
+        <div>
+          <div class="inv-proj-name"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></div>
+          <div class="inv-proj-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="inv-proj-value">$850,000.00</div>
+          <div class="inv-proj-value-lbl">Total Quote Value (exclude Tax)</div>
+        </div>
+      </div>
+      <div class="inv-proj-right">
+        <div class="inv-proj-right-hdr">
+          <span class="inv-proj-pay-label">Payment Summary</span>
+          <button class="inv-view-quote-btn">View your quote</button>
+        </div>
+        <div>
+          <span class="inv-proj-pay-amount">$650,000.00 </span>
+          <span class="inv-proj-pay-of">of $850,000.02 Paid so far</span>
+        </div>
+        <div class="inv-proj-bar">
+          <div class="inv-proj-bar-fill" style="flex:70 0 0;background:#009113;"></div>
+          <div class="inv-proj-bar-fill" style="flex:16 0 0;background:#cf3400;"></div>
+          <div class="inv-proj-bar-fill" style="flex:14 0 0;background:#eaeaea;border:1px solid #d0d0d0;"></div>
+        </div>
+        <div class="inv-proj-legend">
+          <div class="inv-proj-legend-item">
+            <div class="inv-proj-legend-dot-row"><div class="inv-proj-legend-dot" style="background:#009113;"></div> Paid so far</div>
+            <div class="inv-proj-legend-val">$650,000.00</div>
+          </div>
+          <div class="inv-proj-legend-item">
+            <div class="inv-proj-legend-dot-row"><div class="inv-proj-legend-dot" style="background:#cf3400;"></div> To pay now</div>
+            <div class="inv-proj-legend-val">$15,000.00</div>
+          </div>
+          <div class="inv-proj-legend-item right">
+            <div class="inv-proj-legend-dot-row"><div class="inv-proj-legend-dot" style="background:#eaeaea;border:1px solid #ccc;"></div> Upcoming</div>
+            <div class="inv-proj-legend-val">$15,000.00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Right: payment details card -->
+    <div class="inv-summary-right">
+      <div class="inv-pay-details-title">Payment details</div>
+      <div class="inv-pay-company">LCR Integrated Systems</div>
+      <div class="inv-pay-address">1200 Elmwood Ave, Suite 400<br>Austin, TX 78701, United States</div>
+      <div class="inv-pay-codes">
+        <div class="inv-pay-code"><label>Routing Number</label><span>123456789</span></div>
+        <div class="inv-pay-code"><label>Account Number</label><span>000123456789</span></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Mobile-view: summary card follows the mobile app (Figma 1160-22392) -->
+  <div class="co-mv co-mv-summary">
+  <!-- Payment Summary Card -->
+  <div class="co-pc-wrap">
+    <div class="co-pc-top">
+      <div class="co-pc-title">Total Project<br>Accepted Value</div>
+      <div class="co-pc-total">
+        <div class="co-pc-total-value">$850,000.00</div>
+        <div class="co-pc-total-label">Total Value (excl. Tax)</div>
+      </div>
+    </div>
+    <div class="co-pc-body">
+      <div class="co-pc-summary-label">Payment Summary</div>
+      <div class="co-pc-amount-row">
+        <span class="co-pc-amount">$650,000.00</span>
+        <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+      </div>
+      <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
+        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      </div>
+      <div class="co-pc-legend">
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
+          <div class="co-pc-legend-value">$650,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
+          <div class="co-pc-legend-value">$18,000.00</div>
+        </div>
+        <div class="co-pc-legend-item">
+          <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
+          <div class="co-pc-legend-value">$182,000.00</div>
+        </div>
+      </div>
+      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Change Order','$850,000.00','Change Order Payment')">Pay Now</button>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="qp-filter-tabs">
+    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">02</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Pending your review <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">TBC <span class="qp-filter-count">00</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">00</span></button>
+    <label class="qp-search-pill">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" placeholder="Search" oninput="searchQuotes(this)">
+    </label>
+  </div>
+
+
+  <!-- Mobile-view: change order cards follow the mobile app (Figma 1160-22392) -->
+  <div class="co-mv co-mv-cards qp-list">
+    <!-- Card 1: Pending your review -->
+    <div class="co-card" data-status="pending your review">
+      <div class="co-card-header">
+        <div class="co-card-hd-row">
+          <div class="co-card-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""></div>
+          <div class="co-card-hd-info">
+            <div class="co-header-row">
+              <span class="qr-badge qr-badge-pending">Pending your review</span>
+              <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+            </div>
+            <div class="co-header-quote">Quote #23944</div>
+            <div class="co-header-title">Dutch House Security</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="co-timeline">
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Revision 1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+          </div>
+        </div>
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Change Order 1.1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+            <p class="co-tl-desc">Additional earth terminal required to complete the system installation and ensure correct connectivity.</p>
+          </div>
+        </div>
+        <div class="co-tl-item co-tl-item-active">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-pending"><span class="co-tl-dot-inner"></span></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-label" style="font-size:16px;font-weight:600;color:#313131;margin-bottom:6px;">Change Order 1.2</div>
+            <div class="co-tl-status-row">
+              <span class="qr-badge qr-badge-pending">Pending your review</span>
+              <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+            </div>
+            <div class="co-value-table">
+              <div class="co-value-row">
+                <span class="co-value-label">Previous Project Total</span>
+                <span class="co-value-num">$12,200,000.00</span>
+              </div>
+              <div class="co-value-row">
+                <span class="co-value-label">Change Order 1.2</span>
+                <span class="co-value-num" style="color:#cf3400;">−$1,200,000.00</span>
+              </div>
+              <div class="co-value-row">
+                <span class="co-value-label">Variation Value</span>
+                <span class="co-value-num" style="color:#009113;">+$2,120,000.00</span>
+              </div>
+              <div class="co-value-footer">
+                <div class="co-value-footer-left">
+                  <span class="co-value-footer-label">New Project Total</span>
+                  <span class="co-value-footer-sub">if accepted</span>
+                </div>
+                <span class="co-value-num" style="color:#009113;font-size:16px;">$13,120,000.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="co-card-actions">
+        <button class="inv-btn" style="flex:none;width:100%;height:41px;" onclick="mvViewCo(this)">View Change Order 1.2 Details</button>
+        <div class="qr-action-group">
+          <button class="qr-action-btn">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </button>
+          <button class="qr-action-btn" onclick="mvCoAction(this, 'tbc')">TBC</button>
+          <button class="qr-action-btn reject" onclick="mvCoAction(this, 'reject')">Reject</button>
+          <button class="qr-action-btn accept" onclick="mvCoAction(this, 'accept')">Accept</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Accepted -->
+    <div class="co-card" data-status="accepted">
+      <div class="co-card-header">
+        <div class="co-card-hd-row">
+          <div class="co-card-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""></div>
+          <div class="co-card-hd-info">
+            <div class="co-header-row">
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+              <span class="qr-date qr-date-accepted">Accepted on 2 April 2026</span>
+            </div>
+            <div class="co-header-quote">Quote #23944</div>
+            <div class="co-header-title">Dutch House Security</div>
+          </div>
+        </div>
+      </div>
+      <div class="co-payment-progress">
+        <div class="qr-payment-label">Payment Progress</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$7,800,000.00</span>
+          <span class="qr-payment-of">of $12,000,000.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar" style="margin:6px 0 0;">
+          <div class="qr-payment-bar-seg seg-paid" style="width:65%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:10%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">65%</span>
+            </div>
+            <span class="co-pay-amt">$7,800,000.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">10%</span>
+            </div>
+            <span class="co-pay-amt">$1,200,000.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">25%</span>
+            </div>
+            <span class="co-pay-amt">$3,000,000.00</span>
+          </div>
+        </div>
+        <button class="inv-btn" style="flex:none;width:100%;height:41px;margin-top:17px;" onclick="mvViewCo(this)">View Accepted Details</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Change Order rows (Figma 1160-39268) -->
+  <div class="qp-list co-row-list">
+
+    <div class="co-row" data-status="pending your review">
+      <div class="co-row-left">
+        <div class="co-row-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""></div>
+        <div class="co-row-left-info">
+          <div class="co-row-meta"><span>Quote #23944</span><span>Revision 1.2</span></div>
+          <div class="co-row-title">Dutch House Security</div>
+        </div>
+      </div>
+      <div class="co-row-mid">
+        <div class="co-row-status">
+          <span class="qr-badge qr-badge-pending">Pending your review</span>
+          <span class="qr-date qr-date-pending">Valid until 14 Apr 2026</span>
+        </div>
+        <div class="co-row-version">5 Previous Version &rarr; <span class="co-row-version-co">Change Order 1.2</span></div>
+        <div class="co-row-desc">Additional CCTV coverage for the rear elevation, including two PoE cameras and NVR licence upgrade.</div>
+        <div class="co-row-values">
+          <div class="co-row-val"><span class="v">$12,200,000.00</span><span class="l">Previous Project Total</span></div>
+          <div class="co-row-val"><span class="v" style="color:#cf3400;">-$1,200,000.00</span><span class="l">Change Order 1.2</span></div>
+          <div class="co-row-val"><span class="v" style="color:#009113;">+$2,120,000.00</span><span class="l">3 Variation Value</span></div>
+          <div class="co-row-val"><span class="v" style="color:#009113;">$13,120,000.00</span><span class="l"><b>New Project Total</b> After Change Order 1.2 accepted</span></div>
+        </div>
+      </div>
+      <div class="co-row-right">
+        <button class="co-row-view-btn" onclick="openCoDetailModal(this)">View Change Order Details</button>
+        <div class="qr-action-group co-row-actions">
+          <button class="qr-action-btn" title="Comment">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </button>
+          <button class="qr-action-btn" onclick="tbcCoRow(this)">To be confirmed</button>
+          <button class="qr-action-btn reject" onclick="rejectCoRow(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCoRow(this)">Accept</button>
+        </div>
+      </div>
+    </div>
+    <div class="co-row" data-status="accepted">
+      <div class="co-row-left">
+        <div class="co-row-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""></div>
+        <div class="co-row-left-info">
+          <div class="co-row-meta"><span>Quote #23944</span><span>Revision 1.2</span></div>
+          <div class="co-row-title">Dutch House Security</div>
+        </div>
+      </div>
+      <div class="co-row-mid">
+        <div class="co-row-status">
+          <span class="qr-badge qr-badge-accepted">Accepted</span>
+          <span class="qr-date qr-date-accepted">Accepted on 2 Apr 2026</span>
+        </div>
+        <div class="co-row-version">5 Previous Version &rarr; <span class="co-row-version-co">Change Order 1.2</span></div>
+        <div class="co-row-desc">Additional CCTV coverage for the rear elevation, including two PoE cameras and NVR licence upgrade.</div>
+        <div class="co-row-values">
+          <div class="co-row-val"><span class="v">$12,200,000.00</span><span class="l">Previous Project Total</span></div>
+          <div class="co-row-val"><span class="v" style="color:#cf3400;">-$1,200,000.00</span><span class="l">Change Order 1.2</span></div>
+          <div class="co-row-val"><span class="v" style="color:#009113;">+$2,120,000.00</span><span class="l">3 Variation Value</span></div>
+          <div class="co-row-val"><span class="v" style="color:#009113;">$13,120,000.00</span><span class="l"><b>New Project Total</b> After Change Order 1.2 accepted</span></div>
+        </div>
+      </div>
+      <div class="co-row-right">
+        <button class="co-row-view-btn" onclick="openCoDetailModal(this)">View Change Order Details</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="qp-footer">
+    <div class="qp-footer-left">
+      <div class="qp-footer-logo">
+        <img src="data:image/png;base64,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" alt="BH" onerror="this.parentElement.style.background='var(--brand-dark)';this.style.display='none'"/>
+      </div>
+      <div class="qp-footer-project"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></div>
+    </div>
+    <div class="qp-footer-right">
+      <div class="qp-footer-pm">
+        <div class="qp-footer-pm-name"><span class="brand-pm-name">Tyler Holmes</span></div>
+        <div class="qp-footer-pm-role"><span class="brand-pm-role">Project Manager</span></div>
+      </div>
+      <div class="qp-footer-contact">
+        <div class="qp-footer-contact-item">
+          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <a href="mailto:demo@example.com">demo@example.com</a>
+        </div>
+        <div class="qp-footer-contact-item">
+          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.33 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-1.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+441234567890">+44 (0) 1234567890</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="detail-sidebar-mob">
+  <div class="dsm-left">
+    <div class="dsm-name"><span class="brand-pm-name">Tyler Holmes</span></div>
+    <div class="dsm-role"><span class="brand-pm-role">Project Manager</span></div>
+  </div>
+  <div class="dsm-right">
+    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-envelope"></i><a href="mailto:info@butlerharwell.com">info@butlerharwell.com</a></div>
+    <div class="dsm-contact-item"><i class="fa-sharp-solid fa-phone"></i><a href="tel:+448000302999">+44 (0) 8000 302 999</a></div>
+  </div>
+</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SCREEN 6 — VARIATIONS SUB-PAGE
+═══════════════════════════════════════════════════════ -->
+
+
 <div id="s-variations" class="screen">
 <div class="quotes-page">
 
@@ -1441,6 +1899,11 @@
       <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
+      </div>
+      <div class="qp-nav-item" onclick="go('change-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="13" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Change Orders
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Change to Review</span>
       </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
@@ -1480,90 +1943,13 @@
     </div>
   </div>
 
-  <!-- Summary cards: two side-by-side (Figma: Total Project Value + Variation Summary) -->
-  <div class="qp-summary-row">
-    <!-- Total Project Value card -->
-    <div class="qp-card qp-var-summary-card">
-      <div class="var-card-left">
-        <div>
-          <div class="var-summary-title">Total Project Value</div>
-          <div style="color:#009113;font-size:12px;font-weight:600;margin-top:4px;">Accepted on 14 April 2026</div>
-        </div>
-        <div class="var-total-block" style="text-align:right;">
-          <div class="var-total-value" style="font-size:20px;font-weight:600;color:var(--c-text-1);">£850,000.00</div>
-          <div class="var-total-label" style="font-size:9px;font-weight:500;color:var(--c-text-muted);line-height:1.3;max-width:110px;">Total Quote Value (exclude VAT)</div>
-        </div>
-      </div>
-      <div class="qp-project-right">
-        <div class="qp-payment-summary-label">Payment Summary</div>
-        <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
-          <div class="qp-payment-amount">£650,000.00</div>
-          <div class="qp-payment-of">of £850,000.02 Paid so far</div>
-        </div>
-        <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
-        </div>
-        <div class="qp-progress-legend">
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#009113;"></div> Paid so far</div>
-            <div class="qp-legend-value">£650,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now</div>
-            <div class="qp-legend-value">£15,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#eaeaea;"></div> Upcoming</div>
-            <div class="qp-legend-value">£15,000.00</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Variation Summary card -->
-    <div class="qp-card qp-var-summary-card">
-      <div class="var-card-left">
-        <div class="var-summary-title">Variation Summary</div>
-        <div style="margin-top:4px;">
-          <div class="var-status-row var-status-pending"><span>Pending your review</span><span>03</span></div>
-          <div class="var-status-row var-status-tbc"><span>To be confirmed</span><span>03</span></div>
-          <div class="var-status-row var-status-accepted"><span>Accepted</span><span>03</span></div>
-          <div class="var-status-row var-status-declined"><span>Declined</span><span>03</span></div>
-        </div>
-      </div>
-      <div class="qp-project-right">
-        <div class="qp-payment-summary-label">Payment Summary</div>
-        <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
-          <div class="qp-payment-amount">£650,000.00</div>
-          <div class="qp-payment-of">of £850,000.02 Paid so far</div>
-        </div>
-        <div class="qp-progress-bar-outer">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
-        </div>
-        <div class="qp-progress-legend">
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#009113;"></div> Paid so far</div>
-            <div class="qp-legend-value">£650,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#cf3400;"></div> To pay now</div>
-            <div class="qp-legend-value">£15,000.00</div>
-          </div>
-          <div class="qp-legend-item">
-            <div class="qp-legend-dot-row"><div class="qp-legend-dot" style="background:#eaeaea;"></div> Upcoming</div>
-            <div class="qp-legend-value">£15,000.00</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Filter tabs -->
+  <!-- Filter tabs (Figma 1160-38812) -->
   <div class="qp-filter-tabs">
-    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">04</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Pending your review <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">To be confirmed <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">12</span></button>
+    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">05</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Pending your review <span class="qp-filter-count">02</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">To be confirmed <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">01</span></button>
     <label class="qp-search-pill">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -1572,154 +1958,126 @@
     </label>
   </div>
 
-  <!-- Variation rows (same .qr layout as quotes, different labels) -->
-  <div class="qp-list">
+  <!-- Variation cards (Figma 1160-38812) -->
+  <div class="qp-list dv-list">
 
-    <!-- Pending your review -->
-    <div class="qr">
-      <div class="qr-thumb"><img src="images/img_06.png" alt="" onerror="this.style.display='none'"/></div>
-      <div class="qr-name">
-        <div class="qr-meta">
-          <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3</span>
-        </div>
-        <div class="qr-title">Home Automation</div>
+    <div class="dv-row" onclick="dvRowClick(event)" data-status="pending your review" data-value="12120000">
+      <div class="dv-thumb"><img src="images/variation-kitchen-av.png" alt="" onerror="this.style.display='none'"/></div>
+      <div class="dv-main">
+        <div class="dv-meta">Variation 01 from Quote#23944</div>
+        <div class="dv-title">Kitchen Audio-Visual System Upgrade &ndash; Enhanced Features for Zone 2</div>
       </div>
-      <div class="qr-status">
-        <span class="qr-badge qr-badge-pending">Pending your review</span>
-        <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
-      </div>
-      <div></div>
-      <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
-      <div class="qr-actions">
-        <div class="qr-action-group">
-          <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn" onclick="tbcCard(this)">To be confirmed</button>
-          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
-          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
+      <div class="dv-mid">
+        <div class="dv-status">
+          <span class="qr-badge qr-badge-pending">Pending your review</span>
+          <span class="qr-date qr-date-pending">Valid until 14 Apr 2026</span>
         </div>
+        <div class="dv-value">
+          <div class="dv-value-num">$12,120,000.00</div>
+          <div class="dv-value-lbl">Estimate Value</div>
+        </div>
+      </div>
+      <div class="dv-right">
+        <button class="dv-view-btn" onclick="openDvProposal(this)">View Variation</button>
+        <button class="dv-add-btn" onclick="toggleDvSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
       </div>
     </div>
 
-    <!-- To be confirmed (Revision 3.1) -->
-    <div class="qr">
-      <div class="qr-thumb"><img src="images/img_06.png" alt="" onerror="this.style.display='none'"/></div>
-      <div class="qr-name">
-        <div class="qr-meta">
-          <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3.1</span>
-        </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+    <div class="dv-row" onclick="dvRowClick(event)" data-status="pending your review" data-value="2200000">
+      <div class="dv-thumb"><img src="images/variation-cinema.png" alt="" onerror="this.style.display='none'"/></div>
+      <div class="dv-main">
+        <div class="dv-meta">Variation 02 from Quote#23944</div>
+        <div class="dv-title">Additional Downlights &ndash; Master Bedroom</div>
       </div>
-      <div class="qr-status">
-        <span class="qr-badge qr-badge-tbc">To be confirmed</span>
-        <span class="qr-date qr-date-tbc">Valid until 14 April 2026</span>
-      </div>
-      <div></div>
-      <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
-      <div class="qr-actions">
-        <div class="qr-action-group">
-          <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn" onclick="tbcCard(this)">To be confirmed</button>
-          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
-          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
+      <div class="dv-mid">
+        <div class="dv-status">
+          <span class="qr-badge qr-badge-pending">Pending your review</span>
+          <span class="qr-date qr-date-pending">Valid until 14 Apr 2026</span>
         </div>
+        <div class="dv-value">
+          <div class="dv-value-num">$2,200,000.00</div>
+          <div class="dv-value-lbl">Estimate Value</div>
+        </div>
+      </div>
+      <div class="dv-right">
+        <button class="dv-view-btn" onclick="openDvProposal(this)">View Variation</button>
+        <button class="dv-add-btn" onclick="toggleDvSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
       </div>
     </div>
 
-    <!-- To be confirmed (overdue) -->
-    <div class="qr">
-      <div class="qr-thumb"><img src="images/img_06.png" alt="" onerror="this.style.display='none'"/></div>
-      <div class="qr-name">
-        <div class="qr-meta">
-          <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3</span>
-        </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+    <div class="dv-row" onclick="dvRowClick(event)" data-status="tbc" data-value="1850000">
+      <div class="dv-thumb"><img src="images/variation-speaker.png" alt="" onerror="this.style.display='none'"/></div>
+      <div class="dv-main">
+        <div class="dv-meta">Variation 03 from Quote#23944</div>
+        <div class="dv-title">Garden Lighting &amp; Audio Extension &ndash; Rear Terrace</div>
       </div>
-      <div class="qr-status">
-        <span class="qr-badge qr-badge-tbc">To be confirmed</span>
-        <span class="qr-date qr-date-overdue">Overdue 14 April 2026</span>
-      </div>
-      <div></div>
-      <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
-      <div class="qr-actions">
-        <div class="qr-action-group">
-          <button class="qr-action-btn"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
-          <button class="qr-action-btn" onclick="tbcCard(this)">To be confirmed</button>
-          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
-          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
+      <div class="dv-mid">
+        <div class="dv-status">
+          <span class="qr-badge qr-badge-tbc">To be confirmed</span>
+          <span class="qr-date qr-date-tbc">Valid until 14 Apr 2026</span>
         </div>
+        <div class="dv-value">
+          <div class="dv-value-num">$1,850,000.00</div>
+          <div class="dv-value-lbl">Estimate Value</div>
+        </div>
+      </div>
+      <div class="dv-right">
+        <button class="dv-view-btn" onclick="openDvProposal(this)">View Variation</button>
+        <button class="dv-add-btn" onclick="toggleDvSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
       </div>
     </div>
 
-    <!-- Accepted (with payment progress — Figma 724:28554) -->
-    <div class="qr">
-      <div class="qr-thumb"><img src="images/img_06.png" alt="" onerror="this.style.display='none'"/></div>
-      <div class="qr-name">
-        <div class="qr-meta">
-          <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 3</span>
-        </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+    <div class="dv-row" onclick="dvRowClick(event)" data-status="accepted" data-value="3400000">
+      <div class="dv-thumb"><img src="images/variation-kef.png" alt="" onerror="this.style.display='none'"/></div>
+      <div class="dv-main">
+        <div class="dv-meta">Variation 04 from Quote#23944</div>
+        <div class="dv-title">Home Cinema Acoustic Treatment Package</div>
       </div>
-      <div class="qr-status">
-        <span class="qr-badge qr-badge-accepted">Accepted</span>
-        <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
-      </div>
-      <div class="qr-payment">
-        <div class="qr-payment-label">Payment Progress</div>
-        <div class="qr-payment-bar">
-          <div class="qr-payment-bar-fill" style="width:0%;"></div>
+      <div class="dv-mid">
+        <div class="dv-status">
+          <span class="qr-badge qr-badge-accepted">Accepted</span>
+          <span class="qr-date qr-date-accepted">Accepted on 2 Apr 2026</span>
         </div>
-        <div class="qr-payment-legend">
-          <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div> Paid so far <span style="margin-left:4px;">0%</span></div>
-            <div class="qr-legend-val">£15,000.00</div>
-          </div>
-          <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div> To pay now <span style="margin-left:4px;">0%</span></div>
-            <div class="qr-legend-val">£15,000.00</div>
-          </div>
-          <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#eaeaea;"></div> Upcoming <span style="margin-left:4px;">0%</span></div>
-            <div class="qr-legend-val">£15,000.00</div>
-          </div>
+        <div class="dv-value">
+          <div class="dv-value-num">$3,400,000.00</div>
+          <div class="dv-value-lbl">Estimate Value</div>
         </div>
       </div>
-      <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Initial</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
-      <div></div>
+      <div class="dv-right">
+        <button class="dv-view-btn" onclick="openDvProposal(this)">View Variation</button>
+      </div>
     </div>
 
-    <!-- Declined -->
-    <div class="qr">
-      <div class="qr-thumb"><img src="images/img_06.png" alt="" onerror="this.style.display='none'"/></div>
-      <div class="qr-name">
-        <div class="qr-meta">
-          <span class="qr-number">Variation #23944</span>
-          <span class="qr-revision">Revision 1</span>
+    <div class="dv-row" onclick="dvRowClick(event)" data-status="declined" data-value="980000">
+      <div class="dv-thumb"><img src="images/variation-intercom.png" alt="" onerror="this.style.display='none'"/></div>
+      <div class="dv-main">
+        <div class="dv-meta">Variation 05 from Quote#23944</div>
+        <div class="dv-title">Driveway Security Bollards &amp; Intercom</div>
+      </div>
+      <div class="dv-mid">
+        <div class="dv-status">
+          <span class="qr-badge qr-badge-declined">Declined</span>
+          <span class="qr-date qr-date-declined">Declined on 14 Apr 2026</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="dv-value">
+          <div class="dv-value-num">$980,000.00</div>
+          <div class="dv-value-lbl">Estimate Value</div>
+        </div>
       </div>
-      <div class="qr-status">
-        <span class="qr-badge qr-badge-declined">Declined</span>
-        <span class="qr-date qr-date-declined">Declined on 14 April 2026</span>
+      <div class="dv-right">
+        <button class="dv-view-btn" onclick="openDvProposal(this)">View Variation</button>
       </div>
-      <div></div>
-      <div class="qr-view"><button class="qr-view-btn">View Variation</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£0.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£0.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Original Quote</span></div></div>
-      <div></div>
     </div>
 
+  </div>
+
+  <!-- Floating accept bar (Figma 1160-39035) -->
+  <div class="dv-accept-bar" id="dv-accept-bar">
+    <div class="dv-accept-info">
+      <div class="dv-accept-count">0 Variations to accept</div>
+      <div class="dv-accept-total">Estimated total value $0.00</div>
+    </div>
+    <button class="dv-accept-btn" onclick="reviewAcceptDv()">Review &amp; Accept</button>
   </div>
 
   <!-- Footer -->
@@ -1788,6 +2146,11 @@
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
       </div>
+      <div class="qp-nav-item" onclick="go('change-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="13" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Change Orders
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Change to Review</span>
+      </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         Invoices
@@ -1834,29 +2197,29 @@
         <div class="so-project-title"><span class="brand-project-name">Amos-Yeo Foxglove - AVOIP</span></div>
         <div class="so-project-meta">Lead time 12 weeks · Due 16 Mar 2026</div>
         <div class="so-total-value">
-          <div class="so-total-val">£850,000.00</div>
-          <div class="so-total-lbl">Total Sales Order Value (exclude VAT)</div>
+          <div class="so-total-val">$850,000.00</div>
+          <div class="so-total-lbl">Total Sales Order Value (exclude Tax)</div>
         </div>
       </div>
       <div class="so-pc-right">
         <div class="so-ps-label">Payment Summary</div>
         <div class="so-ps-amount-row">
-          <span class="so-ps-big">£650,000.00</span>
-          <span class="so-ps-of">of £850,000.02 Paid so far</span>
+          <span class="so-ps-big">$650,000.00</span>
+          <span class="so-ps-of">of $850,000.02 Paid so far</span>
         </div>
         <div class="so-ps-bar"><div class="so-ps-bar-fill" style="width:76%;"></div></div>
         <div class="so-ps-legend">
           <div class="so-legend-item">
             <div class="so-legend-dot-row"><div class="so-legend-dot" style="background:#009113;"></div>Paid so far</div>
-            <div class="so-legend-val">£650,000.00 (0%)</div>
+            <div class="so-legend-val">$650,000.00 (0%)</div>
           </div>
           <div class="so-legend-item">
             <div class="so-legend-dot-row"><div class="so-legend-dot" style="background:#cf3400;"></div>To pay now</div>
-            <div class="so-legend-val">£15,000.00 (20%)</div>
+            <div class="so-legend-val">$15,000.00 (20%)</div>
           </div>
           <div class="so-legend-item so-legend-item-right">
             <div class="so-legend-dot-row"><div class="so-legend-dot" style="background:#eaeaea;"></div>Upcoming</div>
-            <div class="so-legend-val">£0.00 (0%)</div>
+            <div class="so-legend-val">$0.00 (0%)</div>
           </div>
         </div>
       </div>
@@ -1865,15 +2228,15 @@
     <div class="so-payment-details-card">
       <div class="so-pd-title">Payment details</div>
       <div class="so-pd-company">LCR Integrated Systems</div>
-      <div class="so-pd-address">Elmwood Ave, Inverness United Kingdom, IV2 6HE</div>
+      <div class="so-pd-address">1200 Elmwood Ave, Suite 400, Austin, TX 78701, United States</div>
       <div class="so-pd-banking">
         <div class="so-pd-bank-item">
-          <div class="so-pd-bank-lbl">Sort code</div>
-          <div class="so-pd-bank-val">40-00-00</div>
+          <div class="so-pd-bank-lbl">Routing Number</div>
+          <div class="so-pd-bank-val">123456789</div>
         </div>
         <div class="so-pd-bank-item">
           <div class="so-pd-bank-lbl">Account Number</div>
-          <div class="so-pd-bank-val">000000</div>
+          <div class="so-pd-bank-val">000123456789</div>
         </div>
       </div>
     </div>
@@ -1913,7 +2276,7 @@
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
     </div>
 
     <!-- ② Accepted: Dutch House Security (Figma 849:771) — includes payment summary -->
@@ -1935,23 +2298,23 @@
       <div class="qr-payment">
         <div class="qr-payment-label">Payment Summary</div>
         <div class="qr-payment-amount-row">
-          <span class="qr-payment-big">£650,000.00</span>
-          <span class="qr-payment-of">of £650,000.02 Paid so far</span>
+          <span class="qr-payment-big">$650,000.00</span>
+          <span class="qr-payment-of">of $650,000.02 Paid so far</span>
         </div>
         <div class="qr-payment-bar"><div class="qr-payment-bar-fill" style="width:100%;"></div></div>
         <div class="qr-payment-legend">
           <div class="qr-legend-item">
             <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div>Paid so far <span style="margin-left:4px;font-weight:600;">100%</span></div>
-            <div class="qr-legend-val">£650,000.00</div>
+            <div class="qr-legend-val">$650,000.00</div>
           </div>
           <div class="qr-legend-item">
             <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div>To pay now <span style="margin-left:4px;font-weight:600;">0%</span></div>
-            <div class="qr-legend-val">£0.00</div>
+            <div class="qr-legend-val">$0.00</div>
           </div>
         </div>
       </div>
       <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
     </div>
 
     <!-- ③ Declined: Network Infrastructure -->
@@ -1971,7 +2334,7 @@
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£18,900.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$18,900.00</div><div class="qr-orig-lbl">Original</div></div>
     </div>
 
     <!-- ④ To be confirmed: AV Integration -->
@@ -1991,7 +2354,7 @@
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£28,500.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$28,500.00</div><div class="qr-orig-lbl">Original</div></div>
     </div>
 
   </div>
@@ -2060,6 +2423,11 @@
       <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
+      </div>
+      <div class="qp-nav-item" onclick="go('change-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="13" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Change Orders
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Change to Review</span>
       </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
@@ -2197,8 +2565,8 @@
       </div>
       <div></div>
       <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">£20,000.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">£20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn">
@@ -2224,15 +2592,15 @@
           <div class="inv-ref">Invoice #00002</div>
         </div>
         <div class="inv-amount-col">
-          <div class="inv-amount-val">£850,000.00</div>
-          <div class="inv-amount-lbl">exclude VAT</div>
+          <div class="inv-amount-val">$850,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-payment">
         <div class="inv-payment-label">Payment Progress</div>
         <div class="inv-payment-amount-row">
-          <div class="inv-payment-big">£650,000.00</div>
-          <div class="inv-payment-of">of £850,000.02 Paid so far</div>
+          <div class="inv-payment-big">$650,000.00</div>
+          <div class="inv-payment-of">of $850,000.02 Paid so far</div>
         </div>
         <div class="inv-payment-bar">
           <div class="inv-payment-bar-fill" style="width:76%;background:#009113;"></div>
@@ -2241,17 +2609,17 @@
         <div class="inv-payment-legend">
           <div class="inv-legend-item">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">70%</span></div>
-            <div class="inv-legend-val">£650,000.00</div>
+            <div class="inv-legend-val">$650,000.00</div>
           </div>
           <div class="inv-legend-item right">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">30%</span></div>
-            <div class="inv-legend-val">£200,000.00</div>
+            <div class="inv-legend-val">$200,000.00</div>
           </div>
         </div>
       </div>
       <div class="inv-btns">
         <button class="inv-btn" onclick="go('invoices')">Invoice Details</button>
-        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00002','£850,000.00','Invoice for Aftercare')">Pay now</button>
+        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay now</button>
       </div>
     </div><!-- /inv-row -->
 
@@ -2319,6 +2687,11 @@
       <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
+      </div>
+      <div class="qp-nav-item" onclick="go('change-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="13" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Change Orders
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Change to Review</span>
       </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
@@ -2512,6 +2885,11 @@
       <div class="qp-nav-item" onclick="go('variations');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         Variations
+      </div>
+      <div class="qp-nav-item" onclick="go('change-order');closeDropdowns()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="13" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        Change Orders
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Change to Review</span>
       </div>
       <div class="qp-nav-item" onclick="go('invoices');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
@@ -3575,6 +3953,330 @@
 </div>
 
 
+
+
+<!-- ═══ Change Order detail modal (Figma 1160-39738) ═══ -->
+<div class="codm-overlay" id="codm-overlay" onclick="if(event.target===this)closeCoDetailModal()">
+  <div class="codm">
+    <div class="codm-header">
+      <div class="codm-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""></div>
+      <div class="codm-head-info">
+        <div class="codm-head-status">
+          <span class="qr-badge qr-badge-pending" id="codm-badge">Pending your review</span>
+          <span class="qr-date qr-date-pending" id="codm-date">Valid until 14 Apr 2026</span>
+        </div>
+        <div class="codm-head-meta"><span>Quote #23944</span><span>Revision 1.2</span></div>
+        <div class="codm-head-title">Dutch House Security</div>
+      </div>
+      <button class="codm-close" onclick="closeCoDetailModal()"><i class="fa-solid fa-times"></i></button>
+    </div>
+    <div class="codm-body">
+      <!-- Revision timeline -->
+      <div class="codm-timeline">
+        <div class="codm-tl-item">
+          <i class="fa-solid fa-circle-check codm-tl-icon"></i>
+          <div class="codm-tl-row"><span class="codm-tl-name">Revision 1</span><span class="codm-tl-tag codm-tl-tag-accepted">Accepted</span></div>
+        </div>
+        <div class="codm-tl-item">
+          <i class="fa-solid fa-circle-check codm-tl-icon"></i>
+          <div class="codm-tl-row"><span class="codm-tl-name">Change Order 1.1</span><span class="codm-tl-tag codm-tl-tag-accepted">Accepted</span></div>
+          <div class="codm-tl-desc">Additional earth terminal required to complete the system installation and ensure correct connectivity.</div>
+        </div>
+        <div class="codm-tl-item codm-tl-last">
+          <i class="fa-solid fa-circle-dot codm-tl-icon codm-tl-icon-current"></i>
+          <div class="codm-tl-row"><span class="codm-tl-name">Change Order 1.2</span></div>
+          <div class="codm-tl-current-status">
+            <span class="qr-badge qr-badge-pending" id="codm-tl-badge">Pending your review</span>
+            <span class="qr-date qr-date-pending" id="codm-tl-date">Valid until 14 Apr 2026</span>
+          </div>
+        </div>
+      </div>
+      <!-- Totals table -->
+      <div class="codm-totals">
+        <div class="codm-tot-row"><span class="codm-tot-lbl">Previous Project Total</span><span class="codm-tot-val">$12,200,000.00</span></div>
+        <div class="codm-tot-row"><span class="codm-tot-lbl">Change Order 1.2</span><span class="codm-tot-val" style="color:#cf3400;">-$1,200,000.00</span></div>
+        <div class="codm-tot-row codm-tot-row-last"><span class="codm-tot-lbl">Variation Value</span><span class="codm-tot-val" style="color:#009113;">+$2,120,000.00</span></div>
+        <div class="codm-tot-footer">
+          <div>
+            <div class="codm-tot-footer-title">New Project Total</div>
+            <div class="codm-tot-footer-sub"><span class="codm-sub-d">if accepted</span><span class="codm-sub-m">After Change Order 1.2 accepted</span></div>
+          </div>
+          <div class="codm-tot-footer-val">$13,120,000.00</div>
+        </div>
+      </div>
+      <!-- Breakdown -->
+      <div class="codm-breakdown">
+        <div class="codm-bd-title">New Project Total Breakdown</div>
+        <div class="codm-bd-card">
+          <div class="codm-bd-head"><i class="fa-solid fa-file-pen"></i><span class="codm-bd-name">Change Order 1.2</span></div>
+          <div class="codm-bd-split">
+            <div class="codm-bd-desc">Additional site setup &amp; commissioning</div>
+            <div class="codm-bd-delta">+$1,000,000.00</div>
+          </div>
+          <div class="codm-bd-lbl" style="text-align:right;">Change Order Changes</div>
+        </div>
+        <div class="codm-bd-card">
+          <div class="codm-bd-head">
+            <i class="fa-solid fa-file-medical"></i><span class="codm-bd-name">Variation 1</span><span class="codm-bd-name">Revision 3</span>
+            <span class="codm-bd-tag codm-bd-tag-above">Above Estimate</span>
+          </div>
+          <div class="codm-bd-desc">Additional Downlights &ndash; Master Bedroom</div>
+          <div class="codm-bd-vals">
+            <div class="codm-bd-val-block">
+              <div class="codm-bd-num">$1,200,000.00</div>
+              <div class="codm-bd-lbl">Original Estimate Value</div>
+            </div>
+            <div class="codm-bd-val-block codm-bd-val-right">
+              <div class="codm-bd-delta codm-bd-delta-sm">+$1,000,000.00</div>
+              <div class="codm-bd-num">$2,200,000.00</div>
+              <div class="codm-bd-lbl">Final Price</div>
+            </div>
+          </div>
+        </div>
+        <div class="codm-bd-card">
+          <div class="codm-bd-head">
+            <i class="fa-solid fa-file-plus"></i><span class="codm-bd-name">Variation 1</span><span class="codm-bd-name">Revision 3</span>
+            <span class="codm-bd-tag codm-bd-tag-same">Same as estimate</span>
+          </div>
+          <div class="codm-bd-desc">Additional Downlights &ndash; Master Bedroom</div>
+          <div class="codm-bd-vals">
+            <div class="codm-bd-val-block">
+              <div class="codm-bd-num">$1,200,000.00</div>
+              <div class="codm-bd-lbl">Original Estimate Value</div>
+            </div>
+            <div class="codm-bd-val-block codm-bd-val-right">
+              <div class="codm-bd-num">$1,200,000.00</div>
+              <div class="codm-bd-lbl">Final Price</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="codm-footer" id="codm-footer">
+      <div class="qr-action-group codm-actions">
+        <button class="qr-action-btn codm-act-comment" title="Comment"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+        <button class="qr-action-btn" onclick="codmAction('tbc')">TBC</button>
+        <button class="qr-action-btn reject" onclick="codmAction('reject')">Reject</button>
+        <button class="qr-action-btn accept" onclick="codmAction('accept')">Accept</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ Ready to accept panel (Figma 1160-39975) ═══ -->
+<div class="dvp" id="dvp">
+  <div class="dvp-header">
+    <div class="dvp-header-title">Ready to accept</div>
+    <div class="dvp-header-sub">Review the variations you&rsquo;ve added. Accepting confirms them on your contract.</div>
+    <button class="dvp-close" onclick="closeDvPanel()"><i class="fa-solid fa-times"></i></button>
+  </div>
+  <div class="dvp-list" id="dvp-list"></div>
+  <div class="dvp-footer">
+    <div class="dvp-total-row">
+      <span class="dvp-total-lbl">Estimate Total</span>
+      <span class="dvp-total-val" id="dvp-total">$0.00</span>
+    </div>
+    <div class="dvp-note">By accepting you approve these variations and their estimated values. This can&rsquo;t be undone in the app, contact your project manager if anything changes.</div>
+    <button class="dvp-accept-btn" onclick="dvPanelAccept()">Accept</button>
+  </div>
+</div>
+
+
+<!-- ═══ Change Order sign document overlay (mobile-parity accept flow) ═══ -->
+<div class="co-doc-overlay" id="co-doc-overlay">
+  <button class="co-doc-close" onclick="closeCoDocument()" aria-label="Close">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <iframe id="co-doc-iframe" title="Change Order document"></iframe>
+</div>
+
+
+<!-- ═══ Variation proposal document overlay (mobile-parity flow) ═══ -->
+<div class="co-doc-overlay" id="var-doc-overlay">
+  <button class="co-doc-close" onclick="closeVarDoc()" aria-label="Close">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <iframe id="var-doc-iframe" title="Variation proposal"></iframe>
+</div>
+
+
+<!-- ═══ Mobile-view CO detail sheet — ported from the mobile app (Figma 1160-22734) ═══ -->
+<div class="co-detail-overlay" id="co-detail-overlay" onclick="closeCoDetails()">
+  <div class="co-detail-sheet" onclick="event.stopPropagation()">
+
+    <!-- Sticky header (drag zone) -->
+    <div class="co-detail-header" id="co-detail-header">
+      <div class="qp-comment-handle"></div>
+      <div class="co-detail-hd-row">
+        <div class="co-detail-thumb">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt="">
+        </div>
+        <div class="co-detail-hd-info">
+          <div class="co-detail-hd-meta">
+            <span class="qr-badge qr-badge-pending" id="co-detail-badge">Pending your review</span>
+            <span class="qr-date qr-date-pending" id="co-detail-date">Valid until 14 April 2026</span>
+          </div>
+          <div class="co-detail-hd-quote" id="co-detail-quote">Quote #23944</div>
+          <div class="co-detail-hd-title" id="co-detail-title">Dutch House Security</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="co-detail-body">
+
+      <!-- Timeline -->
+      <div class="co-timeline" style="padding:16px 14px 0;">
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Revision 1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+          </div>
+        </div>
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Change Order 1.1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+            <p class="co-tl-desc">Additional earth terminal required to complete the system installation and ensure correct connectivity.</p>
+          </div>
+        </div>
+        <div class="co-tl-item co-tl-item-active">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-pending"><span class="co-tl-dot-inner"></span></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-label" style="font-size:16px;font-weight:600;color:#313131;margin-bottom:6px;" id="co-detail-co-label">Change Order 1.2</div>
+            <div class="co-tl-status-row">
+              <span class="qr-badge qr-badge-pending">Pending your review</span>
+              <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+            </div>
+            <div class="co-value-table" style="margin:10px 0 0;">
+              <div class="co-value-row">
+                <span class="co-value-label">Previous Project Total</span>
+                <span class="co-value-num">$12,200,000.00</span>
+              </div>
+              <div class="co-value-row">
+                <span class="co-value-label">Change Order 1.2</span>
+                <span class="co-value-num" style="color:#cf3400;">−$1,200,000.00</span>
+              </div>
+              <div class="co-value-row" style="border-bottom:none;">
+                <span class="co-value-label">Variation Value</span>
+                <span class="co-value-num" style="color:#009113;">+$2,120,000.00</span>
+              </div>
+              <div class="co-value-footer">
+                <div class="co-value-footer-left">
+                  <span class="co-value-footer-label">New Project Total</span>
+                  <span class="co-value-footer-sub">if accepted</span>
+                </div>
+                <span class="co-value-num" style="color:#009113;font-size:16px;">$13,120,000.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Project Total Breakdown -->
+      <div class="co-breakdown-wrap" style="margin:8px 14px 24px 40px;">
+        <div class="co-breakdown-title">New Project Total Breakdown</div>
+
+        <!-- Change Order 1.2 doc card -->
+        <div class="co-doc-card">
+          <div class="co-doc-header">
+            <i class="fa-solid fa-file-invoice co-doc-icon"></i>
+            <span class="co-doc-ref">Change Order 1.2</span>
+          </div>
+          <div class="co-doc-title">Additional site setup &amp; commissioning</div>
+          <div class="co-doc-table">
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Change Order Changes</span>
+              <span class="co-doc-table-value" style="color:#009113;">+$1,000,000.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Variation 1 — Above Estimate -->
+        <div class="co-doc-card">
+          <div class="co-doc-header">
+            <i class="fa-solid fa-file-plus co-doc-icon"></i>
+            <span class="co-doc-ref">Variation 1</span>
+            <span class="co-doc-rev">Revision 3</span>
+            <span class="qr-badge qr-badge-accepted" style="margin-left:auto;">Above Estimate</span>
+          </div>
+          <div class="co-doc-title">Additional site setup &amp; commissioning</div>
+          <div class="co-doc-table">
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Original Estimate Value</span>
+              <span class="co-doc-table-value">$1,200,000.00</span>
+            </div>
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Change in value</span>
+              <span class="co-doc-table-value" style="color:#009113;">+$1,000,000.00</span>
+            </div>
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Final Price</span>
+              <span class="co-doc-table-value">$2,200,000.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Variation 2 — Same as estimate -->
+        <div class="co-doc-card">
+          <div class="co-doc-header">
+            <i class="fa-solid fa-file-plus co-doc-icon"></i>
+            <span class="co-doc-ref">Variation 2</span>
+            <span class="co-doc-rev">Revision 3</span>
+            <span class="qr-badge" style="margin-left:auto;background:rgba(156,156,156,0.26);">Same as estimate</span>
+          </div>
+          <div class="co-doc-title">Additional site setup &amp; commissioning</div>
+          <div class="co-doc-table">
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Original Estimate Value</span>
+              <span class="co-doc-table-value">$1,200,000.00</span>
+            </div>
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Change in value</span>
+              <span class="co-doc-table-value" style="color:#009113;">+$1,000,000.00</span>
+            </div>
+            <div class="co-doc-table-row">
+              <span class="co-doc-table-label">Final Price</span>
+              <span class="co-doc-table-value">$2,200,000.00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- /co-detail-body -->
+
+    <!-- Sticky footer: action buttons -->
+    <div class="co-detail-footer">
+      <div class="qr-action-group" style="width:100%;">
+        <button class="qr-action-btn">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+        <button class="qr-action-btn" onclick="coSheetAction('tbc')">TBC</button>
+        <button class="qr-action-btn" onclick="coSheetAction('reject')">Reject</button>
+        <button class="qr-action-btn" onclick="coSheetAccept()">Accept</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 </body>
 </html>

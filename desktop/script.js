@@ -7,7 +7,7 @@ const screenLabels  = {
 const screenFriendly = {
   login: 'Login Page', 'forgot-password': 'Forgot Password', dash: 'Project List', detail: 'Project Detail',
   quotes: 'Quotes', invoices: 'Invoices',
-  variations: 'Variations', 'purchase-order': 'Sales Order',
+  variations: 'Variations', 'change-order': 'Change Orders', 'purchase-order': 'Sales Order',
   documents: 'Documents', warranty: 'Warranty', progress: 'Progress'
 };
 
@@ -120,6 +120,8 @@ function fpGoBack() {
 
 function go(name) {
   const overlay = document.getElementById('skeleton-overlay');
+  // Leaving the variations page closes the Ready to accept panel
+  if (name !== 'variations' && typeof closeDvPanel === 'function') closeDvPanel();
   // Close nav dropdowns only — screen panel stays open across navigation
   document.querySelectorAll('.qp-nav-dropdown').forEach(d => d.classList.remove('open'));
   document.querySelectorAll('.qp-user-dropdown').forEach(d => d.classList.remove('open'));
@@ -323,8 +325,26 @@ function filterTab(btn) {
 
   // 4. Show all on "all"
   if (label === 'all') {
-    screen.querySelectorAll('.qr, .inv-row').forEach(r => r.style.display = '');
+    screen.querySelectorAll('.qr, .inv-row, .co-row, .dv-row, .co-card').forEach(r => r.style.display = '');
     return;
+  }
+
+  // Change Order / Variation rows — filter by data-status (labels incl. "TBC")
+  if (screen.querySelector('.co-row') || screen.querySelector('.dv-row')) {
+    const CO_MAP = {
+      'pending your review': 'pending your review',
+      'tbc': 'tbc',
+      'to be confirmed': 'tbc',
+      'accepted': 'accepted',
+      'declined': 'declined',
+    };
+    const st = CO_MAP[label];
+    if (st) {
+      screen.querySelectorAll('.co-row, .dv-row, .co-card').forEach(r => {
+        r.style.display = ((r.dataset.status || '').toLowerCase() === st) ? '' : 'none';
+      });
+      return;
+    }
   }
 
   // 5. Quote / Variation rows (use .qr-badge-* classes)
@@ -355,7 +375,7 @@ function searchQuotes(input) {
   const el = typeof input === 'string' ? null : input;
   const screen = el ? el.closest('.screen') : document.querySelector('.screen.on');
   if (!screen) return;
-  const rows = screen.querySelectorAll('.qr, .inv-row');
+  const rows = screen.querySelectorAll('.qr, .inv-row, .co-row, .dv-row');
   rows.forEach(row => {
     if (!term) { row.style.display = ''; return; }
     row.style.display = row.textContent.toLowerCase().includes(term) ? '' : 'none';
@@ -454,6 +474,7 @@ function toggleBrandPanel(e) {
   document.body.classList.toggle('brand-open', panel.classList.contains('open'));
   // Close other panels when opening; at ≥1400px screen panel can stay open alongside
   if (panel.classList.contains('open')) {
+    if (typeof closeDvPanel === 'function') closeDvPanel();
     closeProfilePanel();
     closeNotifPanel();
     if (!isWideViewport()) {
@@ -884,7 +905,7 @@ updateOnTokens();
 let _currentInvRef = 'Invoice #002';
 function openPayNowModal(invRef, amount, desc) {
   _currentInvRef = invRef || 'Invoice #002';
-  document.getElementById('paynow-amount').textContent = amount || '£21,250.00';
+  document.getElementById('paynow-amount').textContent = amount || '$21,250.00';
   document.getElementById('paynow-desc').textContent = invRef + ' · ' + (desc || 'Additional speaker installation');
   document.getElementById('paynow-ref').textContent = 'INV-' + (invRef || '#002').replace('Invoice ','');
   document.getElementById('paynow-overlay').classList.add('open');
@@ -920,7 +941,7 @@ function copyToClipboard(text) {
 (function restoreScreenOnLoad() {
   try {
     const saved = localStorage.getItem('wq_screen_desktop');
-    const known = ['dash','detail','quotes','variations','invoices',
+    const known = ['dash','detail','quotes','variations','change-order','invoices',
                    'documents','warranty','progress','purchase-order'];
     const target = (saved && known.includes(saved) && document.getElementById('s-' + saved))
       ? saved : 'dash';
@@ -988,7 +1009,7 @@ function logActivity(action, ref) {
 }
 
 function resortCardList(listEl) {
-  const cards = Array.from(listEl.querySelectorAll(':scope > .qr'));
+  const cards = Array.from(listEl.querySelectorAll(':scope > .qr, :scope > .co-row, :scope > .dv-row'));
   if (cards.length < 2) return;
 
   function priority(card) {
@@ -1211,4 +1232,509 @@ function rejectCard(btn) {
       if (listEl) resortCardList(listEl);
     }, 1450);
   }, 250);
+}
+
+
+/* ── Change Order row actions (desktop) ── */
+function refreshCoRowCounts() {
+  const rows = document.querySelectorAll('#s-change-order .co-row');
+  const counts = { 'all': rows.length, 'pending your review': 0, 'tbc': 0, 'accepted': 0, 'declined': 0 };
+  rows.forEach(r => {
+    const s = (r.dataset.status || '').toLowerCase();
+    if (counts[s] != null) counts[s]++;
+  });
+  document.querySelectorAll('#s-change-order .qp-filter-tab').forEach(tab => {
+    const cnt = tab.querySelector('.qp-filter-count');
+    if (!cnt) return;
+    let label = tab.textContent.replace(/[0-9]/g, '').trim().toLowerCase();
+    if (label === 'tbc') label = 'tbc';
+    const n = counts[label];
+    if (n != null) cnt.textContent = (n < 10 ? '0' : '') + n;
+  });
+}
+function _coRowDate() {
+  return new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function tbcCoRow(btn) {
+  const row = btn.closest('.co-row');
+  if (!row) return;
+  row.dataset.status = 'tbc';
+  flipBadge(row.querySelector('.qr-badge'), 'qr-badge qr-badge-tbc', 'To be confirmed');
+  setTimeout(() => flipBadge(row.querySelector('.qr-date'), 'qr-date qr-date-tbc', null), 150);
+  setTimeout(() => { refreshCoRowCounts(); resortCardList(row.parentElement); }, 1100);
+}
+function rejectCoRow(btn) {
+  const row = btn.closest('.co-row');
+  if (!row) return;
+  row.dataset.status = 'declined';
+  flipBadge(row.querySelector('.qr-badge'), 'qr-badge qr-badge-declined', 'Declined');
+  setTimeout(() => flipBadge(row.querySelector('.qr-date'), 'qr-date qr-date-declined', 'Declined on ' + _coRowDate()), 150);
+  const actions = row.querySelector('.co-row-actions');
+  if (actions) {
+    actions.style.transition = 'opacity 0.4s ease';
+    actions.style.opacity = '0';
+    setTimeout(() => actions.remove(), 450);
+  }
+  setTimeout(() => { refreshCoRowCounts(); resortCardList(row.parentElement); }, 1100);
+}
+function acceptCoRow(btn) {
+  const row = btn.closest('.co-row');
+  if (!row) return;
+  openCoDocument(row);
+}
+
+function _playCoAccept(row) {
+  if (!row) return;
+  row.classList.add('qr-accepting');
+  setTimeout(() => {
+    row.dataset.status = 'accepted';
+    flipBadge(row.querySelector('.qr-badge'), 'qr-badge qr-badge-accepted', 'Accepted');
+    setTimeout(() => flipBadge(row.querySelector('.qr-date'), 'qr-date qr-date-accepted', 'Accepted on ' + _coRowDate()), 150);
+    const actions = row.querySelector('.co-row-actions');
+    if (actions) {
+      actions.style.transition = 'opacity 0.4s ease';
+      actions.style.opacity = '0';
+      setTimeout(() => actions.remove(), 450);
+    }
+  }, 350);
+  setTimeout(() => {
+    row.classList.remove('qr-accepting');
+    row.classList.add('qr-accepted-done');
+    setTimeout(() => row.classList.remove('qr-accepted-done'), 800);
+    refreshCoRowCounts();
+    resortCardList(row.parentElement);
+  }, 1700);
+}
+
+
+/* ═══ Change Order detail modal (Figma 1160-39738) ═══ */
+let _codmRow = null;
+
+function openCoDetailModal(btn) {
+  openCoDetailModalRow(btn.closest('.co-row'));
+}
+
+function openCoDetailModalRow(row) {
+  _codmRow = row;
+  if (row) {
+    const badge = row.querySelector('.qr-badge');
+    const date = row.querySelector('.qr-date');
+    [['codm-badge', badge], ['codm-tl-badge', badge]].forEach(([id, src]) => {
+      const el = document.getElementById(id);
+      if (el && src) { el.className = src.className; el.textContent = src.textContent; }
+    });
+    [['codm-date', date], ['codm-tl-date', date]].forEach(([id, src]) => {
+      const el = document.getElementById(id);
+      if (el && src) { el.className = src.className; el.textContent = src.textContent; }
+    });
+    // action bar only while the row is still actionable
+    const footer = document.getElementById('codm-footer');
+    if (footer) footer.style.display = row.querySelector('.co-row-actions') ? '' : 'none';
+  }
+  document.getElementById('codm-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCoDetailModal() {
+  document.getElementById('codm-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function codmAction(kind) {
+  const row = _codmRow;
+  closeCoDetailModal();
+  if (!row) return;
+  const actions = row.querySelector('.co-row-actions');
+  if (!actions) return;
+  const btns = actions.querySelectorAll('.qr-action-btn');
+  if (kind === 'tbc') tbcCoRow(btns[1]);
+  else if (kind === 'reject') rejectCoRow(btns[2]);
+  else if (kind === 'accept') acceptCoRow(btns[3]);
+}
+
+/* ═══ Desktop Variations redesign (Figma 1160-38812) ═══ */
+function toggleDvSelect(btn) {
+  const row = btn.closest('.dv-row');
+  if (!row) return;
+  const sel = row.classList.toggle('dv-selected');
+  btn.classList.toggle('dv-added', sel);
+  btn.innerHTML = sel
+    ? '<i class="fa-sharp-solid fa-trash-alt"></i>Remove from Accept'
+    : '<i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept';
+  updateDvBar();
+  if (sel) {
+    // Mobile-view follows the mobile app: adding just shows the footer bar;
+    // the sheet only opens via Review & Accept. Desktop opens the panel directly.
+    if (document.body.classList.contains('mobile-view')) rebuildDvPanel();
+    else openDvPanel();
+  } else {
+    rebuildDvPanel();
+    if (!document.querySelectorAll('#s-variations .dv-row.dv-selected').length) closeDvPanel();
+  }
+}
+
+function updateDvBar() {
+  const bar = document.getElementById('dv-accept-bar');
+  if (!bar) return;
+  const sel = document.querySelectorAll('#s-variations .dv-row.dv-selected');
+  const panel = document.getElementById('dvp');
+  if (!sel.length || (panel && panel.classList.contains('open'))) { bar.classList.remove('show'); return; }
+  let total = 0;
+  sel.forEach(r => total += parseFloat(r.dataset.value || '0'));
+  bar.querySelector('.dv-accept-count').textContent =
+    sel.length + (sel.length === 1 ? ' Variation' : ' Variations') + ' to accept';
+  bar.querySelector('.dv-accept-total').textContent =
+    'Estimated total value $' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  bar.classList.add('show');
+}
+
+function reviewAcceptDv() {
+  openDvPanel();
+}
+
+function acceptDvRow(row) {
+  row.classList.remove('dv-selected');
+  row.dataset.status = 'accepted';
+  flipBadge(row.querySelector('.qr-badge'), 'qr-badge qr-badge-accepted', 'Accepted');
+  setTimeout(() => flipBadge(row.querySelector('.qr-date'), 'qr-date qr-date-accepted', 'Accepted on ' + _coRowDate()), 150);
+  const add = row.querySelector('.dv-add-btn');
+  if (add) {
+    add.style.transition = 'opacity 0.4s ease';
+    add.style.opacity = '0';
+    setTimeout(() => add.remove(), 450);
+  }
+  row.classList.add('qr-accepted-done');
+  setTimeout(() => row.classList.remove('qr-accepted-done'), 800);
+  setTimeout(() => { refreshDvCounts(); resortCardList(row.parentElement); }, 1100);
+}
+
+function refreshDvCounts() {
+  const rows = document.querySelectorAll('#s-variations .dv-row');
+  const counts = { 'all': rows.length, 'pending your review': 0, 'tbc': 0, 'accepted': 0, 'declined': 0 };
+  rows.forEach(r => {
+    const s = (r.dataset.status || '').toLowerCase();
+    if (counts[s] != null) counts[s]++;
+  });
+  document.querySelectorAll('#s-variations .qp-filter-tab').forEach(tab => {
+    const cnt = tab.querySelector('.qp-filter-count');
+    if (!cnt) return;
+    let label = tab.textContent.replace(/[0-9]/g, '').trim().toLowerCase();
+    if (label === 'to be confirmed') label = 'tbc';
+    const n = counts[label];
+    if (n != null) cnt.textContent = (n < 10 ? '0' : '') + n;
+  });
+}
+
+
+/* ═══ Ready to accept panel (Figma 1160-39975) ═══ */
+function openDvPanel() {
+  if (typeof closeBrandPanel === 'function') closeBrandPanel();
+  rebuildDvPanel();
+  document.getElementById('dvp').classList.add('open');
+  document.body.classList.add('dvp-open');
+  document.getElementById('dv-accept-bar').classList.remove('show');
+}
+
+function closeDvPanel() {
+  document.getElementById('dvp').classList.remove('open');
+  document.body.classList.remove('dvp-open');
+  updateDvBar(); // selections survive close — bar offers the way back in
+}
+
+function rebuildDvPanel() {
+  const list = document.getElementById('dvp-list');
+  if (!list) return;
+  const sel = document.querySelectorAll('#s-variations .dv-row.dv-selected');
+  list.innerHTML = '';
+  let total = 0;
+  sel.forEach(row => {
+    total += parseFloat(row.dataset.value || '0');
+    const img = row.querySelector('.dv-thumb img');
+    const title = (row.querySelector('.dv-title') || {}).textContent || '';
+    const meta = (row.querySelector('.dv-meta') || {}).textContent || '';
+    const val = (row.querySelector('.dv-value-num') || {}).textContent || '';
+    const item = document.createElement('div');
+    item.className = 'dvp-item';
+    item.innerHTML =
+      '<div class="dvp-item-thumb">' + (img ? '<img src="' + img.getAttribute('src') + '" alt="">' : '') + '</div>' +
+      '<div class="dvp-item-info">' +
+        '<div class="dvp-item-top"><div class="dvp-item-title"></div><div class="dvp-item-val"></div></div>' +
+        '<div class="dvp-item-bottom"><div class="dvp-item-meta"></div><button class="dvp-remove-btn">Remove</button></div>' +
+      '</div>';
+    item.querySelector('.dvp-item-title').textContent = title;
+    item.querySelector('.dvp-item-val').textContent = val;
+    item.querySelector('.dvp-item-meta').textContent = meta;
+    item.querySelector('.dvp-remove-btn').onclick = () => dvPanelRemove(row);
+    list.appendChild(item);
+  });
+  const totalEl = document.getElementById('dvp-total');
+  if (totalEl) totalEl.textContent = '$' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function dvPanelRemove(row) {
+  const btn = row.querySelector('.dv-add-btn');
+  if (btn && row.classList.contains('dv-selected')) toggleDvSelect(btn); // handles rebuild + close-on-empty
+}
+
+function dvPanelAccept() {
+  const sel = document.querySelectorAll('#s-variations .dv-row.dv-selected');
+  document.getElementById('dvp').classList.remove('open');
+  document.body.classList.remove('dvp-open');
+  document.getElementById('dv-accept-bar').classList.remove('show');
+  sel.forEach((row, i) => setTimeout(() => acceptDvRow(row), i * 200));
+}
+
+
+/* ═══ CO sign document overlay — same flow as mobile: Accept opens the
+   Change Order document; signing arms the accept; it plays on close. ═══ */
+let _coDocSourceRow = null;
+let _coDocSigned = false;
+let _coSignedPending = false;
+
+function openCoDocument(row) {
+  const overlay = document.getElementById('co-doc-overlay');
+  if (!overlay) return;
+  _coDocSourceRow = row || document.querySelector('#s-change-order .co-row[data-status="pending your review"]');
+  const frame = document.getElementById('co-doc-iframe');
+  if (frame && !frame.src) frame.src = '../mobile/ChangeOrder_Sign_demo.html';
+  else if (frame && _coDocSigned) {
+    try { frame.contentWindow.location.reload(); } catch (e) {}
+    _coDocSigned = false;
+  }
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCoDocument() {
+  const overlay = document.getElementById('co-doc-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  if (!_coSignedPending) return;
+  _coSignedPending = false;
+  const row = _coDocSourceRow;
+  _coDocSourceRow = null;
+  setTimeout(() => _playCoAccept(row), 400);
+}
+
+window.addEventListener('message', (e) => {
+  if (e.data !== 'co-signed') return;
+  _coDocSigned = true;
+  _coSignedPending = true;
+});
+
+
+/* ═══ Variation proposal overlay — same flow as mobile: View Variation opens
+   the proposal demo; Accept/Reject/TBC inside arm the action; it plays on close. ═══ */
+let _varDocRow = null;
+let _varDocPending = null; // 'accept' | 'reject' | 'tbc'
+
+function dvRowClick(e) {
+  // mobile-view: tapping the card opens the proposal (View button is hidden)
+  if (!document.body.classList.contains('mobile-view')) return;
+  if (e.target.closest('button')) return;
+  const row = e.target.closest('.dv-row');
+  if (row) openDvProposalForRow(row);
+}
+
+function openDvProposal(btn) {
+  openDvProposalForRow(btn.closest('.dv-row'));
+}
+
+function openDvProposalForRow(row) {
+  if (!row) return;
+  _varDocRow = row;
+  _varDocPending = null;
+  const img = row.querySelector('.dv-thumb img');
+  const meta = (row.querySelector('.dv-meta') || {}).textContent || 'Variation';
+  const params = new URLSearchParams({
+    title: (row.querySelector('.dv-title') || {}).textContent || '',
+    price: row.dataset.value || '0',
+    ref: (meta.split('from')[0] || 'Variation').trim(),
+    valid: ((row.querySelector('.qr-date') || {}).textContent || '').trim(),
+    status: (row.dataset.status || '').toLowerCase() === 'accepted' ? 'accepted' : 'pending'
+  });
+  if (img && img.src) params.set('img', img.src);
+  const frame = document.getElementById('var-doc-iframe');
+  // Hash survives the dev server's cleanUrls redirect (query strings get dropped)
+  frame.src = '../mobile/Variation_Proposal_demo.html#' + params.toString();
+  document.getElementById('var-doc-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVarDoc() {
+  document.getElementById('var-doc-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  if (!_varDocPending || !_varDocRow) { _varDocRow = null; _varDocPending = null; return; }
+  const row = _varDocRow, action = _varDocPending;
+  _varDocRow = null; _varDocPending = null;
+  row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => performSingleDvAction(row, action), 450);
+}
+
+window.addEventListener('message', (e) => {
+  if (e.data === 'var-accept' || e.data === 'var-reject' || e.data === 'var-tbc') {
+    _varDocPending = e.data.replace('var-', '');
+  }
+});
+
+function performSingleDvAction(row, action) {
+  if (action === 'accept') { acceptDvRow(row); updateDvBar(); rebuildDvPanel(); return; }
+  // Leaving the selection if it was added
+  if (row.classList.contains('dv-selected')) {
+    const addBtn = row.querySelector('.dv-add-btn');
+    if (addBtn) toggleDvSelect(addBtn);
+  }
+  if (action === 'reject') {
+    row.dataset.status = 'declined';
+    flipBadge(row.querySelector('.qr-badge'), 'qr-badge qr-badge-declined', 'Declined');
+    setTimeout(() => flipBadge(row.querySelector('.qr-date'), 'qr-date qr-date-declined', 'Declined on ' + _coRowDate()), 150);
+    const add = row.querySelector('.dv-add-btn');
+    if (add) {
+      add.style.transition = 'opacity 0.4s ease';
+      add.style.opacity = '0';
+      setTimeout(() => add.remove(), 450);
+    }
+  } else if (action === 'tbc') {
+    row.dataset.status = 'tbc';
+    flipBadge(row.querySelector('.qr-badge'), 'qr-badge qr-badge-tbc', 'To be confirmed');
+    setTimeout(() => flipBadge(row.querySelector('.qr-date'), 'qr-date qr-date-tbc', 'Valid until 14 Apr 2026'), 150);
+  }
+  setTimeout(() => { refreshDvCounts(); resortCardList(row.parentElement); }, 1100);
+}
+
+
+/* ═══ Mobile-view Change Order cards (ported from the mobile app, Figma 1160-22392) ═══ */
+function _mvCoRowFor(card) {
+  const cards = Array.from(document.querySelectorAll('#s-change-order .co-card'));
+  const rows = document.querySelectorAll('#s-change-order .co-row');
+  return rows[cards.indexOf(card)] || null;
+}
+
+function mvViewCo(btn) {
+  const card = btn.closest('.co-card');
+  if (document.body.classList.contains('mobile-view') && document.getElementById('co-detail-overlay')) {
+    openCoDetails(card);
+  } else {
+    openCoDetailModalRow(_mvCoRowFor(card));
+  }
+}
+
+function mvCoAction(btn, kind) {
+  const card = btn.closest('.co-card');
+  if (!card) return;
+  const row = _mvCoRowFor(card);
+  if (kind === 'accept') { openCoDocument(row); return; } // sign flow mirrors back on close
+  const dateStr = _coRowDate();
+  const badge = card.querySelector('.co-header-row .qr-badge');
+  const date = card.querySelector('.co-header-row .qr-date');
+  const tlBadge = card.querySelector('.co-tl-status-row .qr-badge');
+  const tlDate = card.querySelector('.co-tl-status-row .qr-date');
+  if (kind === 'tbc') {
+    card.dataset.status = 'tbc';
+    flipBadge(badge, 'qr-badge qr-badge-tbc', 'To be confirmed');
+    if (tlBadge) setTimeout(() => flipBadge(tlBadge, 'qr-badge qr-badge-tbc', 'To be confirmed'), 100);
+  } else if (kind === 'reject') {
+    card.dataset.status = 'declined';
+    flipBadge(badge, 'qr-badge qr-badge-declined', 'Declined');
+    setTimeout(() => flipBadge(date, 'qr-date qr-date-declined', 'Declined on ' + dateStr), 150);
+    if (tlBadge) setTimeout(() => flipBadge(tlBadge, 'qr-badge qr-badge-declined', 'Declined'), 100);
+    if (tlDate) setTimeout(() => flipBadge(tlDate, 'qr-date qr-date-declined', 'Declined on ' + dateStr), 250);
+    const actions = card.querySelector('.co-card-actions .qr-action-group');
+    if (actions) {
+      actions.style.transition = 'opacity 0.4s ease';
+      actions.style.opacity = '0';
+      setTimeout(() => actions.remove(), 450);
+    }
+  }
+  _mvSyncRow(row, kind, dateStr);
+}
+
+function _mvSyncRow(row, kind, dateStr) {
+  // quiet sync — the desktop row is hidden while in mobile-view
+  if (!row) return;
+  const b = row.querySelector('.qr-badge');
+  const d = row.querySelector('.qr-date');
+  if (kind === 'tbc') {
+    row.dataset.status = 'tbc';
+    if (b) { b.className = 'qr-badge qr-badge-tbc'; b.textContent = 'To be confirmed'; }
+    if (d) { d.className = 'qr-date qr-date-tbc'; }
+  } else if (kind === 'reject') {
+    row.dataset.status = 'declined';
+    if (b) { b.className = 'qr-badge qr-badge-declined'; b.textContent = 'Declined'; }
+    if (d) { d.className = 'qr-date qr-date-declined'; d.textContent = 'Declined on ' + dateStr; }
+    const a = row.querySelector('.co-row-actions');
+    if (a) a.remove();
+  }
+  refreshCoRowCounts();
+}
+
+/* Accept (sign flow) also mirrors onto the mobile-view card */
+const _playCoAcceptBase = _playCoAccept;
+_playCoAccept = function(row) {
+  _playCoAcceptBase(row);
+  const rows = Array.from(document.querySelectorAll('#s-change-order .co-row'));
+  const card = document.querySelectorAll('#s-change-order .co-card')[rows.indexOf(row)];
+  if (!card) return;
+  card.dataset.status = 'accepted';
+  const dateStr = _coRowDate();
+  flipBadge(card.querySelector('.co-header-row .qr-badge'), 'qr-badge qr-badge-accepted', 'Accepted');
+  setTimeout(() => flipBadge(card.querySelector('.co-header-row .qr-date'), 'qr-date qr-date-accepted', 'Accepted on ' + dateStr), 150);
+  const tlB = card.querySelector('.co-tl-status-row .qr-badge');
+  if (tlB) setTimeout(() => flipBadge(tlB, 'qr-badge qr-badge-accepted', 'Accepted'), 100);
+  const tlD = card.querySelector('.co-tl-status-row .qr-date');
+  if (tlD) setTimeout(() => flipBadge(tlD, 'qr-date qr-date-accepted', 'Accepted on ' + dateStr), 250);
+  const actions = card.querySelector('.co-card-actions .qr-action-group');
+  if (actions) {
+    actions.style.transition = 'opacity 0.4s ease';
+    actions.style.opacity = '0';
+    setTimeout(() => actions.remove(), 450);
+  }
+};
+
+
+/* ═══ Mobile-view CO detail sheet (ported from the mobile app, Figma 1160-22734) ═══ */
+let _coSheetCard = null;
+
+function openCoDetails(card) {
+  _coSheetCard = card || document.querySelector('#s-change-order .co-card');
+  // sync the sheet header + active timeline step from the source card
+  const b = _coSheetCard && _coSheetCard.querySelector('.co-header-row .qr-badge');
+  const d = _coSheetCard && _coSheetCard.querySelector('.co-header-row .qr-date');
+  const pairs = [
+    [document.getElementById('co-detail-badge'), b],
+    [document.querySelector('#co-detail-overlay .co-tl-status-row .qr-badge'), b],
+  ];
+  const datePairs = [
+    [document.getElementById('co-detail-date'), d],
+    [document.querySelector('#co-detail-overlay .co-tl-status-row .qr-date'), d],
+  ];
+  pairs.forEach(([el, src]) => { if (el && src) { el.className = src.className; el.textContent = src.textContent; } });
+  datePairs.forEach(([el, src]) => { if (el && src) { el.className = src.className; el.textContent = src.textContent; } });
+  // footer actions only while the card is still actionable
+  const footer = document.querySelector('#co-detail-overlay .co-detail-footer');
+  if (footer && _coSheetCard) {
+    footer.style.display = _coSheetCard.querySelector('.co-card-actions .qr-action-group') ? '' : 'none';
+  }
+  document.getElementById('co-detail-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCoDetails() {
+  document.getElementById('co-detail-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function coSheetAction(kind) {
+  const card = _coSheetCard;
+  closeCoDetails();
+  if (!card) return;
+  setTimeout(() => mvCoAction(card, kind), 350); // card.closest('.co-card') === card
+}
+
+function coSheetAccept() {
+  const card = _coSheetCard;
+  closeCoDetails();
+  const row = card ? _mvCoRowFor(card) : null;
+  setTimeout(() => openCoDocument(row), 250);
 }
