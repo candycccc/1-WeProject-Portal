@@ -5389,6 +5389,8 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 }
 .co-detail-overlay.open { display: flex; touch-action: none; }
 .co-detail-sheet {
+  -webkit-user-select: none; user-select: none;
+  -webkit-touch-callout: none;
   background: #fff;
   border-radius: 20px 20px 0 0;
   width: 100%;
@@ -5530,10 +5532,9 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   box-shadow: 0 0 0 1px rgba(92,68,51,0.25), 0 3px 2px #efefef;
 }
 .var-photo {
-  /* Scales with the viewport so the info column always has room */
-  width: clamp(80px, 27vw, 112px);
-  aspect-ratio: 112 / 135; height: auto;
-  flex-shrink: 0;
+  flex: 0 0 115px;
+  aspect-ratio: 115 / 135; height: auto;
+  align-self: flex-start;
   border: 1px solid #efefef; border-radius: 3px;
   overflow: hidden; background: #f4f4f4;
 }
@@ -5567,10 +5568,9 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   margin-top: auto;
   width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;
   background: #f9f9f9; border: 1px solid #d9d9d9; border-radius: 3px;
-  padding: 8px 10px; cursor: pointer;
-  font-family: inherit; font-size: 14px; font-weight: 600; color: #313131;
+  padding: 10px; cursor: pointer;
+  font-family: inherit; font-size: 12px; font-weight: 600; color: #313131;
 }
-.var-add-btn i { font-size: 13px; }
 .var-add-btn:active { background: #efefef; }
 /* Selection summary bar — sticky above the bottom edge of the scroll area */
 .var-select-footer {
@@ -5609,6 +5609,8 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
 }
 .var-review-overlay.open { display: flex; touch-action: none; }
 .var-review-sheet {
+  -webkit-user-select: none; user-select: none;
+  -webkit-touch-callout: none;
   background: #fff; border-radius: 10px 10px 0 0; width: 100%;
   max-height: calc(100% - 60px);
   display: flex; flex-direction: column; overflow: hidden;
@@ -5711,6 +5713,28 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
   padding: 13px 16px;
 }
 .nya-review-btn:active { filter: brightness(0.85); }
+
+
+/* Last variation card must clear the fixed selection footer */
+body.mobile-view #s-variations .qp-list { padding-bottom: 130px; }
+
+
+/* Narrow screens (design is 440px): photo becomes a small proportional
+   thumbnail and status/date stack — date and value stay fully visible
+   (Figma 1160-15326) */
+@media (max-width: 439px) {
+  .var-photo {
+    flex: 0 0 53px;
+    aspect-ratio: 53 / 62;
+    border-radius: 4px;
+    align-self: flex-start;
+  }
+  .var-status-row {
+    flex-direction: column; align-items: flex-start; gap: 5px;
+  }
+  .var-valid { text-align: left; width: 100%; }
+  .var-title { -webkit-line-clamp: 3; }
+}
 
 </style>
 <script id="mobile-standalone-vars">
@@ -7049,7 +7073,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
           <span class="var-ref">Variation 01<br>from Quote #23944</span>
         </div>
         <div class="var-title">Kitchen Audio-Visual System Upgrade — Enhanced Features for Zone 2</div>
-      <button class="var-add-btn" onclick="toggleVarSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
+      <button class="var-add-btn" onclick="toggleVarSelect(this)">Add to Accept</button>
       </div>
     </div>
     <div class="var-card" onclick="openVarProposal(event)" data-status="pending your review" data-price="8500">
@@ -7067,7 +7091,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
           <span class="var-ref">Variation 02<br>from Quote #23944</span>
         </div>
         <div class="var-title">Cinema Room Lighting Control</div>
-      <button class="var-add-btn" onclick="toggleVarSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
+      <button class="var-add-btn" onclick="toggleVarSelect(this)">Add to Accept</button>
       </div>
     </div>
     <div class="var-card" onclick="openVarProposal(event)" data-status="pending your review" data-price="25000">
@@ -7085,7 +7109,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
           <span class="var-ref">Variation 03<br>from Quote #23944</span>
         </div>
         <div class="var-title">Network Switch Upgrade</div>
-      <button class="var-add-btn" onclick="toggleVarSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
+      <button class="var-add-btn" onclick="toggleVarSelect(this)">Add to Accept</button>
       </div>
     </div>
     <div class="var-card" onclick="openVarProposal(event)" data-status="pending your review" data-price="3000">
@@ -7103,7 +7127,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
           <span class="var-ref">Variation 04<br>from Quote #23944</span>
         </div>
         <div class="var-title">Driveway Gate Intercom</div>
-      <button class="var-add-btn" onclick="toggleVarSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
+      <button class="var-add-btn" onclick="toggleVarSelect(this)">Add to Accept</button>
       </div>
     </div>
     <div class="var-card" onclick="openVarProposal(event)" data-status="pending your review" data-price="6800">
@@ -7121,7 +7145,7 @@ body.mobile-view #s-change-order .qr-action-btn:first-child { flex: none; width:
           <span class="var-ref">Variation 05<br>from Quote #23944</span>
         </div>
         <div class="var-title">Outdoor Speaker System — Garden Zone</div>
-      <button class="var-add-btn" onclick="toggleVarSelect(this)"><i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept</button>
+      <button class="var-add-btn" onclick="toggleVarSelect(this)">Add to Accept</button>
       </div>
     </div>
 
@@ -11707,9 +11731,16 @@ function refreshCoTabCounts() {
    The proposal is a local demo page fed by query params from the card. */
 var _varDocCard = null;
 var _varDocPending = null; // 'accept' | 'reject' | 'tbc' armed by the iframe
+function scrollVarsToTop() {
+  var sr = document.querySelector('#s-variations .quotes-page') || document.getElementById('s-variations');
+  if (sr && sr.scrollTo) sr.scrollTo({ top: 0, behavior: 'smooth' });
+}
 function openVarProposal(e) {
-  if (e && e.target && e.target.closest('button')) return; // not when tapping Add/Remove/View
+  if (e && e.target && e.target.closest('button')) return; // buttons keep their own behaviour
   var card = e.target.closest('.var-card');
+  if (card) openVarProposalForCard(card);
+}
+function openVarProposalForCard(card) {
   if (!card) return;
   _varDocCard = card;
   _varDocPending = null;
@@ -11744,7 +11775,7 @@ window.addEventListener('message', function(e) {
 });
 /* One card changes status with the usual flip language */
 function performSingleVarAction(card, action) {
-  var dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  var dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
   var label = card.querySelector('.var-status-text');
   var validEl = card.querySelector('.var-valid');
   var dot = card.querySelector('.var-status-dot');
@@ -11766,7 +11797,8 @@ function performSingleVarAction(card, action) {
       btn.style.opacity = '0';
       setTimeout(function() {
         btn.innerHTML = 'View Accepted';
-        btn.removeAttribute('onclick'); btn.onclick = null;
+        btn.removeAttribute('onclick');
+        btn.onclick = function(ev) { ev.stopPropagation(); openVarProposalForCard(card); };
         btn.style.opacity = '1';
       }, 350);
     }
@@ -11791,15 +11823,14 @@ function performSingleVarAction(card, action) {
   setTimeout(function() {
     refreshVarTabCounts();
     resortVarCards();
+    setTimeout(scrollVarsToTop, 750);
   }, 1450);
 }
 function toggleVarSelect(btn) {
   var card = btn.closest('.var-card');
   if (!card) return;
   var selected = card.classList.toggle('var-selected');
-  btn.innerHTML = selected
-    ? '<i class="fa-sharp fa-trash-can"></i>Remove from Accept'
-    : '<i class="fa-sharp-solid fa-circle-plus"></i>Add to Accept';
+  btn.textContent = selected ? 'Remove from Accept' : 'Add to Accept';
   updateVarFooter();
 }
 function updateVarFooter() {
@@ -11886,7 +11917,7 @@ function acceptVarReview() {
 function performAcceptVars() {
   var sel = Array.prototype.slice.call(document.querySelectorAll('#s-variations .var-card.var-selected'));
   if (!sel.length) return;
-  var dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  var dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
   document.getElementById('var-select-footer').classList.remove('show');
   sel.forEach(function(card, i) {
     setTimeout(function() {
@@ -11909,7 +11940,7 @@ function performAcceptVars() {
         setTimeout(function() {
           btn.innerHTML = 'View Accepted';
           btn.removeAttribute('onclick');
-          btn.onclick = null;
+          btn.onclick = function(ev) { ev.stopPropagation(); openVarProposalForCard(card); };
           btn.style.opacity = '1';
         }, 350);
       }
@@ -11919,6 +11950,9 @@ function performAcceptVars() {
     updateVarFooter();
     refreshVarTabCounts();
     resortVarCards();
+    // Once the re-sort settles, return to the top so the remaining
+    // pending items are in view
+    setTimeout(scrollVarsToTop, 750);
   }, sel.length * 250 + 1300);
 }
 /* FLIP re-sort: Pending -> TBC -> Accepted -> Declined (accepted sinks down) */
