@@ -70,14 +70,14 @@
 .fa-chevron-down::before        { content: "\f078"; }
 /* ── Brand tokens ── */
 :root {
-  --brand-accent:  #405995;
+  --brand-accent:  #b69977;
   --brand-dark:    #38435e;
   --brand-muted:   #4a5461;
   --brand-bg:      #f3f4f8;
   --brand-bg-card: #eef0f3;
   --brand-font:    'Figtree', sans-serif;
   /* Text colour on top of --brand-accent: auto-switches black/white by luminance */
-  --c-on-accent:   #ffffff;
+  --c-on-accent:   #000000;
   /* Text colour on top of --brand-dark: auto-switches black/white by luminance */
   --c-on-dark:     #ffffff;
 
@@ -162,7 +162,7 @@ body.dark-mode .detail-breadcrumb {
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
-body { font-family: var(--brand-font); background: var(--brand-bg); color: var(--c-text-1); overflow-x: hidden; }
+body { font-family: var(--brand-font); background: var(--brand-bg); color: var(--c-text-1); overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
 a, button { cursor: pointer; }
 input { font-family: inherit; }
 
@@ -537,7 +537,7 @@ body.mobile-view.brand-open #app-content {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-image: url('images/img_01.png');
+  background-image: url('images/lcr-login.png');
 }
 /* login photo is now a CSS background — the <img class="room"> is hidden */
 .login-photo img.room { display: none; }
@@ -578,9 +578,11 @@ body.mobile-view.brand-open #app-content {
   border-radius: 6px;
   overflow: hidden;
   margin: 0 auto 20px;
+  background: var(--c-surface);
+  display: flex; align-items: center; justify-content: center;
 }
 .login-company-logo img {
-  width: 100%; height: 100%; object-fit: cover;
+  width: 80%; height: 80%; object-fit: contain;
 }
 
 .login-heading {
@@ -891,8 +893,10 @@ body.dark-mode .fp-success-icon { background: rgba(0,145,19,0.22); }
 }
 .dash-logo {
   width: 43px; height: 43px; border-radius: 6px; overflow: hidden; flex-shrink: 0;
+  background: var(--c-surface);
+  display: flex; align-items: center; justify-content: center;
 }
-.dash-logo img { width: 100%; height: 100%; object-fit: cover; }
+.dash-logo img { width: 80%; height: 80%; object-fit: contain; }
 .dash-company-name {
   font-size: 24px; font-weight: 600; color: var(--c-text-1);
   white-space: nowrap;
@@ -1221,8 +1225,51 @@ body.mobile-view .dash-footer {
 .detail-company-logo {
   position: absolute; bottom: 20px; right: 30px;
   width: 54px; height: 54px; border-radius: 6px; overflow: hidden;
+  background: var(--c-surface);
+  display: flex; align-items: center; justify-content: center;
 }
-.detail-company-logo img { width: 100%; height: 100%; object-fit: cover; }
+.detail-company-logo img { width: 80%; height: 80%; object-fit: contain; }
+
+/* ── Need Your Attention popup ── */
+#s-detail { position: relative; }
+.nya-overlay {
+  display: none; position: absolute; inset: 0; z-index: 7000;
+  background: rgba(0,0,0,0.35); backdrop-filter: blur(3px);
+  align-items: center; justify-content: center;
+}
+.nya-overlay.open { display: flex; }
+.nya-dialog {
+  background: #fff; border-radius: 12px; width: 420px; max-width: 92%;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.22);
+  padding: 28px 26px 22px;
+  font-family: 'Figtree', sans-serif;
+  animation: nyaIn .22s ease-out;
+}
+@keyframes nyaIn { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+.nya-title { font-size: 28px; font-weight: 700; color: var(--c-text-1); margin: 0 0 6px; }
+.nya-sub { font-size: 15px; font-weight: 500; color: var(--c-text-2); margin: 0 0 20px; }
+.nya-list { border: 1px solid var(--c-border-1); border-radius: 10px; overflow: hidden; }
+.nya-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px; cursor: pointer;
+  border-bottom: 1px solid var(--c-border-1);
+  transition: background .12s;
+}
+.nya-row:last-child { border-bottom: none; }
+.nya-row:hover { background: var(--c-hover); }
+.nya-row-hl { background: #fdf4ea; }
+.nya-row-hl:hover { background: #fbeedd; }
+.nya-dot { width: 13px; height: 13px; border-radius: 3px; flex-shrink: 0; }
+.nya-row-text { flex: 1; min-width: 0; }
+.nya-row-title { font-size: 17px; font-weight: 600; color: var(--c-text-1); }
+.nya-row-sub { font-size: 14px; font-weight: 500; color: var(--c-text-2); margin-top: 2px; }
+.nya-sub-pending { color: #b8730e; }
+.nya-chev { color: #c3c3c3; font-size: 15px; flex-shrink: 0; }
+.nya-remind {
+  display: block; margin: 20px auto 4px; background: none; border: none;
+  font-family: inherit; font-size: 16px; font-weight: 600; color: var(--c-text-1);
+  text-decoration: underline; cursor: pointer; padding: 6px;
+}
 
 /* Body below hero */
 .detail-body {
@@ -1661,7 +1708,7 @@ body.mobile-view .quotes-page { min-height: 0; }
 .qp-nav-dropdown {
   display: none;
   position: absolute; left: 50%; transform: translateX(-50%);
-  top: calc(100% + 4px);
+  top: 60px;
   width: 349px;
   background: var(--c-surface);
   backdrop-filter: blur(7px);
@@ -1716,6 +1763,14 @@ body.mobile-view .quotes-page { min-height: 0; }
   flex-shrink: 0;
   margin-top: 0;
 }
+/* Quotes desktop: use co-pc two-card layout, hide old summary row */
+.qp-dsk-summary { display: flex; gap: 13px; padding: 0 30px; margin-bottom: 14px; }
+body:not(.mobile-view) #s-quotes .qp-summary-row { display: none; }
+body.mobile-view .qp-dsk-summary { display: none; }
+/* Invoices desktop: use co-pc two-card layout, hide old summary row */
+.inv-dsk-summary { display: flex; gap: 13px; padding: 0 30px; margin-bottom: 14px; }
+body:not(.mobile-view) #s-invoices .inv-summary-row { display: none; }
+body.mobile-view .inv-dsk-summary { display: none; }
 /* Variation screen: two-column card internals */
 .var-card-left {
   flex: 0 0 38%;
@@ -1938,7 +1993,7 @@ body.mobile-view .quotes-page { min-height: 0; }
 }
 .so-project-card {
   background: var(--c-surface);
-  border-top: 2px solid #405995;
+  border-top: 2px solid var(--brand-accent);
   padding: 14px 18px 16px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1971,7 +2026,7 @@ body.mobile-view .quotes-page { min-height: 0; }
 /* Payment details card */
 .so-payment-details-card {
   background: var(--c-surface);
-  border-top: 2px solid #405995;
+  border-top: 2px solid var(--brand-accent);
   padding: 10px 15px 16px;
   overflow: hidden;
 }
@@ -1998,7 +2053,7 @@ body.mobile-view .so-pc-right { border-top: 1px solid var(--c-border-1); padding
 body.mobile-view .so-project-title { font-size: 18px; }
 body.mobile-view .so-total-val { font-size: 18px; }
 body.mobile-view .so-ps-big { font-size: 18px; }
-body.mobile-view .so-payment-details-card { padding: 10px 14px 14px; }
+body.mobile-view .so-payment-details-card { display: none; }
 
 /* View Quote button (top right) */
 .qr-view {
@@ -2054,8 +2109,8 @@ body.mobile-view .so-payment-details-card { padding: 10px 14px 14px; }
   margin-top: 20px;
 }
 .qp-footer-left { display: flex; align-items: center; gap: 14px; }
-.qp-footer-logo { width: 38px; height: 38px; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
-.qp-footer-logo img { width: 100%; height: 100%; object-fit: cover; }
+.qp-footer-logo { width: 38px; height: 38px; border-radius: 6px; overflow: hidden; flex-shrink: 0; background: var(--c-surface); display: flex; align-items: center; justify-content: center; }
+.qp-footer-logo img { width: 80%; height: 80%; object-fit: contain; }
 .qp-footer-project { font-size: 14px; font-weight: 700; color: var(--c-text-1); }
 .qp-footer-right { display: flex; align-items: center; gap: 30px; }
 .qp-footer-pm { display: flex; flex-direction: column; gap: 3px; }
@@ -2522,17 +2577,8 @@ body.mobile-view #s-quotes .qp-payment-amount { font-size: 20px; }
 body.mobile-view #s-quotes .qp-progress-legend { gap: 8px; flex-wrap: wrap; }
 body.mobile-view #s-quotes .qp-legend-value { font-size: 12px; }
 body.mobile-view #s-quotes .qp-progress-bar-outer { height: 18px; }
-/* Payment details card — visible on mobile as a separate card below project summary */
-body.mobile-view #s-quotes .qp-payment-card {
-  display: flex;
-  flex: none;
-  width: 100%;
-  min-height: 163px;
-  padding: 16px 13px;
-  margin: 0 0 12px;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+/* Payment details card — hidden on mobile to match CO layout */
+body.mobile-view #s-quotes .qp-payment-card { display: none; }
 /* Page footer — hidden on mobile */
 body.mobile-view #s-quotes .qp-footer { display: none; }
 /* Filter tabs: sticky just below the topbar so they stay visible while scrolling the list */
@@ -2725,7 +2771,7 @@ body.mobile-view #s-invoices .inv-proj-right {
   padding-left: 0; padding-top: 12px;
 }
 body.mobile-view #s-invoices .inv-proj-legend { flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
-body.mobile-view #s-invoices .inv-summary-right { width: 100%; flex-shrink: unset; }
+body.mobile-view #s-invoices .inv-summary-right { display: none; }
 /* Invoice cards: already vertical — just reduce side padding on mobile */
 body.mobile-view .inv-row { padding: 12px 12px; flex-direction: column; }
 body.mobile-view .inv-col2 { display: none !important; }
@@ -2827,7 +2873,7 @@ body.mobile-view #s-variations .qp-filter-tabs {
   background: var(--brand-bg);
   padding-bottom: 8px;
 }
-body.mobile-view #s-variations .qp-list { flex: none !important; overflow: visible !important; }
+body.mobile-view #s-variations .qp-list { flex: none !important; overflow: visible !important; padding-bottom: 100px; }
 /* Invoices: make list natural flow */
 body.mobile-view #s-invoices .qp-list { flex: none; overflow: visible; }
 /* PO: footer hidden, summary + list scroll naturally */
@@ -3801,7 +3847,7 @@ body:not(.mobile-view) .inv-btn {
 }
 .paynow-mark-paid {
   width: 100%; padding: 12px; border-radius: 5px;
-  background: var(--brand-accent); border: none; color: #fff;
+  background: var(--brand-accent); border: none; color: var(--c-on-accent);
   font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit;
   transition: background .15s, opacity .15s;
 }
@@ -3827,7 +3873,7 @@ body:not(.mobile-view) .inv-btn {
 }
 .payment-noted-done {
   width: 100%; padding: 12px; border-radius: 5px;
-  background: var(--brand-accent); border: none; color: #fff;
+  background: var(--brand-accent); border: none; color: var(--c-on-accent);
   font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit;
   transition: background .15s;
 }
@@ -3869,6 +3915,7 @@ body.dark-mode .payment-noted-done:hover { opacity: 0.88; }
   flex: 1; min-width: 0;
   background: var(--c-surface);
   border-top: 2px solid var(--brand-accent);
+  overflow: hidden;
   padding: 14px 20px;
   display: flex; gap: 20px; align-items: stretch;
 }
@@ -3913,6 +3960,7 @@ body.dark-mode .payment-noted-done:hover { opacity: 0.88; }
   width: 300px; flex-shrink: 0;
   background: var(--c-surface);
   border-top: 2px solid var(--brand-accent);
+  overflow: hidden;
   padding: 10px 15px;
   display: flex; flex-direction: column; gap: 8px;
 }
@@ -4315,12 +4363,17 @@ body.brand-open .qp-profile-overlay { right: 280px; }
 .co-row {
   background: var(--c-surface); border: 1px solid var(--c-border-1); border-radius: 4px;
   box-shadow: 0 3px 2px var(--c-shadow);
-  display: flex; gap: 24px;
+  display: flex; gap: 24px; align-items: flex-start;
   padding: 16px 17px;
   margin-bottom: 12px;
   font-family: 'Figtree', sans-serif;
 }
 .co-row-left { width: 230px; flex-shrink: 0; display: flex; gap: 13px; align-items: flex-start; }
+.co-row-left-top { display: flex; gap: 13px; align-items: flex-start; }
+.co-row[data-status="pending your review"] .co-row-left {
+  flex-direction: column; gap: 0; justify-content: space-between; align-self: stretch;
+}
+.co-row[data-status="pending your review"] .co-row-left > .co-row-val { padding-left: 54px; }
 .co-row-thumb {
   width: 41px; height: 41px; flex-shrink: 0;
   border: 1px solid var(--c-border-1); border-radius: 4px;
@@ -4329,13 +4382,12 @@ body.brand-open .qp-profile-overlay { right: 280px; }
 .co-row-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .co-row-meta { display: flex; gap: 12px; font-size: 10px; font-weight: 600; color: var(--c-text-1); }
 .co-row-title { font-size: 12px; font-weight: 600; color: var(--c-text-1); margin-top: 5px; }
-.co-row-mid { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-.co-row-status { display: flex; align-items: center; gap: 6px; }
-.co-row-version { font-size: 10px; font-weight: 600; color: var(--c-text-2); }
+.co-row-status { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
+.co-row-version { font-size: 12px; font-weight: 600; color: var(--c-text-1); }
 .co-row-version-co { color: #ff9500; }
 .co-row-desc { font-size: 10px; font-weight: 600; color: var(--c-text-1); max-width: 420px; }
-.co-row-values { margin-top: auto; display: flex; padding-top: 10px; }
-.co-row-val { width: 132px; display: flex; flex-direction: column; gap: 1px; }
+.co-row-values { margin-top: auto; display: flex; gap: 40px; padding-top: 10px; }
+.co-row-val { width: 115px; display: flex; flex-direction: column; gap: 1px; }
 .co-row-val:last-child { width: auto; }
 .co-row-val .v { font-size: 12px; font-weight: 600; color: var(--c-text-1); }
 .co-row-val .l { font-size: 8px; font-weight: 500; color: var(--c-text-muted); }
@@ -4343,6 +4395,7 @@ body.brand-open .qp-profile-overlay { right: 280px; }
 .co-row-right {
   flex-shrink: 0; display: flex; flex-direction: column;
   justify-content: space-between; align-items: flex-end; gap: 12px;
+  align-self: stretch;
 }
 .co-row-view-btn {
   background: var(--c-surface-2); border: 1px solid var(--c-border-3); border-radius: 4px;
@@ -4351,6 +4404,22 @@ body.brand-open .qp-profile-overlay { right: 280px; }
 }
 .co-row-view-btn:active { background: var(--c-hover); }
 .co-row-actions .qr-action-btn { font-size: 12px; padding: 6px 10px; }
+.co-row-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.co-row-desc-block { display: flex; flex-direction: column; gap: 7px; }
+.co-row > .co-row-view-btn { align-self: flex-start; }
+/* Mini payment summary (accepted card) */
+.co-row-pay-mini { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.co-row-pay-label { font-size: 10px; font-weight: 600; color: var(--c-text-1); }
+.co-row-pay-amount-row { display: flex; align-items: baseline; gap: 4px; flex-wrap: wrap; }
+.co-row-pay-amount { font-size: 16px; font-weight: 600; color: var(--c-text-1); }
+.co-row-pay-of { font-size: 12px; font-weight: 500; color: var(--c-text-muted); }
+.co-row-pay-bar-outer { height: 4px; background: #eaeaea; overflow: hidden; border-radius: 2px; }
+.co-row-pay-bar-fill { height: 100%; }
+.co-row-pay-legend { display: flex; gap: 25px; align-items: flex-start; }
+.co-row-pay-leg-item { display: flex; flex-direction: column; gap: 2px; }
+.co-row-pay-leg-hd { display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; color: var(--c-text-1); }
+.co-row-pay-leg-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; display: inline-block; }
+.co-row-pay-leg-val { font-size: 10px; font-weight: 600; color: var(--c-text-1); }
 
 /* ═══ Desktop Variations redesign (Figma 1160-38812) ═══ */
 .fa-circle-dot::before   { content: "\f192"; }
@@ -4401,6 +4470,12 @@ body.brand-open .qp-profile-overlay { right: 280px; }
   opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; z-index: 60;
 }
 .dv-accept-bar.show { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+/* Desktop: the bar is fixed (floats above the scrolling page), so its 50% center
+   must shift to stay centred within #app-content when a side panel shifts it.
+   screen-open adds 230px left margin (→ +115px); brand-open adds 280px right (→ -140px). */
+body:not(.mobile-view).screen-open .dv-accept-bar { left: calc(50% + 115px); }
+body:not(.mobile-view).brand-open .dv-accept-bar { left: calc(50% - 140px); }
+body:not(.mobile-view).screen-open.brand-open .dv-accept-bar { left: calc(50% - 25px); }
 .dv-accept-count { font-size: 16px; font-weight: 600; color: var(--c-text-2); }
 .dv-accept-total { font-size: 12px; font-weight: 500; color: var(--c-text-2); margin-top: 4px; }
 .dv-accept-btn {
@@ -4622,8 +4697,9 @@ body.dvp-open #s-variations .quotes-page { padding-right: 400px; }
    wrapping value columns, actions row at the bottom */
 @container (max-width: 1050px) {
   .co-row { flex-wrap: wrap; gap: 12px; }
-  .co-row-left { width: 100%; }
-  .co-row-mid { flex-basis: 100%; }
+  .co-row-left { width: 100%; flex-direction: row !important; }
+  .co-row-left-top { flex: 1; }
+  .co-row-body { flex-basis: 100%; }
   .co-row-desc { max-width: none; }
   .co-row-values { flex-wrap: wrap; gap: 10px 0; }
   .co-row-right {
@@ -4636,12 +4712,13 @@ body.dvp-open #s-variations .quotes-page { padding-right: 400px; }
 /* ═══ Mobile-view (toolbar toggle): fixed elements track the phone frame ═══ */
 body.mobile-view .dv-accept-bar { width: calc(var(--mobile-w, 390px) - 20px); }
 body.mobile-view .dvp {
-  width: var(--mobile-w, 390px);
-  right: auto;
-  left: max(0px, calc((100vw - var(--mobile-w, 390px)) / 2));
-  top: 60px;
-  height: min(var(--mobile-h, 844px), calc(100vh - 60px));
-  bottom: auto;
+  /* The panel is re-homed inside #app-content (the phone frame) in mobile-view,
+     so it positions/clips relative to the frame — no viewport math, no scroll
+     desync. It fills the frame exactly and slides up from the bottom. */
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  width: auto;
+  height: auto;
 }
 body.mobile-view .codm {
   width: calc(var(--mobile-w, 390px) - 12px);
@@ -4677,10 +4754,14 @@ body.mobile-view #s-documents .detail-sidebar-mob { display: none; }
 /* Accept bar = the mobile app's var-select-footer: full frame width, docked
    to the frame bottom, top-rounded frosted sheet */
 body.mobile-view .dv-accept-bar {
-  width: var(--mobile-w, 390px);
+  /* Anchor to the phone frame (#app-content, which is position:relative in
+     mobile-view) so the bar tracks the frame — follows side-panel shifts and
+     never desyncs. The bar is a sibling of the scrolling list, so absolute +
+     bottom:0 keeps it docked to the frame bottom without scrolling. */
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  width: auto;
   max-width: none;
-  left: max(0px, calc((100vw - var(--mobile-w, 390px)) / 2));
-  bottom: max(0px, calc(100vh - 60px - var(--mobile-h, 844px)));
   transform: translateY(14px);
   border-radius: 7px 7px 0 0;
   padding: 14px 17px;
@@ -4770,14 +4851,60 @@ body.mobile-view #s-variations .dv-row .qr-date {
 
 /* === Mobile-view Change Orders - ported from the mobile app (Figma 1160-22392) === */
 .co-mv { display: none; }
-body.mobile-view #s-change-order .inv-summary-row { display: none; }
+#s-change-order .inv-summary-row { display: none; }
+#s-change-order .co-mv-summary { display: flex; gap: 13px; padding: 0 30px; margin-bottom: 14px; }
+body.mobile-view #s-change-order .co-mv-summary { display: block; padding: 0; margin-bottom: 0; }
 body.mobile-view #s-change-order .co-row-list { display: none; }
 body.mobile-view #s-change-order .co-mv { display: block; }
 
-.qr-payment-amount-row { display: flex; flex-direction: column; gap: 2px; }
-.qr-payment-bar-seg { height: 100%; }
-.qr-payment-bar-seg.seg-paid { background: #009113; }
-.qr-payment-bar-seg.seg-due  { background: #cf3400; }
+/* Desktop: co-pc-wrap two-column grid (Figma 1160-39324) */
+body:not(.mobile-view) .co-pc-wrap {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  margin: 0;
+  min-height: 155px;
+  flex: 1;
+}
+/* Payment details card (Figma 1160-39296) */
+.co-pc-details {
+  background: var(--c-surface);
+  border-top: 2px solid var(--brand-accent);
+  padding: 10px 15px 16px;
+  overflow: hidden;
+  flex: 0 0 360px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.co-pc-details-title { font-size: 12px; font-weight: 600; color: var(--c-text-1); margin-bottom: 8px; }
+.co-pc-details-company { font-size: 14px; font-weight: 600; color: var(--c-text-1); }
+.co-pc-details-address { font-size: 12px; font-weight: 500; color: var(--c-text-2); line-height: 1.4; }
+.co-pc-details-banking { display: flex; gap: 16px; margin-top: auto; }
+.co-pc-details-field { display: flex; flex-direction: column; gap: 6px; }
+.co-pc-details-lbl { font-size: 12px; font-weight: 600; color: var(--c-text-1); }
+.co-pc-details-val { font-size: 16px; font-weight: 500; color: var(--c-text-2); }
+body.mobile-view .co-pc-details { display: none; }
+body:not(.mobile-view) .co-pc-top { display: contents; }
+body:not(.mobile-view) .co-pc-title {
+  grid-column: 1; grid-row: 1;
+  font-size: 24px;
+  padding: 14px 18px 0;
+}
+body:not(.mobile-view) .co-pc-title br { display: none; }
+body:not(.mobile-view) .co-pc-total {
+  grid-column: 1; grid-row: 2;
+  align-items: flex-start; text-align: left;
+  align-self: end;
+  padding: 0 18px 16px;
+}
+body:not(.mobile-view) .co-pc-total-value { font-size: 24px; }
+body:not(.mobile-view) .co-pc-body {
+  grid-column: 2; grid-row: 1 / 3;
+  padding: 14px 18px 16px;
+}
+
+.co-mv .qr-payment-amount-row { display: flex; flex-direction: column; gap: 2px; }
+.co-mv .qr-payment-bar-seg { height: 100%; }
+.co-mv .qr-payment-bar-seg.seg-paid { background: #009113; }
+.co-mv .qr-payment-bar-seg.seg-due  { background: #cf3400; }
 .co-card.qr-accepting {
   border-color: #009113 !important;
   box-shadow: 0 0 0 3px rgba(0,145,19,0.18), 0 3px 4px 0 #efefef !important;
@@ -4794,8 +4921,9 @@ body.mobile-view #s-change-order .co-mv { display: block; }
   transition: opacity 0.75s ease, transform 0.75s ease;
 }
 .co-pc-wrap {
-  background: var(--c-surface)fff;
+  background: var(--c-surface);
   border-top: 2px solid var(--brand-accent);
+  overflow: hidden;
   flex-shrink: 0;
   margin: 12px;
 }
@@ -4804,6 +4932,9 @@ body.mobile-view #s-change-order .co-mv { display: block; }
   justify-content: space-between;
   align-items: flex-start;
   padding: 16px 14px 10px;
+}
+body.mobile-view .co-pc-top {
+  padding: 16px 14px 24px;
   gap: 12px;
 }
 .co-pc-title {
@@ -4827,10 +4958,13 @@ body.mobile-view #s-change-order .co-mv { display: block; }
 }
 .co-pc-summary-label {
   font-size: 12px; font-weight: 600;
-  color: var(--c-text-1); margin-bottom: 4px;
+  color: var(--c-text-1); margin-bottom: 24px;
+}
+body.mobile-view .co-pc-summary-label {
+  margin-bottom: 8px;
 }
 .co-pc-amount-row {
-  display: flex; align-items: baseline; gap: 6px; margin-bottom: 10px; flex-wrap: wrap;
+  display: flex; align-items: baseline; gap: 5px; margin-bottom: 10px; flex-wrap: wrap;
 }
 .co-pc-amount {
   font-size: 24px; font-weight: 600; color: var(--c-text-1);
@@ -4840,7 +4974,6 @@ body.mobile-view #s-change-order .co-mv { display: block; }
 }
 .co-pc-legend {
   display: flex; justify-content: space-between;
-  margin-top: 10px; margin-bottom: 14px;
 }
 .co-pc-legend-item {
   display: flex; flex-direction: column; gap: 4px;
@@ -4853,8 +4986,9 @@ body.mobile-view #s-change-order .co-mv { display: block; }
   width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0;
 }
 .co-pc-legend-value {
-  font-size: 12px; font-weight: 700; color: var(--c-text-1); padding-left: 12px;
+  font-size: 16px; font-weight: 600; color: var(--c-text-1); padding-left: 12px;
 }
+body:not(.mobile-view) .co-pc-body .inv-btn-paynow { display: none; }
 .co-card {
   background: var(--c-surface);
   border: 1px solid var(--c-border-1);
