@@ -3838,7 +3838,7 @@ body:not(.mobile-view) .inv-amount-col { display: none; }
 body:not(.mobile-view) .inv-col2 {
   display: flex; flex-direction: column; justify-content: space-between;
   order: 2; flex: 0 0 264px;
-  padding: 16px 14px; border-left: 1px solid var(--c-border-1);
+  padding: 16px 14px;
 }
 body:not(.mobile-view) .inv-col2-top {
   display: flex; align-items: center; gap: 4px; flex-wrap: nowrap;
@@ -3861,7 +3861,7 @@ body:not(.mobile-view) .inv-col2-bottom .inv-amount-lbl {
 /* Col 3 — payment summary (flex:1) */
 body:not(.mobile-view) .inv-payment {
   order: 3; flex: 1; margin-bottom: 0;
-  padding: 17px 14px; border-left: 1px solid var(--c-border-1);
+  padding: 17px 14px;
   gap: 4px; justify-content: space-between;
 }
 body:not(.mobile-view) .inv-payment-label {
@@ -3890,7 +3890,7 @@ body:not(.mobile-view) .inv-legend-val {
 body:not(.mobile-view) .inv-btns {
   order: 4; flex: 0 0 130px;
   flex-direction: column;
-  padding: 16px 17px 19px; border-left: 1px solid var(--c-border-1);
+  padding: 16px 17px 19px;
   align-items: flex-end; justify-content: space-between;
 }
 body:not(.mobile-view) .inv-btn {
