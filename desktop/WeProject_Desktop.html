@@ -878,6 +878,7 @@
             <div class="co-pc-legend-value">$0.00</div>
           </div>
         </div>
+        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Quote','$850,000.00','Quote Payment')">Pay Now</button>
       </div>
     </div>
     <div class="co-pc-details">
@@ -1032,24 +1033,34 @@
       <div class="qr-payment">
         <div class="qr-payment-label">Payment Summary</div>
         <div class="qr-payment-amount-row">
-          <span class="qr-payment-big">$20,000.00</span>
+          <span class="qr-payment-big">$650,000.00</span>
           <span class="qr-payment-of">of $850,000.02 Paid so far</span>
         </div>
         <div class="qr-payment-bar">
-          <div class="qr-payment-bar-fill" style="width:50%;"></div>
+          <div class="qr-payment-bar-seg seg-paid" style="width:76%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
         </div>
-        <div class="qr-payment-legend">
-          <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div> Paid so far <span style="margin-left:4px;">50%</span></div>
-            <div class="qr-legend-val">$650,000.00</div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">76%</span>
+            </div>
+            <span class="co-pay-amt">$650,000.00</span>
           </div>
-          <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div> To pay now <span style="margin-left:4px;">0%</span></div>
-            <div class="qr-legend-val">$650,000.00</div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
           </div>
-          <div class="qr-legend-item" style="align-items:flex-end;">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#9c9c9c;"></div> Upcoming <span style="margin-left:4px;">0%</span></div>
-            <div class="qr-legend-val" style="text-align:right;">$650,000.00</div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">24%</span>
+            </div>
+            <span class="co-pay-amt">$200,000.00</span>
           </div>
         </div>
       </div>
@@ -1289,6 +1300,7 @@
             <div class="co-pc-legend-value">$15,000.00</div>
           </div>
         </div>
+        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay Now</button>
       </div>
     </div>
     <div class="co-pc-details">
@@ -2340,7 +2352,9 @@
   <!-- Top bar -->
   <div class="qp-topbar">
     <button class="qp-back-btn" onclick="go('detail')">
-      <i class="fa-pro-regular fa-arrow-u-turn-up-left" style="font-size:12px;"></i>
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 0 1 0 8h-1"/>
+      </svg>
       Back
     </button>
     <button class="qp-nav-pill" onclick="toggleNavDropdown(event)">
@@ -2453,6 +2467,59 @@
     </div>
   </div>
 
+  <!-- Mobile: CO-style two-card summary (matches Quotes / Invoices) -->
+  <div class="so-dsk-summary">
+    <div class="co-pc-wrap">
+      <div class="co-pc-top">
+        <div class="co-pc-title">Total Project <br>Accepted Value</div>
+        <div class="co-pc-total">
+          <div class="co-pc-total-value">$850,000.00</div>
+          <div class="co-pc-total-label">Total Value (excl. Tax)</div>
+        </div>
+      </div>
+      <div class="co-pc-body">
+        <div class="co-pc-summary-label">Payment Summary</div>
+        <div class="co-pc-amount-row">
+          <span class="co-pc-amount">$650,000.00</span>
+          <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+        </div>
+        <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
+          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+        </div>
+        <div class="co-pc-legend">
+          <div class="co-pc-legend-item">
+            <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
+            <div class="co-pc-legend-value">$650,000.00</div>
+          </div>
+          <div class="co-pc-legend-item">
+            <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
+            <div class="co-pc-legend-value">$15,000.00</div>
+          </div>
+          <div class="co-pc-legend-item">
+            <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
+            <div class="co-pc-legend-value">$0.00</div>
+          </div>
+        </div>
+        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Sales Order','$850,000.00','Sales Order Payment')">Pay Now</button>
+      </div>
+    </div>
+    <div class="co-pc-details">
+      <div class="co-pc-details-title">Payment details</div>
+      <div class="co-pc-details-company">LCR Integrated Systems</div>
+      <div class="co-pc-details-address">1200 Elmwood Ave, Suite 400<br>Austin, TX 78701, United States</div>
+      <div class="co-pc-details-banking">
+        <div class="co-pc-details-field">
+          <div class="co-pc-details-lbl">Routing Number</div>
+          <div class="co-pc-details-val">123456789</div>
+        </div>
+        <div class="co-pc-details-field">
+          <div class="co-pc-details-lbl">Account Number</div>
+          <div class="co-pc-details-val">000123456789</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Filter tabs — Figma 849:747 (All / TBC / Accepted / Declined) -->
   <div class="qp-filter-tabs">
     <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">04</span></button>
@@ -2485,12 +2552,50 @@
         <span class="qr-badge qr-badge-tbc">To be confirmed</span>
         <span class="qr-date qr-date-tbc">Valid until 14 April 2026</span>
       </div>
-      <div></div>
+      <div class="qr-actions">
+        <div class="qr-action-group">
+          <button class="qr-action-btn">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">To be confirmed</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
+        </div>
+      </div>
       <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
       <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
     </div>
 
-    <!-- ② Accepted: Dutch House Security (Figma 849:771) — includes payment summary -->
+    <!-- ② To be confirmed: AV Integration -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="images/variation-cinema.png" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #23946</span>
+        </div>
+        <div class="qr-title">AV Integration Package</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-tbc">To be confirmed</span>
+        <span class="qr-date qr-date-tbc">Valid until 15 July 2026</span>
+      </div>
+      <div class="qr-actions">
+        <div class="qr-action-group">
+          <button class="qr-action-btn">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </button>
+          <button class="qr-action-btn" onclick="tbcCard(this)">To be confirmed</button>
+          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
+          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$28,500.00</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- ③ Accepted: Dutch House Security (Figma 849:771) — includes payment summary -->
     <div class="qr">
       <div class="qr-thumb">
         <img src="images/img_10.png" alt="" onerror="this.style.display='none'"/>
@@ -2512,15 +2617,34 @@
           <span class="qr-payment-big">$650,000.00</span>
           <span class="qr-payment-of">of $650,000.02 Paid so far</span>
         </div>
-        <div class="qr-payment-bar"><div class="qr-payment-bar-fill" style="width:100%;"></div></div>
-        <div class="qr-payment-legend">
-          <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div>Paid so far <span style="margin-left:4px;font-weight:600;">100%</span></div>
-            <div class="qr-legend-val">$650,000.00</div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:100%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$650,000.00</span>
           </div>
-          <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div>To pay now <span style="margin-left:4px;font-weight:600;">0%</span></div>
-            <div class="qr-legend-val">$0.00</div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
           </div>
         </div>
       </div>
@@ -2531,7 +2655,7 @@
     <!-- ③ Declined: Network Infrastructure -->
     <div class="qr">
       <div class="qr-thumb">
-        <img src="images/lcr-ocean-palm.png" alt="" onerror="this.style.display='none'"/>
+        <img src="images/variation-intercom.png" alt="" onerror="this.style.display='none'"/>
       </div>
       <div class="qr-name">
         <div class="qr-meta">
@@ -2546,26 +2670,6 @@
       <div></div>
       <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
       <div class="qr-orig"><div class="qr-orig-val">$18,900.00</div><div class="qr-orig-lbl">Original</div></div>
-    </div>
-
-    <!-- ④ To be confirmed: AV Integration -->
-    <div class="qr">
-      <div class="qr-thumb">
-        <img src="images/lcr-ocean-palm.png" alt="" onerror="this.style.display='none'"/>
-      </div>
-      <div class="qr-name">
-        <div class="qr-meta">
-          <span class="qr-number">Sales Order #23946</span>
-        </div>
-        <div class="qr-title">AV Integration Package</div>
-      </div>
-      <div class="qr-status">
-        <span class="qr-badge qr-badge-tbc">To be confirmed</span>
-        <span class="qr-date qr-date-tbc">Valid until 15 July 2026</span>
-      </div>
-      <div></div>
-      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$28,500.00</div><div class="qr-orig-lbl">Original</div></div>
     </div>
 
   </div>

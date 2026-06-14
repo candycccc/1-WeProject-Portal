@@ -127,6 +127,11 @@ function go(name) {
   document.querySelectorAll('.qp-user-dropdown').forEach(d => d.classList.remove('open'));
   document.getElementById('qp-notif-overlay')?.classList.remove('open');
   document.getElementById('qp-profile-overlay')?.classList.remove('open');
+  // Close any open detail sheets / modals so they don't linger across navigation
+  ['co-detail-overlay','codm-overlay','co-doc-overlay','var-doc-overlay',
+   'paynow-overlay','payment-noted-overlay'].forEach(id =>
+    document.getElementById(id)?.classList.remove('open'));
+  document.body.style.overflow = '';
 
   const alreadyLoaded = loadedScreens.has(name);
   loadedScreens.add(name);
@@ -562,17 +567,23 @@ function deriveTokens(accent) {
 // ── Light / Dark token appliers ──
 function applyLightTokens(hex) {
   const t = deriveTokens(hex);
+  const [h, s] = hexToHsl(hex);
   const root = document.documentElement;
   root.style.setProperty('--brand-accent',  hex);
   root.style.setProperty('--brand-dark',    t.dark);
   root.style.setProperty('--brand-muted',   t.muted);
   root.style.setProperty('--brand-bg',      t.bg);
   root.style.setProperty('--brand-bg-card', t.bgCard);
-  // clear any dark-mode inline overrides on neutral tokens + hero rgb + frosted
+  // clear any dark-mode inline overrides on neutral tokens + frosted
   ['--c-surface','--c-surface-2','--c-footer-bg','--c-hover',
    '--c-border-1','--c-border-2','--c-border-3','--c-separator',
-   '--c-text-1','--c-text-2','--c-text-muted','--c-shadow','--hero-rgb',
+   '--c-text-1','--c-text-2','--c-text-muted','--c-shadow',
    '--c-frosted-bg'].forEach(v => root.style.removeProperty(v));
+  // hero gradient overlay tint — warm dark derived from the brand hue so the
+  // detail hero overlay follows the accent colour (not a fixed navy).
+  const heroHex = hslToHex(h, Math.min(s, 45), 14);
+  const hr = parseInt(heroHex.slice(1,3),16), hg = parseInt(heroHex.slice(3,5),16), hb = parseInt(heroHex.slice(5,7),16);
+  root.style.setProperty('--hero-rgb', `${hr},${hg},${hb}`);
   const chip = document.getElementById('bp-bg-chip');
   if (chip) chip.style.background = t.bg;
 }
@@ -971,6 +982,19 @@ function copyToClipboard(text) {
   try { applyAccent(DEFAULTS.accent); } catch(e) {}
 })();
 
+(function relocateGlobalModals() {
+  // The Pay Now / Payment Noted overlays were authored inside #s-invoices, so they
+  // stayed hidden when triggered from another screen (e.g. the Change Orders summary
+  // card's Pay Now). They are position:fixed, so move them to <body> to make them
+  // available on every page.
+  try {
+    ['paynow-overlay','payment-noted-overlay'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.parentElement !== document.body) document.body.appendChild(el);
+    });
+  } catch(e) {}
+})();
+
 (function restoreScreenOnLoad() {
   try {
     const saved = localStorage.getItem('wq_screen_desktop');
@@ -1138,7 +1162,7 @@ function acceptCard(btn) {
     // ── Phase 4: replace actions with payment progress ──
     const paymentHTML = `
       <div class="qr-payment qr-payment-enter">
-        <div class="qr-payment-label">Payment Progress</div>
+        <div class="qr-payment-label">Payment Summary</div>
         <div class="qr-payment-amount-row">
           <span class="qr-payment-big">$0.00</span>
           <span class="qr-payment-of">of ${total} Paid so far</span>
@@ -1147,18 +1171,27 @@ function acceptCard(btn) {
           <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
           <div class="qr-payment-bar-seg seg-due"  style="width:0%;"></div>
         </div>
-        <div class="qr-payment-legend">
-          <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#009113;"></div>Paid so far <span>0%</span></div>
-            <div class="qr-legend-val">$0.00</div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
           </div>
-          <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#cf3400;"></div>To pay now <span>0%</span></div>
-            <div class="qr-legend-val">$0.00</div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
           </div>
-          <div class="qr-legend-item">
-            <div class="qr-legend-dot-row"><div class="qr-legend-dot" style="background:#eaeaea;"></div>Upcoming <span>100%</span></div>
-            <div class="qr-legend-val">${total}</div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">${total}</span>
           </div>
         </div>
       </div>`;
@@ -1713,16 +1746,45 @@ _playCoAccept = function(row) {
   const dateStr = _coRowDate();
   flipBadge(card.querySelector('.co-header-row .qr-badge'), 'qr-badge qr-badge-accepted', 'Accepted');
   setTimeout(() => flipBadge(card.querySelector('.co-header-row .qr-date'), 'qr-date qr-date-accepted', 'Accepted on ' + dateStr), 150);
-  const tlB = card.querySelector('.co-tl-status-row .qr-badge');
-  if (tlB) setTimeout(() => flipBadge(tlB, 'qr-badge qr-badge-accepted', 'Accepted'), 100);
-  const tlD = card.querySelector('.co-tl-status-row .qr-date');
-  if (tlD) setTimeout(() => flipBadge(tlD, 'qr-date qr-date-accepted', 'Accepted on ' + dateStr), 250);
-  const actions = card.querySelector('.co-card-actions .qr-action-group');
-  if (actions) {
-    actions.style.transition = 'opacity 0.4s ease';
-    actions.style.opacity = '0';
-    setTimeout(() => actions.remove(), 450);
-  }
+  // Transform the pending body (timeline + values + actions) into the accepted
+  // Payment Progress layout so the card matches the static accepted card.
+  setTimeout(() => {
+    if (card.querySelector('.co-payment-progress')) return; // already transformed
+    const newTotal = (card.querySelector('.co-pc-newtotal-val') || {}).textContent || '$13,120,000.00';
+    const timeline = card.querySelector('.co-timeline');
+    const actions  = card.querySelector('.co-card-actions');
+    [timeline, actions].forEach(el => {
+      if (!el) return;
+      el.style.transition = 'opacity 0.3s ease';
+      el.style.opacity = '0';
+      setTimeout(() => el.remove(), 320);
+    });
+    setTimeout(() => {
+      const pp = document.createElement('div');
+      pp.className = 'co-payment-progress qr-payment-enter';
+      pp.innerHTML = `
+        <div class="qr-payment-label">Payment Progress</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of ${newTotal} Paid so far</span>
+        </div>
+        <div class="qr-payment-bar" style="margin:6px 0 0;">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row"><div class="co-pay-legend-left"><div class="qr-legend-dot" style="background:#009113;"></div><span>Paid so far</span><span class="co-pay-pct">0%</span></div><span class="co-pay-amt">$0.00</span></div>
+          <div class="co-pay-legend-row"><div class="co-pay-legend-left"><div class="qr-legend-dot" style="background:#cf3400;"></div><span>To pay now</span><span class="co-pay-pct">0%</span></div><span class="co-pay-amt">$0.00</span></div>
+          <div class="co-pay-legend-row"><div class="co-pay-legend-left"><div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div><span>Upcoming</span><span class="co-pay-pct">100%</span></div><span class="co-pay-amt">${newTotal}</span></div>
+        </div>
+        <button class="inv-btn" style="flex:none;width:100%;height:41px;margin-top:17px;" onclick="mvViewCo(this)">View Accepted Details</button>`;
+      card.appendChild(pp);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        pp.classList.remove('qr-payment-enter');
+        pp.classList.add('qr-payment-entered');
+      }));
+    }, 340);
+  }, 500);
 };
 
 
