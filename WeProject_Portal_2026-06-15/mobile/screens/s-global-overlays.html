@@ -1,0 +1,1385 @@
+<!-- ── Notifications panel ── -->
+<div class="qp-notif-overlay" id="qp-notif-overlay" onclick="closeNotifPanel(event)">
+  <div class="qp-notif-panel" onclick="event.stopPropagation()">
+
+    <!-- Tabs (on top per Figma) -->
+    <div class="qp-notif-tabs">
+      <button class="qp-notif-tab active" id="notif-tab-notif" onclick="switchNotifTab('notif')">Notifications</button>
+      <button class="qp-notif-tab" id="notif-tab-activity" onclick="switchNotifTab('activity')">Portal Activity</button>
+      <div class="qp-notif-tab-bar" id="notif-tab-bar"></div>
+    </div>
+
+    <!-- Panel header: large title + read toggles -->
+    <div class="qp-notif-header">
+      <span class="qp-notif-heading">Notifications</span>
+      <div class="qp-notif-toggles">
+        <div class="qp-notif-toggle-row" onclick="toggleReadFilter('unread')">
+          <span class="qp-notif-toggle-label" style="font-size:11px;">Only show unread</span>
+          <div class="qp-toggle" id="toggle-unread"><div class="qp-toggle-thumb"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category filter pills — matches main nav menu order -->
+    <div class="qp-notif-cat-pills" id="notif-cat-pills">
+      <button class="qp-notif-cat-pill active" data-cat="all"        onclick="setNotifCatPill('all',this)">All <span class="cat-count">10</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="quote"     onclick="setNotifCatPill('quote',this)">Quotes <span class="cat-count">03</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="variation" onclick="setNotifCatPill('variation',this)">Variations <span class="cat-count">02</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="invoice"   onclick="setNotifCatPill('invoice',this)">Invoices <span class="cat-count">02</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="document"  onclick="setNotifCatPill('document',this)">Documents <span class="cat-count">01</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="salesorder" onclick="setNotifCatPill('salesorder',this)">Sales Order <span class="cat-count">01</span></button>
+      <button class="qp-notif-cat-pill"         data-cat="progress"  onclick="setNotifCatPill('progress',this)">Progress <span class="cat-count">01</span></button>
+    </div>
+
+    <!-- Notifications list -->
+    <div class="qp-notif-body" id="notif-panel-notif">
+      <div class="qp-notif-section-label">Today</div>
+
+      <!-- Quote notification (unread) -->
+      <div class="qp-notif-item" data-type="quote" data-unread="true">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">New quote ready for review</span>
+            <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Quote #22341</span>
+              <span>Bathroom Fixtures &amp; Fittings</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">8 min ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #22341')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invoice payment notification (unread) -->
+      <div class="qp-notif-item" data-type="invoice" data-unread="true">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-file-invoice-dollar" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Payment confirmed</span>
+            <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Invoice #INV-0091</span>
+              <span>Progress Claim 1</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">1 hour ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Invoice #INV-0091')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variation approved (unread) -->
+      <div class="qp-notif-item" data-type="variation" data-unread="true">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-code-branch" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Variation approved</span>
+            <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Variation #30145</span>
+              <span>Structural Steel Modification</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">2 hours ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Variation #30145')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress milestone (unread) -->
+      <div class="qp-notif-item" data-type="progress" data-unread="true">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-circle-check" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Milestone reached</span>
+            <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Level 6 Waterproofing</span>
+              <span>Stage complete</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">3 hours ago</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Progress — Level 6 Waterproofing')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qp-notif-section-label">Yesterday</div>
+
+      <!-- Quote accepted (unread) -->
+      <div class="qp-notif-item" data-type="quote" data-unread="true">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Quote accepted</span>
+            <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Quote #22018</span>
+              <span>Kitchen Cabinetry &amp; Joinery</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #22018')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invoice due in 3 days (unread) -->
+      <div class="qp-notif-item" data-type="invoice" data-unread="true">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-file-invoice-dollar" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Invoice due in 3 days</span>
+            <i class="fa-solid fa-circle qp-notif-unread-dot"></i>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Invoice #INV-0092</span>
+              <span>Progress Claim 2</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Invoice #INV-0092')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variation pending review (read — no dot) -->
+      <div class="qp-notif-item" data-type="variation" data-unread="false">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-code-branch" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Variation pending review</span>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Variation #30187</span>
+              <span>Facade Cladding Upgrade</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Variation #30187')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote awaiting confirmation (read) -->
+      <div class="qp-notif-item" data-type="quote" data-unread="false">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-handshake" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Awaiting your confirmation</span>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Quote #22019</span>
+              <span>Waterproofing Membrane System</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Quote #22019')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales order issued (read) -->
+      <div class="qp-notif-item" data-type="salesorder" data-unread="false">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-file-contract" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Sales order issued</span>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Sales Order #SO-0014</span>
+              <span>Level 6–8 Fit-Out Package</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Sales Order #SO-0014')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document shared (read) -->
+      <div class="qp-notif-item" data-type="document" data-unread="false">
+        <div class="qp-notif-icon">
+          <i class="fa-sharp-solid fa-file-lines" style="font-size:14px;"></i>
+        </div>
+        <div class="qp-notif-content">
+          <div class="qp-notif-title-row">
+            <span class="qp-notif-title">Document shared with you</span>
+          </div>
+          <div class="qp-notif-sub-row">
+            <div class="qp-notif-sub">
+              <span>Contract Amendment 02</span>
+              <span>Specification Rev C</span>
+            </div>
+            <div class="qp-notif-time-actions">
+              <span class="qp-notif-time">Yesterday</span>
+              <button class="qp-notif-comment-btn" onclick="openCommentDialog('Contract Amendment 02')"><i class="fa-regular fa-comment-dots"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Portal Activity list -->
+    <div class="qp-notif-body" id="notif-panel-activity" style="display:none;">
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">MM</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">You approved – Quote #22018 Kitchen Cabinetry &amp; Joinery</div>
+          <div class="qp-activity-time"><span>04 Jun 2026</span><span class="qp-activity-time-dot"></span><span>03:15pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">TH</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">Tyler Holmes sent – Quote #22341 Bathroom Fixtures &amp; Fittings</div>
+          <div class="qp-activity-time"><span>04 Jun 2026</span><span class="qp-activity-time-dot"></span><span>11:40am</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">MM</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">You reviewed – Variation #30145 Structural Steel Modification</div>
+          <div class="qp-activity-time"><span>03 Jun 2026</span><span class="qp-activity-time-dot"></span><span>02:50pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">JE</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">Julie Esparza updated – Quote #22018 Kitchen Cabinetry &amp; Joinery</div>
+          <div class="qp-activity-time"><span>03 Jun 2026</span><span class="qp-activity-time-dot"></span><span>10:05am</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">MM</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">You left a note – Variation #30145 Structural Steel Modification</div>
+          <div class="qp-activity-time"><span>02 Jun 2026</span><span class="qp-activity-time-dot"></span><span>04:30pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">TH</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">Tyler Holmes submitted – Variation #30187 Facade Cladding Upgrade</div>
+          <div class="qp-activity-time"><span>01 Jun 2026</span><span class="qp-activity-time-dot"></span><span>01:20pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">MM</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">You confirmed – Sales Order #SO-0014 Level 6–8 Fit-Out Package</div>
+          <div class="qp-activity-time"><span>30 May 2026</span><span class="qp-activity-time-dot"></span><span>09:45am</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">TH</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">Tyler Holmes updated – Invoice #INV-0092 Progress Claim 2</div>
+          <div class="qp-activity-time"><span>28 May 2026</span><span class="qp-activity-time-dot"></span><span>03:00pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">MM</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">You marked as paid – Invoice #INV-0091 Progress Claim 1</div>
+          <div class="qp-activity-time"><span>27 May 2026</span><span class="qp-activity-time-dot"></span><span>05:10pm</span></div>
+        </div>
+      </div>
+      <div class="qp-activity-item">
+        <div class="qp-activity-avatar">JE</div>
+        <div class="qp-activity-content">
+          <div class="qp-activity-action">Julie Esparza sent – Quote #22341 Bathroom Fixtures &amp; Fittings</div>
+          <div class="qp-activity-time"><span>26 May 2026</span><span class="qp-activity-time-dot"></span><span>11:00am</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile-only: "Only show unread" pill — always at bottom of sheet (both tabs, Figma 1059-1230) -->
+    <div class="qp-notif-mobile-footer" onclick="toggleReadFilter('unread')">
+      <button class="qp-notif-unread-pill">
+        <span>Only show unread</span>
+        <div class="qp-toggle" id="toggle-unread-mobile"><div class="qp-toggle-thumb"></div></div>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Comment dialog (bottom sheet) ── -->
+<div class="qp-comment-overlay" id="qp-comment-overlay" onclick="closeCommentDialog()">
+  <div class="qp-comment-dialog" onclick="event.stopPropagation()">
+    <div class="qp-comment-header">
+      <div class="qp-comment-handle"></div>
+      <span class="qp-comment-title">Leave a note</span>
+      <span class="qp-comment-ref" id="comment-ref-text"></span>
+    </div>
+    <textarea class="qp-comment-textarea" id="comment-textarea" placeholder="Write your note here..."></textarea>
+    <div class="qp-comment-actions">
+      <button class="qp-comment-cancel" onclick="closeCommentDialog()">Cancel</button>
+      <button class="qp-comment-done" onclick="submitComment()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── CO Details bottom sheet (Figma 1106:5012) ── -->
+<div class="co-detail-overlay" id="co-detail-overlay" onclick="closeCoDetails()">
+  <div class="co-detail-sheet" onclick="event.stopPropagation()">
+
+    <!-- Sticky header (drag zone) -->
+    <div class="co-detail-header" id="co-detail-header">
+      <div class="qp-comment-handle"></div>
+      <div class="co-detail-hd-row">
+        <div class="co-detail-thumb">
+          <img src="assets/images/08fa6f48-31e3-47be-9f71-aa054eea522a.png" alt=""
+               onerror="this.style.display='none'">
+        </div>
+        <div class="co-detail-hd-info">
+          <div class="co-detail-hd-meta">
+            <span class="qr-badge qr-badge-pending" id="co-detail-badge">Pending your review</span>
+            <span class="qr-date qr-date-pending" id="co-detail-date">Valid until 14 April 2026</span>
+          </div>
+          <div class="co-detail-hd-quote" id="co-detail-quote">Quote #23944</div>
+          <div class="co-detail-hd-title" id="co-detail-title">Dutch House Security INV TEST</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="co-detail-body">
+
+      <!-- Timeline -->
+      <div class="co-timeline" style="padding:16px 14px 0;">
+        <!-- Revision 1 — Accepted -->
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Revision 1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+          </div>
+        </div>
+        <!-- Change Order 1.1 — Accepted -->
+        <div class="co-tl-item">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-done"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="co-tl-line"></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-title-row">
+              <span class="co-tl-label">Change Order 1.1</span>
+              <span class="qr-badge qr-badge-accepted">Accepted</span>
+            </div>
+            <p class="co-tl-desc">Additional earth terminal required to complete the system installation and ensure correct connectivity.</p>
+          </div>
+        </div>
+        <!-- Change Order 1.2 — Pending (active) -->
+        <div class="co-tl-item co-tl-item-active">
+          <div class="co-tl-left">
+            <div class="co-tl-dot co-tl-dot-pending"><span class="co-tl-dot-inner"></span></div>
+          </div>
+          <div class="co-tl-body">
+            <div class="co-tl-label" style="font-size:16px;font-weight:600;color:#313131;margin-bottom:6px;" id="co-detail-co-label">Change Order 1.2</div>
+            <div class="co-tl-status-row">
+              <span class="qr-badge qr-badge-pending">Pending your review</span>
+              <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+            </div>
+            <!-- Value breakdown table — inside CO 1.2 body -->
+            <div class="co-value-table" style="margin:10px 0 0;">
+              <div class="co-value-row">
+                <span class="co-value-label">Previous Project Total</span>
+                <span class="co-value-num">$12,200,000.00</span>
+              </div>
+              <div class="co-value-row">
+                <span class="co-value-label">Change Order 1.2</span>
+                <span class="co-value-num" style="color:#cf3400;">−$1,200,000.00</span>
+              </div>
+              <div class="co-value-row" style="border-bottom:none;">
+                <span class="co-value-label">Variation Value</span>
+                <span class="co-value-num" style="color:#009113;">+$2,120,000.00</span>
+              </div>
+              <div class="co-value-footer">
+                <div class="co-value-footer-left">
+                  <span class="co-value-footer-label">New Project Total</span>
+                  <span class="co-value-footer-sub">if accepted</span>
+                </div>
+                <span class="co-value-num" style="color:#009113;font-size:16px;">$13,120,000.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Change Order 1.2 doc card — offset to align under CO 1.2 timeline body -->
+      <div class="co-doc-card" style="margin:8px 14px 12px 40px;">
+        <div class="co-doc-header">
+          <i class="fa-solid fa-file-invoice co-doc-icon"></i>
+          <span class="co-doc-ref">Change Order 1.2</span>
+        </div>
+        <div class="co-doc-row">
+          <div class="co-doc-desc">Additional site setup &amp; commissioning</div>
+          <div class="co-doc-right">
+            <div class="co-doc-delta" style="color:#009113;">+$1,000,000.00</div>
+            <div class="co-doc-sublabel">Change Order Changes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variation 1 — Above Estimate -->
+      <div class="co-doc-card co-doc-var" style="margin:0 14px 12px 40px;">
+        <div class="co-doc-header">
+          <i class="fa-solid fa-file-plus co-doc-icon"></i>
+          <span class="co-doc-ref">Variation 1</span>
+          <span class="co-doc-rev">Revision 3</span>
+          <span class="qr-badge qr-badge-accepted" style="margin-left:auto;">Above Estimate</span>
+        </div>
+        <div class="co-doc-title">Additional Downlights – Master Bedroom</div>
+        <div class="co-doc-amounts">
+          <div>
+            <div class="co-doc-val">$1,200,000.00</div>
+            <div class="co-doc-vallabel">Original Estimate Value</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:12px;font-weight:600;color:#009113;">+$1,000,000.00</div>
+            <div class="co-doc-val">$2,200,000.00</div>
+            <div class="co-doc-vallabel">Final Price</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variation 1 — Same as estimate -->
+      <div class="co-doc-card co-doc-var" style="margin:0 14px 24px 40px;">
+        <div class="co-doc-header">
+          <i class="fa-solid fa-file-plus co-doc-icon"></i>
+          <span class="co-doc-ref">Variation 1</span>
+          <span class="co-doc-rev">Revision 3</span>
+          <span class="qr-badge" style="margin-left:auto;background:rgba(156,156,156,0.26);">Same as estimate</span>
+        </div>
+        <div class="co-doc-title">Additional Downlights – Master Bedroom</div>
+        <div class="co-doc-amounts">
+          <div>
+            <div class="co-doc-val">$1,200,000.00</div>
+            <div class="co-doc-vallabel">Original Estimate Value</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="co-doc-val">$1,200,000.00</div>
+            <div class="co-doc-vallabel">Final Price</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /co-detail-body -->
+
+    <!-- Sticky footer: action buttons -->
+    <div class="co-detail-footer">
+      <div class="qr-action-group" style="width:100%;">
+        <button class="qr-action-btn" onclick="openCommentDialog('CO-1.2')">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+        <button class="qr-action-btn" onclick="closeCoDetails()">TBC</button>
+        <button class="qr-action-btn" onclick="closeCoDetails()">Reject</button>
+        <button class="qr-action-btn" onclick="closeCoDetails()">Accept</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Needs Your Attention dialog ── -->
+<div class="nya-overlay" id="nya-overlay" onclick="closeNYADialog()">
+  <div class="nya-dialog" onclick="event.stopPropagation()">
+
+    <!-- Header: title + counter -->
+    <div class="nya-header">
+      <span class="nya-title">Needs your attention</span>
+      <span class="nya-counter" id="nya-counter">01/02</span>
+    </div>
+    <!-- Progress bar (JS-driven width) -->
+    <div class="nya-progress">
+      <div class="nya-progress-fill" id="nya-progress-fill" style="width:50%"></div>
+    </div>
+
+    <!-- ── Item 01: Change Order ── -->
+    <div class="nya-item" id="nya-item-1">
+      <div class="nya-status-row">
+        <span class="nya-status-badge">Pending your review</span>
+        <span class="nya-valid-date">Valid until 14 April 2026</span>
+      </div>
+      <div class="nya-ref-row">
+        <span>Quote #23944</span>
+        <span>Change Order 3.1</span>
+      </div>
+      <div class="nya-item-title">Dutch House Security INV TEST</div>
+      <div class="nya-amounts">
+        <div class="nya-amount-row">
+          <span>Original amount</span>
+          <span>£20,000.00</span>
+        </div>
+        <div class="nya-amount-row">
+          <span>Revised amount</span>
+          <span>£25,000.00</span>
+        </div>
+        <div class="nya-amount-row">
+          <span>Net change</span>
+          <span class="nya-amount-positive">+£5,000.00</span>
+        </div>
+      </div>
+      <div class="nya-actions">
+        <button class="nya-action-btn nya-icon-btn">
+          <i class="fa-regular fa-comment-dots"></i>
+        </button>
+        <button class="nya-action-btn" onclick="nyaNext()">TBC</button>
+        <button class="nya-action-btn" onclick="nyaNext()">Reject</button>
+        <button class="nya-action-btn" onclick="nyaNext()">Accept</button>
+      </div>
+      <button class="nya-view-btn" onclick="closeNYADialog();go('variations')">View Change Order</button>
+      <button class="nya-remind-btn" onclick="closeNYADialog()">Remind me later</button>
+    </div>
+
+    <!-- ── Item 02: Invoice ── -->
+    <div class="nya-item" id="nya-item-2" style="display:none">
+      <div class="nya-status-row">
+        <div class="nya-status-dot-row">
+          <span class="nya-status-dot" style="background:#cf3400;"></span>
+          <span class="nya-status-dot-label">Unpaid</span>
+        </div>
+        <span class="nya-valid-date" style="color:#cf3400;">Valid until 14 April 2026</span>
+      </div>
+      <div class="nya-inv-row">
+        <div class="nya-inv-left">
+          <div class="nya-inv-title">Invoice for Aftercare</div>
+          <div class="nya-inv-ref">Invoice #00002</div>
+        </div>
+        <div class="nya-inv-right">
+          <div class="nya-inv-amount">£850,000.00</div>
+          <div class="nya-inv-vat">exclude VAT</div>
+        </div>
+      </div>
+      <div class="nya-payment-lbl">Payment Progress</div>
+      <div class="nya-seg-bar">
+        <div class="nya-seg-fill" style="background:#009113;"></div>
+        <div class="nya-seg-fill" style="background:#cf3400;"></div>
+      </div>
+      <div class="nya-seg-legend">
+        <div class="nya-seg-legend-side">
+          <div class="nya-seg-legend-row">
+            <span class="nya-seg-dot" style="background:#009113;"></span>
+            <span>Paid so far</span>
+            <span>50%</span>
+          </div>
+          <div class="nya-seg-amount">£15,000.00</div>
+        </div>
+        <div class="nya-seg-legend-side">
+          <div class="nya-seg-legend-row">
+            <span class="nya-seg-dot" style="background:#cf3400;"></span>
+            <span>To pay now</span>
+            <span>50%</span>
+          </div>
+          <div class="nya-seg-amount">£15,000.00</div>
+        </div>
+      </div>
+      <div class="nya-two-btns">
+        <button class="nya-view-btn" onclick="closeNYADialog();go('invoices')">View Invoice</button>
+        <button class="nya-view-btn" onclick="closeNYADialog();go('invoices')">Pay Now</button>
+      </div>
+      <button class="nya-remind-btn" onclick="closeNYADialog()">Remind me later</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Skeleton loading overlay — per-page layouts -->
+<div id="skeleton-overlay">
+  <!-- Shared topbar -->
+  <div class="sk-topbar">
+    <div class="sk-block sk-topbar-back"></div>
+    <div class="sk-block sk-nav-blob"></div>
+    <div class="sk-block sk-avatar"></div>
+  </div>
+
+  <!-- ── LOGIN ── -->
+  <div class="sk-body sk-active" id="sk-layout-login" style="flex-direction:row;padding:0;background:#f0ede8;">
+    <div class="sk-login-photo" style="flex:1;background:#ddd8d0;"></div>
+    <div class="sk-login-form" style="width:420px;flex-shrink:0;background:#fff;display:flex;flex-direction:column;justify-content:center;padding:48px 40px;gap:20px;">
+      <div class="sk-block sk-logo-ring" style="margin-bottom:8px;"></div>
+      <div class="sk-block sk-line sk-w-55 sk-h-xl" style="align-self:center;"></div>
+      <div class="sk-block sk-line sk-w-40 sk-h-xs" style="align-self:center;"></div>
+      <div style="height:14px;"></div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="sk-block sk-line sk-w-30 sk-h-xs"></div>
+        <div class="sk-block sk-input-el"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="sk-block sk-line sk-w-25 sk-h-xs"></div>
+        <div class="sk-block sk-input-el"></div>
+      </div>
+      <div class="sk-block sk-btn-full" style="margin-top:6px;"></div>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD ── -->
+  <div class="sk-body" id="sk-layout-dash" style="flex-direction:column;gap:16px;padding:20px;">
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:4px;">
+      <div class="sk-block sk-line sk-w-55 sk-h-xl"></div>
+      <div class="sk-block sk-line sk-w-35 sk-h-xs"></div>
+    </div>
+    <div class="sk-3col">
+      <div class="sk-shell" style="padding:16px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+            <div class="sk-block sk-line sk-w-70 sk-h-md"></div>
+            <div class="sk-block sk-line sk-w-50 sk-h-xs"></div>
+          </div>
+          <div class="sk-block sk-line sk-badge-skel"></div>
+        </div>
+        <div class="sk-block sk-line sk-w-100 sk-h-bar"></div>
+        <div style="display:flex;justify-content:space-between;">
+          <div class="sk-block sk-line sk-w-40 sk-h-xs"></div>
+          <div class="sk-block sk-line sk-w-30 sk-h-xs"></div>
+        </div>
+      </div>
+      <div class="sk-shell" style="padding:16px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+            <div class="sk-block sk-line sk-w-75 sk-h-md" style="animation-delay:.06s"></div>
+            <div class="sk-block sk-line sk-w-45 sk-h-xs" style="animation-delay:.06s"></div>
+          </div>
+          <div class="sk-block sk-line sk-badge-skel" style="animation-delay:.06s"></div>
+        </div>
+        <div class="sk-block sk-line sk-w-100 sk-h-bar" style="animation-delay:.06s"></div>
+        <div style="display:flex;justify-content:space-between;">
+          <div class="sk-block sk-line sk-w-40 sk-h-xs" style="animation-delay:.06s"></div>
+          <div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.06s"></div>
+        </div>
+      </div>
+      <div class="sk-shell" style="padding:16px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+          <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+            <div class="sk-block sk-line sk-w-65 sk-h-md" style="animation-delay:.12s"></div>
+            <div class="sk-block sk-line sk-w-55 sk-h-xs" style="animation-delay:.12s"></div>
+          </div>
+          <div class="sk-block sk-line sk-badge-skel" style="animation-delay:.12s"></div>
+        </div>
+        <div class="sk-block sk-line sk-w-100 sk-h-bar" style="animation-delay:.12s"></div>
+        <div style="display:flex;justify-content:space-between;">
+          <div class="sk-block sk-line sk-w-45 sk-h-xs" style="animation-delay:.12s"></div>
+          <div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.12s"></div>
+        </div>
+      </div>
+    </div>
+    <div class="sk-3col">
+      <div class="sk-shell" style="padding:16px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div class="sk-block sk-line sk-w-70 sk-h-md" style="animation-delay:.18s"></div>
+          <div class="sk-block sk-line sk-w-50 sk-h-xs" style="animation-delay:.18s"></div>
+        </div>
+        <div class="sk-block sk-line sk-w-100 sk-h-bar" style="animation-delay:.18s"></div>
+      </div>
+      <div class="sk-shell" style="padding:16px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div class="sk-block sk-line sk-w-65 sk-h-md" style="animation-delay:.24s"></div>
+          <div class="sk-block sk-line sk-w-48 sk-h-xs" style="animation-delay:.24s"></div>
+        </div>
+        <div class="sk-block sk-line sk-w-100 sk-h-bar" style="animation-delay:.24s"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROJECT DETAIL ── -->
+  <div class="sk-body" id="sk-layout-detail" style="flex-direction:column;gap:0;padding:0;">
+    <div style="background:#fff;border-bottom:1px solid #eaeaea;padding:20px 24px;display:flex;gap:20px;align-items:stretch;">
+      <div style="display:flex;flex-direction:column;gap:10px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-50 sk-h-xl"></div>
+        <div class="sk-block sk-line sk-w-70 sk-h-sm"></div>
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <div class="sk-block sk-line sk-chip" style="width:70px;"></div>
+          <div class="sk-block sk-line sk-chip" style="width:70px;animation-delay:.05s"></div>
+          <div class="sk-block sk-line sk-chip" style="width:70px;animation-delay:.1s"></div>
+        </div>
+      </div>
+      <div class="sk-desktop-only" style="display:flex;flex-direction:column;gap:8px;width:280px;flex-shrink:0;border-left:1px solid #eaeaea;padding-left:20px;">
+        <div class="sk-block sk-line sk-w-40 sk-h-xs"></div>
+        <div class="sk-block sk-line sk-w-100 sk-h-bar"></div>
+        <div style="display:flex;justify-content:space-between;">
+          <div class="sk-block sk-line sk-w-35 sk-h-xs"></div>
+          <div class="sk-block sk-line sk-w-30 sk-h-xs"></div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#fff;border-bottom:1px solid #eaeaea;padding:0 24px;display:flex;gap:4px;">
+      <div class="sk-block sk-line sk-tab-el" style="max-width:90px;"></div>
+      <div class="sk-block sk-line sk-tab-el" style="max-width:90px;animation-delay:.05s"></div>
+      <div class="sk-block sk-line sk-tab-el" style="max-width:90px;animation-delay:.1s"></div>
+      <div class="sk-block sk-line sk-tab-el" style="max-width:90px;animation-delay:.15s"></div>
+    </div>
+    <div style="padding:20px;display:flex;gap:14px;flex:1;">
+      <div class="sk-shell" style="flex:2;padding:16px;display:flex;flex-direction:column;gap:12px;">
+        <div class="sk-block sk-line sk-w-35 sk-h-base"></div>
+        <div class="sk-block sk-line sk-w-100 sk-h-xs"></div>
+        <div class="sk-block sk-line sk-w-90 sk-h-xs" style="animation-delay:.05s"></div>
+        <div class="sk-block sk-line sk-w-95 sk-h-xs" style="animation-delay:.1s"></div>
+        <div style="height:6px;"></div>
+        <div class="sk-block sk-line sk-w-100 sk-h-xs" style="animation-delay:.15s"></div>
+        <div class="sk-block sk-line sk-w-80 sk-h-xs" style="animation-delay:.2s"></div>
+      </div>
+      <div class="sk-shell sk-desktop-only" style="flex:1;padding:16px;display:flex;flex-direction:column;gap:10px;">
+        <div class="sk-block sk-line sk-w-50 sk-h-base"></div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+          <div style="display:flex;justify-content:space-between;">
+            <div class="sk-block sk-line sk-w-40 sk-h-xs"></div>
+            <div class="sk-block sk-line sk-w-35 sk-h-xs"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;">
+            <div class="sk-block sk-line sk-w-45 sk-h-xs" style="animation-delay:.06s"></div>
+            <div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.06s"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;">
+            <div class="sk-block sk-line sk-w-40 sk-h-xs" style="animation-delay:.12s"></div>
+            <div class="sk-block sk-line sk-w-35 sk-h-xs" style="animation-delay:.12s"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── QUOTES ── -->
+  <div class="sk-body" id="sk-layout-quotes" style="flex-direction:column;gap:12px;padding:20px;">
+    <div class="sk-shell-top" style="padding:16px 20px;display:flex;gap:20px;align-items:center;">
+      <div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-50 sk-h-lg"></div>
+        <div class="sk-block sk-line sk-w-35 sk-h-xs"></div>
+      </div>
+      <div class="sk-desktop-only" style="display:flex;flex-direction:column;gap:8px;width:220px;flex-shrink:0;border-left:1px solid #eaeaea;padding-left:20px;">
+        <div class="sk-block sk-line sk-w-50 sk-h-xs"></div>
+        <div class="sk-block sk-line sk-w-70 sk-h-md"></div>
+        <div class="sk-block sk-line sk-w-100 sk-h-bar"></div>
+      </div>
+    </div>
+    <div class="sk-filters-row">
+      <div class="sk-block sk-chip" style="width:64px;"></div>
+      <div class="sk-block sk-chip" style="width:80px;"></div>
+      <div class="sk-block sk-chip" style="width:76px;"></div>
+      <div class="sk-block sk-chip" style="width:88px;"></div>
+      <div class="sk-block sk-chip" style="width:clamp(90px,34%,130px);margin-left:auto;border-radius:4px;"></div>
+    </div>
+    <!-- Desktop: 3-column grid rows -->
+    <div class="sk-qr-card sk-desktop-only">
+      <div class="sk-gcell"><div class="sk-block sk-line sk-w-30 sk-h-xs"></div><div class="sk-block sk-line sk-w-60 sk-h-base"></div><div class="sk-block sk-line sk-w-45 sk-h-xs"></div></div>
+      <div class="sk-gcell" style="justify-content:space-between;"><div class="sk-block sk-line sk-badge-skel"></div><div style="display:flex;flex-direction:column;gap:4px;"><div class="sk-block sk-line sk-w-70 sk-h-md"></div><div class="sk-block sk-line sk-w-55 sk-h-xs"></div></div></div>
+      <div class="sk-gcell-btns"><div class="sk-block sk-line sk-btn-s"></div><div class="sk-block sk-line sk-btn-s"></div></div>
+    </div>
+    <div class="sk-qr-card sk-desktop-only">
+      <div class="sk-gcell"><div class="sk-block sk-line sk-w-25 sk-h-xs" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-55 sk-h-base" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-40 sk-h-xs" style="animation-delay:.07s"></div></div>
+      <div class="sk-gcell" style="justify-content:space-between;"><div class="sk-block sk-line sk-badge-skel" style="animation-delay:.07s"></div><div style="display:flex;flex-direction:column;gap:4px;"><div class="sk-block sk-line sk-w-65 sk-h-md" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-50 sk-h-xs" style="animation-delay:.07s"></div></div></div>
+      <div class="sk-gcell-btns"><div class="sk-block sk-line sk-btn-s" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-btn-s" style="animation-delay:.07s"></div></div>
+    </div>
+    <div class="sk-qr-card sk-desktop-only">
+      <div class="sk-gcell"><div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-60 sk-h-base" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-42 sk-h-xs" style="animation-delay:.14s"></div></div>
+      <div class="sk-gcell" style="justify-content:space-between;"><div class="sk-block sk-line sk-badge-skel" style="animation-delay:.14s"></div><div style="display:flex;flex-direction:column;gap:4px;"><div class="sk-block sk-line sk-w-70 sk-h-md" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-50 sk-h-xs" style="animation-delay:.14s"></div></div></div>
+      <div class="sk-gcell-btns"><div class="sk-block sk-line sk-btn-s" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-btn-s" style="animation-delay:.14s"></div></div>
+    </div>
+    <!-- Mobile: stacked quote cards -->
+    <div class="sk-mobile-only sk-shell" style="flex-direction:column;gap:0;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:44px 1fr 1fr;gap:10px;padding:12px 12px 8px;align-items:start;">
+        <div class="sk-block sk-thumb-sm"></div>
+        <div style="display:flex;flex-direction:column;gap:5px;"><div class="sk-block sk-line sk-w-70 sk-h-xs"></div><div class="sk-block sk-line sk-w-90 sk-h-base"></div></div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;"><div class="sk-block sk-line sk-badge-skel"></div></div>
+      </div>
+      <div style="display:flex;gap:16px;padding:4px 12px 8px 66px;"><div class="sk-block sk-line sk-w-30 sk-h-xs"></div><div class="sk-block sk-line sk-w-25 sk-h-xs"></div></div>
+      <div style="border-top:1px solid #f0f0f0;padding:10px 12px;"><div class="sk-block sk-line sk-w-100 sk-h-md" style="border-radius:4px;"></div></div>
+    </div>
+    <div class="sk-mobile-only sk-shell" style="flex-direction:column;gap:0;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:44px 1fr 1fr;gap:10px;padding:12px 12px 8px;align-items:start;">
+        <div class="sk-block sk-thumb-sm" style="animation-delay:.07s"></div>
+        <div style="display:flex;flex-direction:column;gap:5px;"><div class="sk-block sk-line sk-w-65 sk-h-xs" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-80 sk-h-base" style="animation-delay:.07s"></div></div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;"><div class="sk-block sk-line sk-badge-skel" style="animation-delay:.07s"></div></div>
+      </div>
+      <div style="display:flex;gap:16px;padding:4px 12px 8px 66px;"><div class="sk-block sk-line sk-w-35 sk-h-xs" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-20 sk-h-xs" style="animation-delay:.07s"></div></div>
+      <div style="border-top:1px solid #f0f0f0;padding:10px 12px;"><div class="sk-block sk-line sk-w-100 sk-h-md" style="border-radius:4px;animation-delay:.07s"></div></div>
+    </div>
+    <div class="sk-mobile-only sk-shell" style="flex-direction:column;gap:0;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:44px 1fr 1fr;gap:10px;padding:12px 12px 8px;align-items:start;">
+        <div class="sk-block sk-thumb-sm" style="animation-delay:.14s"></div>
+        <div style="display:flex;flex-direction:column;gap:5px;"><div class="sk-block sk-line sk-w-75 sk-h-xs" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-85 sk-h-base" style="animation-delay:.14s"></div></div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;"><div class="sk-block sk-line sk-badge-skel" style="animation-delay:.14s"></div></div>
+      </div>
+      <div style="display:flex;gap:16px;padding:4px 12px 8px 66px;"><div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-25 sk-h-xs" style="animation-delay:.14s"></div></div>
+      <div style="border-top:1px solid #f0f0f0;padding:10px 12px;"><div class="sk-block sk-line sk-w-100 sk-h-md" style="border-radius:4px;animation-delay:.14s"></div></div>
+    </div>
+  </div>
+
+  <!-- ── INVOICES ── -->
+  <div class="sk-body" id="sk-layout-invoices" style="flex-direction:column;gap:14px;padding:20px;background:#f3f4f8;">
+    <div class="sk-summary-row">
+      <div class="sk-card-left">
+        <div class="sk-card-left-col">
+          <div class="sk-block sk-line sk-w-80 sk-h-xl"></div>
+          <div class="sk-block sk-line sk-w-60 sk-h-xs"></div>
+          <div class="sk-block sk-line sk-w-70 sk-h-xl"></div>
+        </div>
+        <div class="sk-card-right-col">
+          <div class="sk-block sk-line sk-w-40 sk-h-xs"></div>
+          <div style="display:flex;align-items:baseline;gap:6px;">
+            <div class="sk-block sk-line sk-w-40 sk-h-lg"></div>
+            <div class="sk-block sk-line sk-w-25 sk-h-sm"></div>
+          </div>
+          <div class="sk-block sk-line sk-w-100 sk-h-bar" style="height:12px;"></div>
+          <div style="display:flex;justify-content:space-between;">
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:55px;height:9px;"></div></div>
+              <div class="sk-block sk-line" style="width:65px;height:11px;margin-left:14px;"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:55px;height:9px;"></div></div>
+              <div class="sk-block sk-line" style="width:65px;height:11px;margin-left:14px;"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;">
+              <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:50px;height:9px;"></div></div>
+              <div class="sk-block sk-line" style="width:65px;height:11px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sk-card-right">
+        <div class="sk-block sk-line sk-w-60 sk-h-xs"></div>
+        <div class="sk-block sk-line sk-w-80 sk-h-base"></div>
+        <div class="sk-block sk-line sk-w-70 sk-h-xs"></div>
+        <div class="sk-block sk-line sk-w-65 sk-h-xs"></div>
+        <div style="height:1px;background:#eaeaea;"></div>
+        <div style="display:flex;justify-content:space-between;">
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div class="sk-block sk-line" style="width:55px;height:9px;"></div>
+            <div class="sk-block sk-line" style="width:65px;height:12px;"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div class="sk-block sk-line" style="width:70px;height:9px;"></div>
+            <div class="sk-block sk-line" style="width:65px;height:12px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sk-filters-row">
+      <div class="sk-block sk-chip" style="width:64px;"></div>
+      <div class="sk-block sk-chip" style="width:76px;"></div>
+      <div class="sk-block sk-chip" style="width:60px;"></div>
+      <div class="sk-block sk-chip" style="width:82px;"></div>
+      <div class="sk-block sk-chip" style="width:clamp(90px,34%,130px);margin-left:auto;border-radius:4px;"></div>
+    </div>
+    <!-- Desktop: 4-column invoice cards -->
+    <div class="sk-inv-card-r sk-desktop-only">
+      <div class="sk-gcell"><div class="sk-block sk-line sk-w-35 sk-h-xs"></div><div class="sk-block sk-line sk-w-55 sk-h-sm"></div><div class="sk-block sk-line sk-w-45 sk-h-xs"></div></div>
+      <div class="sk-gcell" style="justify-content:space-between;"><div style="display:flex;align-items:center;gap:6px;"><div class="sk-block sk-line sk-badge-skel"></div><div class="sk-block sk-line sk-w-40 sk-h-xs"></div></div><div style="display:flex;flex-direction:column;gap:3px;margin-top:auto;"><div class="sk-block sk-line sk-w-70 sk-h-md"></div><div class="sk-block sk-line sk-w-50 sk-h-xs"></div></div></div>
+      <div class="sk-gcell" style="justify-content:space-between;"><div class="sk-block sk-line sk-w-35 sk-h-xs"></div><div style="display:flex;align-items:baseline;gap:5px;"><div class="sk-block sk-line sk-w-45 sk-h-md"></div><div class="sk-block sk-line sk-w-30 sk-h-xs"></div></div><div class="sk-block sk-line sk-w-100 sk-h-micro"></div><div style="display:flex;justify-content:space-between;"><div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:50px;height:8px;"></div></div><div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:50px;height:8px;"></div></div></div></div>
+      <div class="sk-gcell-btns"><div class="sk-block sk-line sk-btn-s"></div><div class="sk-block sk-line sk-btn-s"></div></div>
+    </div>
+    <div class="sk-inv-card-r sk-desktop-only">
+      <div class="sk-gcell"><div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-50 sk-h-sm" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-40 sk-h-xs" style="animation-delay:.07s"></div></div>
+      <div class="sk-gcell" style="justify-content:space-between;"><div style="display:flex;align-items:center;gap:6px;"><div class="sk-block sk-line sk-badge-skel" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-35 sk-h-xs" style="animation-delay:.07s"></div></div><div style="display:flex;flex-direction:column;gap:3px;margin-top:auto;"><div class="sk-block sk-line sk-w-65 sk-h-md" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-45 sk-h-xs" style="animation-delay:.07s"></div></div></div>
+      <div class="sk-gcell" style="justify-content:space-between;"><div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.07s"></div><div style="display:flex;align-items:baseline;gap:5px;"><div class="sk-block sk-line sk-w-45 sk-h-md" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.07s"></div></div><div class="sk-block sk-line sk-w-100 sk-h-micro" style="animation-delay:.07s"></div><div style="display:flex;justify-content:space-between;"><div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:45px;height:8px;animation-delay:.07s"></div></div><div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:45px;height:8px;animation-delay:.07s"></div></div></div></div>
+      <div class="sk-gcell-btns"><div class="sk-block sk-line sk-btn-s" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-btn-s" style="animation-delay:.07s"></div></div>
+    </div>
+    <div class="sk-inv-card-r sk-desktop-only">
+      <div class="sk-gcell"><div class="sk-block sk-line sk-w-35 sk-h-xs" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-55 sk-h-sm" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-42 sk-h-xs" style="animation-delay:.14s"></div></div>
+      <div class="sk-gcell" style="justify-content:space-between;"><div style="display:flex;align-items:center;gap:6px;"><div class="sk-block sk-line sk-badge-skel" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-40 sk-h-xs" style="animation-delay:.14s"></div></div><div style="display:flex;flex-direction:column;gap:3px;margin-top:auto;"><div class="sk-block sk-line sk-w-70 sk-h-md" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-50 sk-h-xs" style="animation-delay:.14s"></div></div></div>
+      <div class="sk-gcell" style="justify-content:space-between;"><div class="sk-block sk-line sk-w-35 sk-h-xs" style="animation-delay:.14s"></div><div style="display:flex;align-items:baseline;gap:5px;"><div class="sk-block sk-line sk-w-45 sk-h-md" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.14s"></div></div><div class="sk-block sk-line sk-w-100 sk-h-micro" style="animation-delay:.14s"></div><div style="display:flex;justify-content:space-between;"><div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:50px;height:8px;animation-delay:.14s"></div></div><div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:50px;height:8px;animation-delay:.14s"></div></div></div></div>
+      <div class="sk-gcell-btns"><div class="sk-block sk-line sk-btn-s" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-btn-s" style="animation-delay:.14s"></div></div>
+    </div>
+    <!-- Mobile: stacked invoice cards -->
+    <div class="sk-mobile-only sk-shell" style="flex-direction:column;gap:0;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 12px 10px;">
+        <div style="display:flex;flex-direction:column;gap:6px;"><div class="sk-block sk-line sk-w-60 sk-h-xs"></div><div class="sk-block sk-line sk-w-80 sk-h-sm"></div><div class="sk-block sk-line sk-badge-skel" style="margin-top:2px;"></div></div>
+        <div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end;"><div class="sk-block sk-line sk-w-55 sk-h-xs"></div><div class="sk-block sk-line sk-w-80 sk-h-lg"></div><div class="sk-block sk-line sk-w-100 sk-h-micro" style="margin-top:2px;"></div></div>
+      </div>
+      <div style="border-top:1px solid #eaeaea;display:flex;gap:8px;padding:10px 12px;">
+        <div class="sk-block sk-line" style="flex:1;height:32px;border-radius:4px;"></div>
+        <div class="sk-block sk-line" style="flex:1;height:32px;border-radius:4px;"></div>
+      </div>
+      <div style="padding:0 12px 10px;"><div class="sk-block sk-line sk-w-100 sk-h-md" style="border-radius:4px;"></div></div>
+    </div>
+    <div class="sk-mobile-only sk-shell" style="flex-direction:column;gap:0;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 12px 10px;">
+        <div style="display:flex;flex-direction:column;gap:6px;"><div class="sk-block sk-line sk-w-55 sk-h-xs" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-75 sk-h-sm" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-badge-skel" style="margin-top:2px;animation-delay:.07s"></div></div>
+        <div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end;"><div class="sk-block sk-line sk-w-50 sk-h-xs" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-80 sk-h-lg" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-100 sk-h-micro" style="margin-top:2px;animation-delay:.07s"></div></div>
+      </div>
+      <div style="border-top:1px solid #eaeaea;display:flex;gap:8px;padding:10px 12px;">
+        <div class="sk-block sk-line" style="flex:1;height:32px;border-radius:4px;animation-delay:.07s"></div>
+        <div class="sk-block sk-line" style="flex:1;height:32px;border-radius:4px;animation-delay:.07s"></div>
+      </div>
+      <div style="padding:0 12px 10px;"><div class="sk-block sk-line sk-w-100 sk-h-md" style="border-radius:4px;animation-delay:.07s"></div></div>
+    </div>
+    <div class="sk-mobile-only sk-shell" style="flex-direction:column;gap:0;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 12px 10px;">
+        <div style="display:flex;flex-direction:column;gap:6px;"><div class="sk-block sk-line sk-w-60 sk-h-xs" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-80 sk-h-sm" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-badge-skel" style="margin-top:2px;animation-delay:.14s"></div></div>
+        <div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end;"><div class="sk-block sk-line sk-w-55 sk-h-xs" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-80 sk-h-lg" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-100 sk-h-micro" style="margin-top:2px;animation-delay:.14s"></div></div>
+      </div>
+      <div style="border-top:1px solid #eaeaea;display:flex;gap:8px;padding:10px 12px;">
+        <div class="sk-block sk-line" style="flex:1;height:32px;border-radius:4px;animation-delay:.14s"></div>
+        <div class="sk-block sk-line" style="flex:1;height:32px;border-radius:4px;animation-delay:.14s"></div>
+      </div>
+      <div style="padding:0 12px 10px;"><div class="sk-block sk-line sk-w-100 sk-h-md" style="border-radius:4px;animation-delay:.14s"></div></div>
+    </div>
+  </div>
+
+  <!-- ── VARIATIONS ── -->
+  <div class="sk-body" id="sk-layout-variations" style="flex-direction:column;gap:12px;padding:20px;">
+    <div class="sk-shell-top" style="padding:16px 20px;display:flex;align-items:center;gap:16px;">
+      <div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-45 sk-h-lg"></div>
+        <div class="sk-block sk-line sk-w-65 sk-h-xs"></div>
+      </div>
+      <div class="sk-block sk-line sk-btn-m"></div>
+    </div>
+    <div class="sk-filters-row">
+      <div class="sk-block sk-chip" style="width:60px;"></div>
+      <div class="sk-block sk-chip" style="width:80px;"></div>
+      <div class="sk-block sk-chip" style="width:72px;"></div>
+    </div>
+    <div class="sk-shell" style="padding:14px 16px;display:flex;align-items:center;gap:16px;">
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-25 sk-h-xs"></div>
+        <div class="sk-block sk-line sk-w-70 sk-h-base"></div>
+        <div class="sk-block sk-line sk-w-45 sk-h-xs"></div>
+      </div>
+      <div class="sk-block sk-line sk-badge-skel"></div>
+      <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;flex-shrink:0;width:clamp(70px,18%,100px);">
+        <div class="sk-block sk-line sk-w-100 sk-h-md"></div>
+        <div class="sk-block sk-line sk-w-70 sk-h-xs"></div>
+      </div>
+      <div class="sk-block sk-line sk-btn-m sk-desktop-only"></div>
+    </div>
+    <div class="sk-shell" style="padding:14px 16px;display:flex;align-items:center;gap:16px;">
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-22 sk-h-xs" style="animation-delay:.07s"></div>
+        <div class="sk-block sk-line sk-w-60 sk-h-base" style="animation-delay:.07s"></div>
+        <div class="sk-block sk-line sk-w-38 sk-h-xs" style="animation-delay:.07s"></div>
+      </div>
+      <div class="sk-block sk-line sk-badge-skel" style="animation-delay:.07s"></div>
+      <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;flex-shrink:0;width:clamp(70px,18%,100px);">
+        <div class="sk-block sk-line sk-w-100 sk-h-md" style="animation-delay:.07s"></div>
+        <div class="sk-block sk-line sk-w-65 sk-h-xs" style="animation-delay:.07s"></div>
+      </div>
+      <div class="sk-block sk-line sk-btn-m sk-desktop-only" style="animation-delay:.07s"></div>
+    </div>
+    <div class="sk-shell" style="padding:14px 16px;display:flex;align-items:center;gap:16px;">
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-25 sk-h-xs" style="animation-delay:.14s"></div>
+        <div class="sk-block sk-line sk-w-75 sk-h-base" style="animation-delay:.14s"></div>
+        <div class="sk-block sk-line sk-w-42 sk-h-xs" style="animation-delay:.14s"></div>
+      </div>
+      <div class="sk-block sk-line sk-badge-skel" style="animation-delay:.14s"></div>
+      <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;flex-shrink:0;width:clamp(70px,18%,100px);">
+        <div class="sk-block sk-line sk-w-100 sk-h-md" style="animation-delay:.14s"></div>
+        <div class="sk-block sk-line sk-w-60 sk-h-xs" style="animation-delay:.14s"></div>
+      </div>
+      <div class="sk-block sk-line sk-btn-m sk-desktop-only" style="animation-delay:.14s"></div>
+    </div>
+  </div>
+
+  <!-- ── PURCHASE ORDER ── -->
+  <div class="sk-body" id="sk-layout-purchase-order" style="flex-direction:column;gap:12px;padding:20px;">
+    <div class="sk-shell-top" style="padding:16px 20px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;">
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:0;flex:1;">
+        <div class="sk-block sk-line sk-w-25 sk-h-xs"></div>
+        <div class="sk-block sk-line sk-w-55 sk-h-lg"></div>
+        <div class="sk-block sk-line sk-w-40 sk-h-xs"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;flex-shrink:0;">
+        <div class="sk-block sk-line sk-btn-m"></div>
+        <div class="sk-block sk-line sk-desktop-only" style="width:clamp(80px,30%,140px);height:9px;"></div>
+      </div>
+    </div>
+    <div class="sk-shell" style="padding:14px 16px;display:flex;align-items:flex-start;gap:14px;">
+      <div class="sk-block sk-thumb-sq"></div>
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-60 sk-h-base"></div>
+        <div class="sk-block sk-line sk-w-35 sk-h-xs"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:center;flex-shrink:0;width:36px;">
+        <div class="sk-block sk-line" style="width:28px;height:16px;"></div>
+        <div class="sk-block sk-line" style="width:22px;height:8px;"></div>
+      </div>
+      <div class="sk-desktop-only" style="flex:1;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;"><div class="sk-block sk-line sk-w-40 sk-h-xs"></div><div class="sk-block sk-line sk-w-40 sk-h-xs"></div></div>
+        <div class="sk-block sk-line sk-w-100 sk-h-micro"></div>
+        <div style="display:flex;gap:12px;">
+          <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:65px;height:9px;"></div></div>
+          <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:65px;height:9px;"></div></div>
+          <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:70px;height:9px;"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sk-shell" style="padding:14px 16px;display:flex;align-items:flex-start;gap:14px;">
+      <div class="sk-block sk-thumb-sq" style="animation-delay:.07s"></div>
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-55 sk-h-base" style="animation-delay:.07s"></div>
+        <div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.07s"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:center;flex-shrink:0;width:36px;">
+        <div class="sk-block sk-line" style="width:28px;height:16px;animation-delay:.07s"></div>
+        <div class="sk-block sk-line" style="width:22px;height:8px;animation-delay:.07s"></div>
+      </div>
+      <div class="sk-desktop-only" style="flex:1;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;"><div class="sk-block sk-line sk-w-40 sk-h-xs" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-40 sk-h-xs" style="animation-delay:.07s"></div></div>
+        <div class="sk-block sk-line sk-w-100 sk-h-micro" style="animation-delay:.07s"></div>
+        <div style="display:flex;gap:12px;">
+          <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:65px;height:9px;animation-delay:.07s"></div></div>
+          <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:65px;height:9px;animation-delay:.07s"></div></div>
+          <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:70px;height:9px;animation-delay:.07s"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sk-shell" style="padding:14px 16px;display:flex;align-items:flex-start;gap:14px;">
+      <div class="sk-block sk-thumb-sq" style="animation-delay:.14s"></div>
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-50 sk-h-base" style="animation-delay:.14s"></div>
+        <div class="sk-block sk-line sk-w-35 sk-h-xs" style="animation-delay:.14s"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:center;flex-shrink:0;width:36px;">
+        <div class="sk-block sk-line" style="width:28px;height:16px;animation-delay:.14s"></div>
+        <div class="sk-block sk-line" style="width:22px;height:8px;animation-delay:.14s"></div>
+      </div>
+      <div class="sk-desktop-only" style="flex:1;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;"><div class="sk-block sk-line sk-w-40 sk-h-xs" style="animation-delay:.14s"></div><div class="sk-block sk-line sk-w-40 sk-h-xs" style="animation-delay:.14s"></div></div>
+        <div class="sk-block sk-line sk-w-100 sk-h-micro" style="animation-delay:.14s"></div>
+        <div style="display:flex;gap:12px;">
+          <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:65px;height:9px;animation-delay:.14s"></div></div>
+          <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:65px;height:9px;animation-delay:.14s"></div></div>
+          <div class="sk-legend-row"><div class="sk-dot"></div><div class="sk-block sk-line" style="width:70px;height:9px;animation-delay:.14s"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DOCUMENTS ── -->
+  <div class="sk-body" id="sk-layout-documents" style="flex-direction:column;gap:12px;padding:20px;">
+    <div class="sk-filters-row">
+      <div class="sk-block sk-chip" style="width:44px;"></div>
+      <div class="sk-block sk-chip" style="width:84px;"></div>
+      <div class="sk-block sk-chip" style="width:72px;"></div>
+      <div class="sk-block sk-chip" style="width:80px;"></div>
+      <div class="sk-block sk-chip" style="width:76px;"></div>
+      <div class="sk-block sk-chip" style="width:clamp(80px,26%,120px);margin-left:auto;border-radius:4px;"></div>
+    </div>
+    <div class="sk-shell" style="padding:0;display:flex;flex-direction:column;gap:0;">
+      <div style="display:flex;align-items:center;gap:14px;padding:13px 16px;border-bottom:1px solid #f0f0f0;">
+        <div class="sk-block sk-line" style="width:32px;height:36px;border-radius:3px;flex-shrink:0;"></div>
+        <div style="display:flex;flex-direction:column;gap:5px;flex:1;min-width:0;">
+          <div class="sk-block sk-line sk-w-55 sk-h-base"></div>
+          <div class="sk-block sk-line sk-w-30 sk-h-xs"></div>
+        </div>
+        <div class="sk-block sk-line sk-desktop-only" style="width:80px;height:9px;flex-shrink:0;"></div>
+        <div class="sk-block sk-line sk-btn-s sk-desktop-only"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:13px 16px;border-bottom:1px solid #f0f0f0;">
+        <div class="sk-block sk-line" style="width:32px;height:36px;border-radius:3px;flex-shrink:0;animation-delay:.07s"></div>
+        <div style="display:flex;flex-direction:column;gap:5px;flex:1;min-width:0;">
+          <div class="sk-block sk-line sk-w-65 sk-h-base" style="animation-delay:.07s"></div>
+          <div class="sk-block sk-line sk-w-25 sk-h-xs" style="animation-delay:.07s"></div>
+        </div>
+        <div class="sk-block sk-line sk-desktop-only" style="width:80px;height:9px;flex-shrink:0;animation-delay:.07s"></div>
+        <div class="sk-block sk-line sk-btn-s sk-desktop-only" style="animation-delay:.07s"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:13px 16px;border-bottom:1px solid #f0f0f0;">
+        <div class="sk-block sk-line" style="width:32px;height:36px;border-radius:3px;flex-shrink:0;animation-delay:.14s"></div>
+        <div style="display:flex;flex-direction:column;gap:5px;flex:1;min-width:0;">
+          <div class="sk-block sk-line sk-w-50 sk-h-base" style="animation-delay:.14s"></div>
+          <div class="sk-block sk-line sk-w-35 sk-h-xs" style="animation-delay:.14s"></div>
+        </div>
+        <div class="sk-block sk-line sk-desktop-only" style="width:80px;height:9px;flex-shrink:0;animation-delay:.14s"></div>
+        <div class="sk-block sk-line sk-btn-s sk-desktop-only" style="animation-delay:.14s"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:13px 16px;border-bottom:1px solid #f0f0f0;">
+        <div class="sk-block sk-line" style="width:32px;height:36px;border-radius:3px;flex-shrink:0;animation-delay:.21s"></div>
+        <div style="display:flex;flex-direction:column;gap:5px;flex:1;min-width:0;">
+          <div class="sk-block sk-line sk-w-60 sk-h-base" style="animation-delay:.21s"></div>
+          <div class="sk-block sk-line sk-w-28 sk-h-xs" style="animation-delay:.21s"></div>
+        </div>
+        <div class="sk-block sk-line sk-desktop-only" style="width:80px;height:9px;flex-shrink:0;animation-delay:.21s"></div>
+        <div class="sk-block sk-line sk-btn-s sk-desktop-only" style="animation-delay:.21s"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:13px 16px;">
+        <div class="sk-block sk-line" style="width:32px;height:36px;border-radius:3px;flex-shrink:0;animation-delay:.28s"></div>
+        <div style="display:flex;flex-direction:column;gap:5px;flex:1;min-width:0;">
+          <div class="sk-block sk-line sk-w-45 sk-h-base" style="animation-delay:.28s"></div>
+          <div class="sk-block sk-line sk-w-30 sk-h-xs" style="animation-delay:.28s"></div>
+        </div>
+        <div class="sk-block sk-line sk-desktop-only" style="width:80px;height:9px;flex-shrink:0;animation-delay:.28s"></div>
+        <div class="sk-block sk-line sk-btn-s sk-desktop-only" style="animation-delay:.28s"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROGRESS ── -->
+  <div class="sk-body" id="sk-layout-progress" style="flex-direction:column;gap:0;padding:0;">
+    <div style="background:#fff;border-bottom:1px solid #eaeaea;padding:16px 20px;display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div class="sk-block sk-line sk-w-45 sk-h-lg"></div>
+        <div class="sk-block sk-line sk-w-20 sk-h-xs"></div>
+      </div>
+      <div class="sk-block sk-line sk-w-100 sk-h-bar"></div>
+      <div style="display:flex;justify-content:space-between;">
+        <div class="sk-block sk-line sk-w-30 sk-h-xs"></div>
+        <div class="sk-block sk-line sk-w-25 sk-h-xs"></div>
+      </div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px;padding:16px 20px;background:#f3f4f8;">
+      <div class="sk-block sk-line sk-w-40 sk-h-xs"></div>
+      <!-- quote-style card -->
+      <div class="sk-shell" style="padding:0;display:flex;flex-direction:column;gap:0;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:44px 1fr 1fr;gap:10px;padding:12px 12px 8px;align-items:start;">
+          <div class="sk-block sk-thumb-sm"></div>
+          <div style="display:flex;flex-direction:column;gap:5px;"><div class="sk-block sk-line sk-w-70 sk-h-xs"></div><div class="sk-block sk-line sk-w-90 sk-h-base"></div></div>
+          <div style="display:flex;justify-content:flex-end;"><div class="sk-block sk-line sk-badge-skel"></div></div>
+        </div>
+        <div style="display:flex;gap:16px;padding:4px 12px 8px 66px;"><div class="sk-block sk-line sk-w-30 sk-h-xs"></div><div class="sk-block sk-line sk-w-25 sk-h-xs"></div></div>
+        <div style="border-top:1px solid #f0f0f0;padding:10px 12px;"><div class="sk-block sk-line sk-w-100 sk-h-md" style="border-radius:4px;"></div></div>
+      </div>
+      <!-- invoice-style card -->
+      <div class="sk-shell" style="flex-direction:column;gap:0;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 12px 10px;">
+          <div style="display:flex;flex-direction:column;gap:6px;"><div class="sk-block sk-line sk-w-60 sk-h-xs" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-75 sk-h-sm" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-badge-skel" style="margin-top:2px;animation-delay:.07s"></div></div>
+          <div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end;"><div class="sk-block sk-line sk-w-50 sk-h-xs" style="animation-delay:.07s"></div><div class="sk-block sk-line sk-w-80 sk-h-lg" style="animation-delay:.07s"></div></div>
+        </div>
+        <div style="border-top:1px solid #eaeaea;display:flex;gap:8px;padding:10px 12px;">
+          <div class="sk-block sk-line" style="flex:1;height:32px;border-radius:4px;animation-delay:.07s"></div>
+          <div class="sk-block sk-line" style="flex:1;height:32px;border-radius:4px;animation-delay:.07s"></div>
+        </div>
+        <div style="padding:0 12px 10px;"><div class="sk-block sk-line sk-w-100 sk-h-md" style="border-radius:4px;animation-delay:.07s"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WARRANTY ── -->
+  <div class="sk-body" id="sk-layout-warranty" style="flex-direction:column;gap:12px;padding:20px;">
+    <div class="sk-shell-top" style="padding:16px 20px;display:flex;align-items:center;gap:16px;">
+      <div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-40 sk-h-lg"></div>
+        <div class="sk-block sk-line sk-w-60 sk-h-xs"></div>
+      </div>
+      <div class="sk-block sk-line sk-w-100 sk-h-bar" style="max-width:180px;"></div>
+    </div>
+    <div class="sk-shell" style="padding:14px 16px;display:flex;align-items:center;gap:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-25 sk-h-xs"></div>
+        <div class="sk-block sk-line sk-w-65 sk-h-base"></div>
+        <div class="sk-block sk-line sk-w-40 sk-h-xs"></div>
+      </div>
+      <div class="sk-block sk-line sk-badge-skel"></div>
+      <div class="sk-block sk-line sk-btn-s sk-desktop-only"></div>
+    </div>
+    <div class="sk-shell" style="padding:14px 16px;display:flex;align-items:center;gap:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-22 sk-h-xs" style="animation-delay:.07s"></div>
+        <div class="sk-block sk-line sk-w-70 sk-h-base" style="animation-delay:.07s"></div>
+        <div class="sk-block sk-line sk-w-35 sk-h-xs" style="animation-delay:.07s"></div>
+      </div>
+      <div class="sk-block sk-line sk-badge-skel" style="animation-delay:.07s"></div>
+      <div class="sk-block sk-line sk-btn-s sk-desktop-only" style="animation-delay:.07s"></div>
+    </div>
+    <div class="sk-shell" style="padding:14px 16px;display:flex;align-items:center;gap:14px;">
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0;">
+        <div class="sk-block sk-line sk-w-28 sk-h-xs" style="animation-delay:.14s"></div>
+        <div class="sk-block sk-line sk-w-55 sk-h-base" style="animation-delay:.14s"></div>
+        <div class="sk-block sk-line sk-w-45 sk-h-xs" style="animation-delay:.14s"></div>
+      </div>
+      <div class="sk-block sk-line sk-badge-skel" style="animation-delay:.14s"></div>
+      <div class="sk-block sk-line sk-btn-s sk-desktop-only" style="animation-delay:.14s"></div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /#app-content -->
+
+<!-- Pay now modal — outside #app-content so position:fixed escapes overflow:clip -->
+<div class="paynow-overlay" id="paynow-overlay" onclick="if(event.target===this)closePayNowModal()">
+  <div class="paynow-modal">
+    <div class="paynow-header">
+      <span class="paynow-header-title">Pay now</span>
+      <button class="paynow-close" onclick="closePayNowModal()"><i class="fa-solid fa-times"></i></button>
+    </div>
+    <div class="paynow-body">
+      <div class="paynow-top">
+        <div class="paynow-overdue"><i class="fa-solid fa-circle-exclamation" style="margin-right:5px;"></i>Overdue 3 days</div>
+        <div class="paynow-amount" id="paynow-amount">$21,250.00</div>
+        <div class="paynow-inv-desc" id="paynow-desc">Invoice #108<span class="paynow-inv-desc-dot"></span>Additional speaker installation</div>
+      </div>
+      <div class="paynow-section-title">Bank transfer details</div>
+      <div class="paynow-rows">
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Bank</div>
+          <div class="paynow-detail-val">Chase</div>
+        </div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Account name</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val">LCR Integrated Systems Ltd</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('LCR Integrated Systems Ltd')">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Routing No.</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val">021000021</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('021000021')">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-detail-row">
+          <div class="paynow-detail-label">Account number</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val">987654321</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard('987654321')">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-detail-row paynow-ref-row">
+          <div class="paynow-detail-label">Reference</div>
+          <div class="paynow-val-copy">
+            <div class="paynow-detail-val" id="paynow-ref">INV-#002</div>
+            <button class="paynow-copy-btn" onclick="copyToClipboard(document.getElementById('paynow-ref').textContent)">Copy</button>
+          </div>
+        </div>
+        <div class="paynow-ref-note">*Please include the reference in the payment remarks.</div>
+      </div>
+      <button class="paynow-upload-btn">
+        <i class="fa-sharp-solid fa-upload"></i>
+        Invoice Details
+      </button>
+      <div class="paynow-warning">
+        <i class="fa-solid fa-circle-exclamation" style="flex-shrink:0;margin-top:1px;"></i>
+        <span>After transferring, please take a screenshot and upload it for verification.</span>
+      </div>
+      <button class="paynow-mark-paid" onclick="markAsPaid()">Mark as Paid</button>
+    </div>
+  </div>
+</div>
+
+<!-- Payment noted modal — outside #app-content -->
+<div class="payment-noted-overlay" id="payment-noted-overlay" onclick="if(event.target===this)closePaymentNoted()">
+  <div class="payment-noted-modal">
+    <div class="payment-noted-title">Payment noted</div>
+    <div class="payment-noted-body">We'll update <span id="payment-noted-inv">Invoice #002</span> once the transfer clears, usually 5 working days.</div>
+    <button class="payment-noted-done" onclick="closePaymentNoted()">Done</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SCREEN 8 — PROJECT PROGRESS
+═══════════════════════════════════════════════════════ -->
+
+<!-- ══ Global overlays — outside all .screen divs so they work on every page ══ -->
+
+<!-- ── Edit Profile panel ── -->
+<div class="qp-profile-overlay" id="qp-profile-overlay">
+  <div class="qp-profile-panel">
+    <div class="qp-profile-header">
+      <span class="qp-profile-title">Edit Profile</span>
+      <button class="qp-profile-close" onclick="closeProfilePanel()">×</button>
+    </div>
+    <div class="qp-profile-avatar-wrap">
+      <div class="qp-profile-avatar">MM</div>
+    </div>
+    <div class="qp-profile-body">
+      <div class="qp-profile-row">
+        <div class="qp-profile-field">
+          <label class="qp-profile-label">First name</label>
+          <input class="qp-profile-input" type="text" value="Marsh">
+        </div>
+        <div class="qp-profile-field">
+          <label class="qp-profile-label">Last Name</label>
+          <input class="qp-profile-input" type="text" value="Marlo">
+        </div>
+      </div>
+      <div class="qp-profile-field" style="margin-bottom:16px;">
+        <label class="qp-profile-label">Contact number</label>
+        <div class="qp-profile-phone-row">
+          <select class="qp-profile-country-select">
+            <option>UK +44</option><option>US +1</option><option>AU +61</option>
+          </select>
+          <input class="qp-profile-input" type="tel" value="77712345678" style="flex:1;">
+        </div>
+      </div>
+      <div class="qp-profile-field" style="margin-bottom:20px;">
+        <label class="qp-profile-label">Contact email</label>
+        <input class="qp-profile-input" type="email" value="Demo@demo.com">
+      </div>
+      <hr class="qp-profile-divider">
+      <div class="qp-profile-section-title">Change Password</div>
+      <div class="qp-profile-field" style="margin-bottom:12px;">
+        <label class="qp-profile-label qp-profile-label-pwd">Current password</label>
+        <div class="qp-profile-input-wrap">
+          <input class="qp-profile-input" type="password" value="password123">
+          <button class="qp-profile-eye fa-sharp-solid" onclick="togglePwVis(this)">eye</button>
+        </div>
+      </div>
+      <div class="qp-profile-field" style="margin-bottom:12px;">
+        <label class="qp-profile-label qp-profile-label-pwd">New password</label>
+        <div class="qp-profile-input-wrap">
+          <input class="qp-profile-input" type="password" value="password123">
+          <button class="qp-profile-eye fa-sharp-solid" onclick="togglePwVis(this)">eye</button>
+        </div>
+      </div>
+      <div class="qp-profile-field" style="margin-bottom:12px;">
+        <label class="qp-profile-label qp-profile-label-pwd">Confirm new password</label>
+        <div class="qp-profile-input-wrap">
+          <input class="qp-profile-input" type="password" value="password123">
+          <button class="qp-profile-eye fa-sharp-solid" onclick="togglePwVis(this)">eye</button>
+        </div>
+      </div>
+    </div>
+    <div class="qp-profile-footer">
+      <button class="qp-profile-btn-cancel" onclick="closeProfilePanel()">Cancel</button>
+      <button class="qp-profile-btn-update">Update</button>
+    </div>
+  </div>
+</div>

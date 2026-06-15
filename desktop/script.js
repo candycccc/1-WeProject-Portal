@@ -872,6 +872,13 @@ function applyText(cls, value) {
   document.querySelectorAll('.' + cls).forEach(el => el.textContent = value);
 }
 
+// ── Project switch: swap displayed project name + hero image, then enter detail ──
+function enterProject(name, image) {
+  if (name)  applyText('brand-project-name', name);
+  if (image) document.querySelectorAll('.detail-hero-img').forEach(el => el.src = image);
+  go('detail');
+}
+
 // ── Powered by toggle ──
 function togglePoweredBy(btn) {
   btn.classList.toggle('on');
@@ -1349,19 +1356,56 @@ function acceptCoRow(btn) {
   openCoDocument(row);
 }
 
+// Rebuild a pending desktop CO row into the accepted layout (Payment Summary mini block
+// instead of the values table) so it matches the static accepted row.
+function _coRowToAccepted(row) {
+  const thumb = (row.querySelector('.co-row-thumb') || {}).innerHTML || '';
+  const meta  = (row.querySelector('.co-row-meta') || {}).innerHTML || '';
+  const title = (row.querySelector('.co-row-title') || {}).textContent || '';
+  const desc  = (row.querySelector('.co-row-desc') || {}).textContent || '';
+  const vals  = row.querySelectorAll('.co-row-values .co-row-val .v');
+  const newTotal = vals.length ? vals[vals.length - 1].textContent.trim() : '$2,120,000.00';
+  const dateStr = 'Accepted on ' + _coRowDate();
+  row.innerHTML = `
+      <div class="co-row-left">
+        <div class="co-row-thumb">${thumb}</div>
+        <div class="co-row-left-info">
+          <div class="co-row-meta">${meta}</div>
+          <div class="co-row-title">${title}</div>
+        </div>
+      </div>
+      <div class="co-row-body">
+        <div class="co-row-status">
+          <span class="qr-badge qr-badge-accepted">Accepted</span>
+          <span class="qr-date qr-date-accepted">${dateStr}</span>
+        </div>
+        <div class="co-row-desc-block">
+          <div class="co-row-version">2 Previous Version &rarr; Change Order 1.2</div>
+          <div class="co-row-desc">${desc}</div>
+        </div>
+      </div>
+      <div class="co-row-pay-mini">
+        <div class="co-row-pay-label">Payment Summary</div>
+        <div class="co-row-pay-amount-row">
+          <span class="co-row-pay-amount">$0.00</span>
+          <span class="co-row-pay-of">of ${newTotal} Paid so far</span>
+        </div>
+        <div class="co-row-pay-bar-outer"><div class="co-row-pay-bar-fill" style="width:0%;background:#009113;"></div></div>
+        <div class="co-row-pay-legend">
+          <div class="co-row-pay-leg-item"><div class="co-row-pay-leg-hd"><span class="co-row-pay-leg-dot" style="background:#009113;"></span><span>Paid so far</span><span class="co-row-pay-leg-pct">0%</span></div><div class="co-row-pay-leg-val">$0.00</div></div>
+          <div class="co-row-pay-leg-item"><div class="co-row-pay-leg-hd"><span class="co-row-pay-leg-dot" style="background:#cf3400;"></span><span>To pay now</span><span class="co-row-pay-leg-pct">0%</span></div><div class="co-row-pay-leg-val">$0.00</div></div>
+          <div class="co-row-pay-leg-item"><div class="co-row-pay-leg-hd"><span class="co-row-pay-leg-dot" style="background:#9c9c9c;"></span><span>Upcoming</span><span class="co-row-pay-leg-pct">100%</span></div><div class="co-row-pay-leg-val">${newTotal}</div></div>
+        </div>
+      </div>
+      <button class="co-row-view-btn" onclick="openCoDetailModal(this)">View Change Order Details</button>`;
+}
+
 function _playCoAccept(row) {
   if (!row) return;
   row.classList.add('qr-accepting');
   setTimeout(() => {
     row.dataset.status = 'accepted';
-    flipBadge(row.querySelector('.qr-badge'), 'qr-badge qr-badge-accepted', 'Accepted');
-    setTimeout(() => flipBadge(row.querySelector('.qr-date'), 'qr-date qr-date-accepted', 'Accepted on ' + _coRowDate()), 150);
-    const actions = row.querySelector('.co-row-actions');
-    if (actions) {
-      actions.style.transition = 'opacity 0.4s ease';
-      actions.style.opacity = '0';
-      setTimeout(() => actions.remove(), 450);
-    }
+    _coRowToAccepted(row);
   }, 350);
   setTimeout(() => {
     row.classList.remove('qr-accepting');
@@ -1369,7 +1413,47 @@ function _playCoAccept(row) {
     setTimeout(() => row.classList.remove('qr-accepted-done'), 800);
     refreshCoRowCounts();
     resortCardList(row.parentElement);
+    // After accepting a Change Order, the project's Total Accepted Value
+    // grows by the CO's net delta. Demo: CO 1.2 = +$5,000 (5,000 + 5,000 - 5,000 net).
+    // Update the CO page summary card so the user sees the new totals.
+    updateCoSummaryAfterAccept();
   }, 1700);
+}
+
+// USD currency formatter
+function _usd(n) {
+  return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+// Animate an element's text from one currency value to another over a duration.
+// Uses easeOutCubic for a natural settle.
+function _countUpCurrency(el, from, to, duration, prefix, suffix) {
+  if (!el) return;
+  prefix = prefix || '';
+  suffix = suffix || '';
+  const startTs = performance.now();
+  const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+  function step(now) {
+    const t = Math.min(1, (now - startTs) / duration);
+    const v = from + (to - from) * easeOutCubic(t);
+    el.textContent = prefix + _usd(v) + suffix;
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function updateCoSummaryAfterAccept() {
+  const wrap = document.querySelector('#s-change-order .co-mv .co-pc-wrap');
+  if (!wrap) return;
+  // CO 1.2 accepted → project total grows by net $5,000.
+  // Paid + To-pay stay the same; Upcoming absorbs the increase.
+  const FROM_TOTAL = 257486.97, TO_TOTAL = 262486.97;
+  const FROM_UPC   = 228704.14, TO_UPC   = 233704.14;
+  const DUR = 900;
+  _countUpCurrency(wrap.querySelector('.co-pc-total-value'),  FROM_TOTAL, TO_TOTAL, DUR);
+  _countUpCurrency(wrap.querySelector('.co-pc-amount-of'),    FROM_TOTAL, TO_TOTAL, DUR, 'of ', ' Paid so far');
+  const legends = wrap.querySelectorAll('.co-pc-legend-item .co-pc-legend-value');
+  if (legends[2]) _countUpCurrency(legends[2], FROM_UPC, TO_UPC, DUR);
 }
 
 

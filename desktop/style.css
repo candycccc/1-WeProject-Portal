@@ -1,43 +1,43 @@
-/* ── Font Awesome 7 Pro – local files (same folder as HTML) ── */
+/* ── Font Awesome 7 Pro – local files in the fonts/ folder ── */
 @font-face {
   font-family: 'Font Awesome 7 Pro';
   font-style: normal; font-weight: 900; font-display: block;
-  src: url('Font Awesome 7 Pro-Solid-900.otf') format('opentype');
+  src: url('fonts/Font Awesome 7 Pro-Solid-900.otf') format('opentype');
 }
 @font-face {
   font-family: 'Font Awesome 7 Pro';
   font-style: normal; font-weight: 400; font-display: block;
-  src: url('Font Awesome 7 Pro-Regular-400.otf') format('opentype');
+  src: url('fonts/Font Awesome 7 Pro-Regular-400.otf') format('opentype');
 }
 @font-face {
   font-family: 'Font Awesome 7 Pro';
   font-style: normal; font-weight: 300; font-display: block;
-  src: url('Font Awesome 7 Pro-Light-300.otf') format('opentype');
+  src: url('fonts/Font Awesome 7 Pro-Light-300.otf') format('opentype');
 }
 @font-face {
   font-family: 'Font Awesome 7 Pro';
   font-style: normal; font-weight: 100; font-display: block;
-  src: url('Font Awesome 7 Pro-Thin-100.otf') format('opentype');
+  src: url('fonts/Font Awesome 7 Pro-Thin-100.otf') format('opentype');
 }
 @font-face {
   font-family: 'Font Awesome 7 Sharp';
   font-style: normal; font-weight: 900; font-display: block;
-  src: url('Font Awesome 7 Sharp-Solid-900.otf') format('opentype');
+  src: url('fonts/Font Awesome 7 Sharp-Solid-900.otf') format('opentype');
 }
 @font-face {
   font-family: 'Font Awesome 7 Sharp';
   font-style: normal; font-weight: 400; font-display: block;
-  src: url('Font Awesome 7 Sharp-Regular-400.otf') format('opentype');
+  src: url('fonts/Font Awesome 7 Sharp-Regular-400.otf') format('opentype');
 }
 @font-face {
   font-family: 'Font Awesome 7 Sharp';
   font-style: normal; font-weight: 300; font-display: block;
-  src: url('Font Awesome 7 Sharp-Light-300.otf') format('opentype');
+  src: url('fonts/Font Awesome 7 Sharp-Light-300.otf') format('opentype');
 }
 @font-face {
   font-family: 'Font Awesome 7 Brands';
   font-style: normal; font-weight: 400; font-display: block;
-  src: url('Font Awesome 7 Brands-Regular-400.otf') format('opentype');
+  src: url('fonts/Font Awesome 7 Brands-Regular-400.otf') format('opentype');
 }
 /* ── FA7 Pro utility class helpers ── */
 .fa-solid, .fas   { font-family:'Font Awesome 7 Pro',sans-serif; font-weight:900; font-style:normal; display:inline-block; }
@@ -148,6 +148,7 @@ body.dark-mode .detail-breadcrumb {
 .dark-mode .var-status-tbc { background: #2e2e3e; color: #a0a0b0; }
 /* Dark: payment summary progress bar track (Upcoming segment) */
 .dark-mode .qp-progress-bar-outer { background: #2e2e3e; }
+.dark-mode .qp-progress-bar-fill { border-color: #2e2e3e; }
 .dark-mode .inv-payment-bar { background: var(--c-border-2); }
 /* Dark: sidebar address/contact */
 .dark-mode .sidebar-address,
@@ -219,14 +220,16 @@ input { font-family: inherit; }
   height: calc(100vh - 42px);
   background: #18181f;
   border-right: 1px solid rgba(255,255,255,0.07);
-  box-shadow: 4px 0 28px rgba(0,0,0,0.30);
   z-index: 9998;
   display: flex; flex-direction: column;
   transform: translateX(-100%);
-  transition: transform .28s cubic-bezier(.4,0,.2,1);
+  transition: transform .28s cubic-bezier(.4,0,.2,1), box-shadow .28s cubic-bezier(.4,0,.2,1);
   overflow: hidden;
 }
-#screen-panel.open { transform: translateX(0); }
+#screen-panel.open {
+  transform: translateX(0);
+  box-shadow: 4px 0 28px rgba(0,0,0,0.30);
+}
 
 .sp-panel-head {
   padding: 16px 16px 12px;
@@ -1834,6 +1837,7 @@ body.mobile-view #s-invoices .inv-dsk-summary { display: block; padding: 0; marg
 }
 .qp-progress-bar-fill {
   height: 100%; border-radius: 3px;
+  border: 1px solid #f3f4f8;
 }
 .qp-progress-legend {
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
@@ -4498,10 +4502,14 @@ body.brand-open .qp-profile-overlay { right: 280px; }
 }
 .co-row-left { width: 230px; flex-shrink: 0; display: flex; gap: 13px; align-items: flex-start; }
 .co-row-left-top { display: flex; gap: 13px; align-items: flex-start; }
-.co-row[data-status="pending your review"] .co-row-left {
+/* Any CO row whose .co-row-left has a direct .co-row-val (i.e. "Previous/Current
+   Project Total" badge) needs its left column stacked vertically — thumb+info on
+   top, value on bottom. Applies to both Pending and any Accepted row that uses
+   the values layout (e.g. negative-delta CO with no payment summary). */
+.co-row .co-row-left:has(> .co-row-val) {
   flex-direction: column; gap: 0; justify-content: space-between; align-self: stretch;
 }
-.co-row[data-status="pending your review"] .co-row-left > .co-row-val { padding-left: 54px; }
+.co-row .co-row-left:has(> .co-row-val) > .co-row-val { padding-left: 54px; }
 .co-row-thumb {
   width: 41px; height: 41px; flex-shrink: 0;
   border: 1px solid var(--c-border-1); border-radius: 4px;
@@ -4513,7 +4521,7 @@ body.brand-open .qp-profile-overlay { right: 280px; }
 .co-row-status { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
 .co-row-version { font-size: 12px; font-weight: 600; color: var(--c-text-1); }
 .co-row-version-co { color: #ff9500; }
-.co-row-desc { font-size: 10px; font-weight: 600; color: var(--c-text-1); max-width: 420px; }
+.co-row-desc { font-size: 10px; font-weight: 600; color: var(--c-text-1); max-width: 330px; }
 .co-row-values { margin-top: auto; display: flex; gap: 40px; padding-top: 10px; }
 .co-row-val { width: 115px; display: flex; flex-direction: column; gap: 1px; }
 .co-row-val:last-child { width: auto; }

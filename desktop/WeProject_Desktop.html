@@ -275,7 +275,7 @@
   <!-- Tabs -->
   <div class="dash-tabs">
     <button class="tab-pill active" id="tab-active" onclick="switchTab('active')">
-      Active <span class="tab-count">04</span>
+      Active <span class="tab-count">06</span>
     </button>
     <button class="tab-pill" id="tab-archived" onclick="switchTab('archived')">
       Archived <span class="tab-count">12</span>
@@ -285,12 +285,44 @@
   <!-- Cards: Active -->
   <div class="dash-cards" id="cards-active">
 
-    <div class="project-card" onclick="go('detail')">
+    <div class="project-card" onclick="enterProject('Willow Dean Service and SLA','https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&amp;q=80')">
       <div class="card-top-line"></div>
       <div class="card-info">
         <div class="card-title-row">
           <a class="card-name-link">
-            <span class="card-name"><span class="brand-project-name">Ocean Palm Residences</span></span>
+            <span class="card-name">Willow Dean Service and SLA</span>
+            <svg width="20" height="20" fill="none" stroke="#383741" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </a>
+          <div class="card-status">
+            <div class="status-dot"></div>
+            <span class="card-status-text">Active</span>
+          </div>
+        </div>
+        <div class="card-meta">
+          <div>
+            <div>Last updated</div>
+            <div>About 1 hour ago</div>
+          </div>
+          <div style="text-align:right;">
+            <div>Last viewed</div>
+            <div>14 Jun 4:12pm</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-photo">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&amp;q=80"
+             alt="" onerror="this.style.display='none'"/>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="enterProject('Ocean Palm Residences','images/lcr-ocean-palm.png')">
+      <div class="card-top-line"></div>
+      <div class="card-info">
+        <div class="card-title-row">
+          <a class="card-name-link">
+            <span class="card-name">Ocean Palm Residences</span>
             <svg width="20" height="20" fill="none" stroke="#383741" stroke-width="1.5" viewBox="0 0 24 24">
               <path d="M7 17L17 7M17 7H7M17 7v10"/>
             </svg>
@@ -317,12 +349,12 @@
       </div>
     </div>
 
-    <div class="project-card" onclick="go('detail')">
+    <div class="project-card" onclick="enterProject('Highline Penthouse','https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&amp;q=80')">
       <div class="card-top-line"></div>
       <div class="card-info">
         <div class="card-title-row">
           <a class="card-name-link">
-            <span class="card-name">Interior design project</span>
+            <span class="card-name">Highline Penthouse</span>
             <svg width="20" height="20" fill="none" stroke="#383741" stroke-width="1.5" viewBox="0 0 24 24">
               <path d="M7 17L17 7M17 7H7M17 7v10"/>
             </svg>
@@ -335,16 +367,112 @@
         <div class="card-meta">
           <div>
             <div>Last updated</div>
-            <div>About 1 hour ago</div>
+            <div>Yesterday</div>
           </div>
           <div style="text-align:right;">
             <div>Last viewed</div>
-            <div>02 Mar 10:39pm</div>
+            <div>10 Jun 9:02am</div>
           </div>
         </div>
       </div>
       <div class="card-photo">
-        <img src="images/img_07.png"
+        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&amp;q=80"
+             alt="" onerror="this.style.display='none'"/>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="enterProject('Sunset Ridge Villa','https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&amp;q=80')">
+      <div class="card-top-line"></div>
+      <div class="card-info">
+        <div class="card-title-row">
+          <a class="card-name-link">
+            <span class="card-name">Sunset Ridge Villa</span>
+            <svg width="20" height="20" fill="none" stroke="#383741" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </a>
+          <div class="card-status">
+            <div class="status-dot"></div>
+            <span class="card-status-text">Active</span>
+          </div>
+        </div>
+        <div class="card-meta">
+          <div>
+            <div>Last updated</div>
+            <div>3 days ago</div>
+          </div>
+          <div style="text-align:right;">
+            <div>Last viewed</div>
+            <div>08 Jun 6:18pm</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-photo">
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&amp;q=80"
+             alt="" onerror="this.style.display='none'"/>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="enterProject('Riverside Pavilion','https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&amp;q=80')">
+      <div class="card-top-line"></div>
+      <div class="card-info">
+        <div class="card-title-row">
+          <a class="card-name-link">
+            <span class="card-name">Riverside Pavilion</span>
+            <svg width="20" height="20" fill="none" stroke="#383741" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </a>
+          <div class="card-status">
+            <div class="status-dot"></div>
+            <span class="card-status-text">Active</span>
+          </div>
+        </div>
+        <div class="card-meta">
+          <div>
+            <div>Last updated</div>
+            <div>1 week ago</div>
+          </div>
+          <div style="text-align:right;">
+            <div>Last viewed</div>
+            <div>02 Jun 11:24am</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-photo">
+        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&amp;q=80"
+             alt="" onerror="this.style.display='none'"/>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="enterProject('Cedar Park Estate','https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&amp;q=80')">
+      <div class="card-top-line"></div>
+      <div class="card-info">
+        <div class="card-title-row">
+          <a class="card-name-link">
+            <span class="card-name">Cedar Park Estate</span>
+            <svg width="20" height="20" fill="none" stroke="#383741" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </a>
+          <div class="card-status">
+            <div class="status-dot"></div>
+            <span class="card-status-text">Active</span>
+          </div>
+        </div>
+        <div class="card-meta">
+          <div>
+            <div>Last updated</div>
+            <div>2 weeks ago</div>
+          </div>
+          <div style="text-align:right;">
+            <div>Last viewed</div>
+            <div>25 May 3:47pm</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-photo">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&amp;q=80"
              alt="" onerror="this.style.display='none'"/>
       </div>
     </div>
@@ -590,6 +718,12 @@
 
       <!-- Sales Order -->
       <div class="tile" onclick="go('purchase-order')">
+        <div class="tile-alert">
+          <svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400">
+            <path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/>
+          </svg>
+          <span>1 Action Required</span>
+        </div>
         <div class="tile-label">
           Sales Order
           <i class="fa-sharp-solid fa-file-invoice tile-fa-icon"></i>
@@ -736,6 +870,7 @@
           <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
         </svg>
         Sales Order
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Action Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -851,34 +986,36 @@
       <div class="co-pc-top">
         <div class="co-pc-title">Total Project <br>Accepted Value</div>
         <div class="co-pc-total">
-          <div class="co-pc-total-value">$850,000.00</div>
+          <div class="co-pc-total-value">$257,486.97</div>
           <div class="co-pc-total-label">Total Value (excl. Tax)</div>
         </div>
       </div>
       <div class="co-pc-body">
         <div class="co-pc-summary-label">Payment Summary</div>
         <div class="co-pc-amount-row">
-          <span class="co-pc-amount">$650,000.00</span>
-          <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+          <span class="co-pc-amount">$15,722.60</span>
+          <span class="co-pc-amount-of">of $257,486.97 Paid so far</span>
         </div>
-        <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+        <!-- Real-data bar: 6% paid (green) + 5% due (red) + 89% upcoming (grey) -->
+        <div class="qp-progress-bar-outer" style="margin-bottom:8px;display:flex;">
+          <div class="qp-progress-bar-fill" style="width:6%;background:#009113;"></div>
+          <div class="qp-progress-bar-fill" style="width:5%;background:#cf3400;"></div>
         </div>
         <div class="co-pc-legend">
           <div class="co-pc-legend-item">
             <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
-            <div class="co-pc-legend-value">$650,000.00</div>
+            <div class="co-pc-legend-value">$15,722.60</div>
           </div>
           <div class="co-pc-legend-item">
             <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
-            <div class="co-pc-legend-value">$15,000.00</div>
+            <div class="co-pc-legend-value">$13,060.23</div>
           </div>
           <div class="co-pc-legend-item">
             <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
-            <div class="co-pc-legend-value">$0.00</div>
+            <div class="co-pc-legend-value">$228,704.14</div>
           </div>
         </div>
-        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Quote','$850,000.00','Quote Payment')">Pay Now</button>
+        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Quote','$13,060.23','Quote Payment')">Pay Now</button>
       </div>
     </div>
     <div class="co-pc-details">
@@ -900,11 +1037,11 @@
 
   <!-- ── Filter tabs ── -->
   <div class="qp-filter-tabs">
-    <button class="qp-filter-tab active" onclick="filterQuotes(this)">All <span class="qp-filter-count">04</span></button>
-    <button class="qp-filter-tab" onclick="filterQuotes(this)">Pending your review <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterQuotes(this)">To be confirmed <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterQuotes(this)">Accepted <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterQuotes(this)">Declined <span class="qp-filter-count">12</span></button>
+    <button class="qp-filter-tab active" onclick="filterQuotes(this)">All <span class="qp-filter-count">18</span></button>
+    <button class="qp-filter-tab" onclick="filterQuotes(this)">Pending your review <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab" onclick="filterQuotes(this)">To be confirmed <span class="qp-filter-count">02</span></button>
+    <button class="qp-filter-tab" onclick="filterQuotes(this)">Accepted <span class="qp-filter-count">14</span></button>
+    <button class="qp-filter-tab" onclick="filterQuotes(this)">Declined <span class="qp-filter-count">01</span></button>
     <label class="qp-search-pill">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -916,27 +1053,27 @@
   <!-- ── Quote rows ── -->
   <div class="qp-list">
 
-    <!-- ① Pending your review -->
+    <!-- ① Pending your review — quote_id=7095, quote_no=21655 r3 (Additional Works) -->
     <div class="qr">
       <div class="qr-thumb">
-        <img src="images/lcr-ocean-palm.png" alt="" onerror="this.style.display='none'"/>
+        <img src="https://app.wequote.cloud/user-content/2022/10/Gs6eLiVs6kuSyzjfyPqksGyUcchFvL5z.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Quote #23944</span>
+          <span class="qr-number">Quote #21655</span>
           <span class="qr-revision">Revision 3</span>
         </div>
-        <div class="qr-title">Home Automation</div>
+        <div class="qr-title">Additional Works</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-pending">Pending your review</span>
-        <span class="qr-date qr-date-pending">Valid until 14 April 2026</span>
+        <span class="qr-date qr-date-pending">Valid until 21 Nov 2022</span>
       </div>
       <!-- No payment panel for pending -->
       <div></div>
-      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/9592/d9a986a9f6429edc51f088a5009744ba','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$6,290.82</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$5,897.98</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn">
@@ -949,26 +1086,25 @@
       </div>
     </div>
 
-    <!-- ② To be confirmed (valid) -->
+    <!-- ② To be confirmed (valid) — quote_id=44404, quote_no=23978 r1 (Dutch House AV-IT KP-electrical) -->
     <div class="qr">
       <div class="qr-thumb">
-        <img src="images/lcr-ocean-palm.png" alt="" onerror="this.style.display='none'"/>
+        <img src="https://app.wequote.cloud/user-content/2023/05/eZz5Le8Lun2j5mNHMccrxqCTQc7mOTtF.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Quote #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Quote #23978</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Dutch House AV-IT KP-electrical</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-tbc">To be confirmed</span>
-        <span class="qr-date qr-date-tbc">Valid until 14 April 2026</span>
+        <span class="qr-date qr-date-tbc">Valid until 4 Oct 2024</span>
       </div>
       <div></div>
-      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/66906/b380b9f444b39ca2f04d6c4bc6ad0c17','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$34,632.29</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn">
@@ -984,23 +1120,23 @@
     <!-- ③ To be confirmed (overdue) -->
     <div class="qr">
       <div class="qr-thumb">
-        <img src="images/lcr-ocean-palm.png" alt="" onerror="this.style.display='none'"/>
+        <img src="https://app.wequote.cloud/user-content/2020/05/0TLe1sDrrMiD3nSofcVIeSypaz4y2zN3.PNG" alt="" onerror="this.style.display='none'"/>
       </div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Quote #23944</span>
+          <span class="qr-number">Quote #21427</span>
           <span class="qr-revision">Revision 3</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Dutch House AV-IT-Elan R2</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-tbc">To be confirmed</span>
-        <span class="qr-date qr-date-overdue">Overdue 14 April 2026</span>
+        <span class="qr-date qr-date-overdue">Overdue 22 Nov 2021</span>
       </div>
       <div></div>
-      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/1260/895ee872ce9f26a3274e86f8fbb5ffb5','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$28,958.36</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$28,958.36</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
       <div class="qr-actions">
         <div class="qr-action-group">
           <button class="qr-action-btn">
@@ -1016,37 +1152,94 @@
     <!-- ④ Accepted (with inline payment summary) -->
     <div class="qr">
       <div class="qr-thumb">
-        <img src="images/lcr-ocean-palm.png" alt="" onerror="this.style.display='none'"/>
+        <img src="https://app.wequote.cloud/user-content/2020/05/FMPfP0xFuaFlxoh1KTOmN4szSmZ1oK20.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Quote #23944</span>
-          <span class="qr-revision">Revision 3</span>
+          <span class="qr-number">Quote #23970</span>
         </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Dutch House AV-IT EILIVE DEMO day 2</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-accepted">Accepted</span>
-        <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+        <span class="qr-date qr-date-accepted">Accepted on 23 Sep 2024</span>
       </div>
-      <!-- Inline payment summary (accepted only) -->
+      <!-- Inline payment summary — real data aggregated from invoices.json for Quote 23970
+           Paid: $0  |  To pay now (outstanding inv #0282): $5,581.13  |  Upcoming (not-yet-invoiced + drafts): $21,723.53 -->
       <div class="qr-payment">
         <div class="qr-payment-label">Payment Summary</div>
         <div class="qr-payment-amount-row">
-          <span class="qr-payment-big">$650,000.00</span>
-          <span class="qr-payment-of">of $850,000.02 Paid so far</span>
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $27,304.66 Paid so far</span>
         </div>
         <div class="qr-payment-bar">
-          <div class="qr-payment-bar-seg seg-paid" style="width:76%;"></div>
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:20%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">20%</span>
+            </div>
+            <span class="co-pay-amt">$5,581.13</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">80%</span>
+            </div>
+            <span class="co-pay-amt">$21,723.53</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/65883/92604a4f437e12a8b5cd524d1f20d187','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$27,304.66</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
+      <!-- No action buttons for accepted -->
+      <div></div>
+    </div>
+
+    <!-- ⑤ Accepted (PART PAID 13%) — quote_id=455, quote_no=21426 r1 (Dutch House Lutron HomeWorks QS R2) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2019/04/xlhK5G7XhPCi1zOJbSsdmjUoN1ovpELm.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #21426</span>
+        </div>
+        <div class="qr-title">Dutch House Lutron HomeWorks QS R2</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 21 Jun 2021</span>
+      </div>
+      <!-- Inline payment summary — real data: Paid $2,825 (13%) / 0 due / $18,437.80 upcoming (87%) -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$2,825.00</span>
+          <span class="qr-payment-of">of $21,262.80 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:13%;"></div>
           <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
         </div>
         <div class="co-pay-legend">
           <div class="co-pay-legend-row">
             <div class="co-pay-legend-left">
               <div class="qr-legend-dot" style="background:#009113;"></div>
-              <span>Paid so far</span><span class="co-pay-pct">76%</span>
+              <span>Paid so far</span><span class="co-pay-pct">13%</span>
             </div>
-            <span class="co-pay-amt">$650,000.00</span>
+            <span class="co-pay-amt">$2,825.00</span>
           </div>
           <div class="co-pay-legend-row">
             <div class="co-pay-legend-left">
@@ -1058,37 +1251,712 @@
           <div class="co-pay-legend-row">
             <div class="co-pay-legend-left">
               <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
-              <span>Upcoming</span><span class="co-pay-pct">24%</span>
+              <span>Upcoming</span><span class="co-pay-pct">87%</span>
             </div>
-            <span class="co-pay-amt">$200,000.00</span>
+            <span class="co-pay-amt">$18,437.80</span>
           </div>
         </div>
       </div>
-      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$20,000.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
-      <!-- No action buttons for accepted -->
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/95/e7debedffb8a10428771476f585e3254','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$21,262.80</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
       <div></div>
     </div>
 
-    <!-- ⑤ Declined (view only, no actions) -->
+    <!-- Accepted (part paid 19%) — quote_id=459, quote_no=21430 r1 (Doorbird access systems Dutch House R2) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2019/05/SiVKPVAQNulHpGqz6mBBOLXBgB3VlcWM.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #21430</span>
+        </div>
+        <div class="qr-title">Doorbird access systems Dutch House R2</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 15 Apr 2021</span>
+      </div>
+      <!-- Inline payment summary — real data from invoices.json -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$699.05</span>
+          <span class="qr-payment-of">of $3,609.44 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:19%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">19%</span>
+            </div>
+            <span class="co-pay-amt">$699.05</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">81%</span>
+            </div>
+            <span class="co-pay-amt">$2,910.39</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/103/13bb307ec331f1549aad799fb6da744e','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$3,609.44</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
+      <div></div>
+    </div>
+
+    <!-- Accepted (part paid 24%) — quote_id=1284, quote_no=21529 r1 (Willow Dean Heating Controls) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2021/07/PCBqJLBWr5uYiTFezhMsqFtSfdNKrrs2.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #21529</span>
+        </div>
+        <div class="qr-title">Willow Dean Heating Controls</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 12 Jan 2022</span>
+      </div>
+      <!-- Inline payment summary — real data from invoices.json -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$140.00</span>
+          <span class="qr-payment-of">of $580.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:24%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">24%</span>
+            </div>
+            <span class="co-pay-amt">$140.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">76%</span>
+            </div>
+            <span class="co-pay-amt">$440.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/1257/6c90bccb937020b7532461b7ad94ed0c','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$580.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
+      <div></div>
+    </div>
+
+    <!-- Accepted (not invoiced) — quote_id=44359, quote_no=23977 r1 (Dutch House AV-IT EILIVE DEMO Gen demo) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2019/12/A3wi74IIGD4S4AhDGjW6QzdsCj06gaWn.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #23977</span>
+        </div>
+        <div class="qr-title">Dutch House AV-IT EILIVE DEMO Gen demo</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 27 Sep 2024</span>
+      </div>
+      <!-- Inline payment summary — real data from invoices.json -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $34,632.29 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$34,632.29</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/66859/b01eb7a28673dd8126297d4f853b96a9','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$34,632.29</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
+      <div></div>
+    </div>
+
+    <!-- Accepted (not invoiced) — quote_id=44818, quote_no=23985 r1 (Dutch House AV-IT Robert test) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2019/12/A3wi74IIGD4S4AhDGjW6QzdsCj06gaWn.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #23985</span>
+        </div>
+        <div class="qr-title">Dutch House AV-IT Robert test</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 1 Oct 2024</span>
+      </div>
+      <!-- Inline payment summary — real data from invoices.json -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $34,632.29 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$34,632.29</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/67425/297b46e6ab3f387ec506dd94bab76dcb','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$34,632.29</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
+      <div></div>
+    </div>
+
+    <!-- Accepted (not invoiced) — quote_id=42864, quote_no=23964 r1 (Dutch House AV-IT EILIVE DEMO) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2019/12/A3wi74IIGD4S4AhDGjW6QzdsCj06gaWn.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #23964</span>
+        </div>
+        <div class="qr-title">Dutch House AV-IT EILIVE DEMO</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 18 Sep 2024</span>
+      </div>
+      <!-- Inline payment summary — real data from invoices.json -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $28,958.36 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$28,958.36</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/64980/c9b13e8d8d2e941727a07382429b2e1a','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$28,958.36</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
+      <div></div>
+    </div>
+
+    <!-- Accepted (not invoiced) — quote_id=435, quote_no=21409 r1 (Dutch House Security) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2021/05/z18EiLPL8CgoA2OYrA6BFmThGSpvXmMS.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #21409</span>
+        </div>
+        <div class="qr-title">Dutch House Security</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 16 Apr 2021</span>
+      </div>
+      <!-- Inline payment summary — real data from invoices.json -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $7,089.61 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$7,089.61</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/79/10495ba861839be3a84ceb5f67391c36','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$7,089.61</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
+      <div></div>
+    </div>
+
+    <!-- ⑥ Accepted (NOT INVOICED YET) — quote_id=1094, quote_no=21509 r1 (Lutron Homeworks QS - Additional Parts) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2019/01/zMlwo2GunLOhLVoQ6aVrINngTQu7KIh2.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #21509</span>
+        </div>
+        <div class="qr-title">Lutron Homeworks QS - Additional Parts</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 12 Jan 2022</span>
+      </div>
+      <!-- Inline payment summary — real data: not yet invoiced, all upcoming -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $4,801.15 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$4,801.15</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/945/fcf7c994b33e7fc3e58e54b8a1a34f38','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$4,801.15</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
+      <div></div>
+    </div>
+
+    <!-- Accepted (not invoiced) — quote_id=2032, quote_no=21530 r3 (Willow Dean - Downlights) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2018/06/04/xUa4BTmfOWtKZPSr1eDqvJB7CDiEOUSQ.png" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #21530</span>
+          <span class="qr-revision">Revision 3</span>
+        </div>
+        <div class="qr-title">Willow Dean - Downlights</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 12 Jan 2022</span>
+      </div>
+      <!-- Inline payment summary — real data from invoices.json -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $1,710.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$1,710.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/2330/8b8498e1f16c17ce2765d32a9df5efd5','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$1,710.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$1,710.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
+      <div></div>
+    </div>
+
+    <!-- Accepted (not invoiced) — quote_id=30455, quote_no=23922 r1 (Elan system service and new remote) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2024/05/JwC6Yhl223XQa0MtdjnhwwNTb4ow6D5V.png" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #23922</span>
+        </div>
+        <div class="qr-title">Elan system service and new remote</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 28 Apr 2024</span>
+      </div>
+      <!-- Inline payment summary — real data from invoices.json -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $1,240.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$1,240.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/45923/7387ccbbc65944996e70236ccb30a010','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$1,240.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
+      <div></div>
+    </div>
+
+    <!-- ⑦ Accepted (FULLY PAID 100%) — quote_id=4114, quote_no=21492 r4 (Dutch House - LED Tape, Drivers & Engines) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2018/06/04/xnjSj31YO1cYIdXEtN2bLFTavyEUsdA4.png" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #21492</span>
+          <span class="qr-revision">Revision 4</span>
+        </div>
+        <div class="qr-title">Dutch House - LED Tape, Drivers &amp; Engines</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 20 Jun 2022</span>
+      </div>
+      <!-- Inline payment summary — real data: fully paid 100% across 3 invoices -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$8,185.05</span>
+          <span class="qr-payment-of">of $8,185.05 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:100%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$8,185.05</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/5154/b4fcb127d899eb00b29ffcde49e6d1d4','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$8,185.05</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$8,185.05</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 4</span></div></div>
+      <div></div>
+    </div>
+
+    <!-- Accepted (fully paid 100%) — quote_id=3032, quote_no=21579 r1 (Curtain Tracks Integration) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2018/01/vNzwMzVjjJFkLnbxU15krLHKdfT2Vx40.png" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #21579</span>
+        </div>
+        <div class="qr-title">Curtain Tracks Integration</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 20 Jun 2022</span>
+      </div>
+      <!-- Inline payment summary — real data from invoices.json -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$1,214.45</span>
+          <span class="qr-payment-of">of $1,214.45 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:100%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$1,214.45</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/3778/dcb7eff241fd24ba5a750de5ae8e8fa8','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$1,214.45</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver" style="visibility:hidden;"></div>
+      <div></div>
+    </div>
+
+    <!-- Accepted (fully paid 100%) — quote_id=4112, quote_no=21564 r2 (Hager 2 row consumer unit) -->
     <div class="qr">
       <div class="qr-thumb">
         <img src="images/lcr-ocean-palm.png" alt="" onerror="this.style.display='none'"/>
       </div>
       <div class="qr-name">
-        <div class="qr-sublabel">Original Quote</div>
-        <div class="qr-title">Audio Video Installation</div>
-        <div class="qr-sublabel">Quote #23946</div>
+        <div class="qr-meta">
+          <span class="qr-number">Quote #21564</span>
+          <span class="qr-revision">Revision 2</span>
+        </div>
+        <div class="qr-title">Hager 2 row consumer unit</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 20 Jun 2022</span>
+      </div>
+      <!-- Inline payment summary — real data from invoices.json -->
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$210.00</span>
+          <span class="qr-payment-of">of $210.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:100%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span><span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$210.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span><span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/5150/d15546942a2e8753c98bb7efd571c2e5','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$210.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$210.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 2</span></div></div>
+      <div></div>
+    </div>
+    <!-- ⑧ Declined — quote_id=4115, quote_no=21594 r3 (External Security PA System) -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2022/04/LIKEY4pSkN8p1OhY7sJV6rKJwn5ULJpN.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Quote #21594</span>
+          <span class="qr-revision">Revision 3</span>
+        </div>
+        <div class="qr-title">External Security PA System</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-declined">Declined</span>
-        <span class="qr-date qr-date-declined">Declined on 14 April 2026</span>
+        <span class="qr-date qr-date-declined">Declined on 26 Oct 2025</span>
       </div>
       <div></div>
-      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://staging.wequote.cloud/proposal/31913/958034de4de2210d42be4f7a84921e35','_blank')">View Quote</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$0.00</div><div class="qr-orig-lbl">Original</div></div>
-      <div class="qr-ver"><div class="qr-ver-val">$0.00</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Original Quote</span></div></div>
+      <div class="qr-view"><button class="qr-view-btn" onclick="window.open('https://app.wequote.cloud/proposal/5159/322e84858421a6a8ee110417e2dbea96','_blank')">View Quote</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$2,583.86</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-ver"><div class="qr-ver-val">$2,583.86</div><div class="qr-ver-lbl"><span class="qr-ver-lbl-muted">Version</span><span class="qr-ver-lbl-bold">&nbsp;Revision 3</span></div></div>
       <!-- No action buttons for declined -->
       <div></div>
     </div>
@@ -1180,6 +2048,7 @@
       <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         Sales Order
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Action Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
@@ -1273,34 +2142,36 @@
       <div class="co-pc-top">
         <div class="co-pc-title">Total Project <br>Accepted Value</div>
         <div class="co-pc-total">
-          <div class="co-pc-total-value">$850,000.00</div>
+          <div class="co-pc-total-value">$257,486.97</div>
           <div class="co-pc-total-label">Total Value (excl. Tax)</div>
         </div>
       </div>
       <div class="co-pc-body">
         <div class="co-pc-summary-label">Payment Summary</div>
         <div class="co-pc-amount-row">
-          <span class="co-pc-amount">$650,000.00</span>
-          <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+          <span class="co-pc-amount">$15,722.60</span>
+          <span class="co-pc-amount-of">of $257,486.97 Paid so far</span>
         </div>
-        <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+        <!-- Real-data bar: 6% paid (green) + 5% due (red) + 89% upcoming (grey) -->
+        <div class="qp-progress-bar-outer" style="margin-bottom:8px;display:flex;">
+          <div class="qp-progress-bar-fill" style="width:6%;background:#009113;"></div>
+          <div class="qp-progress-bar-fill" style="width:5%;background:#cf3400;"></div>
         </div>
         <div class="co-pc-legend">
           <div class="co-pc-legend-item">
             <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
-            <div class="co-pc-legend-value">$650,000.00</div>
+            <div class="co-pc-legend-value">$15,722.60</div>
           </div>
           <div class="co-pc-legend-item">
             <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
-            <div class="co-pc-legend-value">$15,000.00</div>
+            <div class="co-pc-legend-value">$13,060.23</div>
           </div>
           <div class="co-pc-legend-item">
             <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
-            <div class="co-pc-legend-value">$15,000.00</div>
+            <div class="co-pc-legend-value">$228,704.14</div>
           </div>
         </div>
-        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay Now</button>
+        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Invoice','$13,060.23','Outstanding invoices')">Pay Now</button>
       </div>
     </div>
     <div class="co-pc-details">
@@ -1322,10 +2193,9 @@
 
   <!-- Filter tabs -->
   <div class="qp-filter-tabs">
-    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">04</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Unpaid <span class="qp-filter-count">01</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Paid <span class="qp-filter-count">01</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Upcoming <span class="qp-filter-count">01</span></button>
+    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">17</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Unpaid <span class="qp-filter-count">04</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Paid <span class="qp-filter-count">13</span></button>
     <label class="qp-search-pill">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -1337,7 +2207,7 @@
   <!-- Invoice rows -->
   <div class="qp-list">
 
-    <!-- Unpaid invoice -->
+    <!-- #0411 — id=14647, status=outstanding, subtotal=7479.1, paid=0 -->
     <div class="inv-row">
       <div class="inv-status-dot-row">
         <div class="inv-status-dot" style="background:#cf3400;"></div>
@@ -1346,51 +2216,206 @@
       <div class="inv-col2">
         <div class="inv-col2-top">
           <span class="inv-status-badge inv-badge-unpaid">Unpaid</span>
-          <span class="inv-valid-until" style="color:#cf3400;">Valid until: 31 Dec 2025</span>
+          <span class="inv-valid-until" style="color:#cf3400;">Due: 2 Jun 2025</span>
         </div>
         <div class="inv-col2-bottom">
-          <div class="inv-amount-val">$850,000.00</div>
+          <div class="inv-amount-val">$7,479.10</div>
           <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-title-row">
         <div class="inv-title-col">
-          <div class="inv-ref">Invoice #00002</div>
-          <div class="inv-title">Invoice for Aftercare</div>
+          <div class="inv-ref">#0411</div>
+          <div class="inv-title">Deposit — Dutch House AV-IT KP-electrical</div>
         </div>
         <div class="inv-amount-col">
-          <div class="inv-amount-val">$850,000.00</div>
+          <div class="inv-amount-val">$7,479.10</div>
           <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-payment">
         <div class="inv-payment-label">Payment Summary</div>
         <div class="inv-payment-amount-row">
-          <div class="inv-payment-big">$650,000.00</div>
-          <div class="inv-payment-of">of $850,000.02 Paid so far</div>
+          <div class="inv-payment-big">$0.00</div>
+          <div class="inv-payment-of">of $7,479.10 Paid so far</div>
         </div>
         <div class="inv-payment-bar">
-          <div class="inv-payment-bar-fill" style="width:76%;background:#009113;"></div>
-          <div class="inv-payment-bar-fill" style="width:24%;background:#cf3400;"></div>
+          <div class="inv-payment-bar-fill" style="width:0%;background:#009113;"></div><div class="inv-payment-bar-fill" style="width:100%;background:#cf3400;"></div>
         </div>
         <div class="inv-payment-legend">
           <div class="inv-legend-item">
-            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">70%</span></div>
-            <div class="inv-legend-val">$650,000.00</div>
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
           </div>
           <div class="inv-legend-item right">
-            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">30%</span></div>
-            <div class="inv-legend-val">$200,000.00</div>
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$7,479.10</div>
           </div>
         </div>
       </div>
       <div class="inv-btns">
-        <button class="inv-btn">Invoice Details</button>
-        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00002','$850,000.00','Invoice for Aftercare')">Pay now</button>
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/14647/ea1dcd8b2c7ec7df6bb08592454569e7','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('#0411','$7,479.10','Quote 23978: deposite')">Pay now</button>
       </div>
     </div>
 
-    <!-- Paid invoice -->
+    <!-- #0372 — id=12940, status=outstanding, subtotal=6826.16, paid=3000.0 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#cf3400;"></div>
+        <span class="inv-status-label">Unpaid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-unpaid">Unpaid</span>
+          <span class="inv-valid-until" style="color:#cf3400;">Due: 16 Apr 2025</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$6,826.16</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">#0372</div>
+          <div class="inv-title">First Floor</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$6,826.16</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$3,000.00</div>
+          <div class="inv-payment-of">of $6,826.16 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:44%;background:#009113;"></div><div class="inv-payment-bar-fill" style="width:56%;background:#cf3400;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">44%</span></div>
+            <div class="inv-legend-val">$3,000.00</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">56%</span></div>
+            <div class="inv-legend-val">$3,826.16</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/12940/d4841d6d6839b84cfd561dfbf35d1c72','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('#0372','$3,826.16','First Floor')">Pay now</button>
+      </div>
+    </div>
+
+    <!-- #0299 — id=10560, status=outstanding, subtotal=14037.15, paid=0 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#cf3400;"></div>
+        <span class="inv-status-label">Unpaid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-unpaid">Unpaid</span>
+          <span class="inv-valid-until" style="color:#cf3400;">Due: 18 Feb 2025</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$14,037.15</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">#0299</div>
+          <div class="inv-title">50% interim invoice</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$14,037.15</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$0.00</div>
+          <div class="inv-payment-of">of $14,037.15 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:0%;background:#009113;"></div><div class="inv-payment-bar-fill" style="width:100%;background:#cf3400;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$14,037.15</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/10560/84f49d346200b17a2d3998c5eb1490d7','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('#0299','$14,037.15','50% jkdgiuhdigbhfigbjhjh')">Pay now</button>
+      </div>
+    </div>
+
+    <!-- #0282 — id=10198, status=outstanding, subtotal=5581.13, paid=0 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#cf3400;"></div>
+        <span class="inv-status-label">Unpaid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-unpaid">Unpaid</span>
+          <span class="inv-valid-until" style="color:#cf3400;">Due: 6 Feb 2025</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$5,581.13</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">#0282</div>
+          <div class="inv-title">Quote 23970: Dutch House AV-IT EILIVE DEMO day 2</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$5,581.13</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$0.00</div>
+          <div class="inv-payment-of">of $5,581.13 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:0%;background:#009113;"></div><div class="inv-payment-bar-fill" style="width:100%;background:#cf3400;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$5,581.13</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/10198/7cf01fce26157e277b61a60557805b64','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('#0282','$5,581.13','Quote 23970: Dutch House AV-IT EILIVE DEMO day 2')">Pay now</button>
+      </div>
+    </div>
+
+    <!-- #0393 — id=13665, status=paid, subtotal=4453.6, paid=4453.6 -->
     <div class="inv-row">
       <div class="inv-status-dot-row">
         <div class="inv-status-dot" style="background:#009113;"></div>
@@ -1399,28 +2424,28 @@
       <div class="inv-col2">
         <div class="inv-col2-top">
           <span class="inv-status-badge inv-badge-paid">Paid</span>
-          <span class="inv-valid-until" style="color:#009113;">Paid on: 24 Sep 2025</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 8 May 2025</span>
         </div>
         <div class="inv-col2-bottom">
-          <div class="inv-amount-val">$850,000.00</div>
+          <div class="inv-amount-val">$4,453.60</div>
           <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-title-row">
         <div class="inv-title-col">
-          <div class="inv-ref">#250924.SOC014</div>
-          <div class="inv-title">Invoice for Site visit 10/09/25</div>
+          <div class="inv-ref">#0393</div>
+          <div class="inv-title">Project work — May 2025</div>
         </div>
         <div class="inv-amount-col">
-          <div class="inv-amount-val">$850,000.00</div>
+          <div class="inv-amount-val">$4,453.60</div>
           <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-payment">
         <div class="inv-payment-label">Payment Summary</div>
         <div class="inv-payment-amount-row">
-          <div class="inv-payment-big">$850,000.00</div>
-          <div class="inv-payment-of">of $850,000.00 Paid so far</div>
+          <div class="inv-payment-big">$4,453.60</div>
+          <div class="inv-payment-of">of $4,453.60 Paid so far</div>
         </div>
         <div class="inv-payment-bar">
           <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
@@ -1428,7 +2453,7 @@
         <div class="inv-payment-legend">
           <div class="inv-legend-item">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
-            <div class="inv-legend-val">$850,000.00</div>
+            <div class="inv-legend-val">$4,453.60</div>
           </div>
           <div class="inv-legend-item right">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
@@ -1437,62 +2462,636 @@
         </div>
       </div>
       <div class="inv-btns">
-        <button class="inv-btn">Invoice Details</button>
-        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('#250924.SOC014','$850,000.00','Invoice for Site visit')">Pay now</button>
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/13665/e4af3f3aab1d3fb12987e6a931cfe1c1','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
       </div>
     </div>
 
-    <!-- Upcoming invoice -->
+    <!-- #0110 — id=4242, status=paid, subtotal=1240.0, paid=1240.0 -->
     <div class="inv-row">
       <div class="inv-status-dot-row">
-        <div class="inv-status-dot" style="background:#9c9c9c;"></div>
-        <span class="inv-status-label">Upcoming</span>
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
       </div>
       <div class="inv-col2">
         <div class="inv-col2-top">
-          <span class="inv-status-badge inv-badge-upcoming">Upcoming</span>
-          <span class="inv-valid-until" style="color:#9c9c9c;">Due: 15 Jan 2026</span>
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 10 Mar 2025</span>
         </div>
         <div class="inv-col2-bottom">
-          <div class="inv-amount-val">$200,000.00</div>
+          <div class="inv-amount-val">$1,240.00</div>
           <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-title-row">
         <div class="inv-title-col">
-          <div class="inv-ref">Invoice #00003</div>
-          <div class="inv-title">Invoice for Aftercare remote support</div>
+          <div class="inv-ref">#0110</div>
+          <div class="inv-title">ELAN HR40 Wi-Fi Handheld Remote Control with Charging S</div>
         </div>
         <div class="inv-amount-col">
-          <div class="inv-amount-val">$200,000.00</div>
+          <div class="inv-amount-val">$1,240.00</div>
           <div class="inv-amount-lbl">exclude Tax</div>
         </div>
       </div>
       <div class="inv-payment">
         <div class="inv-payment-label">Payment Summary</div>
         <div class="inv-payment-amount-row">
-          <div class="inv-payment-big">$0.00</div>
-          <div class="inv-payment-of">of $200,000.00 Paid so far</div>
+          <div class="inv-payment-big">$1,240.00</div>
+          <div class="inv-payment-of">of $1,240.00 Paid so far</div>
         </div>
-        <div class="inv-payment-bar"><!-- empty — upcoming --></div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
         <div class="inv-payment-legend">
           <div class="inv-legend-item">
-            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">0%</span></div>
-            <div class="inv-legend-val">$0.00</div>
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$1,240.00</div>
           </div>
           <div class="inv-legend-item right">
             <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
-            <div class="inv-legend-val">$200,000.00</div>
+            <div class="inv-legend-val">$0.00</div>
           </div>
         </div>
       </div>
       <div class="inv-btns">
-        <button class="inv-btn">Invoice Details</button>
-        <button class="inv-btn inv-btn-paynow" onclick="openPayNowModal('Invoice #00003','$200,000.00','Invoice for Aftercare remote support')">Pay now</button>
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/4242/2215bc5c97393f05f818347c10f81461','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
       </div>
     </div>
 
-  </div>
+    <!-- INV-0150 — id=435, status=paid, subtotal=5897.98, paid=5897.98 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 6 Jul 2023</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$5,897.98</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">INV-0150</div>
+          <div class="inv-title">Drive Way CCTV</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$5,897.98</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$5,897.98</div>
+          <div class="inv-payment-of">of $5,897.98 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$5,897.98</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/435/a080ca8cfa2bbfc61da1f3ff1141d8c9','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    <!-- Invoice #211 — id=211, status=paid, subtotal=3798.31, paid=3798.31 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 26 Feb 2024</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$3,798.31</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">Invoice #211</div>
+          <div class="inv-title">Quote #21579: Curtain Tracks Integration final payment</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$3,798.31</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$3,798.31</div>
+          <div class="inv-payment-of">of $3,798.31 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$3,798.31</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/211/6ad59471309d49aa03e089e4924a6162','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    <!-- Invoice #204 — id=204, status=paid, subtotal=210.0, paid=210.0 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 20 Jun 2022</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$210.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">Invoice #204</div>
+          <div class="inv-title">Products on quote #21564:  Hager DB</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$210.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$210.00</div>
+          <div class="inv-payment-of">of $210.00 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$210.00</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/204/f6bf6d71584db4ea035ef00b0a77e7e0','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    <!-- Invoice #205 — id=205, status=paid, subtotal=4000.0, paid=4000.0 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 20 Jun 2022</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$4,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">Invoice #205</div>
+          <div class="inv-title">Products on quote #21492: Dutch House - LED Tape, Drive</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$4,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$4,000.00</div>
+          <div class="inv-payment-of">of $4,000.00 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$4,000.00</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/205/ec37d8e81d50f88c50dccb49f594ab0a','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    <!-- Invoice #206 — id=206, status=paid, subtotal=6553.1, paid=6553.1 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 20 Jun 2022</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$6,553.10</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">Invoice #206</div>
+          <div class="inv-title">Products on quote #21529: Willow Dean Heating Controls</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$6,553.10</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$6,553.10</div>
+          <div class="inv-payment-of">of $6,553.10 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$6,553.10</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/206/ef518858714c967bbb248f1ee82f91c1','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    <!-- Invoice #207 — id=207, status=paid, subtotal=4185.05, paid=4185.05 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 26 Feb 2024</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$4,185.05</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">Invoice #207</div>
+          <div class="inv-title">Quote #21492: Dutch House - LED Tape, Drivers &amp; Engines</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$4,185.05</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$4,185.05</div>
+          <div class="inv-payment-of">of $4,185.05 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$4,185.05</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/207/30ef9a195b40d5349a90ec3c85b5042b','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    <!-- Invoice #10 — id=152, status=paid, subtotal=10000.0, paid=10000.0 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 17 Apr 2022</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$10,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">Invoice #10</div>
+          <div class="inv-title">Comms Signalling</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$10,000.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$10,000.00</div>
+          <div class="inv-payment-of">of $10,000.00 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$10,000.00</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/152/14329659350bcecb6cf28e2af6b8d2ef','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    <!-- Invoice #6 — id=96, status=paid, subtotal=1710.0, paid=1710.0 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 3 Feb 2022</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$1,710.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">Invoice #6</div>
+          <div class="inv-title">Products</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$1,710.00</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$1,710.00</div>
+          <div class="inv-payment-of">of $1,710.00 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$1,710.00</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/96/684067da0c46b5cf3e5a4d14c8e46f0b','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    <!-- Invoice #4 — id=93, status=paid, subtotal=26509.31, paid=26509.31 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 3 Feb 2022</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$26,509.31</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">Invoice #4</div>
+          <div class="inv-title">4K Video Distribution</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$26,509.31</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$26,509.31</div>
+          <div class="inv-payment-of">of $26,509.31 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$26,509.31</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/93/9c7fd01fd682269d7955ac15587ea3e7','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    <!-- Invoice #0051 — id=87, status=paid, subtotal=4801.15, paid=4801.15 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 1 Feb 2022</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$4,801.15</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">Invoice #0051</div>
+          <div class="inv-title">Lutron HomeWorks QS</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$4,801.15</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$4,801.15</div>
+          <div class="inv-payment-of">of $4,801.15 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$4,801.15</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/87/d3b72cb9b222c6af5d4725b0f9beedd1','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    <!-- Invoice #0025 — id=84, status=paid, subtotal=18437.8, paid=18437.8 -->
+    <div class="inv-row">
+      <div class="inv-status-dot-row">
+        <div class="inv-status-dot" style="background:#009113;"></div>
+        <span class="inv-status-label">Paid</span>
+      </div>
+      <div class="inv-col2">
+        <div class="inv-col2-top">
+          <span class="inv-status-badge inv-badge-paid">Paid</span>
+          <span class="inv-valid-until" style="color:#009113;">Paid on: 1 Feb 2022</span>
+        </div>
+        <div class="inv-col2-bottom">
+          <div class="inv-amount-val">$18,437.80</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-title-row">
+        <div class="inv-title-col">
+          <div class="inv-ref">Invoice #0025</div>
+          <div class="inv-title">Lutron HomeWorks QS</div>
+        </div>
+        <div class="inv-amount-col">
+          <div class="inv-amount-val">$18,437.80</div>
+          <div class="inv-amount-lbl">exclude Tax</div>
+        </div>
+      </div>
+      <div class="inv-payment">
+        <div class="inv-payment-label">Payment Summary</div>
+        <div class="inv-payment-amount-row">
+          <div class="inv-payment-big">$18,437.80</div>
+          <div class="inv-payment-of">of $18,437.80 Paid so far</div>
+        </div>
+        <div class="inv-payment-bar">
+          <div class="inv-payment-bar-fill" style="width:100%;background:#009113;"></div>
+        </div>
+        <div class="inv-payment-legend">
+          <div class="inv-legend-item">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#009113;"></div> Paid so far <span class="inv-legend-pct">100%</span></div>
+            <div class="inv-legend-val">$18,437.80</div>
+          </div>
+          <div class="inv-legend-item right">
+            <div class="inv-legend-dot-row"><div class="inv-legend-dot" style="background:#cf3400;"></div> To pay now <span class="inv-legend-pct">0%</span></div>
+            <div class="inv-legend-val">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="inv-btns">
+        <button class="inv-btn" onclick="window.open('https://app.wequote.cloud/invoice/84/81379ef499d87194c79e9c20dbf42693','_blank')">Invoice Details</button>
+        <button class="inv-btn inv-btn-paynow" style="visibility:hidden;">Pay now</button>
+      </div>
+    </div>
+
+    </div>
 
   <!-- Pay now modal -->
   <div class="paynow-overlay" id="paynow-overlay" onclick="if(event.target===this)closePayNowModal()">
@@ -1641,6 +3240,7 @@
       <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         Sales Order
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Action Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
@@ -1736,34 +3336,36 @@
     <div class="co-pc-top">
       <div class="co-pc-title">Total Project <br>Accepted Value</div>
       <div class="co-pc-total">
-        <div class="co-pc-total-value">$850,000.00</div>
+        <div class="co-pc-total-value">$257,486.97</div>
         <div class="co-pc-total-label">Total Value (excl. Tax)</div>
       </div>
     </div>
     <div class="co-pc-body">
       <div class="co-pc-summary-label">Payment Summary</div>
       <div class="co-pc-amount-row">
-        <span class="co-pc-amount">$650,000.00</span>
-        <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+        <span class="co-pc-amount">$15,722.60</span>
+        <span class="co-pc-amount-of">of $257,486.97 Paid so far</span>
       </div>
-      <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
-        <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+      <!-- Real-data bar: 6% paid (green) + 5% due (red) + 89% upcoming (grey) -->
+      <div class="qp-progress-bar-outer" style="margin-bottom:8px;display:flex;">
+        <div class="qp-progress-bar-fill" style="width:6%;background:#009113;"></div>
+        <div class="qp-progress-bar-fill" style="width:5%;background:#cf3400;"></div>
       </div>
       <div class="co-pc-legend">
         <div class="co-pc-legend-item">
           <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
-          <div class="co-pc-legend-value">$650,000.00</div>
+          <div class="co-pc-legend-value">$15,722.60</div>
         </div>
         <div class="co-pc-legend-item">
           <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
-          <div class="co-pc-legend-value">$18,000.00</div>
+          <div class="co-pc-legend-value">$13,060.23</div>
         </div>
         <div class="co-pc-legend-item">
           <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
-          <div class="co-pc-legend-value">$182,000.00</div>
+          <div class="co-pc-legend-value">$228,704.14</div>
         </div>
       </div>
-      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Change Order','$850,000.00','Change Order Payment')">Pay Now</button>
+      <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Change Order','$13,060.23','Change Order Payment')">Pay Now</button>
     </div>
   </div>
 
@@ -1964,7 +3566,7 @@
             <div class="co-row-title">Dutch House Security</div>
           </div>
         </div>
-        <div class="co-row-val"><span class="v">$12,200,000.00</span><span class="l">Previous Project Total</span></div>
+        <div class="co-row-val"><span class="v">$257,486.97</span><span class="l">Current Project Total</span></div>
       </div>
       <div class="co-row-body">
         <div class="co-row-status">
@@ -1976,9 +3578,9 @@
           <div class="co-row-desc">Additional CCTV coverage for the rear elevation, including two PoE cameras and NVR licence upgrade.</div>
         </div>
         <div class="co-row-values">
-          <div class="co-row-val"><span class="v" style="color:#313131;">-$1,200,000.00</span><span class="l">Change Order 1.2</span></div>
-          <div class="co-row-val"><span class="v" style="color:#313131;">+$2,120,000.00</span><span class="l">3 Variation Value</span></div>
-          <div class="co-row-val"><span class="v" style="color:#009113;">$2,120,000.00</span><span class="l"><b>New Project Total</b> After Change Order 1.2 accepted</span></div>
+          <div class="co-row-val"><span class="v" style="color:#313131;">+$5,000.00</span><span class="l">Change Order 1.2</span></div>
+          <div class="co-row-val"><span class="v" style="color:#313131;">+$5,000.00</span><span class="l">3 Variation Value</span></div>
+          <div class="co-row-val"><span class="v" style="color:#009113;">$262,486.97</span><span class="l"><b>New Project Total</b> After Change Order 1.2 accepted</span></div>
         </div>
       </div>
       <div class="co-row-right">
@@ -1995,61 +3597,38 @@
     </div>
 
     <!-- Accepted card (Figma 1160-39446) -->
+    <!-- Accepted CO row — real data: quote_id=43576, Change Order 1.1 (= base revision 1 + change_order 1)
+         Negative CO (reduction) — uses project-level values to stay consistent with the Pending row's labels:
+           Previous Project Total: $259,140.67 (= $257,486.97 + $1,653.70 ; project total before this CO)
+           Change Order 1.1:       -$1,653.70 (real delta: removed $1,862.20 + added $208.50)
+           Variation Value:        $0.00
+           New Project Total:      $257,486.97 (= current project total in summary card) -->
     <div class="co-row" data-status="accepted">
       <div class="co-row-left">
-        <div class="co-row-thumb"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCI+CiAgPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRURFREVEIiByeD0iMTAiLz4KICA8IS0tIGNhbWVyYSBib2R5IC0tPgogIDxyZWN0IHg9IjYiIHk9IjI2IiB3aWR0aD0iNDYiIGhlaWdodD0iMjgiIHJ4PSI1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTJFMkUyIiBzdHJva2Utd2lkdGg9Ii44Ii8+CiAgPCEtLSBsZW5zIGhvdXNpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iMTIiIGZpbGw9IiNGMEYwRjAiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDwhLS0gbGVucyByaW5ncyAtLT4KICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjQwIiByPSI5IiBmaWxsPSIjMjUyNTMwIi8+CiAgPGNpcmNsZSBjeD0iMjkiIGN5PSI0MCIgcj0iNiIgZmlsbD0iIzE2MTYxRSIvPgogIDxjaXJjbGUgY3g9IjI5IiBjeT0iNDAiIHI9IjMiIGZpbGw9IiMwQTBBMTIiLz4KICA8IS0tIGxlbnMgcmVmbGVjdGlvbiAtLT4KICA8ZWxsaXBzZSBjeD0iMjYiIGN5PSIzNy41IiByeD0iMiIgcnk9IjEuMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9Ii4yIi8+CiAgPCEtLSBJUiBMRURzIC0tPgogIDxjaXJjbGUgY3g9IjEyIiBjeT0iMzMiIHI9IjIiIGZpbGw9IiNEMEQwRDAiLz4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjQwIiByPSIyIiBmaWxsPSIjRDBEMEQwIi8+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSI0NyIgcj0iMiIgZmlsbD0iI0QwRDBEMCIvPgogIDwhLS0gbW91bnRpbmcgYnJhY2tldCAtLT4KICA8cmVjdCB4PSI1MiIgeT0iMzAiIHdpZHRoPSIxNiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNFOEU4RTgiIHN0cm9rZT0iI0RDRENEQyIgc3Ryb2tlLXdpZHRoPSIuOCIvPgogIDxyZWN0IHg9IjU1IiB5PSIzNyIgd2lkdGg9IjEwIiBoZWlnaHQ9IjYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9Ii41Ii8+CiAgPCEtLSBzdGF0dXMgTEVEIC0tPgogIDxjaXJjbGUgY3g9IjEwIiBjeT0iMjgiIHI9IjIiIGZpbGw9IiNGRjNCMzAiLz4KPC9zdmc+" alt=""></div>
-        <div class="co-row-left-info">
-          <div class="co-row-meta"><span>Quote #23944</span><span>Change Order 1.2</span></div>
-          <div class="co-row-title">Dutch House Security</div>
+        <div class="co-row-left-top">
+          <div class="co-row-thumb"><img src="https://app.wequote.cloud/user-content/2019/12/A3wi74IIGD4S4AhDGjW6QzdsCj06gaWn.jpg" alt=""></div>
+          <div class="co-row-left-info">
+            <div class="co-row-meta"><span>Quote #23970</span><span>Change Order 1.1</span></div>
+            <div class="co-row-title">Dutch House AV-IT EILIVE DEMO day 2</div>
+          </div>
         </div>
+        <div class="co-row-val"><span class="v">$259,140.67</span><span class="l">Previous Project Total</span></div>
       </div>
       <div class="co-row-body">
         <div class="co-row-status">
           <span class="qr-badge qr-badge-accepted">Accepted</span>
-          <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+          <span class="qr-date qr-date-accepted">Accepted on 23 Sep 2024</span>
         </div>
         <div class="co-row-desc-block">
-          <div class="co-row-version">2 Previous Version &rarr; Change Order 1.2</div>
-          <div class="co-row-desc">Additional CCTV coverage for the rear elevation, including two PoE cameras and NVR licence upgrade.</div>
+          <div class="co-row-version">1 Previous Version &rarr; Change Order 1.1</div>
+        </div>
+        <div class="co-row-values">
+          <div class="co-row-val"><span class="v" style="color:#cf3400;">-$1,653.70</span><span class="l">Change Order 1.1</span></div>
+          <div class="co-row-val"><span class="v" style="color:#313131;">$0.00</span><span class="l">0 Variation Value</span></div>
+          <div class="co-row-val"><span class="v" style="color:#009113;">$257,486.97</span><span class="l"><b>New Project Total</b> After Change Order 1.1 accepted</span></div>
         </div>
       </div>
-      <div class="co-row-pay-mini">
-        <div class="co-row-pay-label">Payment Summary</div>
-        <div class="co-row-pay-amount-row">
-          <span class="co-row-pay-amount">$2,000,000.00</span>
-          <span class="co-row-pay-of">of $2,120,000.00 Paid so far</span>
-        </div>
-        <div class="co-row-pay-bar-outer">
-          <div class="co-row-pay-bar-fill" style="width:50%;background:#009113;"></div>
-        </div>
-        <div class="co-row-pay-legend">
-          <div class="co-row-pay-leg-item">
-            <div class="co-row-pay-leg-hd">
-              <span class="co-row-pay-leg-dot" style="background:#009113;"></span>
-              <span>Paid so far</span>
-              <span class="co-row-pay-leg-pct">50%</span>
-            </div>
-            <div class="co-row-pay-leg-val">$2,000,000.00</div>
-          </div>
-          <div class="co-row-pay-leg-item">
-            <div class="co-row-pay-leg-hd">
-              <span class="co-row-pay-leg-dot" style="background:#cf3400;"></span>
-              <span>To pay now</span>
-              <span class="co-row-pay-leg-pct">0%</span>
-            </div>
-            <div class="co-row-pay-leg-val">$2,000,000.00</div>
-          </div>
-          <div class="co-row-pay-leg-item">
-            <div class="co-row-pay-leg-hd">
-              <span class="co-row-pay-leg-dot" style="background:#9c9c9c;"></span>
-              <span>Upcoming</span>
-              <span class="co-row-pay-leg-pct">0%</span>
-            </div>
-            <div class="co-row-pay-leg-val">$2,000,000.00</div>
-          </div>
-        </div>
-      </div>
-      <button class="co-row-view-btn" onclick="openCoDetailModal(this)">View Change Order 1.2 Details</button>
+      <button class="co-row-view-btn" onclick="window.open('https://app.wequote.cloud/change-order/43576/146ae3889bd98c93403255f8e123ebe1','_blank')">View Change Order Details</button>
     </div>
 
   </div>
@@ -2135,6 +3714,7 @@
       <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         Sales Order
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Action Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
@@ -2473,34 +4053,34 @@
       <div class="co-pc-top">
         <div class="co-pc-title">Total Project <br>Accepted Value</div>
         <div class="co-pc-total">
-          <div class="co-pc-total-value">$850,000.00</div>
+          <div class="co-pc-total-value">$257,486.97</div>
           <div class="co-pc-total-label">Total Value (excl. Tax)</div>
         </div>
       </div>
       <div class="co-pc-body">
         <div class="co-pc-summary-label">Payment Summary</div>
         <div class="co-pc-amount-row">
-          <span class="co-pc-amount">$650,000.00</span>
-          <span class="co-pc-amount-of">of $850,000.00 Paid so far</span>
+          <span class="co-pc-amount">$15,722.60</span>
+          <span class="co-pc-amount-of">of $257,486.97 Paid so far</span>
         </div>
         <div class="qp-progress-bar-outer" style="margin-bottom:8px;">
-          <div class="qp-progress-bar-fill" style="width:76%;background:#009113;"></div>
+          <div class="qp-progress-bar-fill" style="width:6.1%;background:#009113;"></div>
         </div>
         <div class="co-pc-legend">
           <div class="co-pc-legend-item">
             <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#009113;"></div>Paid so far</div>
-            <div class="co-pc-legend-value">$650,000.00</div>
+            <div class="co-pc-legend-value">$15,722.60</div>
           </div>
           <div class="co-pc-legend-item">
             <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:#cf3400;"></div>To pay now</div>
-            <div class="co-pc-legend-value">$15,000.00</div>
+            <div class="co-pc-legend-value">$13,060.23</div>
           </div>
           <div class="co-pc-legend-item">
             <div class="co-pc-legend-label"><div class="co-pc-legend-dot" style="background:var(--c-border-1);"></div>Upcoming</div>
-            <div class="co-pc-legend-value">$0.00</div>
+            <div class="co-pc-legend-value">$228,704.14</div>
           </div>
         </div>
-        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Sales Order','$850,000.00','Sales Order Payment')">Pay Now</button>
+        <button class="inv-btn inv-btn-paynow" style="width:100%;height:41px;" onclick="openPayNowModal('Sales Order','$13,060.23','Sales Order Payment')">Pay Now</button>
       </div>
     </div>
     <div class="co-pc-details">
@@ -2522,10 +4102,10 @@
 
   <!-- Filter tabs — Figma 849:747 (All / TBC / Accepted / Declined) -->
   <div class="qp-filter-tabs">
-    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">04</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">To be confirmed <span class="qp-filter-count">12</span></button>
+    <button class="qp-filter-tab active" onclick="filterTab(this)">All <span class="qp-filter-count">13</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">To be confirmed <span class="qp-filter-count">01</span></button>
     <button class="qp-filter-tab" onclick="filterTab(this)">Accepted <span class="qp-filter-count">12</span></button>
-    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">12</span></button>
+    <button class="qp-filter-tab" onclick="filterTab(this)">Declined <span class="qp-filter-count">00</span></button>
     <label class="qp-search-pill">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -2537,20 +4117,20 @@
   <!-- Sales Order rows (Figma 849:902 + 849:771) -->
   <div class="qp-list">
 
-    <!-- ① To be confirmed: Home Automation (Figma 849:902) -->
+    <!-- #0154 — id 120347 — Pending review demo -->
     <div class="qr">
       <div class="qr-thumb">
-        <img src="images/img_09.png" alt="" onerror="this.style.display='none'"/>
+        <img src="https://app.wequote.cloud/user-content/2023/06/Xr473hlXYKaGqGGBOrtuKFL3DlgPfCFQ.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Sales Order #23944</span>
+          <span class="qr-number">Sales Order #0154</span>
         </div>
-        <div class="qr-title">Home Automation</div>
+        <div class="qr-title">Garage light inspection</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-tbc">To be confirmed</span>
-        <span class="qr-date qr-date-tbc">Valid until 14 April 2026</span>
+        <span class="qr-date qr-date-tbc">Valid until 14 July 2026</span>
       </div>
       <div class="qr-actions">
         <div class="qr-action-group">
@@ -2563,59 +4143,29 @@
         </div>
       </div>
       <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$931.28</div><div class="qr-orig-lbl">Original</div></div>
     </div>
 
-    <!-- ② To be confirmed: AV Integration -->
+    <!-- #0009 — id 57644 -->
     <div class="qr">
       <div class="qr-thumb">
-        <img src="images/variation-cinema.png" alt="" onerror="this.style.display='none'"/>
+        <img src="https://app.wequote.cloud/user-content/2021/05/KefzaNQ8WNJ2tCFwiVq28AnKjVqWrBHv.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Sales Order #23946</span>
+          <span class="qr-number">Sales Order #0009</span>
         </div>
-        <div class="qr-title">AV Integration Package</div>
-      </div>
-      <div class="qr-status">
-        <span class="qr-badge qr-badge-tbc">To be confirmed</span>
-        <span class="qr-date qr-date-tbc">Valid until 15 July 2026</span>
-      </div>
-      <div class="qr-actions">
-        <div class="qr-action-group">
-          <button class="qr-action-btn">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          </button>
-          <button class="qr-action-btn" onclick="tbcCard(this)">To be confirmed</button>
-          <button class="qr-action-btn reject" onclick="rejectCard(this)">Reject</button>
-          <button class="qr-action-btn accept" onclick="acceptCard(this)">Accept</button>
-        </div>
-      </div>
-      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$28,500.00</div><div class="qr-orig-lbl">Original</div></div>
-    </div>
-
-    <!-- ③ Accepted: Dutch House Security (Figma 849:771) — includes payment summary -->
-    <div class="qr">
-      <div class="qr-thumb">
-        <img src="images/img_10.png" alt="" onerror="this.style.display='none'"/>
-      </div>
-      <div class="qr-name">
-        <div class="qr-meta">
-          <span class="qr-number">Sales Order #23944</span>
-        </div>
-        <div class="qr-title">Dutch House Security INV TEST</div>
+        <div class="qr-title">Apple TV driver replacement</div>
       </div>
       <div class="qr-status">
         <span class="qr-badge qr-badge-accepted">Accepted</span>
-        <span class="qr-date qr-date-accepted">Accepted on 14 April 2026</span>
+        <span class="qr-date qr-date-accepted">Accepted on 14 January 2025</span>
       </div>
-      <!-- Payment summary — shown only on accepted rows (Figma annotation: node 849:1013) -->
       <div class="qr-payment">
         <div class="qr-payment-label">Payment Summary</div>
         <div class="qr-payment-amount-row">
-          <span class="qr-payment-big">$650,000.00</span>
-          <span class="qr-payment-of">of $650,000.02 Paid so far</span>
+          <span class="qr-payment-big">$500.58</span>
+          <span class="qr-payment-of">of $500.58 Paid so far</span>
         </div>
         <div class="qr-payment-bar">
           <div class="qr-payment-bar-seg seg-paid" style="width:100%;"></div>
@@ -2628,7 +4178,7 @@
               <span>Paid so far</span>
               <span class="co-pay-pct">100%</span>
             </div>
-            <span class="co-pay-amt">$650,000.00</span>
+            <span class="co-pay-amt">$500.58</span>
           </div>
           <div class="co-pay-legend-row">
             <div class="co-pay-legend-left">
@@ -2649,27 +4199,623 @@
         </div>
       </div>
       <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$20,000.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$500.58</div><div class="qr-orig-lbl">Original</div></div>
     </div>
 
-    <!-- ③ Declined: Network Infrastructure -->
+    <!-- #0016 — id 59674 -->
     <div class="qr">
       <div class="qr-thumb">
-        <img src="images/variation-intercom.png" alt="" onerror="this.style.display='none'"/>
+        <img src="https://app.wequote.cloud/user-content/2019/02/cVv3EJLt7LuVozhtacdDaY500mZ55YYs.jpg" alt="" onerror="this.style.display='none'"/>
       </div>
       <div class="qr-name">
         <div class="qr-meta">
-          <span class="qr-number">Sales Order #23945</span>
+          <span class="qr-number">Sales Order #0016</span>
         </div>
-        <div class="qr-title">Network Infrastructure</div>
+        <div class="qr-title">TV bracket fix</div>
       </div>
       <div class="qr-status">
-        <span class="qr-badge qr-badge-declined">Declined</span>
-        <span class="qr-date qr-date-declined">Declined on 2 April 2026</span>
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 7 January 2025</span>
       </div>
-      <div></div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$826.00</span>
+          <span class="qr-payment-of">of $826.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:100%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$826.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+      </div>
       <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
-      <div class="qr-orig"><div class="qr-orig-val">$18,900.00</div><div class="qr-orig-lbl">Original</div></div>
+      <div class="qr-orig"><div class="qr-orig-val">$826.00</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- #0036 — id 65715 -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2025/10/50gepevenJVEhC1K58fMMTlEflalmKMz.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #0036</span>
+        </div>
+        <div class="qr-title">Fibre cable supply</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 5 February 2025</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $112.90 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$112.90</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$112.90</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- #0078 — id 81621 -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2025/02/5YnW2YX3qsKrU6LvrrIyocEJ6XXF2iHb.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #0078</span>
+        </div>
+        <div class="qr-title">Hisense Laser TV supply</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 2 April 2025</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$2,251.41</span>
+          <span class="qr-payment-of">of $2,251.41 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:100%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$2,251.41</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$2,251.41</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- #0079 — id 81916 -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2025/02/aEx6Ai6GrU4vlDvm8omHbnpWLqbaQrOx.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #0079</span>
+        </div>
+        <div class="qr-title">Additional works</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 21 May 2025</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$2,010.08</span>
+          <span class="qr-payment-of">of $4,020.16 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:50%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:25%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">50%</span>
+            </div>
+            <span class="co-pay-amt">$2,010.08</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">25%</span>
+            </div>
+            <span class="co-pay-amt">$1,005.04</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">25%</span>
+            </div>
+            <span class="co-pay-amt">$1,005.04</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$4,020.16</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- #0080 — id 81917 -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2025/02/aEx6Ai6GrU4vlDvm8omHbnpWLqbaQrOx.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #0080</span>
+        </div>
+        <div class="qr-title">TV wall mount supply</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 3 April 2025</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$2,351.40</span>
+          <span class="qr-payment-of">of $2,351.40 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:100%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$2,351.40</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$2,351.40</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- #0101 — id 90208 -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="images/variation-cinema.png" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #0101</span>
+        </div>
+        <div class="qr-title">Snag list — door lock</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 10 September 2025</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $456.54 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:100%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$456.54</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$456.54</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- #0132 — id 113888 -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2024/06/KyAvHzdigwILhZFsKcf8qUdHmd3tC5rg.png" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #0132</span>
+        </div>
+        <div class="qr-title">Keypad diagnostic</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 26 August 2025</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$168.00</span>
+          <span class="qr-payment-of">of $168.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:100%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$168.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$168.00</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- #0139 — id 118051 -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2023/01/SmEOk16ycNxKwKbal2qWhloN8vRhLumb.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #0139</span>
+        </div>
+        <div class="qr-title">HDMI ribbon supply</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 11 September 2025</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $8.14 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$8.14</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$8.14</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- #0140 — id 118094 -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="images/img_10.png" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #0140</span>
+        </div>
+        <div class="qr-title">HDMI cable supply</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 11 September 2025</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $198.31 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$198.31</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$198.31</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- #0144 — id 119527 -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2026/05/kUC3adCwvWLyfopdgCmOKeVMHrVkR3Wu.jpg" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #0144</span>
+        </div>
+        <div class="qr-title">No-signal Sky diagnostic</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 17 September 2025</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$571.52</span>
+          <span class="qr-payment-of">of $571.52 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:100%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:0%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$571.52</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$571.52</div><div class="qr-orig-lbl">Original</div></div>
+    </div>
+
+    <!-- #0150 — id 119895 -->
+    <div class="qr">
+      <div class="qr-thumb">
+        <img src="https://app.wequote.cloud/user-content/2018/06/04/iLz35XKHVKArpe0cmZkrhJSeVqDXpJgh.png" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="qr-name">
+        <div class="qr-meta">
+          <span class="qr-number">Sales Order #0150</span>
+        </div>
+        <div class="qr-title">HDBaseT diagnostic</div>
+      </div>
+      <div class="qr-status">
+        <span class="qr-badge qr-badge-accepted">Accepted</span>
+        <span class="qr-date qr-date-accepted">Accepted on 18 September 2025</span>
+      </div>
+      <div class="qr-payment">
+        <div class="qr-payment-label">Payment Summary</div>
+        <div class="qr-payment-amount-row">
+          <span class="qr-payment-big">$0.00</span>
+          <span class="qr-payment-of">of $172.00 Paid so far</span>
+        </div>
+        <div class="qr-payment-bar">
+          <div class="qr-payment-bar-seg seg-paid" style="width:0%;"></div>
+          <div class="qr-payment-bar-seg seg-due" style="width:100%;"></div>
+        </div>
+        <div class="co-pay-legend">
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#009113;"></div>
+              <span>Paid so far</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#cf3400;"></div>
+              <span>To pay now</span>
+              <span class="co-pay-pct">100%</span>
+            </div>
+            <span class="co-pay-amt">$172.00</span>
+          </div>
+          <div class="co-pay-legend-row">
+            <div class="co-pay-legend-left">
+              <div class="qr-legend-dot" style="background:#eaeaea;border:1px solid #d0d0d0;"></div>
+              <span>Upcoming</span>
+              <span class="co-pay-pct">0%</span>
+            </div>
+            <span class="co-pay-amt">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="qr-view"><button class="qr-view-btn">View Sales Order</button></div>
+      <div class="qr-orig"><div class="qr-orig-val">$172.00</div><div class="qr-orig-lbl">Original</div></div>
     </div>
 
   </div>
@@ -2751,6 +4897,7 @@
       <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         Sales Order
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Action Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
@@ -3015,6 +5162,7 @@
       <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         Sales Order
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Action Required</span>
       </div>
       <div class="qp-nav-item qp-nav-item-active" onclick="closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
@@ -3213,6 +5361,7 @@
       <div class="qp-nav-item" onclick="go('purchase-order');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         Sales Order
+        <span class="qp-nav-alert"><svg width="9" height="9" viewBox="0 0 16 16" fill="#cf3400"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 1.75a.75.75 0 0 0-1.5 0V11a.75.75 0 0 0 1.5 0z"/></svg>1 Action Required</span>
       </div>
       <div class="qp-nav-item" onclick="go('documents');closeDropdowns()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
