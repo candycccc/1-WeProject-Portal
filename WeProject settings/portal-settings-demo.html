@@ -1,0 +1,3055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WeProject — Customer Portal Settings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+/* ── WeQuote design tokens ── */
+:root {
+  --brand:        #FF4655;
+  --brand-hover:  #E63B49;
+  --brand-tint:   #FFE7E9;
+  --ink:          #1F2F3E;
+  --steel:        #A8B6C9;
+  --grey-100:     #F9F9F9;
+  --grey-200:     #F3F4F6;
+  --grey-300:     #EDF0F3;
+  --grey-400:     #E5E5E5;
+  --grey-600:     #D0D0D0;
+  --grey-800:     #777;
+  --grey-900:     #595959;
+  --fg-1:         #1F2F3E;
+  --fg-3:         #777;
+  --fg-4:         #B2B2B2;
+  --success:      #58AE94;
+  --success-2:    #1EB395;
+  --info:         #2783B3;
+  --warn:         #E8A33D;
+  --shadow-card:  0 1px 2px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.04);
+  --shadow-pop:   0 4px 12px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --font:         'Mulish', -apple-system, BlinkMacSystemFont, sans-serif;
+  --header-h:     72px;
+  --sidebar-w:    243px;
+  --row-h:        44px;
+  --radius-sm:    4px;
+  --radius-md:    5px;
+  --transition:   150ms ease-out;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--fg-1);
+  background: var(--grey-300);
+  height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app  { display: flex; flex-direction: column; height: 100vh; }
+.body { display: flex; flex: 1; min-height: 0; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  background: #fff;
+  border-right: 1px solid var(--grey-400);
+  overflow-y: auto;
+  flex-shrink: 0;
+  padding: 14px 12px;
+}
+
+.nav-sec-label {
+  font-size: 11px; font-weight: 800;
+  color: var(--fg-1); letter-spacing: .04em;
+  padding: 14px 12px 6px;
+}
+
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 12px; border-radius: var(--radius-md);
+  cursor: pointer; color: var(--fg-1);
+  font-weight: 500; font-size: 13px;
+  transition: background var(--transition);
+}
+.nav-item:hover { background: var(--grey-200); }
+.nav-item.active { background: var(--ink); color: #fff; font-weight: 700; }
+.nav-item i { font-size: 16px; color: var(--steel); flex-shrink: 0; }
+.nav-item.active i { color: rgba(255,255,255,.85); }
+.nav-count {
+  margin-left: auto;
+  background: var(--grey-200); color: var(--grey-800);
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 3px;
+}
+.nav-item.active .nav-count { background: rgba(255,255,255,.18); color: #fff; }
+
+/* ── MAIN ── */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+
+/* ── HEADER ── */
+.topbar {
+  height: var(--header-h);
+  background: var(--ink); color: #fff;
+  display: flex; align-items: center;
+  padding: 0 27px; flex-shrink: 0;
+  font-family: var(--font);
+}
+.topbar-logo {
+  width: 42px; height: 42px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.topbar-wordmark {
+  margin-left: 18px;
+  border: 1px solid var(--steel); border-radius: 3px;
+  padding: 7px 16px; font-size: 11px; font-weight: 700;
+  color: var(--steel); letter-spacing: .02em; white-space: nowrap;
+}
+.topbar-space { flex: 1; }
+.topbar-icons {
+  display: flex; align-items: center; gap: 18px;
+  margin-right: 24px;
+}
+.topbar-icons i { font-size: 18px; color: var(--steel); cursor: pointer; }
+.notif-wrap { position: relative; }
+.notif-dot {
+  position: absolute; top: -4px; right: -6px;
+  background: var(--brand); color: #fff;
+  font-size: 9px; font-weight: 700;
+  border-radius: 20px; padding: 1px 4px; min-width: 6px; text-align: center;
+}
+.topbar-greeting { font-size: 14px; font-weight: 700; margin-right: 12px; }
+.topbar-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--success-2); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px;
+}
+
+/* ── CONTENT ── */
+.content-area { flex: 1; overflow-y: auto; }
+
+.page-wrap { padding: 24px 28px; }
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  font-size: 12px; color: var(--fg-3);
+  display: flex; align-items: center; gap: 4px;
+  margin-bottom: 10px;
+}
+.breadcrumb a { color: var(--fg-3); cursor: pointer; }
+.breadcrumb a:hover { color: var(--fg-1); text-decoration: underline; }
+.breadcrumb i { font-size: 10px; }
+
+/* ── PAGE HEAD ── */
+.page-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.page-title { font-size: 24px; font-weight: 700; letter-spacing: -.005em; margin-bottom: 3px; }
+.page-subtitle { font-size: 13px; color: var(--fg-3); }
+.page-subtitle a { color: var(--info); }
+.btn-row { display: flex; gap: 8px; align-items: center; }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 12px; border-radius: var(--radius-sm);
+  font-family: var(--font); font-size: 12px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  cursor: pointer; border: none;
+  transition: background var(--transition);
+  white-space: nowrap;
+}
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--brand-hover); }
+.btn-primary:disabled { opacity: .45; cursor: not-allowed; }
+.btn-ghost { background: transparent; color: var(--fg-1); border: 1px solid var(--grey-600); }
+.btn-ghost:hover { background: var(--grey-200); }
+.btn-sm { padding: 5px 10px; font-size: 11px; }
+
+/* ── TABS (underline variant) ── */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid var(--grey-400);
+  margin-bottom: 20px;
+}
+.tab {
+  display: flex; align-items: center; gap: 6px;
+  padding: 12px 18px; font-size: 12px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--fg-3); cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+  transition: color var(--transition);
+}
+.tab:hover { color: var(--fg-1); }
+.tab.active { color: var(--fg-1); border-bottom-color: var(--brand); }
+
+/* ── CARD ── */
+.card {
+  background: #fff; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 16px; overflow: hidden;
+}
+.card-hdr {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--grey-400);
+}
+.card-title { font-size: 16px; font-weight: 700; margin-bottom: 3px; }
+.card-desc  { font-size: 12px; color: var(--fg-3); }
+.card-hdr-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--grey-400);
+}
+
+/* ── TABLE (shared) ── */
+.wq-table { width: 100%; border-collapse: collapse; }
+.wq-table th {
+  padding: 8px 14px; font-size: 11px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--fg-1); border-bottom: 1px solid var(--grey-400);
+  text-align: left; background: var(--grey-100);
+}
+.wq-table td {
+  padding: 0 14px; height: var(--row-h);
+  border-bottom: 1px solid var(--grey-400);
+  vertical-align: middle; font-size: 13px;
+}
+.wq-table tr:last-child td { border-bottom: none; }
+.wq-table tbody tr:hover td { background: var(--grey-200); }
+
+/* ── AVATAR + CUSTOMER CELL ── */
+.cust-cell { display: flex; align-items: center; gap: 10px; }
+.av {
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: #fff; flex-shrink: 0; font-size: 10px;
+}
+.cust-name  { font-weight: 700; font-size: 13px; }
+.cust-email { font-size: 12px; color: var(--fg-3); }
+
+/* ── PILLS ── */
+.pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 75px; padding: 3px 8px; border-radius: var(--radius-sm);
+  font-weight: 700; font-size: 11px; line-height: 1; white-space: nowrap;
+}
+.pill-active    { background: #2783B3; color: #fff; }
+.pill-cancelled { background: #8F4399; color: #fff; }
+
+/* ── MATRIX ── */
+.matrix-meta {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 18px 20px; border-bottom: 1px solid var(--grey-400);
+}
+.matrix-legend { display: flex; align-items: center; gap: 14px; flex-shrink: 0; margin-left: 18px; margin-top: 2px; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; }
+.ldot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+.matrix-hint {
+  padding: 7px 20px; font-size: 11px; color: var(--fg-3);
+  border-bottom: 1px solid var(--grey-400); background: var(--grey-100);
+}
+.scope-banner {
+  padding: 8px 20px; font-size: 11px; font-weight: 600; color: #92400E;
+  border-bottom: 1px solid #FEF3C7; background: #FFFBEB;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.mtable { width: 100%; border-collapse: collapse; }
+.mtable th {
+  padding: 9px 8px; font-size: 10px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--fg-3); text-align: center;
+  border-bottom: 1px solid var(--grey-400); background: var(--grey-100);
+}
+.mtable th.sec-th { text-align: left; width: 220px; padding-left: 20px; }
+.mtable td { padding: 12px 8px; border-bottom: 1px solid var(--grey-400); vertical-align: middle; }
+.mtable td.sec-td { padding-left: 20px; }
+.mtable tr:last-child td { border-bottom: none; }
+
+.sec-name { font-weight: 700; font-size: 13px; }
+.sec-desc { font-size: 11px; color: var(--fg-3); margin-top: 2px; }
+.amt-flag { color: #D97706; font-weight: 800; font-size: 11px; margin-left: 3px; }
+
+.perm-cell { text-align: center; }
+
+/* ── PERM DROPDOWN ── */
+.perm-dd { position: relative; display: inline-block; }
+.pdd-trigger {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 40px; padding: 0 10px; border-radius: 4px; min-width: 130px;
+  font-family: var(--font); font-size: 13px; font-weight: 700;
+  cursor: pointer; border: none; white-space: nowrap;
+  transition: filter 120ms ease-out; user-select: none;
+}
+.pdd-trigger:hover { filter: brightness(.92); }
+.pdd-full  { background: transparent; color: var(--fg-1); }
+.pdd-scope { background: transparent; color: var(--fg-1); }
+.pdd-none  { background: #E5E7EB;     color: var(--fg-1); }
+.pdd-icon-full  { color: #1EB395; font-size: 12px; flex-shrink: 0; }
+.pdd-icon-scope { color: #E8A33D; font-size: 12px; flex-shrink: 0; }
+.pdd-icon-none  { color: #7B828C; font-size: 12px; flex-shrink: 0; }
+.pdd-label { flex: 1; text-align: left; }
+.pdd-chevron { font-size: 10px; color: #333; flex-shrink: 0; }
+.pdd-menu {
+  display: none; position: absolute;
+  top: calc(100% + 4px); left: 0;
+  background: #fff; border: 1px solid var(--grey-400);
+  border-radius: 6px; box-shadow: var(--shadow-pop);
+  z-index: 200; min-width: 140px; padding: 4px 0;
+}
+.pdd-menu.open { display: block; }
+.pdd-opt {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; font-size: 13px; font-weight: 600;
+  cursor: pointer; color: var(--fg-1); font-family: var(--font);
+}
+.pdd-opt:hover { background: var(--grey-200); }
+.pdd-opt.sel { font-weight: 800; }
+
+.scope-note { font-size: 10px; color: #D97706; font-weight: 600; margin-top: 2px; }
+
+/* ── PANEL PERM DROPDOWN (bordered) ── */
+.ppdd-wrap { position: relative; display: inline-block; }
+.ppdd-trigger {
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 34px; padding: 0 10px; border-radius: 4px; min-width: 148px;
+  font-family: var(--font); font-size: 13px; font-weight: 600;
+  cursor: pointer; border: 1px solid var(--grey-600);
+  background: #fff; color: var(--fg-1);
+  white-space: nowrap; user-select: none;
+  transition: border-color 120ms ease-out;
+}
+.ppdd-trigger:hover { border-color: var(--grey-800); }
+.ppdd-left { display: flex; align-items: center; gap: 6px; flex: 1; }
+.ppdd-chevron { font-size: 10px; color: var(--fg-3); flex-shrink: 0; }
+.ppdd-menu {
+  display: none; position: absolute;
+  top: calc(100% + 4px); left: 0;
+  background: #fff; border: 1px solid var(--grey-400);
+  border-radius: 6px; box-shadow: var(--shadow-pop);
+  z-index: 300; min-width: 154px; padding: 4px 0;
+}
+.ppdd-menu.open { display: block; }
+.ppdd-opt {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; font-size: 13px; font-weight: 600;
+  cursor: pointer; color: var(--fg-1); font-family: var(--font);
+}
+.ppdd-opt:hover { background: var(--grey-200); }
+.ppdd-opt.sel { font-weight: 800; }
+
+.matrix-footer {
+  padding: 10px 20px; font-size: 11px; color: var(--fg-3);
+  border-top: 1px solid var(--grey-400); background: var(--grey-100);
+}
+
+/* ── PROJECT DETAIL ── */
+.proj-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0 18px;
+}
+.back-crumb { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.back-crumb a { color: var(--fg-3); cursor: pointer; font-weight: 600; }
+.back-crumb a:hover { color: var(--fg-1); }
+.crumb-curr { color: var(--fg-1); font-weight: 700; }
+.changed-meta { font-size: 12px; color: var(--fg-3); text-align: right; line-height: 1.5; }
+
+.role-sel {
+  padding: 5px 26px 5px 10px; border: 1px solid var(--grey-600);
+  border-radius: var(--radius-sm); font-family: var(--font);
+  font-size: 12px; font-weight: 600;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23777'/%3E%3C/svg%3E") no-repeat right 8px center;
+  appearance: none; cursor: pointer; color: var(--fg-1);
+}
+.role-sel:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(255,70,85,.12); }
+
+.sum-label { font-weight: 800; font-size: 14px; color: #3c3c3c; display: block; margin-bottom: 3px; }
+.sum-chips { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.sum-chip  { font-size: 13px; font-weight: 700; color: var(--fg-3); }
+.sum-dot   { width: 6px; height: 6px; background: #d9d9d9; border-radius: 50%; flex-shrink: 0; }
+
+.ov-link   { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--fg-1); text-decoration: underline; cursor: pointer; }
+.ov-default{ display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--fg-1); }
+
+.edit-lnk {
+  color: var(--info); font-size: 12px; font-weight: 700;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+}
+.edit-lnk:hover { text-decoration: underline; }
+
+/* ── PROJECT TABLE (Figma-spec headers: no uppercase, grey text) ── */
+.proj-tbl th {
+  text-transform: none; letter-spacing: normal;
+  font-size: 12px; font-weight: 700; color: var(--fg-3);
+  background: none; padding: 10px 14px;
+}
+.proj-tbl td {
+  padding: 18px 10px 20px; height: auto;
+  vertical-align: top; border-bottom: 1px solid #d9d9d9;
+}
+
+/* ── PROJECT LIST TABLE (in directory, Figma node 1020:38818) ── */
+.proj-list-tbl th {
+  text-transform: none; letter-spacing: normal; background: none;
+  font-size: 12px; font-weight: 700; color: #7b828c;
+  padding: 10px 14px; border-bottom: 1px solid var(--grey-400);
+}
+.proj-list-tbl td { height: 64px; padding: 0 14px; border-bottom: 1px solid var(--grey-400); vertical-align: middle; }
+.proj-list-tbl tr:last-child td { border-bottom: none; }
+.proj-list-tbl tbody tr:hover td { background: var(--grey-200); }
+
+/* ── ROLE TEMPLATE DROPDOWN ── */
+.role-tpl-wrap { position: relative; display: inline-block; width: 138px; }
+.role-tpl-vis {
+  display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  padding: 10px 11px; border: 1px solid var(--grey-600);
+  border-radius: var(--radius-sm); background: #fff;
+  font-size: 13px; font-weight: 700; color: var(--fg-1);
+  pointer-events: none; white-space: nowrap;
+}
+.role-tpl-vis span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.role-tpl-sel {
+  position: absolute; inset: 0; opacity: 0; cursor: pointer;
+  width: 100%; height: 100%; font-family: var(--font);
+}
+
+/* ── DIRECTORY CARD ── */
+.dir-card-hdr {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 20px 20px 16px; border-bottom: 1px solid var(--grey-400);
+}
+.dir-tbl th {
+  padding: 10px 14px; font-size: 11px; font-weight: 700;
+  color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase;
+  background: var(--grey-200); border-bottom: 1px solid var(--grey-400);
+}
+.dir-tbl td { padding: 10px 14px; border-top: 1px solid var(--grey-400); height: auto; }
+.dir-tbl tbody tr:first-child td { border-top: none; }
+.dir-tbl tbody tr:hover td { background: var(--grey-200); }
+
+/* ── SIDE PANEL ── */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.2); z-index: 99;
+}
+.overlay.show { display: block; }
+
+.panel {
+  position: fixed; top: 0; right: -510px;
+  width: 500px; height: 100vh;
+  background: #fff; border-left: 1px solid var(--grey-400);
+  box-shadow: var(--shadow-pop);
+  z-index: 100; display: flex; flex-direction: column;
+  transition: right 200ms ease-out; overflow: hidden;
+}
+.panel.open { right: 0; }
+
+.panel-hdr {
+  padding: 14px 18px; border-bottom: 1px solid var(--grey-400);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.panel-cust { display: flex; align-items: center; gap: 10px; }
+.p-name  { font-weight: 700; font-size: 14px; }
+.p-email { font-size: 11px; color: var(--fg-3); }
+.x-btn {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid var(--grey-400); background: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--fg-3); font-size: 14px;
+}
+.x-btn:hover { background: var(--grey-200); color: var(--fg-1); }
+
+.panel-body { flex: 1; overflow-y: auto; padding: 16px 18px; }
+
+.panel-sec-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--fg-1); margin-bottom: 10px;
+}
+.field-lbl { font-size: 11px; font-weight: 700; color: var(--fg-1); margin-bottom: 5px; }
+
+.role-block {
+  margin-bottom: 16px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--grey-200);
+}
+
+.perm-row { padding: 9px 0; border-bottom: 1px solid var(--grey-200); }
+.perm-row:last-child { border-bottom: none; }
+.perm-row-top {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;
+}
+.perm-name { font-weight: 700; font-size: 13px; }
+.perm-controls { display: flex; align-items: center; gap: 7px; }
+
+.psel {
+  padding: 4px 24px 4px 8px; border-radius: var(--radius-sm);
+  font-family: var(--font); font-size: 12px; font-weight: 600;
+  appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23777'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 6px center;
+}
+.psel:focus { outline: none; }
+.sf { border: 1px solid #86EFAC; background: #F0FDF4; color: #166534; }
+.ss { border: 1px solid #FCD34D; background: #FFFBEB; color: #92400E; }
+.sn { border: 1px solid var(--grey-400); background: var(--grey-200); color: var(--fg-3); }
+
+.reset-one {
+  font-size: 11px; font-weight: 600; color: var(--fg-3);
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; gap: 2px; font-family: var(--font);
+}
+.reset-one:hover { color: var(--fg-1); }
+
+.perm-meta { font-size: 11px; color: var(--fg-3); }
+.overridden-tag { color: var(--brand); font-weight: 700; font-size: 11px; margin-top: 2px; }
+.amt-note { font-size: 10px; font-weight: 600; color: #D97706; margin-top: 2px; }
+
+.panel-ftr {
+  padding: 12px 18px; border-top: 1px solid var(--grey-400);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0; background: #fff;
+}
+.reset-all-btn {
+  color: var(--brand); font-size: 12px; font-weight: 700;
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; gap: 4px; font-family: var(--font);
+  letter-spacing: .02em;
+}
+.reset-all-btn:hover { text-decoration: underline; }
+.panel-actions { display: flex; gap: 7px; }
+
+/* ── PREVIEW PORTAL ── */
+.preview-page { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.preview-top  { padding: 16px 28px; flex-shrink: 0; }
+.preview-top-row {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.preview-titleblock { flex: 1 1 260px; min-width: 0; }
+.preview-titleblock .page-title { font-size: 20px; margin-bottom: 4px; }
+.preview-titleblock .page-subtitle { font-size: 12px; line-height: 1.45; }
+.preview-selector { flex: 2 1 460px; padding: 12px 16px; margin-bottom: 0; }
+.prev-grid {
+  display: grid; grid-template-columns: 1fr 1fr auto;
+  gap: 14px; align-items: end;
+}
+.prev-stake-info .av { flex-shrink: 0; }
+.prev-lbl {
+  font-size: 11px; font-weight: 800; color: var(--fg-1);
+  letter-spacing: .04em; margin-bottom: 8px;
+}
+.prev-sel {
+  width: 100%; padding: 10px 32px 10px 12px;
+  border: 1px solid var(--grey-600); border-radius: 4px;
+  font-family: var(--font); font-size: 13px; font-weight: 600;
+  color: var(--fg-1);
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23777'/%3E%3C/svg%3E") no-repeat right 12px center;
+  appearance: none; cursor: pointer;
+}
+.prev-sel:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(255,70,85,.12); }
+.prev-stake-info { display: flex; align-items: center; gap: 10px; padding-bottom: 4px; }
+.preview-iframe-wrap {
+  flex: 1; min-height: 0;
+  margin: 0 28px 24px; border-radius: var(--radius-md);
+  overflow: hidden; box-shadow: var(--shadow-card);
+  background: #fff;
+}
+.preview-iframe { border: none; width: 100%; height: 100%; display: block; background: #fff; }
+.preview-empty {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  margin: 0 28px 24px; padding: 48px 32px; text-align: center;
+  background: #fff; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+.preview-empty i { font-size: 44px; color: var(--fg-4); margin-bottom: 12px; }
+.preview-empty-title { font-size: 17px; font-weight: 700; color: var(--fg-1); margin-bottom: 6px; }
+.preview-empty-sub { font-size: 13px; color: var(--fg-3); max-width: 380px; line-height: 1.5; }
+
+/* ── CUSTOMER DETAIL PANEL — project rows ── */
+.cust-proj-row {
+  padding: 14px 14px;
+  border: 1px solid var(--grey-400);
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  background: #fff;
+}
+.cust-proj-row:hover { background: var(--grey-100); }
+
+.assign-section {
+  margin-top: 14px; padding: 16px;
+  background: var(--brand-tint);
+  border-radius: var(--radius-sm);
+  border: 1px solid #FFCED2;
+}
+.assign-section .field-lbl { margin-top: 12px; }
+.assign-section .field-lbl:first-child { margin-top: 0; }
+.assign-sel {
+  width: 100%; padding: 9px 30px 9px 12px;
+  border: 1px solid var(--grey-600); border-radius: 4px;
+  font-family: var(--font); font-size: 13px; font-weight: 600;
+  color: var(--fg-1);
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23777'/%3E%3C/svg%3E") no-repeat right 10px center;
+  appearance: none; cursor: pointer;
+}
+.assign-sel:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(255,70,85,.12); }
+.assign-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+.btn-assign-open {
+  display: block; width: 100%;
+  margin-top: 12px; padding: 12px;
+  background: #fff; border: 1px dashed var(--brand);
+  color: var(--brand); font-family: var(--font);
+  font-size: 12px; font-weight: 800; letter-spacing: .04em;
+  text-transform: uppercase; cursor: pointer; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn-assign-open:hover { background: var(--brand-tint); }
+
+/* ── SELECT CUSTOMER MODAL ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(31,47,62,.32);
+  z-index: 150; align-items: center; justify-content: center;
+}
+.modal-overlay.show { display: flex; }
+.modal-card {
+  background: #fff; width: min(1180px, 94vw); max-height: 86vh;
+  border-radius: 8px; box-shadow: var(--shadow-pop);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.modal-hdr {
+  padding: 18px 24px; border-bottom: 1px solid var(--grey-400);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.modal-title { font-size: 17px; font-weight: 800; color: var(--fg-1); }
+.modal-x {
+  background: none; border: none; cursor: pointer;
+  font-size: 20px; line-height: 1; color: var(--fg-3);
+  padding: 4px; border-radius: 4px;
+}
+.modal-x:hover { color: var(--fg-1); background: var(--grey-200); }
+.modal-body { flex: 1; overflow-y: auto; padding: 18px 24px; }
+
+.search-wrap {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 14px; background: var(--grey-200);
+  border: 1px solid var(--grey-400); border-radius: 4px;
+  padding: 0 12px;
+}
+.search-wrap i { font-size: 14px; color: var(--fg-3); flex-shrink: 0; }
+.search-wrap input {
+  flex: 1; border: none; outline: none; background: transparent;
+  padding: 10px 0; font-family: var(--font); font-size: 13px; font-weight: 500;
+  color: var(--fg-1);
+}
+.search-wrap input::placeholder { color: var(--fg-4); }
+
+.cust-tbl { width: 100%; border-collapse: collapse; }
+.cust-tbl th {
+  text-align: left; font-size: 12px; font-weight: 700;
+  color: var(--fg-3); padding: 10px 12px;
+  border-bottom: 1px solid var(--grey-400);
+}
+.cust-tbl td {
+  padding: 14px 12px; font-size: 13px; vertical-align: top;
+  border-bottom: 1px dashed var(--grey-400);
+}
+.cust-tbl tbody tr:hover td { background: var(--grey-200); }
+.cust-tbl tbody tr.in-portal td { color: var(--fg-3); }
+.cust-tbl tbody tr.in-portal:hover td { background: var(--grey-100); cursor: not-allowed; }
+.cust-tbl tbody tr.clickable { cursor: pointer; }
+.cust-pri { font-weight: 700; color: var(--fg-1); }
+.cust-sub { font-size: 12px; color: var(--fg-3); margin-top: 2px; }
+.cust-email-red { color: var(--brand); font-weight: 600; }
+.in-portal-pill {
+  display: inline-block;
+  background: var(--grey-200); color: var(--fg-3);
+  font-size: 10px; font-weight: 800; letter-spacing: .04em;
+  padding: 3px 8px; border-radius: 3px; text-transform: uppercase;
+}
+
+.modal-ftr {
+  padding: 16px 24px; border-top: 1px solid var(--grey-400);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0; background: #fff;
+}
+.btn-new-cust {
+  background: var(--success-2); color: #fff;
+}
+.btn-new-cust:hover { background: #19987F; }
+.btn-modal-cancel {
+  background: var(--grey-800); color: #fff;
+}
+.btn-modal-cancel:hover { background: var(--grey-900); }
+
+/* ── ADD PROJECT MODAL ── */
+.proj-modal-card { width: min(620px, 94vw); max-height: 88vh; }
+.proj-form-row {
+  display: grid; grid-template-columns: 130px 1fr;
+  align-items: start; gap: 16px; padding: 12px 0;
+}
+.proj-form-row > label {
+  font-size: 13px; font-weight: 500; color: var(--fg-1);
+  padding-top: 9px;
+}
+.proj-form-row > .ctrl { min-width: 0; }
+.proj-input, .proj-select, .proj-textarea {
+  width: 100%; height: 38px;
+  border: 1px solid var(--grey-600); border-radius: 5px;
+  padding: 0 12px; font-family: var(--font); font-size: 13px;
+  color: var(--fg-1); background: #fff; outline: none;
+  transition: border-color 120ms, box-shadow 120ms;
+}
+.proj-textarea { height: 80px; padding: 10px 12px; resize: vertical; }
+.proj-input:focus, .proj-select:focus, .proj-textarea:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(255,70,85,.12);
+}
+.proj-input.err, .proj-textarea.err { border-color: var(--brand); }
+.proj-err-msg {
+  font-size: 11px; color: var(--brand); font-weight: 600; margin-top: 4px;
+}
+.proj-select {
+  appearance: none; cursor: pointer; padding-right: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231F2F3E'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+}
+.proj-cust-group { display: flex; gap: 6px; }
+.proj-cust-group .proj-input { flex: 1; }
+.proj-icon-btn {
+  width: 38px; height: 38px; border: 1px solid var(--grey-600);
+  background: #fff; border-radius: 5px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--fg-3); flex-shrink: 0;
+}
+.proj-icon-btn:hover { background: var(--grey-200); color: var(--fg-1); }
+.proj-icon-btn.add { background: var(--success-2); color: #fff; border-color: var(--success-2); }
+.proj-icon-btn.add:hover { background: #19987F; }
+.proj-section-title {
+  font-size: 14px; font-weight: 700; color: var(--fg-1);
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid var(--grey-400);
+}
+.proj-loc-stack > * { margin-top: 8px; }
+.proj-loc-stack > *:first-child { margin-top: 0; }
+.proj-colour-row { display: flex; align-items: center; gap: 12px; }
+.proj-colour-swatch {
+  appearance: none; -webkit-appearance: none;
+  width: 56px; height: 38px; border: 1px solid var(--grey-600);
+  border-radius: 5px; padding: 4px; cursor: pointer; background: #fff;
+}
+.proj-colour-swatch::-webkit-color-swatch-wrapper { padding: 0; }
+.proj-colour-swatch::-webkit-color-swatch { border: none; border-radius: 3px; }
+.proj-colour-hex { font-size: 13px; font-weight: 600; color: var(--fg-3); font-family: var(--font); }
+.proj-check-row { display: flex; align-items: center; gap: 10px; }
+.proj-checkbox {
+  appearance: none; -webkit-appearance: none;
+  width: 18px; height: 18px; border: 1px solid var(--grey-600);
+  border-radius: 3px; background: #fff; cursor: pointer;
+  position: relative; flex-shrink: 0;
+}
+.proj-checkbox:checked { background: var(--brand); border-color: var(--brand); }
+.proj-checkbox:checked::after {
+  content:''; position:absolute; left:5px; top:1px; width:5px; height:10px;
+  border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+.proj-check-row .check-lbl {
+  font-size: 12px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--fg-1);
+}
+.proj-help {
+  display: flex; gap: 6px; padding: 10px 0 0;
+  font-size: 12px; color: var(--info); line-height: 1.5;
+}
+.proj-help i { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── PROJECTS PAGE ── */
+.proj-page-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.proj-page-actions { display: flex; gap: 8px; align-items: center; }
+
+/* Projects table — simplified version of the design */
+.proj-stats { display: flex; gap: 36px; padding: 18px 20px; border-bottom: 1px solid var(--grey-400); }
+.proj-stat { cursor: pointer; }
+.proj-stat-lbl { font-size: 11px; font-weight: 800; letter-spacing: .04em; color: var(--fg-3); display: flex; align-items: center; gap: 6px; }
+.proj-stat-lbl .count {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--grey-200); color: var(--fg-1); border-radius: 4px;
+  font-size: 10px; padding: 2px 6px; font-weight: 700;
+}
+.proj-stat.active .proj-stat-lbl .count { background: var(--brand); color: #fff; }
+.proj-stat-val { font-size: 20px; font-weight: 700; color: var(--fg-1); margin-top: 6px; }
+.proj-stat.active { position: relative; }
+.proj-stat.active::after {
+  content: ''; position: absolute; bottom: -18px; left: 0; right: 0; height: 2px; background: var(--brand);
+}
+
+/* ── PROJECT DETAIL DASHBOARD ── */
+.pd-page-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.pd-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--grey-400); margin-bottom: 18px; }
+.pd-tab {
+  padding: 10px 16px; font-size: 12px; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--fg-3); cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.pd-tab.active { color: var(--fg-1); border-bottom-color: var(--brand); }
+.pd-tab:hover:not(.active) { color: var(--fg-1); }
+
+.pd-top-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.pd-layout { display: grid; grid-template-columns: 1fr 300px; gap: 14px; }
+.pd-main { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.pd-right { display: flex; flex-direction: column; gap: 14px; }
+.pd-card {
+  background: #fff; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card); padding: 18px 20px;
+}
+.pd-card-title { font-size: 14px; font-weight: 700; color: var(--fg-1); margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+.pd-card-title i { font-size: 14px; color: var(--brand); }
+
+/* Project Overview stacked bars */
+.po-row { display: grid; grid-template-columns: 100px 1fr 110px; gap: 12px; align-items: center; padding: 9px 0; }
+.po-row + .po-row { border-top: 1px solid var(--grey-300); }
+.po-label { font-size: 12px; color: var(--fg-3); }
+.po-label-val { font-size: 14px; font-weight: 700; color: var(--fg-1); margin-top: 2px; }
+.po-bar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: #EDF0F3; }
+.po-seg { display: flex; align-items: center; justify-content: center; height: 100%; position: relative; font-size: 10px; font-weight: 700; color: rgba(255,255,255,.95); white-space: nowrap; }
+.po-seg-products { background: #FF4655; }
+.po-seg-labour   { background: #8B6BBA; }
+.po-seg-margin   { background: #1EB395; }
+.po-seg-unpaid-p { background: #FFB3BA; color: #7a2a32 !important; }
+.po-seg-unpaid-l { background: #C4B5DA; color: #4a3a73 !important; }
+.po-seg-left     { background: #D9D9D9; color: #777 !important; }
+.po-total { text-align: right; }
+.po-total-lbl { font-size: 12px; color: var(--fg-3); }
+.po-total-val { font-size: 14px; font-weight: 700; color: var(--fg-1); margin-top: 2px; }
+
+.po-legend { display: flex; flex-wrap: wrap; gap: 12px 16px; padding-top: 12px; border-top: 1px solid var(--grey-300); margin-top: 6px; }
+.po-leg-item { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--fg-3); }
+.po-leg-sw { width: 18px; height: 8px; border-radius: 4px; flex-shrink: 0; }
+
+/* Mini "Actual vs Quoted" charts */
+.mini-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.mini-card { background: #fff; border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 14px; }
+.mini-head { font-size: 10px; font-weight: 700; color: var(--fg-3); margin-bottom: 2px; letter-spacing: .02em; }
+.mini-head .actual { color: #8B6BBA; }
+.mini-head .quoted { color: #1EB395; }
+.mini-title { font-size: 14px; font-weight: 700; color: var(--fg-1); margin-bottom: 12px; }
+.mini-chart {
+  display: grid; grid-template-columns: 42px 1fr;
+  gap: 6px; height: 130px;
+}
+.mini-yaxis {
+  display: flex; flex-direction: column-reverse; justify-content: space-between;
+  font-size: 9px; color: var(--fg-4); font-weight: 600;
+  padding: 4px 0;
+}
+.mini-plot {
+  position: relative; border-left: 1px solid var(--grey-400);
+  display: flex; gap: 14px; align-items: flex-end; justify-content: center;
+  padding: 4px 0;
+}
+.mini-plot::before, .mini-plot::after, .mini-plot > .gridline {
+  content: ''; position: absolute; left: 0; right: 0; height: 1px;
+  background: var(--grey-300);
+}
+.mini-plot::before { top: 0; }
+.mini-plot::after  { bottom: 0; }
+.mini-plot .gridline.l1 { top: 25%; }
+.mini-plot .gridline.l2 { top: 50%; }
+.mini-plot .gridline.l3 { top: 75%; }
+.mini-bar { width: 24px; border-radius: 3px 3px 0 0; min-height: 4px; transition: height 200ms; z-index: 1; position: relative; }
+.mini-bar.actual { background: #8B6BBA; }
+.mini-bar.quoted { background: #1EB395; }
+
+/* Right column: Time donut */
+.tm-card { padding: 16px; }
+.tm-donut {
+  position: relative; width: 180px; height: 180px;
+  margin: 8px auto;
+}
+.tm-donut svg { width: 100%; height: 100%; display: block; }
+.tm-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; line-height: 1.25;
+}
+.tm-hours { font-size: 16px; font-weight: 700; color: var(--fg-1); }
+.tm-hours-lbl { font-size: 10px; color: var(--fg-3); margin-bottom: 4px; }
+.tm-travel { font-size: 14px; font-weight: 700; color: var(--warn); }
+.tm-travel-lbl { font-size: 10px; color: var(--fg-3); }
+
+/* Engineer list */
+.eng-list { padding: 0; }
+.eng-row {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 8px; padding: 10px 16px;
+  border-top: 1px solid var(--grey-300);
+}
+.eng-row:first-child { border-top: 0; }
+.eng-name { display: flex; align-items: center; gap: 8px; }
+.eng-name-text { font-size: 12px; font-weight: 700; color: var(--fg-1); }
+.eng-hrs { font-size: 11px; font-weight: 700; color: var(--fg-1); text-align: right; }
+.eng-hrs-sub { font-size: 10px; color: var(--fg-3); font-weight: 600; }
+.eng-status { font-size: 9px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--info); margin-top: 2px; }
+
+/* Project Time stats */
+.pt-card { padding: 14px 16px; }
+.pt-stats { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin: 10px 0; }
+.pt-stat-val { font-size: 16px; font-weight: 700; }
+.pt-stat-lbl { font-size: 9px; font-weight: 700; color: var(--fg-3); text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+.pt-bar { height: 6px; background: var(--grey-300); border-radius: 3px; overflow: hidden; margin: 8px 0; }
+.pt-bar > div { height: 100%; background: #1EB395; }
+.pt-visits { display: flex; gap: 18px; padding-top: 8px; border-top: 1px solid var(--grey-300); font-size: 11px; }
+.pt-visits .num { font-size: 16px; font-weight: 700; }
+.pt-visits .v1 .num { color: #E8A33D; }
+.pt-visits .v2 .num { color: #1EB395; }
+.pt-visits .v3 .num { color: var(--brand); }
+.pt-visits .lbl { font-size: 9px; color: var(--fg-3); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+
+/* legacy detail layout (kept for the prior implementation) */
+.pd-grid {
+  display: grid; grid-template-columns: 1fr 380px; gap: 16px;
+  margin-bottom: 16px;
+}
+.pd-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; font-size: 13px; }
+.pd-meta-lbl { font-size: 11px; font-weight: 700; color: var(--fg-3); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 3px; }
+.pd-meta-val { font-weight: 700; color: var(--fg-1); }
+
+/* ── PROGRESS WIDGET ── */
+.prog-widget {
+  background: #fff; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card); padding: 16px;
+}
+.prog-status-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding-bottom: 14px; border-bottom: 1px solid var(--grey-300); margin-bottom: 18px;
+}
+.prog-status-lbl { font-size: 13px; color: var(--fg-3); margin-right: 6px; }
+.prog-pill {
+  background: #fff; border: 1px solid var(--grey-400);
+  padding: 6px 14px; border-radius: 18px;
+  font-size: 12px; font-weight: 500; color: var(--fg-3);
+  cursor: default; font-family: var(--font);
+  transition: all 120ms;
+}
+.prog-pill.sel { background: var(--ink); color: #fff; border-color: var(--ink); font-weight: 700; }
+.prog-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.prog-title { font-size: 12px; font-weight: 700; color: var(--fg-3); text-transform: uppercase; letter-spacing: .04em; }
+.prog-pct { font-size: 30px; font-weight: 700; color: var(--fg-1); line-height: 1; }
+.prog-label { font-size: 26px; font-weight: 700; line-height: 1.1; margin-bottom: 4px; }
+.prog-label-planned { color: #22A14F; }
+.prog-label-delayed { color: #E8A33D; }
+.prog-label-behind  { color: #C44A1A; }
+.prog-sub { font-size: 13px; color: var(--fg-3); margin-bottom: 18px; line-height: 1.4; }
+.prog-bars-wrap { position: relative; margin: 16px 0 12px; padding-top: 14px; user-select: none; }
+.prog-bars {
+  display: flex; gap: 4px; align-items: stretch;
+  position: relative;
+}
+.prog-bar {
+  flex: 1; height: 42px;
+  background: var(--grey-300); border: none;
+  border-radius: 3px; cursor: pointer; position: relative;
+  padding: 0;
+  transition: background 100ms;
+}
+.prog-bar:hover { filter: brightness(.9); }
+.prog-bar.filled.s-planned { background: #22A14F; }
+.prog-bar.filled.s-delayed { background: #E8A33D; }
+.prog-bar.filled.s-behind  { background: #C44A1A; }
+.prog-marker {
+  position: absolute; top: 0; transform: translateX(-50%);
+  width: 0; height: 0; pointer-events: none;
+  border-left: 7px solid transparent; border-right: 7px solid transparent;
+  border-top: 9px solid var(--fg-1);
+}
+.prog-dates {
+  display: flex; justify-content: space-between; margin-top: 10px;
+}
+.prog-dates .lbl { font-size: 11px; font-weight: 700; color: var(--fg-3); margin-bottom: 2px; text-transform: capitalize; }
+.prog-dates .val { color: var(--fg-1); font-size: 18px; font-weight: 700; }
+
+/* ── ROLE TEMPLATE DIALOG ── */
+/* Sits above .panel (z=100) so it overlays the stakeholder edit drawer. */
+.rt-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(31,47,62,.45);
+  z-index: 200; align-items: center; justify-content: center;
+}
+.rt-overlay.show { display: flex; }
+.rt-card {
+  background: #fff; width: min(520px, 94vw); max-height: 86vh;
+  border-radius: 8px; box-shadow: var(--shadow-pop);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.rt-hdr {
+  padding: 16px 20px; border-bottom: 1px solid var(--grey-400);
+  display: flex; align-items: flex-start; justify-content: space-between;
+  flex-shrink: 0;
+}
+.rt-title { font-size: 16px; font-weight: 800; color: var(--fg-1); }
+.rt-sub   { font-size: 12px; color: var(--fg-3); margin-top: 3px; }
+.rt-body { padding: 8px 20px 16px; overflow-y: auto; }
+.rt-row {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 12px;
+  padding: 10px 0; border-bottom: 1px dashed var(--grey-400);
+}
+.rt-row:last-child { border-bottom: none; }
+.rt-sec-name { font-size: 13px; font-weight: 700; color: var(--fg-1); }
+.rt-sec-desc { font-size: 11px; color: var(--fg-3); margin-top: 2px; line-height: 1.4; }
+.rt-perm {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 700; white-space: nowrap;
+}
+.rt-perm-full  { color: var(--success-2); }
+.rt-perm-scope { color: var(--warn); }
+.rt-perm-none  { color: var(--grey-800); }
+.rt-ftr {
+  padding: 12px 20px; border-top: 1px solid var(--grey-400);
+  display: flex; gap: 8px; justify-content: space-between; align-items: center;
+  flex-shrink: 0; background: #fff;
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- TOPBAR (full width across sidebar + main) -->
+  <div class="topbar">
+    <img class="topbar-logo" src="wequote-logo.svg" alt="WeQuote">
+    <div class="topbar-wordmark">LCR INTEGRATED SYSTEMS</div>
+    <div class="topbar-space"></div>
+    <div class="topbar-icons">
+      <i class="bi bi-question-circle"></i>
+      <div class="notif-wrap">
+        <i class="bi bi-bell"></i>
+        <span class="notif-dot">1</span>
+      </div>
+      <i class="bi bi-gear"></i>
+    </div>
+    <div class="topbar-greeting">Hi, Candy</div>
+    <div class="topbar-avatar">C</div>
+  </div>
+
+  <div class="body">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="content-area" id="content-area"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+<div class="panel" id="panel"><div id="panel-inner"></div></div>
+
+<!-- ADD USER (Select Customer) modal -->
+<div class="modal-overlay" id="add-user-overlay" onclick="if(event.target===this)closeAddUser()">
+  <div class="modal-card" id="add-user-modal"></div>
+</div>
+
+<!-- ROLE TEMPLATE dialog (read-only baseline view) -->
+<div class="rt-overlay" id="rt-overlay" onclick="if(event.target===this)closeRoleTemplate()">
+  <div class="rt-card" id="rt-card"></div>
+</div>
+
+<!-- ADD PROJECT modal -->
+<div class="modal-overlay" id="add-proj-overlay" onclick="if(event.target===this)closeAddProject()">
+  <div class="modal-card proj-modal-card" id="add-proj-modal"></div>
+</div>
+
+<!-- ADD STAKEHOLDER modal (for portal-settings project page) -->
+<div class="modal-overlay" id="add-stk-overlay" onclick="if(event.target===this)closeAddStakeholder()">
+  <div class="modal-card" id="add-stk-modal" style="width:min(480px,94vw)"></div>
+</div>
+
+<script>
+/* ── DATA ── */
+
+const ROLES = ['Home Owner','Builder / MC','Electrician','A/C','Quantity Surveyor','Builder PM'];
+
+const SECTIONS = [
+  {id:'quotes',      name:'Quotes',       desc:'Line items, totals, and revision history.',               amt:true },
+  {id:'variations',  name:'Variations',   desc:'Extra work created from an accepted quote.',             amt:true },
+  {id:'sales_order', name:'Sales Order',  desc:'Add-on orders for minor items.',                         amt:true },
+  {id:'invoices',    name:'Invoices',     desc:'Issued invoices, outstanding payments, payment history.',amt:true },
+  {id:'progress',    name:'Progress',     desc:'Plans, schematics, and room-level drawings.',            amt:false},
+  {id:'documents',   name:'Documents',    desc:'Plans, schematics, and room-level drawings.',            amt:false},
+  {id:'warranty',    name:'Warranty',     desc:'Warranty terms, certificates, and claims.',              amt:false},
+  {id:'activity',    name:'Activity Feed',desc:'Updates — who uploaded, approved, or commented.',        amt:false},
+];
+
+const BL = {
+  quotes:      ['full','scope','scope','scope','full','full'],
+  variations:  ['full','full', 'full', 'full', 'full','full'],
+  sales_order: ['full','full', 'full', 'full', 'full','full'],
+  invoices:    ['full','full', 'none', 'none', 'full','none'],
+  progress:    ['full','full', 'full', 'full', 'full','full'],
+  documents:   ['full','none', 'full', 'none', 'none','full'],
+  warranty:    ['full','full', 'full', 'full', 'full','full'],
+  activity:    ['full','full', 'full', 'full', 'full','full'],
+};
+const BL_ORIG = JSON.parse(JSON.stringify(BL));
+
+const AV_COLORS = {
+  'Bradley Johnson':    '#FF4655',
+  'Sarah McKinnon':     '#E8A33D',
+  'Tom Greenhalgh':     '#58AE94',
+  'Northbridge Hotels': '#2783B3',
+  'Saxon House':        '#8F4399',
+  'Portcullis Group':   '#777777',
+  'Bridge Quay':        '#1EB395',
+  'Acme AV Ltd':        '#FF4655',
+  'John Smith':         '#2783B3',
+  'Mary Lee':           '#58AE94',
+};
+
+const CUSTOMERS = [
+  {name:'Bradley Johnson',    email:'bradley@johnson.example',          projects:3, seen:'2 days ago'},
+  {name:'Sarah McKinnon',     email:'sm@mckinnon.example',              projects:1, seen:'today'},
+  {name:'Tom Greenhalgh',     email:'tom@greenhalgh.example',           projects:1, seen:'never'},
+  {name:'Northbridge Hotels', email:'pm@northbridgehotels.example',     projects:1, seen:'yesterday'},
+  {name:'Saxon House',        email:'reception@saxonhouse.example',     projects:1, seen:'3 weeks ago'},
+  {name:'Portcullis Group',   email:'ops@portcullisgroup.example',      projects:1, seen:'5 days ago'},
+  {name:'Bridge Quay',        email:'fm@bridgequay.example',            projects:1, seen:'never'},
+  {name:'Acme AV Ltd',        email:'av@acmeav.example',                projects:1, seen:'never'},
+  {name:'John Smith',         email:'john@smithbuilders.example',       projects:1, seen:'never'},
+  {name:'Mary Lee',           email:'mary@leegs.example',               projects:2, seen:'2 days ago'},
+];
+let CUSTOMERS_ORIG = JSON.parse(JSON.stringify(CUSTOMERS)); // baseline for Cancel
+
+const PROJECTS = [
+  {num:'#24501', name:'Willow Dean Service and SLA', customer:'Bradley Johnson', status:'active',    by:'Mark Carlo',  date:'14 Jun 2026', startDate:'2026-01-12', endDate:'2027-01-04', image:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&q=80'},
+  {num:'#24502', name:'Ocean Palm Residences',       customer:'Sarah McKinnon',  status:'active',    by:'Mark Carlo',  date:'02 Mar 2026', startDate:'2026-01-15', endDate:'2026-09-30', image:'../desktop/images/lcr-ocean-palm.png'},
+  {num:'#24503', name:'Highline Penthouse',          customer:'Portcullis Group',status:'active',    by:'Mark Carlo',  date:'10 Jun 2026', startDate:'2026-02-01', endDate:'2026-12-15', image:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80'},
+  {num:'#24504', name:'Sunset Ridge Villa',          customer:'Bradley Johnson', status:'active',    by:'Yadhu',       date:'08 Jun 2026', startDate:'2026-03-01', endDate:'2027-02-28', image:'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&q=80'},
+  {num:'#24505', name:'Riverside Pavilion',          customer:'Saxon House',     status:'cancelled', by:'Jennie Cave', date:'02 Jun 2026', startDate:'2026-04-01', endDate:'2026-11-30', image:'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80'},
+  {num:'#24506', name:'Cedar Park Estate',           customer:'Sarah McKinnon',  status:'active',    by:'Lee Roche',   date:'25 May 2026', startDate:'2026-05-15', endDate:'2027-04-30', image:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80'},
+];
+
+const STAKE = [
+  {name:'Sarah McKinnon',    email:'sm@mckinnon.example',          role:'Home Owner',
+   ov:{quotes:'full',variations:'scope',sales_order:'full',invoices:'scope',progress:'scope',documents:'scope',warranty:'scope',activity:'full'},
+   changed:'3 min ago',by:'Lee Roche',active:'2 days ago'},
+  {name:'Tom Greenhalgh',    email:'tom@greenhalgh.example',       role:'Builder / MC',
+   ov:null,changed:'2 days ago',by:'Jennie Cave',active:'2 days ago'},
+  {name:'Northbridge Hotels',email:'pm@northbridgehotels.example', role:'Electrician',
+   ov:null,changed:'2 days ago',by:'Lee Roche',active:'2 days ago'},
+  {name:'Bridge Quay',       email:'fm@bridgequay.example',        role:'Builder PM',
+   ov:{quotes:'full',variations:'full',sales_order:'full',invoices:'none',progress:'full',documents:'full',warranty:'full',activity:'scope'},
+   changed:'2 days ago',by:'Yadhu',active:'2 days ago'},
+  {name:'Mary Lee',          email:'mary@leegs.example',           role:'Quantity Surveyor',
+   ov:null,changed:'2 days ago',by:'Lee Roche',active:'2 days ago'},
+];
+
+/* Master WeQuote customer list — source for the "Add User" picker.
+   Anything whose email matches a CUSTOMERS[] entry is already in the portal. */
+const WQ_CUSTOMERS = [
+  {name:'Barry Peters',        addr:'Flat 30\nLiverpool, L3 5KA',         account:'',        phone:'07850 392188',   email:'B.Peter@hotmail.co.uk',          contact:{name:'Barry Peters', email:'B.Peter@hotmail.co.uk', phone:'07850 392188'}, assigned:'candy'},
+  {name:'candy',               addr:'',                                    account:'cc@wetech.cloud', phone:'',          email:'',                                contact:null,                                                                  assigned:'candy'},
+  {name:'Bradley Johnson',     addr:'12 Norwood Ave\nLondon, NW1 8RT',    account:'LCR-001', phone:'020 7946 1212', email:'bradley@johnson.example',         contact:{name:'Bradley Johnson', email:'bradley@johnson.example', phone:'020 7946 1212'}, assigned:'Lee Roche'},
+  {name:'Sarah McKinnon',      addr:'45 Castle Rd\nEdinburgh, EH1 2NG',   account:'LCR-002', phone:'0131 555 0942', email:'sm@mckinnon.example',             contact:{name:'Sarah McKinnon',  email:'sm@mckinnon.example',     phone:'0131 555 0942'}, assigned:'Lee Roche'},
+  {name:'Tom Greenhalgh',      addr:'88 Park Lane\nManchester, M1 4QF',   account:'LCR-003', phone:'0161 555 7890', email:'tom@greenhalgh.example',          contact:{name:'Tom Greenhalgh',  email:'tom@greenhalgh.example',  phone:'0161 555 7890'}, assigned:'Jennie Cave'},
+  {name:'Northbridge Hotels',  addr:'1 Quayside\nNewcastle, NE1 3AE',     account:'LCR-004', phone:'0191 555 2310', email:'pm@northbridgehotels.example',    contact:{name:'Tyler Holmes',    email:'tyler@northbridgehotels.example', phone:'0191 555 2310'}, assigned:'Lee Roche'},
+  {name:'Saxon House',         addr:'19 Abbey Mews\nYork, YO1 7HH',       account:'LCR-005', phone:'01904 555 1198', email:'reception@saxonhouse.example',   contact:{name:'Helen Saxon',     email:'reception@saxonhouse.example', phone:'01904 555 1198'}, assigned:'Mark Carlo'},
+  {name:'Portcullis Group',    addr:'Holburn Tower\nLondon, EC1A 7BE',    account:'LCR-006', phone:'020 7000 1818', email:'ops@portcullisgroup.example',     contact:{name:'David Stone',     email:'ops@portcullisgroup.example', phone:'020 7000 1818'}, assigned:'Yadhu'},
+  {name:'Bridge Quay',         addr:'4 Riverside Walk\nBristol, BS1 6XN', account:'LCR-007', phone:'0117 555 4422', email:'fm@bridgequay.example',           contact:{name:'Olivia Reed',     email:'fm@bridgequay.example',     phone:'0117 555 4422'}, assigned:'Yadhu'},
+  {name:'Acme AV Ltd',         addr:'Unit 12, Trade Park\nLeeds, LS1 9QT',account:'LCR-008', phone:'0113 555 6611', email:'av@acmeav.example',               contact:{name:'Priya Patel',     email:'av@acmeav.example',         phone:'0113 555 6611'}, assigned:'Mark Carlo'},
+  {name:'John Smith',          addr:'9 Oak Ave\nLeicester, LE1 4PA',      account:'LCR-009', phone:'0116 555 9087', email:'john@smithbuilders.example',      contact:{name:'John Smith',      email:'john@smithbuilders.example', phone:'0116 555 9087'}, assigned:'Lee Roche'},
+  {name:'Mary Lee',            addr:'2 The Crescent\nBath, BA1 5LL',      account:'LCR-010', phone:'01225 555 7733', email:'mary@leegs.example',             contact:{name:'Mary Lee',        email:'mary@leegs.example',         phone:'01225 555 7733'}, assigned:'Lee Roche'},
+];
+
+/* Per-project stakeholders for the Preview Portal selector.
+   Index matches PROJECTS[]. Project #24502 (Ocean Palm) reuses STAKE so panel edits flow through. */
+const PREVIEW_STAKES = {
+  0: [ // Willow Dean Service and SLA
+    {name:'Bradley Johnson', email:'bradley@johnson.example',       role:'Home Owner',   ov:null},
+    {name:'John Smith',      email:'john@smithbuilders.example',    role:'Builder / MC', ov:null},
+    {name:'Acme AV Ltd',     email:'av@acmeav.example',             role:'A/C',          ov:null},
+  ],
+  1: STAKE, // Ocean Palm Residences
+  2: [ // Highline Penthouse
+    {name:'Portcullis Group', email:'ops@portcullisgroup.example',  role:'Home Owner',        ov:null},
+    {name:'Tom Greenhalgh',   email:'tom@greenhalgh.example',       role:'Builder / MC',      ov:null},
+    {name:'Acme AV Ltd',      email:'av@acmeav.example',            role:'A/C',               ov:null},
+    {name:'Mary Lee',         email:'mary@leegs.example',           role:'Quantity Surveyor', ov:null},
+  ],
+  3: [ // Sunset Ridge Villa
+    {name:'Bradley Johnson', email:'bradley@johnson.example',       role:'Home Owner',   ov:null},
+    {name:'John Smith',      email:'john@smithbuilders.example',    role:'Builder / MC', ov:null},
+    {name:'Bridge Quay',     email:'fm@bridgequay.example',         role:'Builder PM',   ov:null},
+  ],
+  4: [ // Riverside Pavilion
+    {name:'Saxon House',        email:'reception@saxonhouse.example',  role:'Home Owner',        ov:null},
+    {name:'Northbridge Hotels', email:'pm@northbridgehotels.example',  role:'Builder / MC',      ov:null},
+    {name:'Mary Lee',           email:'mary@leegs.example',            role:'Quantity Surveyor', ov:null},
+  ],
+  5: [ // Cedar Park Estate
+    {name:'Sarah McKinnon',  email:'sm@mckinnon.example',       role:'Home Owner', ov:null},
+    {name:'Bradley Johnson', email:'bradley@johnson.example',   role:'Home Owner', ov:null},
+  ],
+};
+
+const NAV = [
+  {id:'overview',       label:'Overview',        icon:'bi-grid'},
+  {id:'tutorials',      label:'Tutorials',       icon:'bi-play-circle'},
+  {id:'updates',        label:'Updates',         icon:'bi-megaphone'},
+  {section:'SALES'},
+  {id:'quotes-nav',     label:'Quotes',          icon:'bi-file-earmark-text'},
+  {id:'sales-order',    label:'Sales Order',     icon:'bi-handbag',count:89},
+  {id:'projects',       label:'Projects',        icon:'bi-diagram-3'},
+  {id:'customers',      label:'Customers',       icon:'bi-people'},
+  {id:'sales-team',     label:'Sales Team',      icon:'bi-person-badge'},
+  {section:'EQUIPMENT'},
+  {id:'products',       label:'Products',        icon:'bi-cart'},
+  {id:'catalogues',     label:'Catalogues',      icon:'bi-book'},
+  {id:'systems',        label:'Systems',         icon:'bi-diagram-2'},
+  {id:'procurement',    label:'Procurement',     icon:'bi-bag-check'},
+  {id:'inventory',      label:'Inventory',       icon:'bi-box-seam'},
+  {section:'WORK HUB'},
+  {id:'tasks',          label:'Tasks',           icon:'bi-list-check',count:83},
+  {id:'jobs',           label:'Jobs',            icon:'bi-briefcase'},
+  {id:'reports',        label:'Reports',         icon:'bi-file-earmark-bar-graph'},
+  {id:'schedule',       label:'Schedule',        icon:'bi-calendar3'},
+  {id:'snaggs',         label:'Snaggs',          icon:'bi-exclamation-triangle'},
+  {id:'teams',          label:'Teams',           icon:'bi-people-fill'},
+  {section:'QUOTE GENERATION'},
+  {id:'template',       label:'Template Editor', icon:'bi-wrench'},
+  {section:'CUSTOMER PORTAL'},
+  {id:'portal-settings',label:'Portal Settings', icon:'bi-shield-lock'},
+  {id:'preview-portal', label:'Preview Portal',  icon:'bi-eye'},
+];
+
+/* ── STATE ── */
+let VIEW='settings', TAB='access', unsaved=false, panelIdx=null, panelOv={}, panelOrigRole=null;
+// Preview state: pick a CUSTOMER first, then which of THEIR projects to view.
+let previewCust=0, previewCustProj=0;
+let addUserOpen=false, addUserSearch='';
+let custPanelIdx=null;
+let assignFormOpen=false, assignProj=0, assignRole='Home Owner';
+let panelBackToCust=null; // when set, panel shows "← Back to <customer>" instead of closing
+let currentProjectIdx=1; // Seacon Tower default — set by gotoProject(idx)
+function curStakes() { return PREVIEW_STAKES[currentProjectIdx]; }
+
+let projDetailIdx=null;            // which project's detail page is open
+let projDetailTab='overview';      // 'overview' | 'progress'
+let addStkOpen=false, addStkCustIdx=null, addStkRole='Home Owner';
+let addProjOpen=false;             // Add Project modal
+let addProjMode='create';          // 'create' | 'edit'
+let addProjEditIdx=null;           // index when editing
+let addProjErr={};                 // field validation errors
+let addProjForm = {                // current form values
+  customer:'', description:'', assignee:'', warehouse:'Default',
+  currency:'GBP', label:'', startDate:'', endDate:'',
+  address:'', building:'', floor:'', town:'', county:'', postcode:'', country:'',
+  colour:'#FF0000', includeTravel:false, image:null
+};
+// Schedule progress + status per project, demo defaults
+const PROJ_PROGRESS = {
+  0: {pct: 45, status: 'planned'},
+  1: {pct: 70, status: 'planned'},
+  2: {pct: 32, status: 'delayed'},
+  3: {pct: 60, status: 'planned'},
+  4: {pct: 15, status: 'behind'},
+  5: {pct: 85, status: 'planned'},
+};
+
+/* ── HELPERS ── */
+const PLbl = p => p==='full'?'Full Access':p==='scope'?'Scope Only':'No Access';
+const PCls = p => p==='full'?'pf':p==='scope'?'ps':'pn';
+const PIcn = p => p==='full'?'bi-check-circle-fill':p==='scope'?'bi-eye-fill':'bi-x-circle-fill';
+const SCls = p => p==='full'?'sf':p==='scope'?'ss':'sn';
+const ri   = role => ROLES.indexOf(role);
+
+function av(name, sz=28) {
+  const c = AV_COLORS[name]||'#1F2F3E';
+  const ini = name.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+  return `<div class="av" style="width:${sz}px;height:${sz}px;background:${c};font-size:${Math.round(sz*.36)}px">${ini}</div>`;
+}
+
+function effPerm(s,sid) {
+  if (s.ov && s.ov[sid]!==undefined) return s.ov[sid];
+  const r=ri(s.role); return r>=0?BL[sid][r]:'full';
+}
+function ovCount(s) {
+  if (!s.ov) return 0;
+  const r=ri(s.role);
+  return Object.keys(s.ov).filter(sid=>s.ov[sid]!==(r>=0?BL[sid][r]:'full')).length;
+}
+function summary(s) {
+  const c={full:0,scope:0,none:0};
+  SECTIONS.forEach(sec=>c[effPerm(s,sec.id)]++);
+  return c;
+}
+
+/* Find every project where `name` appears as a stakeholder, and what role they play.
+   Returns [{projIdx, project, role}, ...] — driven by PREVIEW_STAKES (single source of truth). */
+function getCustProjects(name) {
+  const out = [];
+  PROJECTS.forEach((p, i) => {
+    const stakes = PREVIEW_STAKES[i] || [];
+    const match = stakes.find(s => s.name === name);
+    if (match) out.push({projIdx: i, project: p, role: match.role});
+  });
+  return out;
+}
+
+/* ── SIDEBAR ── */
+function renderSidebar() {
+  return NAV.map(item=>{
+    if (item.section) return `<div class="nav-sec-label">${item.section}</div>`;
+    const isSettings = item.id==='portal-settings';
+    const isPreview  = item.id==='preview-portal';
+    const isProjects = item.id==='projects';
+    const active = (isSettings && VIEW.startsWith('settings')) || (isPreview && VIEW==='preview')
+                || (isProjects && (VIEW==='projects' || VIEW==='projdetail'));
+    let onclick = '';
+    if (isSettings) onclick = "gotoSettings('directory')";
+    else if (isPreview) onclick = "gotoPreview()";
+    else if (isProjects) onclick = "gotoProjectsPage()";
+    return `<div class="nav-item${active?' active':''}" onclick="${onclick}">
+      <i class="bi ${item.icon}"></i>
+      <span>${item.label}</span>
+      ${item.count!=null?`<span class="nav-count">${item.count}</span>`:''}
+    </div>`;
+  }).join('');
+}
+
+/* ── SETTINGS PAGE ── */
+function renderSettings() {
+  return `
+<div class="page-wrap">
+  <div class="breadcrumb">
+    <a onclick="gotoSettings('access')">Customer Portal</a>
+    <i class="bi bi-chevron-right"></i> Settings
+  </div>
+  <div class="page-head">
+    <div>
+      <div class="page-title">Customer Portal Settings</div>
+      <div class="page-subtitle">Choose what your customers can see at <a href="#">portal.lcr-integrated.com</a></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="cancelSave()">Cancel</button>
+      <button class="btn btn-primary" id="save-btn" onclick="doSave()" ${!unsaved?'disabled':''}>
+        ${unsaved?'<i class="bi bi-circle-fill" style="font-size:6px;color:rgba(255,255,255,.7)"></i>':''}SAVE CHANGES
+      </button>
+    </div>
+  </div>
+  <div class="tabs">
+    <div class="tab${TAB==='directory'?' active':''}" onclick="switchTab('directory')">
+      <i class="bi bi-gear-fill"></i> USER DIRECTORY &amp; PROJECTS SETTINGS
+    </div>
+    <div class="tab${TAB==='access'?' active':''}" onclick="switchTab('access')">
+      <i class="bi bi-gear-fill"></i> ACCESS &amp; PERMISSIONS SETTINGS
+    </div>
+  </div>
+  ${TAB==='access' ? renderMatrix() : renderDirectory()}
+</div>`;
+}
+
+function renderMatrix() {
+  return `
+<div class="card">
+  <div class="matrix-meta">
+    <div>
+      <div class="card-title">Generic Baseline Role Permissions</div>
+      <div class="card-desc">Safe defaults — every project inherits these. Override per-project below if needed.</div>
+    </div>
+    <div class="matrix-legend">
+      <span class="legend-item">
+        <span style="width:20px;height:18px;background:#e8f5ee;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">
+          <i class="bi bi-check-circle-fill" style="color:#1EB395;font-size:11px"></i>
+        </span>&nbsp;Full access
+      </span>
+      <span class="legend-item">
+        <span style="width:20px;height:18px;background:#fff4e0;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">
+          <i class="bi bi-eye-fill" style="color:#E8A33D;font-size:11px"></i>
+        </span>&nbsp;Scope only
+      </span>
+      <span class="legend-item">
+        <span style="width:20px;height:18px;background:#F3F4F6;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">
+          <i class="bi bi-x-circle-fill" style="color:#7B828C;font-size:11px"></i>
+        </span>&nbsp;No access
+      </span>
+      <button class="btn btn-ghost btn-sm" onclick="resetBL()" style="margin-left:4px">Reset All</button>
+    </div>
+  </div>
+  <div class="matrix-hint">Click any cell to change the permission for that role. This is the baseline for every customer of that role.</div>
+  <div class="scope-banner"><i class="bi bi-info-circle-fill"></i> <b>Scope Only</b> on financial sections (marked <b>£</b>): the section is visible but monetary amounts are hidden from the customer.</div>
+  <table class="mtable">
+    <thead><tr>
+      <th class="sec-th">Section</th>
+      ${ROLES.map(r=>`<th style="width:152px">${r}</th>`).join('')}
+    </tr></thead>
+    <tbody>
+      ${SECTIONS.map(s=>`
+        <tr>
+          <td class="sec-td">
+            <div class="sec-name">${s.name}${s.amt?`<span class="amt-flag">£</span>`:''}</div>
+            <div class="sec-desc">${s.desc}</div>
+          </td>
+          ${BL[s.id].map((p,i)=>`
+            <td class="perm-cell">
+              <div class="perm-dd">
+                <button class="pdd-trigger pdd-${p}" onclick="togglePermDD(event,'${s.id}',${i})">
+                  <i class="bi ${PIcn(p)} pdd-icon-${p}"></i>
+                  <span class="pdd-label">${PLbl(p)}</span>
+                  <i class="bi bi-chevron-down pdd-chevron"></i>
+                </button>
+                <div class="pdd-menu" id="ddm-${s.id}-${i}">
+                  ${['full','scope','none'].map(opt=>`
+                    <div class="pdd-opt${p===opt?' sel':''}" onclick="setPermCell('${s.id}',${i},'${opt}')">
+                      <i class="bi ${PIcn(opt)} pdd-icon-${opt}"></i>${PLbl(opt)}
+                    </div>`).join('')}
+                </div>
+              </div>
+              ${p==='scope'&&s.amt?`<div class="scope-note">Amount hidden</div>`:''}
+            </td>
+          `).join('')}
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+  <div class="matrix-footer">
+    <i class="bi bi-info-circle"></i> These are the safe defaults. Each project inherits them based on the customer's role — you can override per-cell per-project if needed.
+  </div>
+</div>`;
+}
+
+function renderDirectory() {
+  return `
+<div class="card">
+  <div class="dir-card-hdr">
+    <div>
+      <div style="font-size:18px;font-weight:700;color:var(--fg-1);margin-bottom:4px">Customers Portal User Directory</div>
+      <div style="font-size:13px;font-weight:500;color:var(--fg-3)">Add and manage users in the Customer Portal. Once added, assign them to projects below.</div>
+    </div>
+    <button class="btn btn-primary" style="gap:8px" onclick="openAddUser()">
+      <i class="bi bi-plus-lg" style="font-size:12px"></i>ADD USER
+    </button>
+  </div>
+  <table class="wq-table dir-tbl">
+    <thead><tr>
+      <th style="width:280px">Customer</th>
+      <th>Email</th>
+      <th style="width:170px;text-align:right">Assigned To</th>
+      <th style="width:140px;text-align:right">Last Seen</th>
+      <th style="width:110px;text-align:right">Action</th>
+    </tr></thead>
+    <tbody>
+      ${CUSTOMERS.map((c,i)=>{
+        const n = getCustProjects(c.name).length;
+        return `<tr>
+          <td style="width:280px">
+            <div class="cust-cell">${av(c.name,32)}<div class="cust-name" style="font-size:14px">${c.name}</div></div>
+          </td>
+          <td style="color:var(--fg-3);font-size:13px;font-weight:500">${c.email}</td>
+          <td style="text-align:right;font-weight:700;font-size:13px;color:var(--fg-1)">
+            ${n>0
+              ? `<a onclick="openCustPanel(${i})" style="color:var(--fg-1);text-decoration:underline;cursor:pointer">${n} project${n>1?'s':''}</a>`
+              : `<span style="color:var(--fg-3);font-weight:500">No projects</span>`}
+          </td>
+          <td style="text-align:right;font-size:13px;color:var(--fg-3);font-weight:500">${c.seen}</td>
+          <td style="text-align:right">
+            <div style="display:inline-flex;align-items:center;gap:12px">
+              <a onclick="openCustPanel(${i})" style="font-size:13px;font-weight:700;color:var(--info);cursor:pointer;display:inline-flex;align-items:center;gap:4px">
+                View <i class="bi bi-arrow-right" style="font-size:11px"></i>
+              </a>
+              <button onclick="event.stopPropagation();removeCustomer(${i})" title="Remove from portal"
+                      style="background:none;border:none;cursor:pointer;color:var(--fg-4);padding:4px;border-radius:3px"
+                      onmouseover="this.style.color='var(--brand)';this.style.background='var(--brand-tint)'"
+                      onmouseout="this.style.color='var(--fg-4)';this.style.background='none'">
+                <i class="bi bi-trash" style="font-size:14px"></i>
+              </button>
+            </div>
+          </td>
+        </tr>`;
+      }).join('')}
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-hdr-row">
+    <div>
+      <div class="card-title">Projects</div>
+      <div class="card-desc">Click Edit on a project to manage per-stakeholder access overrides.</div>
+    </div>
+  </div>
+  <table class="wq-table proj-list-tbl">
+    <thead><tr>
+      <th style="width:60px">No.</th>
+      <th style="width:200px">Description</th>
+      <th style="width:150px">Customer</th>
+      <th style="width:100px">Status</th>
+      <th style="width:160px;text-align:center">Stakeholder(s)</th>
+      <th style="width:160px">Last Changed</th>
+      <th></th>
+    </tr></thead>
+    <tbody>
+      ${PROJECTS.map((p,i)=>{
+        const n = PREVIEW_STAKES[i].length;
+        return `<tr>
+          <td style="font-size:14px;font-weight:700;color:var(--fg-3)">${p.num}</td>
+          <td style="font-size:14px;font-weight:700;color:var(--fg-1)">${p.name}</td>
+          <td style="font-size:14px;font-weight:700;color:var(--fg-1)">${p.customer}</td>
+          <td><span class="pill pill-${p.status}">${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</span></td>
+          <td style="text-align:center">
+            <a onclick="gotoProject(${i})" style="font-size:15px;font-weight:700;color:var(--fg-1);text-decoration:underline;cursor:pointer">${n}</a>
+          </td>
+          <td>
+            <div style="font-size:14px;font-weight:700;color:var(--fg-1)">${p.by}</div>
+            <div style="font-size:12px;font-weight:600;color:var(--fg-3)">${p.date}</div>
+          </td>
+          <td style="text-align:right">
+            <div style="display:inline-flex;align-items:center;gap:4px;cursor:pointer" onclick="gotoProject(${i})">
+              <span style="font-size:14px;font-weight:700;color:#4a5461">Edit</span>
+              <i class="bi bi-pencil" style="font-size:12px;color:#4a5461"></i>
+            </div>
+          </td>
+        </tr>`;
+      }).join('')}
+    </tbody>
+  </table>
+</div>`;
+}
+
+/* ── PROJECT DETAIL ── */
+function renderProject() {
+  const proj = PROJECTS[currentProjectIdx];
+  const stakes = curStakes();
+  return `
+<div class="page-wrap">
+  <div class="proj-head">
+    <div class="back-crumb">
+      <a onclick="gotoSettings('directory')"><i class="bi bi-chevron-left"></i> Portal Settings</a>
+      <i class="bi bi-chevron-right" style="color:var(--grey-600);font-size:12px"></i>
+      <span class="crumb-curr">${proj.num} · ${proj.name}</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="changed-meta">Last Changed ${proj.date}<br>By ${proj.by}</div>
+      <button class="btn btn-primary" onclick="openAddStakeholder()" style="gap:6px">
+        <i class="bi bi-plus-lg" style="font-size:12px"></i>ADD STAKEHOLDER
+      </button>
+      <button class="btn btn-ghost" onclick="cancelSave()">Cancel</button>
+      <button class="btn btn-primary" id="save-btn" onclick="doSave()" ${!unsaved?'disabled':''}>SAVE CHANGES</button>
+    </div>
+  </div>
+  <div class="card">
+    <table class="wq-table proj-tbl">
+      <thead><tr>
+        <th>Customer</th>
+        <th>Role Template</th>
+        <th>Role Access Summary</th>
+        <th>Permission overrides?</th>
+        <th>Last Changed</th>
+        <th>Last Active</th>
+        <th>Action</th>
+      </tr></thead>
+      <tbody>
+        ${stakes.length === 0 ? `
+          <tr><td colspan="7" style="padding:48px 24px;text-align:center;border-bottom:none">
+            <div style="font-size:14px;font-weight:700;color:var(--fg-1);margin-bottom:6px">No stakeholders yet</div>
+            <div style="font-size:13px;color:var(--fg-3);margin-bottom:14px">Add a portal user above to start configuring per-stakeholder permission overrides.</div>
+            <button class="btn btn-primary" onclick="openAddStakeholder()" style="gap:6px">
+              <i class="bi bi-plus-lg" style="font-size:12px"></i>ADD STAKEHOLDER
+            </button>
+          </td></tr>
+        ` : ''}
+        ${stakes.map((s,i)=>{
+          const c=summary(s), oc=ovCount(s);
+          const lbl = c.full===8 ? 'Full Access to 8 Sections'
+                    : c.none===8 ? 'No Access'
+                    : c.scope===8 ? 'Scope Access Only'
+                    : c.full>=6  ? 'Mostly Full Access'
+                    : c.scope>=6 ? 'Mostly Scope Access'
+                    : 'Mixed Access';
+          const chipParts=[
+            c.full >0?`${c.full} Full Access`:'',
+            c.scope>0?`${c.scope} Scope Only`:'',
+            c.none >0?`${c.none} No Access`:'',
+          ].filter(Boolean);
+          const chipsHtml=chipParts.map((t,j)=>
+            `${j>0?'<span class="sum-dot"></span>':''}<span class="sum-chip">${t}</span>`
+          ).join('');
+          return `<tr>
+            <td>
+              <div class="cust-cell">${av(s.name,28)}<div>
+                <div class="cust-name" style="font-size:14px">${s.name}</div>
+                <div class="cust-email">${s.email}</div>
+              </div></div>
+            </td>
+            <td>
+              <div class="role-tpl-wrap">
+                <div class="role-tpl-vis">
+                  <span>${s.role}</span>
+                  <i class="bi bi-chevron-down" style="font-size:10px;color:#333;flex-shrink:0"></i>
+                </div>
+                <select class="role-tpl-sel" onchange="changeRole(${i},this.value)">
+                  ${ROLES.map(r=>`<option${r===s.role?' selected':''}>${r}</option>`).join('')}
+                </select>
+              </div>
+            </td>
+            <td style="min-width:240px">
+              <span class="sum-label">${lbl}</span>
+              <div class="sum-chips">${chipsHtml}</div>
+            </td>
+            <td>
+              ${oc>0
+                ?`<a class="ov-link" onclick="openPanel(${i})"><i class="bi bi-check-circle-fill" style="color:#1eb395;font-size:12px;flex-shrink:0"></i>${oc} custom override${oc>1?'s':''}</a>`
+                :`<span class="ov-default"><i class="bi bi-x-circle-fill" style="color:#7b828c;font-size:12px;flex-shrink:0"></i>Using role defaults</span>`}
+            </td>
+            <td>
+              <div style="display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:700;color:var(--fg-3)">
+                <span>Last Changed ${s.changed||'—'}</span>
+                <span>By ${s.by||'—'}</span>
+              </div>
+            </td>
+            <td style="font-size:13px;font-weight:700;color:var(--fg-3)">${s.active||'—'}</td>
+            <td>
+              <div style="display:inline-flex;align-items:center;gap:4px">
+                <a onclick="openPanel(${i})" style="font-size:13px;font-weight:700;color:var(--fg-1);text-decoration:underline;cursor:pointer">Edit</a>
+                <i class="bi bi-pencil" style="font-size:12px;color:var(--steel)"></i>
+              </div>
+            </td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+  </div>
+</div>`;
+}
+
+/* ── SIDE PANEL ── */
+function renderPanel(idx) {
+  const s=curStakes()[idx], r=ri(s.role);
+  const proj = PROJECTS[currentProjectIdx];
+  const backCust = panelBackToCust !== null ? CUSTOMERS[panelBackToCust] : null;
+  return `
+<div style="display:flex;flex-direction:column;height:100vh">
+  ${backCust ? `
+    <div style="padding:10px 18px;border-bottom:1px solid var(--grey-200);background:var(--grey-100);font-size:12px;font-weight:600;color:var(--fg-3);display:flex;align-items:center;gap:6px">
+      <a onclick="closePanel()" style="color:var(--info);cursor:pointer;display:inline-flex;align-items:center;gap:4px;text-decoration:none">
+        <i class="bi bi-chevron-left" style="font-size:11px"></i> Back to ${backCust.name}
+      </a>
+      <span style="color:var(--grey-600)">/</span>
+      <span style="color:var(--fg-1);font-weight:700">${proj.num} · ${proj.name}</span>
+    </div>
+  ` : ''}
+  <div class="panel-hdr">
+    <div class="panel-cust">${av(s.name,34)}
+      <div><div class="p-name">${s.name}</div><div class="p-email">${s.email}</div></div>
+    </div>
+    <button onclick="closePanel()" style="background:none;border:none;cursor:pointer;font-size:22px;line-height:1;color:var(--fg-1);padding:2px 6px;border-radius:3px" title="Close">&#215;</button>
+  </div>
+  <div class="panel-body">
+    <div class="role-block" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--grey-200);margin-bottom:14px">
+      <div>
+        <div class="field-lbl">Current Role</div>
+        <select class="role-sel" style="width:100%" onchange="changeRole(${idx},this.value)">
+          ${ROLES.map(ro=>`<option${ro===s.role?' selected':''}>${ro}</option>`).join('')}
+        </select>
+      </div>
+      <div>
+        <div class="field-lbl">Using Role Template</div>
+        <div style="font-size:14px;font-weight:700;color:var(--fg-1);margin-bottom:4px">${s.role}</div>
+        <a onclick="openRoleTemplate('${s.role}')" style="font-size:12px;font-weight:600;color:var(--fg-1);text-decoration:underline;cursor:pointer">View role template</a>
+      </div>
+    </div>
+    ${SECTIONS.map(sec=>{
+      const base=r>=0?BL[sec.id][r]:'full';
+      // Only use saved overrides (s.ov) if the role hasn't changed since opening the panel.
+      // If role changed, old overrides were relative to the old baseline — ignore them.
+      const cur=panelOv[sec.id]!==undefined?panelOv[sec.id]
+               :(s.role===panelOrigRole&&s.ov&&s.ov[sec.id]!==undefined?s.ov[sec.id]:base);
+      const isOv=cur!==base;
+      return `<div class="perm-row">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div class="perm-name" style="font-size:16px;font-weight:700">${sec.name}${sec.amt?` <span class="amt-flag">£</span>`:''}</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="ppdd-wrap">
+            <button class="ppdd-trigger" onclick="togglePanelDD(event,'${sec.id}')">
+              <div class="ppdd-left">
+                <i class="bi ${PIcn(cur)} pdd-icon-${cur}"></i>
+                <span>${PLbl(cur)}</span>
+              </div>
+              <i class="bi bi-chevron-down ppdd-chevron"></i>
+            </button>
+            <div class="ppdd-menu" id="ppdd-${sec.id}">
+              ${['full','scope','none'].map(opt=>`
+                <div class="ppdd-opt${cur===opt?' sel':''}" onclick="setPanelPerm('${sec.id}','${opt}')">
+                  <i class="bi ${PIcn(opt)} pdd-icon-${opt}"></i>${PLbl(opt)}
+                </div>`).join('')}
+            </div>
+          </div>
+          <button class="reset-one" onclick="resetOne('${sec.id}','${base}')">
+            <i class="bi bi-arrow-counterclockwise" style="font-size:12px;color:#777"></i>
+            <span style="font-size:13px;font-weight:700;color:var(--fg-1)">Reset</span>
+          </button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:5px">
+          <div class="perm-meta">Role Default: ${PLbl(base)}</div>
+          ${isOv?`<span style="color:var(--brand);font-weight:700;font-size:11px">Overridden</span>`:''}
+        </div>
+        ${cur==='scope'&&sec.amt?`<div class="amt-note">Amount hidden from customer</div>`:''}
+      </div>`;
+    }).join('')}
+  </div>
+  <div class="panel-ftr">
+    <button class="reset-all-btn" onclick="resetAll(${idx})">
+      <i class="bi bi-arrow-counterclockwise" style="color:var(--brand)"></i> Reset All
+    </button>
+    <div class="panel-actions">
+      <button class="btn btn-ghost" style="padding:12px 18px" onclick="closePanel()">Cancel</button>
+      <button class="btn btn-primary" style="padding:12px 18px" onclick="savePanel(${idx})">SAVE CHANGES</button>
+    </div>
+  </div>
+</div>`;
+}
+
+/* ── ACTIONS ── */
+function gotoSettings(tab) { VIEW='settings'; TAB=tab||'access'; closePanel(); render(); }
+function gotoProject(idx)  { if (idx!==undefined) currentProjectIdx=+idx; VIEW='project'; render(); }
+function switchTab(t)      { TAB=t; render(); }
+
+/* ── ADD STAKEHOLDER (to current project, on Portal Settings project view) ── */
+function openAddStakeholder() {
+  addStkOpen = true;
+  // default to first eligible (in CUSTOMERS, not yet a stakeholder on this project)
+  const stakes = curStakes();
+  const takenNames = new Set(stakes.map(s => s.name));
+  const eligible = CUSTOMERS.findIndex(c => !takenNames.has(c.name));
+  addStkCustIdx = eligible >= 0 ? eligible : null;
+  addStkRole = 'Home Owner';
+  drawAddStakeholder();
+  document.getElementById('add-stk-overlay').classList.add('show');
+}
+function closeAddStakeholder() {
+  addStkOpen = false;
+  document.getElementById('add-stk-overlay').classList.remove('show');
+}
+function saveAddStakeholder() {
+  if (addStkCustIdx === null) { closeAddStakeholder(); return; }
+  const c = CUSTOMERS[addStkCustIdx];
+  if (!c) { closeAddStakeholder(); return; }
+  const stakes = curStakes();
+  if (!stakes.find(s => s.name === c.name)) {
+    stakes.push({name: c.name, email: c.email, role: addStkRole, ov: null});
+    unsaved = true;
+  }
+  closeAddStakeholder();
+  render();
+}
+function drawAddStakeholder() {
+  const proj = PROJECTS[currentProjectIdx];
+  const stakes = curStakes();
+  const takenNames = new Set(stakes.map(s => s.name));
+  const eligible = CUSTOMERS.map((c,i)=>({c,i})).filter(({c}) => !takenNames.has(c.name));
+  const inner = `
+    <div class="modal-hdr">
+      <div>
+        <div class="modal-title">Add Stakeholder</div>
+        <div style="font-size:12px;color:var(--fg-3);margin-top:3px">${proj.num} · ${proj.name}</div>
+      </div>
+      <button class="modal-x" onclick="closeAddStakeholder()" title="Close">&times;</button>
+    </div>
+    <div class="modal-body" style="padding:18px 24px">
+      ${eligible.length === 0 ? `
+        <div style="padding:24px 0;text-align:center;color:var(--fg-3);font-size:13px;line-height:1.5">
+          Every portal user is already a stakeholder on this project.<br>
+          <a onclick="openAddUserFromStakeholder()" style="color:var(--brand);font-weight:700;cursor:pointer;text-decoration:underline">+ Add a new portal user</a> first to assign them here.
+        </div>
+      ` : `
+        <div class="proj-form-row">
+          <label>Customer</label>
+          <div class="ctrl">
+            <select class="proj-select" onchange="addStkCustIdx=+this.value">
+              ${eligible.map(({c,i}) => `
+                <option value="${i}" ${i===addStkCustIdx?'selected':''}>${c.name}${c.email?` · ${c.email}`:''}</option>
+              `).join('')}
+            </select>
+            <a onclick="openAddUserFromStakeholder()" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:12px;font-weight:700;color:var(--brand);cursor:pointer">
+              <i class="bi bi-plus-lg" style="font-size:11px"></i> Add a new portal user
+            </a>
+          </div>
+        </div>
+        <div class="proj-form-row">
+          <label>Role</label>
+          <div class="ctrl">
+            <select class="proj-select" onchange="addStkRole=this.value">
+              ${ROLES.map(r => `<option ${r===addStkRole?'selected':''}>${r}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+        <div class="proj-help" style="padding-top:14px">
+          <i class="bi bi-info-circle-fill"></i>
+          <span>The customer will inherit the role's baseline permissions. You can override per-section after they're added.</span>
+        </div>
+      `}
+    </div>
+    <div class="modal-ftr">
+      <span></span>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-modal-cancel" onclick="closeAddStakeholder()">CANCEL</button>
+        ${eligible.length > 0
+          ? `<button class="btn btn-primary" onclick="saveAddStakeholder()">ADD STAKEHOLDER</button>`
+          : ''}
+      </div>
+    </div>`;
+  document.getElementById('add-stk-modal').innerHTML = inner;
+}
+
+/* ── PROJECTS PAGE + DETAIL + PROGRESS WIDGET ── */
+function gotoProjectsPage() { VIEW='projects'; projDetailIdx=null; render(); }
+function gotoProjDetail(idx) { projDetailIdx=+idx; VIEW='projdetail'; render(); }
+
+function renderProjectsPage() {
+  const all = PROJECTS.length;
+  const active = PROJECTS.filter(p => p.status==='active').length;
+  const cancelled = PROJECTS.filter(p => p.status==='cancelled').length;
+  return `
+<div class="page-wrap">
+  <div class="breadcrumb">
+    Projects <i class="bi bi-chevron-right"></i> LCR Integrated Systems
+  </div>
+  <div class="proj-page-head">
+    <div class="page-title">Projects</div>
+    <div class="proj-page-actions">
+      <button class="btn btn-ghost"><i class="bi bi-person-plus" style="font-size:13px"></i>NEW CUSTOMER</button>
+      <button class="btn btn-primary" onclick="openAddProject()" style="gap:6px"><i class="bi bi-plus-lg" style="font-size:13px"></i>NEW PROJECT</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="proj-stats">
+      <div class="proj-stat active">
+        <div class="proj-stat-lbl">ALL <span class="count">${all}</span></div>
+        <div class="proj-stat-val">${all} Projects</div>
+      </div>
+      <div class="proj-stat">
+        <div class="proj-stat-lbl">ACTIVE <span class="count">${active}</span></div>
+        <div class="proj-stat-val">${active} Projects</div>
+      </div>
+      <div class="proj-stat">
+        <div class="proj-stat-lbl">CANCELLED <span class="count">${cancelled}</span></div>
+        <div class="proj-stat-val">${cancelled} Projects</div>
+      </div>
+    </div>
+    <table class="wq-table proj-list-tbl">
+      <thead><tr>
+        <th style="width:80px">No.</th>
+        <th>Description</th>
+        <th style="width:170px">Customer</th>
+        <th style="width:100px">Status</th>
+        <th style="width:80px;text-align:center">Progress</th>
+        <th style="width:160px">Last Changed</th>
+        <th style="width:80px"></th>
+      </tr></thead>
+      <tbody>
+        ${PROJECTS.map((p,i)=>{
+          const pr = PROJ_PROGRESS[i] || {pct:0, status:'planned'};
+          return `<tr style="cursor:pointer" onclick="gotoProjDetail(${i})">
+            <td style="font-size:14px;font-weight:700;color:var(--fg-3)">${p.num}</td>
+            <td>
+              <div style="display:flex;align-items:center;gap:12px">
+                ${p.image
+                  ? `<img src="${p.image}" alt="" style="width:48px;height:36px;object-fit:cover;border-radius:4px;flex-shrink:0" onerror="this.style.display='none'">`
+                  : `<div style="width:48px;height:36px;border-radius:4px;background:var(--grey-200);display:flex;align-items:center;justify-content:center;color:var(--fg-4);flex-shrink:0"><i class="bi bi-image" style="font-size:14px"></i></div>`}
+                <span style="font-size:14px;font-weight:700;color:var(--fg-1)">${p.name}</span>
+              </div>
+            </td>
+            <td style="font-size:14px;font-weight:700;color:var(--fg-1)">${p.customer}</td>
+            <td><span class="pill pill-${p.status}">${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</span></td>
+            <td style="text-align:center;font-weight:700;font-size:13px;color:var(--fg-1)">${pr.pct}%</td>
+            <td>
+              <div style="font-size:14px;font-weight:700;color:var(--fg-1)">${p.by}</div>
+              <div style="font-size:12px;font-weight:600;color:var(--fg-3)">${p.date}</div>
+            </td>
+            <td style="text-align:right">
+              <span style="font-size:13px;font-weight:700;color:var(--info)">Open →</span>
+            </td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+  </div>
+</div>`;
+}
+
+/* Mock dashboard data — shared across projects for demo */
+const PROJ_DASH = {
+  quoted:  {products: 41999, labour: 27122, margin: 44147, totalSell: 113268},
+  actual:  {products: 11544, unpaidProducts: 28448, labour: 4249, unpaidLabour: 20971, margin: 48055, margin2: 48055},
+  invoiced:{p1: 49398, p2: 9027, p3: 9800, p4: 28721, p5: 9551, p6: 6770},
+  metrics: {
+    productCost: {actual: 11544, quoted: 41999},
+    labourCost:  {actual: 4249,  quoted: 27122},
+    totalCost:   {actual: 15793, quoted: 69121},
+    hours:       {actual: 515,   quoted: 709},
+    margin:      {actual: 48055, quoted: 44147},
+  },
+  time: {used: 515.63, total: 515.63, travel: 3.27},
+  engineers: [
+    {name: 'Nithish Pajeer',  color:'#1EB395', hours: '49 hours 21 mins', visits: 19, status: 'Last Clocked In 1 year ago'},
+    {name: 'Yadhu Kishan',    color:'#E8A33D', hours: '2 hours 2 mins',   visits: 2,  status: 'Last Clocked In 1 year ago'},
+    {name: 'Lee Roche',       color:'#FF4655', hours: '373 hours 38 mins',visits: 35, status: 'Last Clocked In 1 year ago'},
+    {name: 'Rizwan Tahir',    color:'#2783B3', hours: '17 hours 1 min',   visits: 6,  status: 'Last Clocked In 1 year ago'},
+    {name: 'Robert Biro',     color:'#8F4399', hours: '35 hours 39 mins', visits: 0,  status: 'Last Clocked In 1 year ago'},
+  ],
+  projectTime: {booked: 495.62, billable: 20.02, over: 0, totalQuoted: 709.27},
+  visits: {contract: 54, sales: 2, service: 0},
+};
+
+function setProjDetailTab(t) { projDetailTab = t; render(); }
+
+function renderProjDetail() {
+  const p = PROJECTS[projDetailIdx];
+  if (!p) return '<div class="page-wrap">Project not found.</div>';
+  return `
+<div class="page-wrap">
+  <div class="pd-page-hd">
+    <div class="back-crumb" style="display:flex;align-items:center;gap:10px">
+      ${p.image
+        ? `<img src="${p.image}" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:6px;flex-shrink:0" onerror="this.style.display='none'">`
+        : `<div style="width:48px;height:48px;border-radius:6px;background:var(--grey-200);display:flex;align-items:center;justify-content:center;color:var(--fg-4);flex-shrink:0"><i class="bi bi-image" style="font-size:18px"></i></div>`}
+      <div>
+        <div style="font-size:11px;color:var(--fg-3);font-weight:600;display:flex;align-items:center;gap:4px">
+          <a onclick="gotoProjectsPage()" style="color:var(--fg-3);cursor:pointer"><i class="bi bi-chevron-left" style="font-size:10px"></i> Projects</a>
+        </div>
+        <div style="font-size:18px;font-weight:700;color:var(--fg-1);margin-top:2px">Project ${p.num.replace('#','')} · ${p.name}</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-ghost" onclick="openEditProject(${projDetailIdx})"><i class="bi bi-pencil" style="font-size:13px"></i>EDIT PROJECT</button>
+      <button class="btn btn-ghost"><i class="bi bi-bell" style="font-size:13px"></i>SET NOTIFICATIONS</button>
+      <button class="btn btn-primary" style="gap:6px"><i class="bi bi-plus-lg" style="font-size:13px"></i>NEW QUOTE</button>
+    </div>
+  </div>
+  ${renderProjOverviewTab()}
+</div>`;
+}
+
+function renderProjOverviewTab() {
+  const d = PROJ_DASH;
+  const pr = PROJ_PROGRESS[projDetailIdx] || {pct:0, status:'planned'};
+  // Helpers for stacked bar segments — percent of total bar width
+  const total = d.quoted.products + d.quoted.labour + d.quoted.margin;
+  const fmt = n => '£' + n.toLocaleString('en-GB');
+  const seg = (val, total, cls, lbl) => `<div class="po-seg ${cls}" style="flex:${val} 0 0" title="${lbl}: ${fmt(val)}">${val>4000?fmt(val):''}</div>`;
+
+  const actualTotal = d.actual.products + d.actual.unpaidProducts + d.actual.labour + d.actual.unpaidLabour + d.actual.margin;
+  const invoicedTotal = d.invoiced.p1 + d.invoiced.p2 + d.invoiced.p3 + d.invoiced.p4 + d.invoiced.p5 + d.invoiced.p6;
+
+  return `
+<div class="pd-layout">
+  <div class="pd-main">
+    <div class="pd-top-grid">
+  ${renderProgressWidget(projDetailIdx, pr)}
+  <div class="pd-card">
+    <div class="pd-card-title"><i class="bi bi-diagram-3-fill"></i> Project Overview</div>
+      <div class="po-row">
+        <div><div class="po-label">Quoted</div><div class="po-label-val">${fmt(total)}</div></div>
+        <div class="po-bar">
+          ${seg(d.quoted.products,total,'po-seg-products','Products')}
+          ${seg(d.quoted.labour,total,'po-seg-labour','Labour')}
+          ${seg(d.quoted.margin,total,'po-seg-margin','Margin')}
+        </div>
+        <div class="po-total"><div class="po-total-lbl">Total Sell</div><div class="po-total-val">${fmt(d.quoted.totalSell)}</div></div>
+      </div>
+      <div class="po-row">
+        <div><div class="po-label">Actual</div><div class="po-label-val">${fmt(d.actual.products + d.actual.labour)}</div></div>
+        <div class="po-bar">
+          ${seg(d.actual.products,actualTotal,'po-seg-products','Products')}
+          ${seg(d.actual.unpaidProducts,actualTotal,'po-seg-unpaid-p','Unpaid Products')}
+          ${seg(d.actual.labour,actualTotal,'po-seg-labour','Labour')}
+          ${seg(d.actual.unpaidLabour,actualTotal,'po-seg-unpaid-l','Unpaid Labour')}
+          ${seg(d.actual.margin,actualTotal,'po-seg-margin','Margin')}
+        </div>
+        <div class="po-total"><div class="po-total-lbl">Margin</div><div class="po-total-val">${fmt(d.actual.margin)}</div></div>
+      </div>
+      <div class="po-row">
+        <div><div class="po-label">Invoiced</div><div class="po-label-val">${fmt(d.invoiced.p1+d.invoiced.p2)}</div></div>
+        <div class="po-bar">
+          ${seg(d.invoiced.p1,invoicedTotal,'po-seg-products','Products')}
+          ${seg(d.invoiced.p2,invoicedTotal,'po-seg-unpaid-p','Unpaid')}
+          ${seg(d.invoiced.p3,invoicedTotal,'po-seg-left','Pending')}
+          ${seg(d.invoiced.p4,invoicedTotal,'po-seg-labour','Labour')}
+          ${seg(d.invoiced.p5,invoicedTotal,'po-seg-unpaid-l','Unpaid Labour')}
+          ${seg(d.invoiced.p6,invoicedTotal,'po-seg-margin','Margin')}
+        </div>
+        <div class="po-total"><div class="po-total-lbl"></div><div class="po-total-val"></div></div>
+      </div>
+      <div class="po-legend">
+        <span class="po-leg-item"><span class="po-leg-sw" style="background:#FF4655"></span>Products</span>
+        <span class="po-leg-item"><span class="po-leg-sw" style="background:#8B6BBA"></span>Labour</span>
+        <span class="po-leg-item"><span class="po-leg-sw" style="background:#1EB395"></span>Margin</span>
+        <span class="po-leg-item"><span class="po-leg-sw" style="background:#FFB3BA"></span>Unpaid Products</span>
+        <span class="po-leg-item"><span class="po-leg-sw" style="background:#C4B5DA"></span>Unpaid Labour</span>
+      <span class="po-leg-item"><span class="po-leg-sw" style="background:#D9D9D9"></span>Left</span>
+      </div>
+    </div>
+    </div>
+
+    <div class="mini-grid">
+      ${[
+        {key:'productCost', title:'Product Cost', icon:'bi-stack',     max:50000, prefix:'£', step:10000},
+        {key:'labourCost',  title:'Labour Cost',  icon:'bi-stack',     max:30000, prefix:'£', step:5000},
+        {key:'totalCost',   title:'Total Cost',   icon:'bi-stack',     max:70000, prefix:'£', step:10000},
+        {key:'hours',       title:'Hours',        icon:'bi-clock',     max:800,   prefix:'',  step:200},
+        {key:'margin',      title:'Margin',       icon:'bi-bar-chart', max:50000, prefix:'£', step:10000},
+      ].map(m=>{
+        const v = d.metrics[m.key];
+        const hA = Math.max(4, v.actual / m.max * 118);
+        const hQ = Math.max(4, v.quoted / m.max * 118);
+        const ticks = [];
+        for (let t = 0; t <= m.max; t += m.step) ticks.push(t);
+        return `<div class="mini-card">
+          <div class="mini-head"><i class="bi ${m.icon}"></i> <span class="actual">Actual</span> vs <span class="quoted">Quoted</span></div>
+          <div class="mini-title">${m.title}</div>
+          <div class="mini-chart">
+            <div class="mini-yaxis">${ticks.map(t=>`<span>${m.prefix}${t.toLocaleString()}</span>`).join('')}</div>
+            <div class="mini-plot">
+              <div class="gridline l1"></div>
+              <div class="gridline l2"></div>
+              <div class="gridline l3"></div>
+              <div class="mini-bar actual" style="height:${hA}px" title="Actual: ${v.actual.toLocaleString()}"></div>
+              <div class="mini-bar quoted" style="height:${hQ}px" title="Quoted: ${v.quoted.toLocaleString()}"></div>
+            </div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    <div class="pd-card">
+      <div class="pd-card-title"><i class="bi bi-bar-chart-line-fill"></i> Phasewise Overview &mdash; <span class="actual" style="color:#8B6BBA">Actual</span> vs <span class="quoted" style="color:#1EB395">Assigned</span> Task Hours</div>
+      <div style="display:grid;grid-template-columns:42px 1fr;gap:8px;height:260px">
+        <div class="mini-yaxis">
+          <span>0</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span>
+        </div>
+        <div class="mini-plot" style="height:auto;gap:0;padding:8px 0">
+          <div class="gridline" style="top:20%"></div>
+          <div class="gridline" style="top:40%"></div>
+          <div class="gridline" style="top:60%"></div>
+          <div class="gridline" style="top:80%"></div>
+          ${[
+            {name:'Unassigned',          a:380, q:440},
+            {name:'2-First Fix Install', a:8,   q:20},
+            {name:'4-2nd Fix Install',   a:120, q:120},
+            {name:'1-Design Stage',      a:18,  q:22},
+            {name:'5-Commissioning',     a:7,   q:7},
+            {name:'6-Hand Over',         a:4,   q:4},
+            {name:'3-Off Site Build',    a:8,   q:14},
+          ].map(ph=>{
+            const max = 500;
+            const hA = Math.max(2, ph.a/max*230);
+            const hQ = Math.max(2, ph.q/max*230);
+            return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;z-index:1;position:relative">
+              <div style="display:flex;gap:6px;align-items:flex-end">
+                <div class="mini-bar actual" style="width:18px;height:${hA}px"></div>
+                <div class="mini-bar quoted" style="width:18px;height:${hQ}px"></div>
+              </div>
+              <div style="font-size:10px;font-weight:600;color:var(--fg-3);text-align:center;line-height:1.2;white-space:nowrap">${ph.name}</div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pd-right">
+    <div class="pd-card tm-card">
+      <div class="pd-card-title" style="margin-bottom:6px"><i class="bi bi-clock-history"></i> Time</div>
+      <div class="tm-donut">
+        <svg viewBox="0 0 36 36">
+          <g transform="rotate(-90 18 18)">
+            <!-- Background ring -->
+            <circle cx="18" cy="18" r="16" fill="none" stroke="#EDF0F3" stroke-width="4"/>
+            <!-- Main "Hours Used" arc (orange) — 90% of circle -->
+            <circle cx="18" cy="18" r="16" fill="none" stroke="#E8A33D" stroke-width="4"
+              stroke-dasharray="90 100" stroke-dashoffset="0"/>
+            <!-- 3 small coloured dots on the ring (engineer/category markers) -->
+            <circle cx="18" cy="18" r="16" fill="none" stroke="#2783B3" stroke-width="4"
+              stroke-dasharray="0.1 100" stroke-dashoffset="-91" stroke-linecap="round"/>
+            <circle cx="18" cy="18" r="16" fill="none" stroke="#8F4399" stroke-width="4"
+              stroke-dasharray="0.1 100" stroke-dashoffset="-94" stroke-linecap="round"/>
+            <circle cx="18" cy="18" r="16" fill="none" stroke="#FF4655" stroke-width="4"
+              stroke-dasharray="0.1 100" stroke-dashoffset="-97" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <div class="tm-center">
+          <div class="tm-hours">${d.time.used.toFixed(2)}/${d.time.total.toFixed(2)}</div>
+          <div class="tm-hours-lbl">Hours Used</div>
+          <div class="tm-travel">${d.time.travel.toFixed(2)} Hours</div>
+          <div class="tm-travel-lbl">Travel Time</div>
+        </div>
+      </div>
+    </div>
+    <div class="pd-card pt-card">
+      <div class="pd-card-title" style="margin-bottom:4px"><i class="bi bi-clock"></i> Project Time</div>
+      <div class="pt-stats">
+        <div><div class="pt-stat-val" style="color:#1EB395">${d.projectTime.booked}</div><div class="pt-stat-lbl">Hours Booked</div></div>
+        <div><div class="pt-stat-val" style="color:#8B6BBA">${d.projectTime.billable}</div><div class="pt-stat-lbl">Hours Billable</div></div>
+        <div><div class="pt-stat-val" style="color:#FF4655">${d.projectTime.over}</div><div class="pt-stat-lbl">Hours Over</div></div>
+        <div><div class="pt-stat-val" style="color:var(--fg-1)">${d.projectTime.totalQuoted}</div><div class="pt-stat-lbl">Total Quoted Hours</div></div>
+      </div>
+      <div class="pt-bar"><div style="width:${Math.min(100,Math.round(d.projectTime.booked/d.projectTime.totalQuoted*100))}%"></div></div>
+      <div class="pt-visits">
+        <div class="v1"><div class="num">${d.visits.contract}</div><div class="lbl">Contract Visits</div></div>
+        <div class="v2"><div class="num">${d.visits.sales}</div><div class="lbl">Sales Visits</div></div>
+        <div class="v3"><div class="num">${d.visits.service}</div><div class="lbl">Service Visits</div></div>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+const PROG_META = {
+  planned: {label:'Progressing as planned', sub:'Project is progressing well and on schedule.'},
+  delayed: {label:'Delayed',                sub:'Some items need attention, delays possible if not resolved.'},
+  behind:  {label:'Behind Schedule',        sub:'Project is behind schedule.'},
+};
+
+/* Calendar position — where the project SHOULD be based on time elapsed vs schedule.
+   Returns 0..100. If dates are missing, returns null (caller should hide the needle). */
+function computeExpectedPct(p) {
+  if (!p || !p.startDate || !p.endDate) return null;
+  const start = new Date(p.startDate), end = new Date(p.endDate);
+  const today = new Date('2026-06-18'); // fixed "today" for the demo
+  if (isNaN(start) || isNaN(end) || end <= start) return null;
+  const total = end - start;
+  const elapsed = today - start;
+  return Math.max(0, Math.min(100, Math.round(elapsed / total * 100)));
+}
+/* Auto-derive schedule status from actual vs expected (admin can still override). */
+function deriveScheduleStatus(actualPct, expectedPct) {
+  if (expectedPct == null) return 'planned';
+  const gap = expectedPct - actualPct; // positive = behind
+  if (gap >= 15) return 'behind';
+  if (gap >= 5)  return 'delayed';
+  return 'planned';
+}
+
+function renderProgressWidget(idx, pr) {
+  pr = pr || {pct:0, status:'planned'};
+  const proj = PROJECTS[idx];
+  const expectedPct = computeExpectedPct(proj);
+  // If admin hasn't explicitly chosen a status, auto-derive it
+  const status = pr.statusOverride ? pr.status : (expectedPct != null ? deriveScheduleStatus(pr.pct, expectedPct) : pr.status);
+  const NBARS = 25;
+  const filled = Math.max(0, Math.min(NBARS, Math.round(pr.pct * NBARS / 100)));
+  const meta = PROG_META[status];
+  return `
+<div class="prog-widget">
+  <div class="prog-status-row" style="display:none">
+    ${['planned','delayed','behind'].map(s=>`
+      <span class="prog-pill ${status===s?'sel':''}">${PROG_META[s].label}</span>
+    `).join('')}
+    <button onclick="clearProgress(${idx})" title="Hide progress tracking for this project"
+            style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--fg-3);padding:4px 6px;border-radius:3px;display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;font-family:var(--font)"
+            onmouseover="this.style.color='var(--brand)';this.style.background='var(--brand-tint)'"
+            onmouseout="this.style.color='var(--fg-3)';this.style.background='none'">
+      <i class="bi bi-eye-slash" style="font-size:12px"></i> CLEAR
+    </button>
+  </div>
+  <div class="prog-header">
+    <div class="prog-title">Progress</div>
+    <div class="prog-pct">${pr.pct}% Done</div>
+  </div>
+  <div class="prog-label prog-label-${status}">${meta.label}</div>
+  <div class="prog-sub">${meta.sub}</div>
+  <div class="prog-bars-wrap">
+    ${expectedPct != null ? `<div class="prog-marker" style="left:${expectedPct}%" title="Today's expected position: ${expectedPct}%"></div>` : ''}
+    <div class="prog-bars" id="progBars-${idx}"
+         onmousemove="if(event.buttons===1)progBarFromX(${idx},event)"
+         onmousedown="progBarFromX(${idx},event)">
+      ${Array.from({length: NBARS}, (_,i)=>{
+        const isFilled = i < filled;
+        return `<button class="prog-bar${isFilled?` filled s-${status}`:''}"
+          data-i="${i}"
+          onclick="setProgPct(${idx}, ${Math.round((i+1)*100/NBARS)})"
+          title="${Math.round((i+1)*100/NBARS)}%"
+        ></button>`;
+      }).join('')}
+    </div>
+  </div>
+  <div class="prog-dates">
+    <div><div class="lbl">Start date</div><div class="val">12 Jan 2026</div></div>
+    <div style="text-align:right"><div class="lbl">Est. completion</div><div class="val">04 Jan 2027</div></div>
+  </div>
+</div>`;
+}
+
+function clearProgress(idx) {
+  // Reset to 0% / Planned — keeps the widget visible but empty
+  PROJ_PROGRESS[idx] = {pct: 0, status: 'planned'};
+  unsaved = true;
+  const wrap = document.querySelector('.pd-top-grid');
+  if (wrap && wrap.firstElementChild) {
+    wrap.firstElementChild.outerHTML = renderProgressWidget(idx, PROJ_PROGRESS[idx]);
+  } else { render(); }
+}
+function setProgPct(idx, pct) {
+  PROJ_PROGRESS[idx] = {...(PROJ_PROGRESS[idx]||{status:'planned'}), pct: Math.max(0, Math.min(100, +pct))};
+  unsaved = true;
+  // Re-render just the progress widget in place to avoid full re-render on every drag
+  const wrap = document.querySelector('.pd-top-grid');
+  if (wrap && wrap.firstElementChild) {
+    wrap.firstElementChild.outerHTML = renderProgressWidget(idx, PROJ_PROGRESS[idx]);
+  } else {
+    render();
+  }
+}
+function setProgStatus(idx, status) {
+  // Clicking a status pill explicitly overrides the auto-derived value
+  PROJ_PROGRESS[idx] = {...(PROJ_PROGRESS[idx]||{pct:0}), status, statusOverride: true};
+  unsaved = true;
+  const wrap = document.querySelector('.pd-top-grid');
+  if (wrap && wrap.firstElementChild) {
+    wrap.firstElementChild.outerHTML = renderProgressWidget(idx, PROJ_PROGRESS[idx]);
+  } else {
+    render();
+  }
+}
+function progBarFromX(idx, ev) {
+  const bars = document.getElementById('progBars-'+idx);
+  if (!bars) return;
+  const rect = bars.getBoundingClientRect();
+  const ratio = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+  setProgPct(idx, Math.round(ratio * 100));
+}
+
+/* ── ADD / EDIT PROJECT MODAL ── */
+function openAddProject() {
+  addProjOpen = true; addProjMode = 'create'; addProjEditIdx = null; addProjErr = {};
+  addProjForm = {
+    customer:'', description:'', assignee:'', warehouse:'Default',
+    currency:'GBP', label:'', startDate:'', endDate:'',
+    address:'', building:'', floor:'', town:'', county:'', postcode:'', country:'',
+    colour:'#FF0000', includeTravel:false, image:null
+  };
+  drawAddProject();
+  document.getElementById('add-proj-overlay').classList.add('show');
+}
+function openEditProject(idx) {
+  const p = PROJECTS[idx];
+  if (!p) return;
+  addProjOpen = true; addProjMode = 'edit'; addProjEditIdx = idx; addProjErr = {};
+  // Pre-fill from stored project (only fields we track)
+  addProjForm = {
+    customer:    p.customer || '',
+    description: p.name || '',
+    assignee:    p.assignee || p.by || '',
+    warehouse:   p.warehouse || 'Default',
+    currency:    p.currency || 'GBP',
+    label:       p.label || '',
+    startDate:   p.startDate || '',
+    endDate:     p.endDate || '',
+    address:     p.address || '',
+    building:    p.building || '',
+    floor:       p.floor || '',
+    town:        p.town || '',
+    county:      p.county || '',
+    postcode:    p.postcode || '',
+    country:     p.country || '',
+    colour:      p.colour || '#FF0000',
+    includeTravel: !!p.includeTravel,
+    image:       p.image || null,
+  };
+  drawAddProject();
+  document.getElementById('add-proj-overlay').classList.add('show');
+}
+function handleProjImageUpload(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    addProjForm.image = e.target.result;
+    const preview = document.getElementById('proj-img-preview');
+    if (preview) { preview.src = e.target.result; preview.style.display = 'block'; }
+    const placeholder = document.getElementById('proj-img-placeholder');
+    if (placeholder) placeholder.style.display = 'none';
+    const removeBtn = document.getElementById('proj-img-remove');
+    if (removeBtn) removeBtn.style.display = 'inline-flex';
+  };
+  reader.readAsDataURL(file);
+}
+function clearProjImage() {
+  addProjForm.image = null;
+  drawAddProject();
+}
+function closeAddProject() {
+  addProjOpen = false;
+  document.getElementById('add-proj-overlay').classList.remove('show');
+}
+function setAddProjField(k, v) { addProjForm[k] = v; }
+function setAddProjDate(k, v) {
+  addProjForm[k] = v;
+  const el = document.getElementById('proj-dur-display');
+  if (el) el.textContent = computeProjDuration(addProjForm.startDate, addProjForm.endDate);
+}
+function computeProjDuration(start, end) {
+  if (!start || !end) return '—';
+  const s = new Date(start), e = new Date(end);
+  if (isNaN(s) || isNaN(e) || e < s) return '—';
+  const days = Math.round((e - s) / 86400000) + 1; // inclusive
+  if (days <= 14) return `${days} day${days===1?'':'s'}`;
+  if (days < 60)  { const w = Math.round(days/7);  return `${w} week${w===1?'':'s'}`; }
+  if (days < 730) { const m = Math.round(days/30); return `${m} month${m===1?'':'s'}`; }
+  const y = Math.round(days/365); return `${y} year${y===1?'':'s'}`;
+}
+function saveAddProject() {
+  const errs = {};
+  if (!addProjForm.description.trim()) errs.description = 'Description is required';
+  if (Object.keys(errs).length) { addProjErr = errs; drawAddProject(); return; }
+  const f = addProjForm;
+  if (addProjMode === 'edit' && addProjEditIdx !== null) {
+    // Update existing project — preserve num, status, by, date
+    const p = PROJECTS[addProjEditIdx];
+    Object.assign(p, {
+      name:        f.description.trim(),
+      customer:    f.customer || '—',
+      assignee:    f.assignee,
+      warehouse:   f.warehouse,
+      currency:    f.currency,
+      label:       f.label,
+      startDate:   f.startDate,
+      endDate:     f.endDate,
+      address:     f.address,
+      building:    f.building,
+      floor:       f.floor,
+      town:        f.town,
+      county:      f.county,
+      postcode:    f.postcode,
+      country:     f.country,
+      colour:      f.colour,
+      includeTravel: f.includeTravel,
+      image:       f.image,
+    });
+  } else {
+    const num = '#' + (24501 + PROJECTS.length).toString();
+    PROJECTS.push({
+      num,
+      name: f.description.trim(),
+      customer: f.customer || '—',
+      status: 'active',
+      by: 'Candy',
+      date: new Date().toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'}),
+      assignee: f.assignee, warehouse: f.warehouse, currency: f.currency, label: f.label,
+      startDate: f.startDate, endDate: f.endDate,
+      address: f.address, building: f.building, floor: f.floor,
+      town: f.town, county: f.county, postcode: f.postcode, country: f.country,
+      colour: f.colour, includeTravel: f.includeTravel, image: f.image,
+    });
+    const newIdx = PROJECTS.length - 1;
+    PREVIEW_STAKES[newIdx] = [];
+    PROJ_PROGRESS[newIdx] = {pct: 0, status: 'planned'};
+  }
+  unsaved = true;
+  closeAddProject();
+  render();
+}
+
+const ASSIGNEES = ['Mark Carlo', 'Lee Roche', 'Jennie Cave', 'Yadhu', 'Candy'];
+const CURRENCIES = ['GBP','USD','EUR','AUD'];
+const LABELS = ['Residential','Commercial','Hotel','Service'];
+
+function drawAddProject() {
+  const f = addProjForm, e = addProjErr;
+  const isEdit = addProjMode === 'edit';
+  document.getElementById('add-proj-modal').innerHTML = `
+    <div class="modal-hdr">
+      <div class="modal-title">${isEdit ? 'Edit Project' : 'Add Project'}</div>
+      <button class="modal-x" onclick="closeAddProject()" title="Close">&times;</button>
+    </div>
+    <div class="modal-body" style="padding:6px 24px">
+      <div class="proj-form-row">
+        <label>Project Image</label>
+        <div class="ctrl">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="position:relative;width:120px;height:80px;border:1px dashed var(--grey-600);border-radius:5px;overflow:hidden;background:var(--grey-100);flex-shrink:0;display:flex;align-items:center;justify-content:center">
+              <img id="proj-img-preview" src="${f.image || ''}" alt="" style="display:${f.image?'block':'none'};width:100%;height:100%;object-fit:cover">
+              <div id="proj-img-placeholder" style="display:${f.image?'none':'flex'};flex-direction:column;align-items:center;gap:4px;color:var(--fg-4);font-size:10px;font-weight:600">
+                <i class="bi bi-image" style="font-size:24px"></i>
+                <span>No image</span>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+              <label class="btn btn-ghost" style="display:inline-flex;cursor:pointer;align-self:flex-start;font-size:11px">
+                <i class="bi bi-upload" style="font-size:12px"></i>
+                ${f.image ? 'REPLACE IMAGE' : 'UPLOAD IMAGE'}
+                <input type="file" accept="image/*" onchange="handleProjImageUpload(this)" style="display:none">
+              </label>
+              <button id="proj-img-remove" type="button" class="btn btn-ghost" onclick="clearProjImage()" style="display:${f.image?'inline-flex':'none'};align-self:flex-start;font-size:11px;color:var(--brand);border-color:var(--brand-tint)">
+                <i class="bi bi-trash" style="font-size:11px"></i> REMOVE
+              </button>
+              <span style="font-size:10px;color:var(--fg-3);font-weight:500">JPG, PNG or SVG. Recommended 1200×800 or larger.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="proj-form-row">
+        <label>Customer</label>
+        <div class="ctrl">
+          <div class="proj-cust-group">
+            <input class="proj-input" type="text" value="${f.customer.replace(/"/g,'&quot;')}" placeholder="" oninput="setAddProjField('customer',this.value)">
+            <button class="proj-icon-btn" title="Search customers" onclick="alert('Search customers — wire to ADD USER picker')"><i class="bi bi-search"></i></button>
+            <button class="proj-icon-btn add" title="New customer" onclick="alert('New customer flow')"><i class="bi bi-plus-lg"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="proj-form-row">
+        <label>Description</label>
+        <div class="ctrl">
+          <textarea class="proj-textarea ${e.description?'err':''}" placeholder="" oninput="setAddProjField('description',this.value);if(addProjErr.description){addProjErr={};this.classList.remove('err');this.nextElementSibling?.remove();}">${f.description.replace(/</g,'&lt;')}</textarea>
+          ${e.description?`<div class="proj-err-msg">${e.description}</div>`:''}
+        </div>
+      </div>
+      <div class="proj-form-row">
+        <label>Assignee</label>
+        <div class="ctrl">
+          <select class="proj-select" onchange="setAddProjField('assignee',this.value)">
+            <option value=""></option>
+            ${ASSIGNEES.map(a=>`<option ${a===f.assignee?'selected':''}>${a}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="proj-form-row">
+        <label>Warehouse</label>
+        <div class="ctrl">
+          <select class="proj-select" onchange="setAddProjField('warehouse',this.value)">
+            <option ${f.warehouse==='Default'?'selected':''}>Default</option>
+            <option ${f.warehouse==='London'?'selected':''}>London</option>
+          </select>
+        </div>
+      </div>
+      <div class="proj-form-row">
+        <label>Currency</label>
+        <div class="ctrl">
+          <select class="proj-select" style="max-width:140px" onchange="setAddProjField('currency',this.value)">
+            ${CURRENCIES.map(c=>`<option ${c===f.currency?'selected':''}>${c}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="proj-form-row">
+        <label>Label</label>
+        <div class="ctrl">
+          <select class="proj-select" onchange="setAddProjField('label',this.value)">
+            <option value=""></option>
+            ${LABELS.map(l=>`<option ${l===f.label?'selected':''}>${l}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="proj-form-row">
+        <label>Start Date</label>
+        <div class="ctrl"><input class="proj-input" type="date" value="${f.startDate}" oninput="setAddProjDate('startDate',this.value)" style="max-width:200px"></div>
+      </div>
+      <div class="proj-form-row">
+        <label>End Date</label>
+        <div class="ctrl"><input class="proj-input" type="date" value="${f.endDate}" oninput="setAddProjDate('endDate',this.value)" style="max-width:200px"></div>
+      </div>
+      <div class="proj-form-row">
+        <label>Duration</label>
+        <div class="ctrl" style="padding-top:9px;font-size:13px;font-weight:700;color:var(--fg-1)">
+          <span id="proj-dur-display">${computeProjDuration(f.startDate, f.endDate)}</span>
+          <span style="font-weight:500;color:var(--fg-3);font-size:12px;margin-left:6px">— auto-calculated from start &amp; end dates</span>
+        </div>
+      </div>
+      <div class="proj-section-title">Project Location</div>
+      <div class="proj-form-row">
+        <label>Address</label>
+        <div class="ctrl proj-loc-stack">
+          <input class="proj-input" placeholder="Street address" value="${f.address.replace(/"/g,'&quot;')}" oninput="setAddProjField('address',this.value)">
+          <input class="proj-input" placeholder="Building, suite (optional)" value="${f.building.replace(/"/g,'&quot;')}" oninput="setAddProjField('building',this.value)">
+          <input class="proj-input" placeholder="Floor, unit (optional)" value="${f.floor.replace(/"/g,'&quot;')}" oninput="setAddProjField('floor',this.value)">
+        </div>
+      </div>
+      <div class="proj-form-row">
+        <label>Town / City</label>
+        <div class="ctrl"><input class="proj-input" value="${f.town.replace(/"/g,'&quot;')}" oninput="setAddProjField('town',this.value)"></div>
+      </div>
+      <div class="proj-form-row">
+        <label>County / State</label>
+        <div class="ctrl"><input class="proj-input" value="${f.county.replace(/"/g,'&quot;')}" oninput="setAddProjField('county',this.value)"></div>
+      </div>
+      <div class="proj-form-row">
+        <label>Postcode / ZIP</label>
+        <div class="ctrl"><input class="proj-input" style="max-width:200px" value="${f.postcode.replace(/"/g,'&quot;')}" oninput="setAddProjField('postcode',this.value)"></div>
+      </div>
+      <div class="proj-form-row">
+        <label>Country</label>
+        <div class="ctrl"><input class="proj-input" value="${f.country.replace(/"/g,'&quot;')}" oninput="setAddProjField('country',this.value)"></div>
+      </div>
+      <div class="proj-form-row">
+        <label>Calendar Colour</label>
+        <div class="ctrl proj-colour-row">
+          <input type="color" class="proj-colour-swatch" value="${f.colour}" oninput="setAddProjField('colour',this.value);this.nextElementSibling.textContent=this.value.toUpperCase()">
+          <span class="proj-colour-hex">${f.colour.toUpperCase()}</span>
+        </div>
+      </div>
+      <div class="proj-form-row">
+        <label>Include Travel</label>
+        <div class="ctrl proj-check-row">
+          <input type="checkbox" class="proj-checkbox" ${f.includeTravel?'checked':''} onchange="setAddProjField('includeTravel',this.checked)">
+          <span class="check-lbl">INCLUDE TRAVEL ON COST</span>
+        </div>
+      </div>
+      <div class="proj-help">
+        <i class="bi bi-info-circle-fill"></i>
+        <span>This will factor in all travel hours when calculating the project's cost in the overview.</span>
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <span></span>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-modal-cancel" onclick="closeAddProject()">CANCEL</button>
+        <button class="btn btn-primary" onclick="saveAddProject()">${isEdit ? 'SAVE CHANGES' : 'CREATE PROJECT'}</button>
+      </div>
+    </div>`;
+}
+
+/* ── ROLE TEMPLATE DIALOG (read-only baseline view) ── */
+function openRoleTemplate(role) {
+  const r = ri(role);
+  if (r < 0) return;
+  const rows = SECTIONS.map(sec => {
+    const p = BL[sec.id][r];
+    return `<div class="rt-row">
+      <div>
+        <div class="rt-sec-name">${sec.name}${sec.amt?` <span class="amt-flag">£</span>`:''}</div>
+        <div class="rt-sec-desc">${sec.desc}</div>
+      </div>
+      <div class="rt-perm rt-perm-${p}">
+        <i class="bi ${PIcn(p)}"></i>${PLbl(p)}
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('rt-card').innerHTML = `
+    <div class="rt-hdr">
+      <div>
+        <div class="rt-title">Role Template — ${role}</div>
+        <div class="rt-sub">Read-only baseline permissions for this role.</div>
+      </div>
+      <button class="modal-x" onclick="closeRoleTemplate()" title="Close">&times;</button>
+    </div>
+    <div class="rt-body">${rows}</div>
+    <div class="rt-ftr">
+      <a onclick="closeRoleTemplate();gotoSettings('access')" style="font-size:12px;font-weight:700;color:var(--info);cursor:pointer">
+        Edit baseline in Access &amp; Permissions Settings →
+      </a>
+      <button class="btn btn-ghost" onclick="closeRoleTemplate()">Close</button>
+    </div>`;
+  document.getElementById('rt-overlay').classList.add('show');
+}
+function closeRoleTemplate() {
+  document.getElementById('rt-overlay').classList.remove('show');
+}
+
+/* ── ADD USER (Select Customer) MODAL ── */
+function openAddUser() {
+  addUserOpen = true; addUserSearch = '';
+  drawAddUser();
+  document.getElementById('add-user-overlay').classList.add('show');
+  // Focus the search input
+  setTimeout(()=>{ const el=document.getElementById('add-user-search'); if(el) el.focus(); }, 30);
+}
+function closeAddUser() {
+  addUserOpen = false;
+  document.getElementById('add-user-overlay').classList.remove('show');
+}
+function onAddUserSearch(v) { addUserSearch = v; drawAddUser(); }
+function addCustomerFromPicker(idx) {
+  const c = WQ_CUSTOMERS[idx];
+  if (!c || isInPortal(c)) return;
+  // Insert at top of CUSTOMERS so admin sees the new entry immediately
+  CUSTOMERS.unshift({ name: c.name, email: c.email || c.account, projects: 0, seen: 'never' });
+  unsaved = true;
+  closeAddUser();
+  // If we got here from the Add Stakeholder modal, return to it with the new customer pre-selected
+  if (addUserReturnTo === 'stakeholder') {
+    addUserReturnTo = null;
+    addStkCustIdx = 0; // the newly-added customer is at index 0 (unshift)
+    drawAddStakeholder();
+    document.getElementById('add-stk-overlay').classList.add('show');
+    return;
+  }
+  render();
+}
+let addUserReturnTo = null;
+function openAddUserFromStakeholder() {
+  addUserReturnTo = 'stakeholder';
+  // Hide the Add Stakeholder overlay so only Select Customer is visible
+  document.getElementById('add-stk-overlay').classList.remove('show');
+  openAddUser();
+}
+function removeCustomer(idx) {
+  const c = CUSTOMERS[idx];
+  if (!c) return;
+  const projs = getCustProjects(c.name);
+  const projNote = projs.length > 0 ? `\n\nThey are currently a stakeholder on ${projs.length} project${projs.length>1?'s':''} — those assignments will also be removed.` : '';
+  if (!confirm(`Remove ${c.name} from the Customer Portal?${projNote}`)) return;
+  // Remove from PREVIEW_STAKES of every project they're on
+  Object.keys(PREVIEW_STAKES).forEach(pid => {
+    PREVIEW_STAKES[pid] = PREVIEW_STAKES[pid].filter(s => s.name !== c.name);
+  });
+  // Remove from CUSTOMERS
+  CUSTOMERS.splice(idx, 1);
+  unsaved = true;
+  render();
+}
+function isInPortal(c) {
+  const key = (c.email || c.account || c.name).toLowerCase();
+  return CUSTOMERS.some(x =>
+    (x.email||'').toLowerCase() === key ||
+    (x.name ||'').toLowerCase() === c.name.toLowerCase()
+  );
+}
+function drawAddUser() {
+  const q = addUserSearch.trim().toLowerCase();
+  const rows = WQ_CUSTOMERS
+    .map((c,i)=>({c,i}))
+    .filter(({c}) =>
+      !q ||
+      c.name.toLowerCase().includes(q) ||
+      (c.email||'').toLowerCase().includes(q) ||
+      (c.account||'').toLowerCase().includes(q) ||
+      (c.phone||'').toLowerCase().includes(q)
+    );
+  const body = `
+    <div class="modal-hdr">
+      <div class="modal-title">Select Customer</div>
+      <button class="modal-x" onclick="closeAddUser()" title="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="search-wrap">
+        <i class="bi bi-search"></i>
+        <input id="add-user-search" type="text" placeholder="Search"
+               value="${addUserSearch.replace(/"/g,'&quot;')}"
+               oninput="onAddUserSearch(this.value)">
+      </div>
+      <table class="cust-tbl">
+        <thead><tr>
+          <th>Customer Name</th>
+          <th>Account No.</th>
+          <th>Phone Number</th>
+          <th>Email Address</th>
+          <th>Primary Contact</th>
+          <th>Assigned to</th>
+        </tr></thead>
+        <tbody>
+          ${rows.length===0 ? `<tr><td colspan="6" style="text-align:center;color:var(--fg-3);padding:32px 12px">No customers match "${addUserSearch}".</td></tr>` : rows.map(({c,i})=>{
+            const inPortal = isInPortal(c);
+            const cls = inPortal ? 'in-portal' : 'clickable';
+            const onclick = inPortal ? '' : `onclick="addCustomerFromPicker(${i})"`;
+            return `<tr class="${cls}" ${onclick}>
+              <td>
+                <div class="cust-pri">${c.name}</div>
+                ${c.addr ? `<div class="cust-sub">${c.addr.replace(/\n/g,'<br>')}</div>` : ''}
+                ${inPortal ? `<div style="margin-top:6px"><span class="in-portal-pill">Already in portal</span></div>` : ''}
+              </td>
+              <td>${c.account||''}</td>
+              <td>${c.phone||''}</td>
+              <td class="${c.email?'cust-email-red':''}">${c.email||''}</td>
+              <td>
+                ${c.contact?`
+                  <div class="cust-pri">${c.contact.name}</div>
+                  <div class="cust-email-red" style="font-size:12px">${c.contact.email}</div>
+                  ${c.contact.phone?`<div style="font-size:12px;color:var(--fg-1)">${c.contact.phone}</div>`:''}
+                `:''}
+              </td>
+              <td>${c.assigned||''}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-new-cust" onclick="alert('New Customer flow — not yet wired in this demo.')">
+        <i class="bi bi-plus-lg" style="font-size:12px"></i>NEW CUSTOMER
+      </button>
+      <button class="btn btn-modal-cancel" onclick="closeAddUser()">CANCEL</button>
+    </div>`;
+  document.getElementById('add-user-modal').innerHTML = body;
+}
+
+function writePreviewPerms() {
+  const c = CUSTOMERS[previewCust];
+  if (!c) {
+    localStorage.removeItem('wqPortalPreview');
+    localStorage.removeItem('wqPortalVisibleProjects');
+    return;
+  }
+  const myProjs = getCustProjects(c.name);
+  // Tell the iframe which projects this customer is allowed to see
+  localStorage.setItem('wqPortalVisibleProjects', JSON.stringify(myProjs.map(p => p.project.name)));
+  if (myProjs.length === 0) { localStorage.removeItem('wqPortalPreview'); return; }
+  const pick = myProjs[previewCustProj] || myProjs[0];
+  const stake = PREVIEW_STAKES[pick.projIdx].find(s => s.name === c.name);
+  const perms = {};
+  SECTIONS.forEach(sec => { perms[sec.id] = effPerm(stake, sec.id); });
+  // If the project has no start/end dates set, hide the Progress card entirely
+  // (overrides whatever the role baseline + overrides would have allowed).
+  const proj = pick.project;
+  if (!proj.startDate || !proj.endDate) {
+    perms.progress = 'none';
+  }
+  localStorage.setItem('wqPortalPreview', JSON.stringify(perms));
+  // Tell the iframe which project to auto-open on the detail page
+  localStorage.setItem('wqPortalCurrentProject', JSON.stringify({
+    name: proj.name,
+    image: proj.image || ''
+  }));
+  // Sync the admin's Progress widget value to the portal so they always match.
+  // Needle = expected (calendar) position; bars = actual; status auto-derived unless admin overrode it.
+  const adminProg = PROJ_PROGRESS[pick.projIdx];
+  if (adminProg && typeof adminProg.pct === 'number') {
+    const expectedPct = computeExpectedPct(proj);
+    const status = adminProg.statusOverride ? adminProg.status
+                  : (expectedPct != null ? deriveScheduleStatus(adminProg.pct, expectedPct) : (adminProg.status || 'planned'));
+    localStorage.setItem('wqPortalProgress', JSON.stringify({
+      pct:      adminProg.pct,
+      expected: expectedPct,
+      status
+    }));
+  } else {
+    localStorage.removeItem('wqPortalProgress');
+  }
+}
+function gotoPreview() {
+  // Default to first customer who actually has at least one project
+  if (getCustProjects(CUSTOMERS[previewCust]?.name||'').length === 0) {
+    const i = CUSTOMERS.findIndex(c => getCustProjects(c.name).length > 0);
+    if (i >= 0) { previewCust = i; previewCustProj = 0; }
+  }
+  writePreviewPerms(); VIEW = 'preview'; render();
+}
+function changePreviewCust(v) {
+  previewCust = +v; previewCustProj = 0;
+  writePreviewPerms(); render();
+}
+function changePreviewCustProj(v) {
+  previewCustProj = +v;
+  writePreviewPerms(); render();
+}
+
+function renderPreview() {
+  const c = CUSTOMERS[previewCust] || CUSTOMERS[0];
+  const myProjs = getCustProjects(c.name);
+  if (previewCustProj >= myProjs.length) previewCustProj = 0;
+  const pick = myProjs[previewCustProj];
+  return `
+<div class="preview-page">
+  <div class="preview-top">
+   <div class="preview-top-row">
+    <div class="preview-titleblock">
+      <div class="page-title">Portal Preview</div>
+      <div class="page-subtitle">Live preview that mirrors your <a onclick="gotoSettings('access')" style="color:var(--brand);font-weight:700">Portal Settings</a>. Pick a customer + one of their projects to see exactly what they'd see.</div>
+    </div>
+    <div class="card preview-selector">
+      <div class="prev-grid">
+        <div>
+          <div class="prev-lbl">VIEWING AS CUSTOMER</div>
+          <select class="prev-sel" onchange="changePreviewCust(this.value)">
+            ${CUSTOMERS.map((cu,i)=>{
+              const n = getCustProjects(cu.name).length;
+              const suffix = n===0 ? ' (no projects)' : ` · ${n} project${n>1?'s':''}`;
+              return `<option value="${i}"${i===previewCust?' selected':''}>${cu.name}${suffix}</option>`;
+            }).join('')}
+          </select>
+        </div>
+        <div>
+          <div class="prev-lbl">ON PROJECT</div>
+          ${myProjs.length > 0 ? `
+            <select class="prev-sel" onchange="changePreviewCustProj(this.value)">
+              ${myProjs.map((mp,i)=>`<option value="${i}"${i===previewCustProj?' selected':''}>${mp.project.num} · ${mp.project.name} · ${mp.role}</option>`).join('')}
+            </select>
+          ` : `
+            <div style="padding:10px 12px;border:1px dashed var(--grey-600);border-radius:4px;font-size:12px;color:var(--fg-3);background:var(--grey-100)">— Not assigned to any project —</div>
+          `}
+        </div>
+        <div class="prev-stake-info">
+          ${av(c.name,36)}
+          <div>
+            <div style="font-size:13px;font-weight:700">${c.name}</div>
+            <div style="font-size:11px;color:var(--fg-3);font-weight:600">${pick ? pick.role : '—'}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+  ${myProjs.length > 0
+    ? `<div class="preview-iframe-wrap">
+         <iframe class="preview-iframe" src="portal-preview.html" id="preview-iframe"></iframe>
+       </div>`
+    : `<div class="preview-empty">
+         <i class="bi bi-eye-slash"></i>
+         <div class="preview-empty-title">${c.name} isn't on any project yet</div>
+         <div class="preview-empty-sub">Assign them to a project from the directory below to preview their portal view.</div>
+         <button class="btn btn-ghost" onclick="gotoSettings('directory')" style="margin-top:14px">Go to Directory</button>
+       </div>`}
+</div>`;
+}
+
+function togglePermDD(e, sid, i) {
+  e.stopPropagation();
+  const el = document.getElementById(`ddm-${sid}-${i}`);
+  const wasOpen = el.classList.contains('open');
+  closeAllPermDDs();
+  if (!wasOpen) el.classList.add('open');
+}
+function closeAllPermDDs() {
+  document.querySelectorAll('.pdd-menu.open,.ppdd-menu.open').forEach(m => m.classList.remove('open'));
+}
+function setPermCell(sid, i, val) {
+  BL[sid][i] = val; unsaved = true;
+  closeAllPermDDs(); render();
+}
+function resetBL() { SECTIONS.forEach(s=>{BL[s.id]=[...BL_ORIG[s.id]];}); }
+function resetDirectory() {
+  CUSTOMERS.length = 0;
+  CUSTOMERS_ORIG.forEach(c => CUSTOMERS.push(JSON.parse(JSON.stringify(c))));
+}
+function cancelSave() { resetBL(); resetDirectory(); unsaved=false; render(); }
+function doSave() {
+  // Commit current state as the new baseline so Cancel after this won't undo it
+  Object.keys(BL).forEach(k => BL_ORIG[k] = [...BL[k]]);
+  CUSTOMERS_ORIG = JSON.parse(JSON.stringify(CUSTOMERS));
+  unsaved=false; render();
+  const btn=document.getElementById('save-btn');
+  if(btn){btn.textContent='SAVED';btn.style.background='#58AE94';}
+  setTimeout(()=>render(),1400);
+}
+
+function togglePanelDD(e, sid) {
+  e.stopPropagation();
+  const el = document.getElementById(`ppdd-${sid}`);
+  const wasOpen = el.classList.contains('open');
+  closeAllPermDDs();
+  if (!wasOpen) el.classList.add('open');
+}
+function setPanelPerm(sid, val) {
+  panelOv[sid] = val;
+  closeAllPermDDs();
+  if (panelIdx !== null) document.getElementById('panel-inner').innerHTML = renderPanel(panelIdx);
+}
+
+function changeRole(idx, val) {
+  curStakes()[idx].role=val;
+  // Role changed inside panel: old overrides no longer apply to new baseline
+  if(panelIdx===idx) panelOv={};
+  render();
+  if(panelIdx===idx) document.getElementById('panel-inner').innerHTML=renderPanel(idx);
+}
+
+function openPanel(idx) {
+  panelIdx=idx;
+  panelOrigRole=curStakes()[idx].role;
+  panelOv=curStakes()[idx].ov?{...curStakes()[idx].ov}:{};
+  document.getElementById('panel-inner').innerHTML=renderPanel(idx);
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+function openCustPanel(idx) {
+  custPanelIdx = idx;
+  assignFormOpen = false;
+  panelBackToCust = null;
+  document.getElementById('panel-inner').innerHTML = renderCustPanel(idx);
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+/* Drill from customer panel into role/permission edit for one of their projects.
+   Reuses renderPanel; panelBackToCust flag makes save/cancel return to cust panel. */
+function editStakeFromCustPanel(custIdx, projIdx) {
+  const c = CUSTOMERS[custIdx];
+  const stakes = PREVIEW_STAKES[projIdx];
+  const sIdx = stakes.findIndex(s => s.name === c.name);
+  if (sIdx < 0) return;
+  currentProjectIdx = projIdx;
+  panelBackToCust = custIdx;
+  custPanelIdx = null;
+  openPanel(sIdx); // sets panelIdx, snapshots role/ov, renders renderPanel
+}
+function openAssignForm(idx) {
+  const c = CUSTOMERS[idx];
+  const taken = new Set(getCustProjects(c.name).map(p => p.projIdx));
+  const firstAvail = PROJECTS.findIndex((_,i) => !taken.has(i));
+  assignProj = firstAvail >= 0 ? firstAvail : 0;
+  assignRole = 'Home Owner';
+  assignFormOpen = true;
+  document.getElementById('panel-inner').innerHTML = renderCustPanel(idx);
+}
+function cancelAssign(idx) {
+  assignFormOpen = false;
+  document.getElementById('panel-inner').innerHTML = renderCustPanel(idx);
+}
+function saveAssignment(idx) {
+  const c = CUSTOMERS[idx];
+  const stakes = PREVIEW_STAKES[assignProj];
+  // dedupe — don't add same customer twice to a project
+  if (!stakes.find(s => s.name === c.name)) {
+    stakes.push({name: c.name, email: c.email, role: assignRole, ov: null});
+    unsaved = true;
+  }
+  assignFormOpen = false;
+  render(); // refresh underlying directory counts
+  document.getElementById('panel-inner').innerHTML = renderCustPanel(idx);
+}
+function closePanel(saved=false) {
+  // Stakeholder panel: if cancelling, restore role to what it was when panel opened
+  if(!saved && panelIdx!==null && panelOrigRole!==null) curStakes()[panelIdx].role=panelOrigRole;
+  // Drill-down mode: instead of fully closing, return to the customer panel
+  if (panelBackToCust !== null) {
+    const idx = panelBackToCust;
+    panelBackToCust = null;
+    panelIdx=null; panelOv={}; panelOrigRole=null;
+    custPanelIdx = idx;
+    document.getElementById('panel-inner').innerHTML = renderCustPanel(idx);
+    render(); // refresh directory counts/overrides in the underlying table
+    return;
+  }
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+  panelIdx=null; panelOv={}; panelOrigRole=null;
+  custPanelIdx=null;
+  render(); // reflect any role restore in the main table
+}
+
+function renderCustPanel(idx) {
+  const c = CUSTOMERS[idx];
+  const projs = getCustProjects(c.name);
+  return `
+<div style="display:flex;flex-direction:column;height:100vh">
+  <div class="panel-hdr">
+    <div class="panel-cust">${av(c.name,34)}
+      <div><div class="p-name">${c.name}</div><div class="p-email">${c.email||'—'}</div></div>
+    </div>
+    <button onclick="closePanel()" style="background:none;border:none;cursor:pointer;font-size:22px;line-height:1;color:var(--fg-1);padding:2px 6px;border-radius:3px" title="Close">&#215;</button>
+  </div>
+  <div class="panel-body">
+    <div style="display:flex;gap:24px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--grey-200)">
+      <div>
+        <div class="field-lbl">Last Seen</div>
+        <div style="font-size:13px;font-weight:600;color:var(--fg-1)">${c.seen}</div>
+      </div>
+      <div>
+        <div class="field-lbl">Portal Access</div>
+        <div style="font-size:13px;font-weight:600;color:var(--fg-1)">Active</div>
+      </div>
+    </div>
+    <div class="panel-sec-title" style="margin-bottom:10px">
+      Assigned Projects <span style="color:var(--fg-3);font-weight:700">(${projs.length})</span>
+    </div>
+    ${projs.length === 0
+      ? `<div style="padding:24px 12px;text-align:center;color:var(--fg-3);font-size:13px;background:var(--grey-100);border-radius:var(--radius-sm)">
+           Not assigned to any project yet.
+         </div>`
+      : projs.map(({projIdx, project: p, role}) => {
+          const stake = PREVIEW_STAKES[projIdx].find(s => s.name === c.name);
+          const oc = stake ? ovCount(stake) : 0;
+          return `<div class="cust-proj-row">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+              <span style="font-size:12px;font-weight:700;color:var(--fg-3)">${p.num}</span>
+              <span class="pill pill-${p.status}">${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</span>
+            </div>
+            <div style="font-size:14px;font-weight:700;color:var(--fg-1);margin-bottom:8px">${p.name}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px">
+              <div style="font-size:12px;color:var(--fg-3)">Role: <span style="color:var(--fg-1);font-weight:700">${role}</span></div>
+              ${oc>0
+                ? `<span style="font-size:11px;color:var(--brand);font-weight:700">${oc} override${oc>1?'s':''}</span>`
+                : ''}
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+              <button class="btn btn-ghost btn-sm" onclick="editStakeFromCustPanel(${idx},${projIdx})" style="display:inline-flex;align-items:center;gap:5px">
+                <i class="bi bi-pencil" style="font-size:11px"></i> Edit role &amp; overrides
+              </button>
+              <a onclick="closePanel();gotoProject(${projIdx})" style="font-size:12px;font-weight:700;color:var(--info);cursor:pointer;display:inline-flex;align-items:center;gap:4px">
+                Go to project <i class="bi bi-arrow-right" style="font-size:11px"></i>
+              </a>
+            </div>
+          </div>`;
+        }).join('')}
+    ${renderAssignBlock(idx, c, projs)}
+  </div>
+</div>`;
+}
+
+function renderAssignBlock(idx, c, projs) {
+  const takenProjs = new Set(projs.map(p => p.projIdx));
+  const available = PROJECTS.map((p,i) => ({p,i})).filter(({i}) => !takenProjs.has(i));
+  if (available.length === 0) {
+    return `<div style="margin-top:12px;padding:12px;text-align:center;font-size:12px;color:var(--fg-3);background:var(--grey-100);border-radius:var(--radius-sm)">
+      ${c.name} is on every project.
+    </div>`;
+  }
+  if (!assignFormOpen) {
+    return `<button class="btn-assign-open" onclick="openAssignForm(${idx})">
+      <i class="bi bi-plus-lg"></i> Assign to Project
+    </button>`;
+  }
+  return `<div class="assign-section">
+    <div class="panel-sec-title" style="margin-bottom:12px;font-size:11px">Assign to a Project</div>
+    <div class="field-lbl">Project</div>
+    <select class="assign-sel" onchange="assignProj=+this.value">
+      ${available.map(({p,i})=>`<option value="${i}"${i===assignProj?' selected':''}>${p.num} · ${p.name}</option>`).join('')}
+    </select>
+    <div class="field-lbl">Role</div>
+    <select class="assign-sel" onchange="assignRole=this.value">
+      ${ROLES.map(r=>`<option value="${r}"${r===assignRole?' selected':''}>${r}</option>`).join('')}
+    </select>
+    <div class="assign-actions">
+      <button class="btn btn-ghost" onclick="cancelAssign(${idx})">Cancel</button>
+      <button class="btn btn-primary" onclick="saveAssignment(${idx})">SAVE ASSIGNMENT</button>
+    </div>
+  </div>`;
+}
+function onPC(sid,val) { panelOv[sid]=val; if(panelIdx!==null)document.getElementById('panel-inner').innerHTML=renderPanel(panelIdx); }
+function resetOne(sid,base) { delete panelOv[sid]; if(panelIdx!==null)document.getElementById('panel-inner').innerHTML=renderPanel(panelIdx); }
+function resetAll(idx) { panelOv={}; document.getElementById('panel-inner').innerHTML=renderPanel(idx); }
+function savePanel(idx) {
+  const s=curStakes()[idx], r=ri(s.role), newOv={};
+  for(const sid in panelOv){if(panelOv[sid]!==(r>=0?BL[sid][r]:'full'))newOv[sid]=panelOv[sid];}
+  s.ov=Object.keys(newOv).length?newOv:null;
+  s.changed='just now'; s.by='Candy';
+  closePanel(true); // saved=true: keep the new role, don't restore
+}
+
+/* ── INIT ── */
+document.addEventListener('click', closeAllPermDDs);
+function render() {
+  document.getElementById('sidebar').innerHTML=renderSidebar();
+  const body = VIEW==='settings'   ? renderSettings()
+              : VIEW==='project'    ? renderProject()
+              : VIEW==='projects'   ? renderProjectsPage()
+              : VIEW==='projdetail' ? renderProjDetail()
+              : renderPreview();
+  document.getElementById('content-area').innerHTML=body;
+  // preview view: content-area must be full-height flex, no scroll
+  const ca = document.getElementById('content-area');
+  if (VIEW==='preview') {
+    ca.style.overflow='hidden'; ca.style.display='flex'; ca.style.flexDirection='column';
+  } else {
+    ca.style.overflow=''; ca.style.display=''; ca.style.flexDirection='';
+  }
+}
+render();
+</script>
+</body>
+</html>
