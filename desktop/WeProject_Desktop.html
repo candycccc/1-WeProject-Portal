@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="images/lcr-logo.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <!-- Font Awesome 7 Pro via local OTF files — no CDN dependency -->
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="style.css?v=20260805-decision-reasons"/>
 </head>
 <body>
 
@@ -5521,6 +5521,134 @@
 </div>
 <!-- /SCREEN — WARRANTY -->
 
+<!-- ── Reject reason modal ── -->
+<div class="reject-reason-overlay" id="reject-reason-overlay" onclick="if(event.target===this)closeRejectReasonModal()">
+  <div class="reject-reason-modal" role="dialog" aria-modal="true" aria-labelledby="reject-reason-title" aria-describedby="reject-reason-reference" tabindex="-1">
+    <div class="reject-reason-header">
+      <div>
+        <div class="reject-reason-title" id="reject-reason-title">Reject Reason</div>
+        <div class="reject-reason-subtitle" id="reject-reason-reference">Tell us why you are rejecting this quote.</div>
+      </div>
+      <button class="reject-reason-close" type="button" onclick="closeRejectReasonModal()" aria-label="Close reject reason dialog">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+
+    <div class="reject-reason-body">
+      <div class="reject-reason-prompt">Select one reason</div>
+      <div class="reject-reason-options" role="radiogroup" aria-label="Reject reason">
+        <label class="reject-reason-option">
+          <input type="radio" name="reject-reason" value="Too Expensive" onchange="handleRejectReasonChange(this)">
+          <span>Too Expensive</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="reject-reason" value="No Longer Required" onchange="handleRejectReasonChange(this)">
+          <span>No Longer Required</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="reject-reason" value="Prefer a Different Solution" onchange="handleRejectReasonChange(this)">
+          <span>Prefer a Different Solution</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="reject-reason" value="Not the Right Time" onchange="handleRejectReasonChange(this)">
+          <span>Not the Right Time</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="reject-reason" value="Scope Doesn't Meet My Needs" onchange="handleRejectReasonChange(this)">
+          <span>Scope Doesn&rsquo;t Meet My Needs</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="reject-reason" value="Found Another Contractor" onchange="handleRejectReasonChange(this)">
+          <span>Found Another Contractor</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="reject-reason" value="Decided Not to Proceed" onchange="handleRejectReasonChange(this)">
+          <span>Decided Not to Proceed</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="reject-reason" value="Other" onchange="handleRejectReasonChange(this)">
+          <span>Other</span>
+        </label>
+      </div>
+
+      <div class="reject-reason-comment" id="reject-reason-comment" hidden>
+        <label for="reject-reason-comment-input">Leave comment</label>
+        <textarea id="reject-reason-comment-input" rows="3" maxlength="500" placeholder="Tell us a little more…" oninput="updateRejectReasonSubmitState()"></textarea>
+        <div class="reject-reason-helper">Required when “Other” is selected.</div>
+      </div>
+    </div>
+
+    <div class="reject-reason-footer">
+      <button class="reject-reason-cancel" type="button" onclick="closeRejectReasonModal()">Cancel</button>
+      <button class="reject-reason-submit" id="reject-reason-submit" type="button" onclick="submitRejectReason()" disabled>Reject</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── To be confirmed reason modal ── -->
+<div class="reject-reason-overlay tbc-reason-overlay" id="tbc-reason-overlay" onclick="if(event.target===this)closeTbcReasonModal()">
+  <div class="reject-reason-modal" role="dialog" aria-modal="true" aria-labelledby="tbc-reason-title" aria-describedby="tbc-reason-reference" tabindex="-1">
+    <div class="reject-reason-header">
+      <div>
+        <div class="reject-reason-title" id="tbc-reason-title">To Be Confirmed</div>
+        <div class="reject-reason-subtitle" id="tbc-reason-reference">Tell us why you need more time to confirm this quote.</div>
+      </div>
+      <button class="reject-reason-close" type="button" onclick="closeTbcReasonModal()" aria-label="Close to be confirmed dialog">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+
+    <div class="reject-reason-body">
+      <div class="reject-reason-prompt">Select one reason</div>
+      <div class="reject-reason-options" role="radiogroup" aria-label="To be confirmed reason">
+        <label class="reject-reason-option">
+          <input type="radio" name="tbc-reason" value="Need More Time to Decide" onchange="handleTbcReasonChange(this)">
+          <span>Need More Time to Decide</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="tbc-reason" value="Need More Information" onchange="handleTbcReasonChange(this)">
+          <span>Need More Information</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="tbc-reason" value="Discussing with Family" onchange="handleTbcReasonChange(this)">
+          <span>Discussing with Family</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="tbc-reason" value="Comparing Other Quotes" onchange="handleTbcReasonChange(this)">
+          <span>Comparing Other Quotes</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="tbc-reason" value="Waiting for Budget Confirmation" onchange="handleTbcReasonChange(this)">
+          <span>Waiting for Budget Confirmation</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="tbc-reason" value="Waiting for Project Schedule Confirmation" onchange="handleTbcReasonChange(this)">
+          <span>Waiting for Project Schedule Confirmation</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="tbc-reason" value="Waiting for Technical Clarification" onchange="handleTbcReasonChange(this)">
+          <span>Waiting for Technical Clarification</span>
+        </label>
+        <label class="reject-reason-option">
+          <input type="radio" name="tbc-reason" value="Other" onchange="handleTbcReasonChange(this)">
+          <span>Other</span>
+        </label>
+      </div>
+
+      <div class="reject-reason-comment" id="tbc-reason-comment" hidden>
+        <label for="tbc-reason-comment-input">Leave comment</label>
+        <textarea id="tbc-reason-comment-input" rows="3" maxlength="500" placeholder="Tell us a little more…" oninput="updateTbcReasonSubmitState()"></textarea>
+        <div class="reject-reason-helper">Required when “Other” is selected.</div>
+      </div>
+    </div>
+
+    <div class="reject-reason-footer">
+      <button class="reject-reason-cancel" type="button" onclick="closeTbcReasonModal()">Cancel</button>
+      <button class="tbc-reason-submit" id="tbc-reason-submit" type="button" onclick="submitTbcReason()" disabled>Mark as To Be Confirmed</button>
+    </div>
+  </div>
+</div>
+
 <!-- ── Notifications panel ── -->
 <div class="qp-notif-overlay" id="qp-notif-overlay" onclick="closeNotifPanel(event)">
   <div class="qp-notif-panel" onclick="event.stopPropagation()">
@@ -6255,7 +6383,7 @@
 
 
 
-<script src="script.js"></script>
+<script src="script.js?v=20260805-decision-reasons"></script>
 
 <!-- ═══════════════════════════════════════════════
      BRANDING CUSTOMIZER PANEL

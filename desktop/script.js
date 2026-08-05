@@ -122,6 +122,8 @@ function go(name) {
   const overlay = document.getElementById('skeleton-overlay');
   // Leaving the variations page closes the Ready to accept panel
   if (name !== 'variations' && typeof closeDvPanel === 'function') closeDvPanel();
+  if (typeof closeRejectReasonModal === 'function') closeRejectReasonModal();
+  if (typeof closeTbcReasonModal === 'function') closeTbcReasonModal();
   // Close nav dropdowns only — screen panel stays open across navigation
   document.querySelectorAll('.qp-nav-dropdown').forEach(d => d.classList.remove('open'));
   document.querySelectorAll('.qp-user-dropdown').forEach(d => d.classList.remove('open'));
@@ -1234,6 +1236,77 @@ function tbcCard(btn) {
   if (!card) return;
   if (card.classList.contains('qr-tbc-ing')) return;
 
+  _tbcCardTarget = card;
+
+  document.querySelectorAll('input[name="tbc-reason"]').forEach(input => {
+    input.checked = false;
+  });
+  const comment = document.getElementById('tbc-reason-comment-input');
+  if (comment) comment.value = '';
+  const commentWrap = document.getElementById('tbc-reason-comment');
+  if (commentWrap) commentWrap.hidden = true;
+
+  const screen = card.closest('.screen')?.id;
+  const entity = screen === 's-purchase-order' ? 'sales order' : 'quote';
+  const ref = cardRef(card);
+  const reference = document.getElementById('tbc-reason-reference');
+  if (reference) reference.textContent = `Tell us why you need more time to confirm this ${entity}${ref ? `: ${ref}` : '.'}`;
+
+  updateTbcReasonSubmitState();
+  document.getElementById('tbc-reason-overlay')?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  setTimeout(() => document.querySelector('#tbc-reason-overlay .reject-reason-modal')?.focus(), 50);
+}
+
+let _tbcCardTarget = null;
+
+function handleTbcReasonChange(input) {
+  const commentWrap = document.getElementById('tbc-reason-comment');
+  const isOther = input?.value === 'Other';
+  if (commentWrap) commentWrap.hidden = !isOther;
+  if (!isOther) {
+    const comment = document.getElementById('tbc-reason-comment-input');
+    if (comment) comment.value = '';
+  }
+  updateTbcReasonSubmitState();
+  if (isOther) setTimeout(() => document.getElementById('tbc-reason-comment-input')?.focus(), 0);
+}
+
+function updateTbcReasonSubmitState() {
+  const selected = document.querySelector('input[name="tbc-reason"]:checked');
+  const comment = document.getElementById('tbc-reason-comment-input')?.value.trim() || '';
+  const valid = !!selected && (selected.value !== 'Other' || !!comment);
+  const submit = document.getElementById('tbc-reason-submit');
+  if (submit) submit.disabled = !valid;
+}
+
+function closeTbcReasonModal() {
+  document.getElementById('tbc-reason-overlay')?.classList.remove('open');
+  document.body.style.overflow = '';
+  _tbcCardTarget = null;
+}
+
+function submitTbcReason() {
+  const selected = document.querySelector('input[name="tbc-reason"]:checked');
+  const comment = document.getElementById('tbc-reason-comment-input')?.value.trim() || '';
+  if (!selected || (selected.value === 'Other' && !comment) || !_tbcCardTarget) {
+    updateTbcReasonSubmitState();
+    return;
+  }
+
+  const card = _tbcCardTarget;
+  const reason = selected.value === 'Other' ? `Other: ${comment}` : selected.value;
+  document.getElementById('tbc-reason-overlay')?.classList.remove('open');
+  document.body.style.overflow = '';
+  _tbcCardTarget = null;
+  performTbcCard(card, reason);
+}
+
+function performTbcCard(card, reason) {
+  if (!card || card.classList.contains('qr-tbc-ing')) return;
+  card.dataset.tbcReason = reason;
+
   // ── Phase 1: grey border flash ──
   card.classList.add('qr-tbc-ing');
 
@@ -1246,7 +1319,7 @@ function tbcCard(btn) {
     }, 150);
 
     // Log to Portal Activity
-    logActivity('You marked as TBC', cardRef(card));
+    logActivity(`You marked as TBC (${reason})`, cardRef(card));
 
     // ── Phase 3: settle after the flips finish ──
     setTimeout(() => {
@@ -1261,6 +1334,83 @@ function rejectCard(btn) {
   const card = btn.closest('.qr');
   if (!card) return;
   if (card.classList.contains('qr-rejecting')) return;
+
+  _rejectCardTarget = card;
+
+  document.querySelectorAll('input[name="reject-reason"]').forEach(input => {
+    input.checked = false;
+  });
+  const comment = document.getElementById('reject-reason-comment-input');
+  if (comment) comment.value = '';
+  const commentWrap = document.getElementById('reject-reason-comment');
+  if (commentWrap) commentWrap.hidden = true;
+
+  const screen = card.closest('.screen')?.id;
+  const entity = screen === 's-purchase-order' ? 'sales order' : 'quote';
+  const ref = cardRef(card);
+  const reference = document.getElementById('reject-reason-reference');
+  if (reference) reference.textContent = `Tell us why you are rejecting this ${entity}${ref ? `: ${ref}` : '.'}`;
+
+  updateRejectReasonSubmitState();
+  document.getElementById('reject-reason-overlay')?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  setTimeout(() => document.querySelector('.reject-reason-modal')?.focus(), 50);
+}
+
+let _rejectCardTarget = null;
+
+function handleRejectReasonChange(input) {
+  const commentWrap = document.getElementById('reject-reason-comment');
+  const isOther = input?.value === 'Other';
+  if (commentWrap) commentWrap.hidden = !isOther;
+  if (!isOther) {
+    const comment = document.getElementById('reject-reason-comment-input');
+    if (comment) comment.value = '';
+  }
+  updateRejectReasonSubmitState();
+  if (isOther) setTimeout(() => document.getElementById('reject-reason-comment-input')?.focus(), 0);
+}
+
+function updateRejectReasonSubmitState() {
+  const selected = document.querySelector('input[name="reject-reason"]:checked');
+  const comment = document.getElementById('reject-reason-comment-input')?.value.trim() || '';
+  const valid = !!selected && (selected.value !== 'Other' || !!comment);
+  const submit = document.getElementById('reject-reason-submit');
+  if (submit) submit.disabled = !valid;
+}
+
+function closeRejectReasonModal() {
+  document.getElementById('reject-reason-overlay')?.classList.remove('open');
+  document.body.style.overflow = '';
+  _rejectCardTarget = null;
+}
+
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape') return;
+  if (document.getElementById('reject-reason-overlay')?.classList.contains('open')) closeRejectReasonModal();
+  if (document.getElementById('tbc-reason-overlay')?.classList.contains('open')) closeTbcReasonModal();
+});
+
+function submitRejectReason() {
+  const selected = document.querySelector('input[name="reject-reason"]:checked');
+  const comment = document.getElementById('reject-reason-comment-input')?.value.trim() || '';
+  if (!selected || (selected.value === 'Other' && !comment) || !_rejectCardTarget) {
+    updateRejectReasonSubmitState();
+    return;
+  }
+
+  const card = _rejectCardTarget;
+  const reason = selected.value === 'Other' ? `Other: ${comment}` : selected.value;
+  document.getElementById('reject-reason-overlay')?.classList.remove('open');
+  document.body.style.overflow = '';
+  _rejectCardTarget = null;
+  performRejectCard(card, reason);
+}
+
+function performRejectCard(card, reason) {
+  if (!card || card.classList.contains('qr-rejecting')) return;
+  card.dataset.rejectReason = reason;
 
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -1289,7 +1439,7 @@ function rejectCard(btn) {
     }, 150);
 
     // Log to Portal Activity
-    logActivity('You rejected', cardRef(card));
+    logActivity(`You rejected (${reason})`, cardRef(card));
 
     // ── Phase 4: remove actions entirely → empty slot ──
     if (actionsEl) actionsEl.outerHTML = '<div></div>';
