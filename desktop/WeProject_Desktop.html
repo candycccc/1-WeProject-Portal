@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="images/lcr-logo.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <!-- Font Awesome 7 Pro via local OTF files — no CDN dependency -->
-<link rel="stylesheet" href="style.css?v=20260805-decision-reasons"/>
+<link rel="stylesheet" href="style.css?v=20260806-dynamic-placeholder-v2"/>
 </head>
 <body>
 
@@ -1055,8 +1055,12 @@
 
     <!-- ① Pending your review — quote_id=7095, quote_no=21655 r3 (Additional Works) -->
     <div class="qr">
-      <div class="qr-thumb">
-        <img src="https://app.wequote.cloud/user-content/2022/10/Gs6eLiVs6kuSyzjfyPqksGyUcchFvL5z.jpg" alt="" onerror="this.style.display='none'"/>
+      <div class="qr-thumb qr-thumb-empty" role="img" aria-label="Quote image unavailable">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M8.5 4.5h10l5 5v18h-15z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M18.5 4.5l5 5h-5z" fill="var(--brand-accent)" stroke="var(--brand-accent)" stroke-width="0.8" stroke-linejoin="round"/>
+          <path d="M12.5 16h7.5M12.5 20.5h5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
       </div>
       <div class="qr-name">
         <div class="qr-meta">
