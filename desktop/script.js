@@ -1,11 +1,13 @@
 const screenLabels  = {
-  login: '① Login', 'forgot-password': '② Forgot Password', dash: '③ Project List', detail: '④ Project Detail',
-  quotes: '⑤ Quotes', invoices: '⑥ Invoices',
-  variations: '⑦ Variations', 'purchase-order': '⑧ Sales Order',
-  documents: '⑨ Documents', warranty: '⑩ Warranty', progress: '⑪ Progress'
+  invite: '① Invitation', login: '② Login', 'forgot-password': '③ Forgot Password',
+  dash: '④ Project List', detail: '④ Project Detail', quotes: '⑤ Quotes',
+  variations: '⑥ Variations', 'change-order': '⑦ Change Orders', invoices: '⑧ Invoices',
+  'purchase-order': '⑨ Sales Order', documents: '⑩ Documents',
+  warranty: '⑪ Warranty', progress: '⑫ Progress'
 };
 const screenFriendly = {
-  login: 'Login Page', 'forgot-password': 'Forgot Password', dash: 'Project List', detail: 'Project Detail',
+  invite: 'Invitation Page', login: 'Login Page', 'forgot-password': 'Forgot Password',
+  dash: 'Project List', detail: 'Project Detail',
   quotes: 'Quotes', invoices: 'Invoices',
   variations: 'Variations', 'change-order': 'Change Orders', 'purchase-order': 'Sales Order',
   documents: 'Documents', warranty: 'Warranty', progress: 'Progress'
@@ -88,7 +90,42 @@ function showSkeletonLayout(name) {
   if (target) target.classList.add('sk-active');
 }
 
-const loadedScreens = new Set();
+const loadedScreens = new Set(['invite']);
+
+/* ── Invitation policy dialogs ── */
+const invitePolicyTitles = {
+  terms: 'Terms of Service',
+  privacy: 'Privacy Policy',
+  cookies: 'Cookie Policy'
+};
+let invitePolicyTrigger = null;
+
+function openInvitePolicyDialog(policy, trigger) {
+  const overlay = document.getElementById('invite-policy-overlay');
+  const dialog = overlay?.querySelector('.invite-policy-dialog');
+  const title = document.getElementById('invite-policy-title');
+  if (!overlay || !dialog || !invitePolicyTitles[policy]) return;
+
+  invitePolicyTrigger = trigger || document.activeElement;
+  document.querySelectorAll('.invite-policy-content').forEach(section => {
+    section.hidden = section.id !== 'invite-policy-' + policy;
+  });
+  if (title) title.textContent = invitePolicyTitles[policy];
+  const body = overlay.querySelector('.invite-policy-body');
+  if (body) body.scrollTop = 0;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => dialog.focus(), 0);
+}
+
+function closeInvitePolicyDialog(returnFocus = true) {
+  const overlay = document.getElementById('invite-policy-overlay');
+  if (!overlay?.classList.contains('open')) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  if (returnFocus && invitePolicyTrigger?.focus) invitePolicyTrigger.focus();
+  invitePolicyTrigger = null;
+}
 
 /* ── Forgot Password helpers ── */
 function showFPSuccess() {
@@ -122,6 +159,7 @@ function go(name) {
   const overlay = document.getElementById('skeleton-overlay');
   // Leaving the variations page closes the Ready to accept panel
   if (name !== 'variations' && typeof closeDvPanel === 'function') closeDvPanel();
+  if (typeof closeInvitePolicyDialog === 'function') closeInvitePolicyDialog(false);
   if (typeof closeRejectReasonModal === 'function') closeRejectReasonModal();
   if (typeof closeTbcReasonModal === 'function') closeTbcReasonModal();
   // Close nav dropdowns only — screen panel stays open across navigation
@@ -1007,7 +1045,7 @@ function copyToClipboard(text) {
 (function restoreScreenOnLoad() {
   try {
     const saved = localStorage.getItem('wq_screen_desktop');
-    const known = ['dash','detail','quotes','variations','change-order','invoices',
+    const known = ['invite','dash','detail','quotes','variations','change-order','invoices',
                    'documents','warranty','progress','purchase-order'];
     const target = (saved && known.includes(saved) && document.getElementById('s-' + saved))
       ? saved : 'dash';
@@ -1388,6 +1426,7 @@ function closeRejectReasonModal() {
 
 document.addEventListener('keydown', event => {
   if (event.key !== 'Escape') return;
+  if (document.getElementById('invite-policy-overlay')?.classList.contains('open')) closeInvitePolicyDialog();
   if (document.getElementById('reject-reason-overlay')?.classList.contains('open')) closeRejectReasonModal();
   if (document.getElementById('tbc-reason-overlay')?.classList.contains('open')) closeTbcReasonModal();
 });

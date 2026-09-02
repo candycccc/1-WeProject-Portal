@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="images/lcr-logo.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <!-- Font Awesome 7 Pro via local OTF files — no CDN dependency -->
-<link rel="stylesheet" href="style.css?v=20260806-dynamic-placeholder-v2"/>
+<link rel="stylesheet" href="style.css?v=20260902-invitation-policy-dialogs"/>
 </head>
 <body>
 
@@ -64,6 +64,96 @@
 
 
 <div id="app-content">
+
+<!-- ═══════════════════════════════════════════════════════
+     SCREEN 0 — INVITATION / JOIN PROJECT
+═══════════════════════════════════════════════════════ -->
+<div id="s-invite" class="screen">
+<div class="invite-page">
+
+  <section class="invite-hero">
+    <div class="invite-wordmark">WeProject.</div>
+
+    <div class="invite-identity-pill">
+      <span>Confirmed as lc@wetech.cloud</span>
+      <button type="button" onclick="go('login')">Change</button>
+    </div>
+
+    <div class="invite-join-content">
+      <h1>Join WeProject to view The Boathouse.<br/>You were invited by TomNeely from AudioVisions.</h1>
+      <div class="invite-actions">
+        <button class="invite-continue" type="button" onclick="go('login')">Continue</button>
+        <p>
+          By continuing, you agree to our
+          <a href="#" onclick="openInvitePolicyDialog('terms', this); return false;">Terms of Service</a>,
+          <a href="#" onclick="openInvitePolicyDialog('privacy', this); return false;">Privacy Policy</a>, and
+          <a href="#" onclick="openInvitePolicyDialog('cookies', this); return false;">Cookie Policy</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="invite-about">
+    <div class="invite-about-copy">
+      <h2>What’s WeProject?</h2>
+      <p>WeProject is a secure portal that helps you stay connected with your project team.</p>
+      <p>You can review project documents, quotations, variations, invoices and updates in one place.</p>
+    </div>
+
+    <div class="invite-preview" aria-label="WeProject portal previews">
+      <div class="invite-desktop-preview" aria-hidden="true">
+        <div class="invite-desktop-canvas">
+          <div class="invite-mini-photo">
+            <img src="images/invite-house-preview.png" alt=""/>
+            <div class="invite-mini-logo">
+              <img src="images/img_05.png" alt=""/>
+            </div>
+          </div>
+          <div class="invite-mini-form">
+            <div class="invite-mini-heading">Login to your project</div>
+            <div class="invite-mini-field">
+              <span>E-mail</span>
+              <div>example@example.com</div>
+            </div>
+            <div class="invite-mini-field">
+              <span>Password</span>
+              <div>Enter Password</div>
+            </div>
+            <div class="invite-mini-button">Log in</div>
+            <div class="invite-mini-options">
+              <span>☑&nbsp; Stay signed in</span>
+              <u>Forgot Password?</u>
+            </div>
+          </div>
+          <div class="invite-mini-footer">
+            <span>Powered by&nbsp; <strong>WeQuote</strong></span>
+            <span>Contact Us&nbsp;&nbsp;&nbsp; Terms of Service&nbsp;&nbsp;&nbsp; Privacy Policy</span>
+          </div>
+        </div>
+      </div>
+      <div class="invite-mobile-preview" aria-hidden="true">
+        <img src="images/invite-mobile-preview.png" alt=""/>
+      </div>
+    </div>
+
+    <footer class="invite-footer login-footer">
+      <div class="powered-by brand-powered-by">
+        <span>Powered by</span>
+        <div class="powered-by-logo">
+          <img src="images/img_03.svg" width="20" height="23" alt=""/>
+          <img src="images/img_04.svg" width="62" height="10" alt="WeQuote"/>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#">Contact Us</a>
+        <a href="#" onclick="openInvitePolicyDialog('terms', this); return false;">Terms of Service</a>
+        <a href="#" onclick="openInvitePolicyDialog('privacy', this); return false;">Privacy Policy</a>
+      </div>
+    </footer>
+  </section>
+
+</div>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════
      SCREEN 1 — LOGIN
@@ -136,7 +226,7 @@
     </div>
     <div class="footer-links">
       <a href="#">Contact Us</a>
-      <a href="#">Terms of Use</a>
+      <a href="#">Terms of Service</a>
       <a href="#">Privacy Policy</a>
     </div>
   </div>
@@ -219,7 +309,7 @@
     </div>
     <div class="footer-links">
       <a href="#">Contact Us</a>
-      <a href="#">Terms of Use</a>
+      <a href="#">Terms of Service</a>
       <a href="#">Privacy Policy</a>
     </div>
   </div>
@@ -6309,7 +6399,65 @@
     </div>
   </div>
 
-</div>
+</div><!-- /#skeleton-overlay -->
+
+  <!-- Invitation policy dialog — read only; Continue is the consent action -->
+  <div class="invite-policy-overlay" id="invite-policy-overlay" onclick="if(event.target===this)closeInvitePolicyDialog()">
+    <div class="invite-policy-dialog" role="dialog" aria-modal="true" aria-labelledby="invite-policy-title" tabindex="-1">
+      <header class="invite-policy-header">
+        <div>
+          <h2 id="invite-policy-title">Terms of Service</h2>
+          <p>Review this policy before continuing.</p>
+        </div>
+        <button class="invite-policy-close" type="button" onclick="closeInvitePolicyDialog()" aria-label="Close policy dialog">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </header>
+
+      <div class="invite-policy-body">
+        <section class="invite-policy-content" id="invite-policy-terms">
+          <div class="invite-policy-note">Prototype content — replace with approved legal copy before release.</div>
+          <h3>Using WeProject</h3>
+          <p>WeProject gives invited customers secure access to information shared by their project team. You must use the portal only for the project and account for which access was provided.</p>
+          <h3>Your account</h3>
+          <p>Keep your sign-in details confidential and tell your project team promptly if you believe your account has been accessed without permission.</p>
+          <h3>Project information</h3>
+          <p>Quotes, variations, change orders, invoices, documents and progress updates are provided through the portal for review. Any action you confirm in WeProject may be recorded against your account.</p>
+          <h3>Acceptable use</h3>
+          <p>Do not misuse the portal, interfere with its operation, attempt to access another customer’s information, or upload unlawful or harmful content.</p>
+          <h3>Availability and changes</h3>
+          <p>Portal features and content may change as the project progresses. Contact your project team if information appears incomplete or incorrect.</p>
+        </section>
+
+        <section class="invite-policy-content" id="invite-policy-privacy" hidden>
+          <div class="invite-policy-note">Prototype content — replace with approved legal copy before release.</div>
+          <h3>Information we use</h3>
+          <p>WeProject may use your name, email address, contact details, project role and records of actions taken in the portal so your project team can provide and manage access.</p>
+          <h3>How information is used</h3>
+          <p>Your information is used to authenticate your account, display relevant project content, send service messages, maintain security and support the delivery of your project.</p>
+          <h3>Sharing and retention</h3>
+          <p>Information may be available to authorised members of your project team and service providers that support the portal. Records are retained only for as long as required for the project, legal obligations and security.</p>
+          <h3>Your choices</h3>
+          <p>Contact your project team if you need to correct your details, ask a privacy question or request information about how your data is handled.</p>
+        </section>
+
+        <section class="invite-policy-content" id="invite-policy-cookies" hidden>
+          <div class="invite-policy-note">Prototype content — replace with approved legal copy before release.</div>
+          <h3>Essential cookies</h3>
+          <p>WeProject uses essential cookies and similar storage to keep you signed in, protect your session, remember security settings and provide the portal features you request.</p>
+          <h3>Preference cookies</h3>
+          <p>Preference cookies may remember choices such as your display settings. They are used to improve convenience and are not required for core account security.</p>
+          <h3>Managing cookies</h3>
+          <p>You can remove or block cookies in your browser settings. Blocking essential cookies may prevent you from signing in or using parts of WeProject.</p>
+        </section>
+      </div>
+
+      <footer class="invite-policy-footer">
+        <button type="button" onclick="closeInvitePolicyDialog()">Close</button>
+      </footer>
+    </div>
+  </div>
+
 </div><!-- /#app-content -->
 
 
@@ -6387,7 +6535,7 @@
 
 
 
-<script src="script.js?v=20260805-decision-reasons"></script>
+<script src="script.js?v=20260902-invitation-policy-dialogs"></script>
 
 <!-- ═══════════════════════════════════════════════
      BRANDING CUSTOMIZER PANEL
@@ -6402,43 +6550,46 @@
   </div>
   <div class="sp-panel-list">
     <div class="sp-panel-section">Auth</div>
-    <div class="sp-item active" id="sp-login" onclick="pickScreen('login','① Login',this)">
-      <span class="sp-item-num">1</span> Login Page
+    <div class="sp-item" id="sp-invite" onclick="pickScreen('invite','① Invitation',this)">
+      <span class="sp-item-num">1</span> Invitation Page
     </div>
-    <div class="sp-item" id="sp-forgot-password" onclick="pickScreen('forgot-password','② Forgot Password',this)">
-      <span class="sp-item-num">2</span> Forgot Password
+    <div class="sp-item active" id="sp-login" onclick="pickScreen('login','② Login',this)">
+      <span class="sp-item-num">2</span> Login Page
+    </div>
+    <div class="sp-item" id="sp-forgot-password" onclick="pickScreen('forgot-password','③ Forgot Password',this)">
+      <span class="sp-item-num">3</span> Forgot Password
     </div>
     <div class="sp-panel-section">Main</div>
-    <div class="sp-item" id="sp-dash" onclick="pickScreen('dash','③ Project List',this)">
-      <span class="sp-item-num">3</span> Project List
+    <div class="sp-item" id="sp-dash" onclick="pickScreen('dash','④ Project List',this)">
+      <span class="sp-item-num">4</span> Project List
     </div>
-    <div class="sp-item" id="sp-detail" onclick="pickScreen('detail','③ Project Detail',this)">
-      <span class="sp-item-num">3</span> Project Detail
+    <div class="sp-item" id="sp-detail" onclick="pickScreen('detail','④ Project Detail',this)">
+      <span class="sp-item-num">4</span> Project Detail
     </div>
     <div class="sp-panel-section">Detail Screens</div>
-    <div class="sp-item" id="sp-quotes" onclick="pickScreen('quotes','④ Quotes',this)">
-      <span class="sp-item-num">4</span> Quotes
+    <div class="sp-item" id="sp-quotes" onclick="pickScreen('quotes','⑤ Quotes',this)">
+      <span class="sp-item-num">5</span> Quotes
     </div>
-    <div class="sp-item" id="sp-variations" onclick="pickScreen('variations','⑤ Variations',this)">
-      <span class="sp-item-num">5</span> Variations
+    <div class="sp-item" id="sp-variations" onclick="pickScreen('variations','⑥ Variations',this)">
+      <span class="sp-item-num">6</span> Variations
     </div>
-    <div class="sp-item" id="sp-change-order" onclick="pickScreen('change-order','⑥ Change Orders',this)">
-      <span class="sp-item-num">6</span> Change Orders
+    <div class="sp-item" id="sp-change-order" onclick="pickScreen('change-order','⑦ Change Orders',this)">
+      <span class="sp-item-num">7</span> Change Orders
     </div>
-    <div class="sp-item" id="sp-invoices" onclick="pickScreen('invoices','⑦ Invoices',this)">
-      <span class="sp-item-num">7</span> Invoices
+    <div class="sp-item" id="sp-invoices" onclick="pickScreen('invoices','⑧ Invoices',this)">
+      <span class="sp-item-num">8</span> Invoices
     </div>
-    <div class="sp-item" id="sp-purchase-order" onclick="pickScreen('purchase-order','⑧ Sales Order',this)">
-      <span class="sp-item-num">8</span> Sales Order
+    <div class="sp-item" id="sp-purchase-order" onclick="pickScreen('purchase-order','⑨ Sales Order',this)">
+      <span class="sp-item-num">9</span> Sales Order
     </div>
-    <div class="sp-item" id="sp-documents" onclick="pickScreen('documents','⑨ Documents',this)">
-      <span class="sp-item-num">9</span> Documents
+    <div class="sp-item" id="sp-documents" onclick="pickScreen('documents','⑩ Documents',this)">
+      <span class="sp-item-num">10</span> Documents
     </div>
-    <div class="sp-item" id="sp-warranty" onclick="pickScreen('warranty','⑩ Warranty',this)" style="display:none;">
-      <span class="sp-item-num">10</span> Warranty
+    <div class="sp-item" id="sp-warranty" onclick="pickScreen('warranty','⑪ Warranty',this)" style="display:none;">
+      <span class="sp-item-num">11</span> Warranty
     </div>
-    <div class="sp-item" id="sp-progress" onclick="pickScreen('progress','⑪ Progress',this)">
-      <span class="sp-item-num">11</span> Progress
+    <div class="sp-item" id="sp-progress" onclick="pickScreen('progress','⑫ Progress',this)">
+      <span class="sp-item-num">12</span> Progress
     </div>
   </div>
 </div>

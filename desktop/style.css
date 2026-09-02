@@ -513,6 +513,505 @@ body.mobile-view.brand-open #app-content {
 }
 
 /* ═══════════════════════════════════════════════
+   SCREEN 0 — INVITATION / JOIN PROJECT
+═══════════════════════════════════════════════ */
+.invite-page {
+  flex: 1;
+  min-height: max(800px, calc(100vh - 42px));
+  display: flex;
+  flex-direction: column;
+  background: var(--brand-bg);
+  color: var(--c-text-1);
+}
+
+.invite-hero {
+  position: relative;
+  flex: 0 0 387px;
+  min-height: 387px;
+  background: var(--brand-bg);
+}
+
+.invite-wordmark {
+  position: absolute;
+  top: 37px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+  white-space: nowrap;
+}
+
+.invite-identity-pill {
+  position: absolute;
+  top: 43px;
+  right: 32px;
+  width: 252px;
+  height: 30px;
+  padding: 0 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border-radius: 100px;
+  background: var(--c-surface);
+  color: var(--c-text-1);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.invite-identity-pill button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+}
+
+.invite-join-content {
+  position: absolute;
+  top: 117px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(922px, calc(100% - 64px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.invite-join-content h1 {
+  width: 100%;
+  font-size: 26px;
+  line-height: 41px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.35px;
+}
+.invite-actions {
+  width: 387px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.invite-continue {
+  width: 100%;
+  min-height: 45px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 0;
+  border-radius: 4px;
+  background: var(--c-text-1);
+  color: var(--c-surface);
+  font-family: 'Mulish', sans-serif;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 700;
+  text-align: center;
+  transition: opacity .15s, transform .15s;
+}
+.invite-continue:hover { opacity: .88; }
+.invite-continue:active { transform: translateY(1px); }
+.invite-actions p {
+  color: var(--c-text-1);
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+}
+.invite-actions a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.invite-actions a:hover { opacity: .7; }
+
+.invite-about {
+  position: relative;
+  flex: 1 0 413px;
+  min-height: 413px;
+  background: var(--c-surface);
+  overflow: hidden;
+}
+.invite-about-copy {
+  position: absolute;
+  top: 81px;
+  left: 32px;
+  width: min(550px, calc(50% - 60px));
+}
+.invite-about-copy h2 {
+  margin: 0 0 26px 6px;
+  color: var(--c-text-1);
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.35px;
+}
+.invite-about-copy p {
+  max-width: 550px;
+  color: var(--c-text-1);
+  font-size: 20px;
+  line-height: 1.182;
+  font-weight: 600;
+}
+.invite-about-copy p + p { margin-top: 24px; }
+
+.invite-preview {
+  position: absolute;
+  top: 43px;
+  right: 24px;
+  width: 524px;
+  height: 304px;
+}
+.invite-desktop-preview {
+  position: absolute;
+  z-index: 1;
+  top: 18px;
+  left: 0;
+  width: 398px;
+  height: 253px;
+  padding: 5px 8px 8px 6px;
+  border: 1px solid #f5f5f5;
+  border-radius: 11px;
+  background: #fff;
+  overflow: hidden;
+}
+.invite-desktop-canvas {
+  position: relative;
+  width: 383px;
+  height: 239px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #eae7e1;
+  color: #313131;
+  font-family: 'Figtree', sans-serif;
+}
+.invite-mini-photo {
+  position: absolute;
+  top: 13px;
+  left: 12px;
+  width: 177px;
+  height: 205px;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.invite-mini-photo > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.invite-mini-logo {
+  position: absolute;
+  right: 11px;
+  bottom: 20px;
+  width: 33px;
+  height: 33px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1px;
+  background: #fff;
+}
+.invite-mini-logo img { width: 100%; height: 100%; object-fit: contain; }
+.invite-mini-form {
+  position: absolute;
+  top: 64px;
+  left: 225px;
+  width: 115px;
+  color: #4a5461;
+  font-size: 4px;
+  font-weight: 600;
+}
+.invite-mini-heading {
+  margin-bottom: 11px;
+  color: #313131;
+  font-size: 7.8px;
+  line-height: 1;
+  text-align: center;
+}
+.invite-mini-field { margin-bottom: 5px; }
+.invite-mini-field > span { display: block; margin-bottom: 2px; }
+.invite-mini-field > div {
+  height: 12px;
+  padding: 3px 5px;
+  overflow: hidden;
+  border: 1px solid #c7c7c7;
+  border-radius: 1px;
+  background: #fff;
+  white-space: nowrap;
+}
+.invite-mini-button {
+  height: 12px;
+  margin-top: 1px;
+  padding: 3px 5px;
+  border-radius: 1px;
+  background: #675437;
+  color: #fff;
+  font-family: 'Mulish', sans-serif;
+  text-align: center;
+}
+.invite-mini-options {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  color: #383741;
+}
+.invite-mini-footer {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #4a5461;
+  font-size: 3.6px;
+  font-weight: 600;
+}
+.invite-mini-footer strong { text-transform: uppercase; }
+.invite-mobile-preview {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 304px;
+  padding: 5px 6px;
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+  border-radius: 22px;
+  background: #fff;
+}
+.invite-mobile-preview img {
+  display: block;
+  width: 138px;
+  height: auto;
+  transform: translateY(-3px);
+  border-radius: 18px;
+}
+
+.invite-footer {
+  position: absolute;
+  right: 48px;
+  bottom: 11px;
+  left: 32px;
+  padding: 0;
+}
+
+/* Read-only Terms / Privacy / Cookie policy dialog. */
+.invite-policy-overlay {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 42px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 32px 20px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 15, 18, .46);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+.invite-policy-overlay.open { display: flex; }
+.invite-policy-dialog {
+  width: min(720px, calc(100% - 40px));
+  max-height: min(720px, calc(100% - 32px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--c-border-1);
+  border-radius: 12px;
+  background: var(--c-surface);
+  color: var(--c-text-1);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, .24);
+  animation: invitePolicyIn .2s ease-out;
+  outline: none;
+}
+@keyframes invitePolicyIn {
+  from { opacity: 0; transform: translateY(8px) scale(.985); }
+  to { opacity: 1; transform: none; }
+}
+.invite-policy-header {
+  padding: 22px 24px 18px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--c-border-1);
+  flex-shrink: 0;
+}
+.invite-policy-header h2 {
+  margin: 0;
+  color: var(--c-text-1);
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+.invite-policy-header p {
+  margin-top: 5px;
+  color: var(--c-text-muted);
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.invite-policy-close {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--c-border-1);
+  border-radius: 50%;
+  background: var(--c-surface-2);
+  color: var(--c-text-1);
+  font-size: 14px;
+}
+.invite-policy-close:hover { background: var(--c-hover); }
+.invite-policy-body {
+  flex: 1;
+  min-height: 0;
+  padding: 22px 24px 28px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.invite-policy-content[hidden] { display: none; }
+.invite-policy-note {
+  margin-bottom: 22px;
+  padding: 10px 12px;
+  border: 1px solid var(--c-border-1);
+  border-radius: 6px;
+  background: var(--c-surface-2);
+  color: var(--c-text-muted);
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+.invite-policy-content h3 {
+  margin: 0 0 7px;
+  color: var(--c-text-1);
+  font-size: 16px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+.invite-policy-content p {
+  margin: 0 0 22px;
+  color: var(--c-text-2);
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+.invite-policy-content p:last-child { margin-bottom: 0; }
+.invite-policy-footer {
+  padding: 14px 24px 18px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--c-border-1);
+  background: var(--c-surface);
+  flex-shrink: 0;
+}
+.invite-policy-footer button {
+  min-width: 104px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--c-text-1);
+  color: var(--c-surface);
+  font-family: 'Mulish', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+.invite-policy-footer button:hover { opacity: .88; }
+
+body.mobile-view .invite-page {
+  min-height: 100%;
+  height: auto;
+  overflow: visible;
+}
+body.mobile-view .invite-hero {
+  flex-basis: 420px;
+  min-height: 420px;
+}
+body.mobile-view .invite-wordmark { top: 25px; font-size: 24px; }
+body.mobile-view .invite-identity-pill {
+  top: 69px;
+  right: 20px;
+  left: 20px;
+  width: auto;
+}
+body.mobile-view .invite-join-content {
+  top: 128px;
+  width: calc(100% - 44px);
+}
+body.mobile-view .invite-join-content h1 {
+  font-size: 23px;
+  line-height: 32px;
+}
+body.mobile-view .invite-actions { width: 100%; }
+body.mobile-view .invite-actions p { font-size: 14px; line-height: 20px; }
+body.mobile-view .invite-about {
+  flex: 0 0 auto;
+  min-height: 720px;
+  padding: 42px 22px 0;
+  overflow: hidden;
+}
+body.mobile-view .invite-about-copy {
+  position: static;
+  width: 100%;
+}
+body.mobile-view .invite-about-copy h2 {
+  margin: 0 0 24px;
+  font-size: 24px;
+}
+body.mobile-view .invite-about-copy p { font-size: 16px; line-height: 1.35; }
+body.mobile-view .invite-about-copy p + p { margin-top: 18px; }
+body.mobile-view .invite-preview {
+  position: relative;
+  top: auto;
+  right: auto;
+  width: 524px;
+  height: 304px;
+  margin-top: 34px;
+  margin-bottom: -104px;
+  transform: scale(.64);
+  transform-origin: top left;
+}
+body.mobile-view .invite-footer {
+  position: static;
+  margin-top: 26px;
+  padding: 0 0 26px;
+}
+body.mobile-view .invite-policy-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 14px;
+}
+body.mobile-view .invite-policy-dialog {
+  width: 100%;
+  max-height: calc(100% - 28px);
+  border-radius: 10px;
+}
+body.mobile-view .invite-policy-header { padding: 18px 18px 15px; }
+body.mobile-view .invite-policy-header h2 { font-size: 21px; }
+body.mobile-view .invite-policy-body { padding: 18px; }
+body.mobile-view .invite-policy-footer { padding: 12px 18px 16px; }
+body.mobile-view .invite-policy-footer button { width: 100%; }
+
+@media (max-width: 1120px) {
+  body:not(.mobile-view) .invite-about-copy { width: calc(45% - 48px); }
+  body:not(.mobile-view) .invite-about-copy p { font-size: 17px; }
+  body:not(.mobile-view) .invite-preview {
+    right: -45px;
+    transform: scale(.88);
+    transform-origin: top right;
+  }
+}
+
+/* ═══════════════════════════════════════════════
    SCREEN 1 — LOGIN
 ═══════════════════════════════════════════════ */
 .login-page {
