@@ -799,7 +799,7 @@ body.mobile-view.brand-open #app-content {
   padding: 0;
 }
 
-/* Read-only Terms / Privacy / Cookie policy dialog. */
+/* Read-only Terms of Use / Privacy Notice dialog. */
 .invite-policy-overlay {
   display: none;
   position: fixed;
@@ -1297,6 +1297,8 @@ body.mobile-view .login-footer .powered-by span {
 }
 body.mobile-view .footer-links {
   gap: 16px;
+  row-gap: 6px;
+  flex-wrap: wrap;
   font-size: 12px;
   font-weight: 600;
   color: var(--c-text-muted);

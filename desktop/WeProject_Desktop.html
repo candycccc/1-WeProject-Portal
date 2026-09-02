@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="images/lcr-logo.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <!-- Font Awesome 7 Pro via local OTF files — no CDN dependency -->
-<link rel="stylesheet" href="style.css?v=20260902-invitation-policy-dialogs"/>
+<link rel="stylesheet" href="style.css?v=20260902-auth-policy-dialogs"/>
 </head>
 <body>
 
@@ -85,9 +85,8 @@
         <button class="invite-continue" type="button" onclick="go('login')">Continue</button>
         <p>
           By continuing, you agree to our
-          <a href="#" onclick="openInvitePolicyDialog('terms', this); return false;">Terms of Service</a>,
-          <a href="#" onclick="openInvitePolicyDialog('privacy', this); return false;">Privacy Policy</a>, and
-          <a href="#" onclick="openInvitePolicyDialog('cookies', this); return false;">Cookie Policy</a>.
+          <a href="#" onclick="openInvitePolicyDialog('terms', this); return false;">Terms of Use</a> and
+          <a href="#" onclick="openInvitePolicyDialog('privacy', this); return false;">Privacy Notice</a>.
         </p>
       </div>
     </div>
@@ -127,7 +126,7 @@
           </div>
           <div class="invite-mini-footer">
             <span>Powered by&nbsp; <strong>WeQuote</strong></span>
-            <span>Contact Us&nbsp;&nbsp;&nbsp; Terms of Service&nbsp;&nbsp;&nbsp; Privacy Policy</span>
+            <span>Contact Us&nbsp;&nbsp;&nbsp; Terms of Use&nbsp;&nbsp;&nbsp; Privacy Notice</span>
           </div>
         </div>
       </div>
@@ -146,8 +145,8 @@
       </div>
       <div class="footer-links">
         <a href="#">Contact Us</a>
-        <a href="#" onclick="openInvitePolicyDialog('terms', this); return false;">Terms of Service</a>
-        <a href="#" onclick="openInvitePolicyDialog('privacy', this); return false;">Privacy Policy</a>
+        <a href="#" onclick="openInvitePolicyDialog('terms', this); return false;">Terms of Use</a>
+        <a href="#" onclick="openInvitePolicyDialog('privacy', this); return false;">Privacy Notice</a>
       </div>
     </footer>
   </section>
@@ -226,8 +225,8 @@
     </div>
     <div class="footer-links">
       <a href="#">Contact Us</a>
-      <a href="#">Terms of Service</a>
-      <a href="#">Privacy Policy</a>
+      <a href="#" onclick="openInvitePolicyDialog('terms', this); return false;">Terms of Use</a>
+      <a href="#" onclick="openInvitePolicyDialog('privacy', this); return false;">Privacy Notice</a>
     </div>
   </div>
 
@@ -309,8 +308,8 @@
     </div>
     <div class="footer-links">
       <a href="#">Contact Us</a>
-      <a href="#">Terms of Service</a>
-      <a href="#">Privacy Policy</a>
+      <a href="#" onclick="openInvitePolicyDialog('terms', this); return false;">Terms of Use</a>
+      <a href="#" onclick="openInvitePolicyDialog('privacy', this); return false;">Privacy Notice</a>
     </div>
   </div>
 
@@ -6406,7 +6405,7 @@
     <div class="invite-policy-dialog" role="dialog" aria-modal="true" aria-labelledby="invite-policy-title" tabindex="-1">
       <header class="invite-policy-header">
         <div>
-          <h2 id="invite-policy-title">Terms of Service</h2>
+          <h2 id="invite-policy-title">Terms of Use</h2>
           <p>Review this policy before continuing.</p>
         </div>
         <button class="invite-policy-close" type="button" onclick="closeInvitePolicyDialog()" aria-label="Close policy dialog">
@@ -6441,15 +6440,6 @@
           <p>Contact your project team if you need to correct your details, ask a privacy question or request information about how your data is handled.</p>
         </section>
 
-        <section class="invite-policy-content" id="invite-policy-cookies" hidden>
-          <div class="invite-policy-note">Prototype content — replace with approved legal copy before release.</div>
-          <h3>Essential cookies</h3>
-          <p>WeProject uses essential cookies and similar storage to keep you signed in, protect your session, remember security settings and provide the portal features you request.</p>
-          <h3>Preference cookies</h3>
-          <p>Preference cookies may remember choices such as your display settings. They are used to improve convenience and are not required for core account security.</p>
-          <h3>Managing cookies</h3>
-          <p>You can remove or block cookies in your browser settings. Blocking essential cookies may prevent you from signing in or using parts of WeProject.</p>
-        </section>
       </div>
 
       <footer class="invite-policy-footer">
@@ -6535,7 +6525,7 @@
 
 
 
-<script src="script.js?v=20260902-invitation-policy-dialogs"></script>
+<script src="script.js?v=20260902-terms-use-privacy-notice"></script>
 
 <!-- ═══════════════════════════════════════════════
      BRANDING CUSTOMIZER PANEL

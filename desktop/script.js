@@ -94,9 +94,8 @@ const loadedScreens = new Set(['invite']);
 
 /* ── Invitation policy dialogs ── */
 const invitePolicyTitles = {
-  terms: 'Terms of Service',
-  privacy: 'Privacy Policy',
-  cookies: 'Cookie Policy'
+  terms: 'Terms of Use',
+  privacy: 'Privacy Notice'
 };
 let invitePolicyTrigger = null;
 
